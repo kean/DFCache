@@ -14,6 +14,105 @@
 		0C37136D17D3FC3300766FD9 /* DwarfKit_Mac_Static.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37136C17D3FC3300766FD9 /* DwarfKit_Mac_Static.m */; };
 		0C37137617D3FC3C00766FD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37132417D3F9C700766FD9 /* Cocoa.framework */; };
 		0C37137C17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37137B17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.m */; };
+		0C3713D117D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
+		0C3713D217D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
+		0C3713D317D3FECA00766FD9 /* cderror.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138417D3FECA00766FD9 /* cderror.h */; };
+		0C3713D417D3FECA00766FD9 /* cderror.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138417D3FECA00766FD9 /* cderror.h */; };
+		0C3713D517D3FECA00766FD9 /* cdjpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138517D3FECA00766FD9 /* cdjpeg.h */; };
+		0C3713D617D3FECA00766FD9 /* cdjpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138517D3FECA00766FD9 /* cdjpeg.h */; };
+		0C3713D717D3FECA00766FD9 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138617D3FECA00766FD9 /* config.h */; };
+		0C3713D817D3FECA00766FD9 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138617D3FECA00766FD9 /* config.h */; };
+		0C3713D917D3FECA00766FD9 /* jchuff.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138717D3FECA00766FD9 /* jchuff.h */; };
+		0C3713DA17D3FECA00766FD9 /* jchuff.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138717D3FECA00766FD9 /* jchuff.h */; };
+		0C3713DB17D3FECA00766FD9 /* jconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138817D3FECA00766FD9 /* jconfig.h */; };
+		0C3713DC17D3FECA00766FD9 /* jconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138817D3FECA00766FD9 /* jconfig.h */; };
+		0C3713DD17D3FECA00766FD9 /* jdct.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138917D3FECA00766FD9 /* jdct.h */; };
+		0C3713DE17D3FECA00766FD9 /* jdct.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138917D3FECA00766FD9 /* jdct.h */; };
+		0C3713DF17D3FECA00766FD9 /* jdhuff.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138A17D3FECA00766FD9 /* jdhuff.h */; };
+		0C3713E017D3FECA00766FD9 /* jdhuff.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138A17D3FECA00766FD9 /* jdhuff.h */; };
+		0C3713E117D3FECA00766FD9 /* jerror.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138B17D3FECA00766FD9 /* jerror.h */; };
+		0C3713E217D3FECA00766FD9 /* jerror.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138B17D3FECA00766FD9 /* jerror.h */; };
+		0C3713E317D3FECA00766FD9 /* jinclude.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138C17D3FECA00766FD9 /* jinclude.h */; };
+		0C3713E417D3FECA00766FD9 /* jinclude.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138C17D3FECA00766FD9 /* jinclude.h */; };
+		0C3713E517D3FECA00766FD9 /* jmemsys.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138D17D3FECA00766FD9 /* jmemsys.h */; };
+		0C3713E617D3FECA00766FD9 /* jmemsys.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138D17D3FECA00766FD9 /* jmemsys.h */; };
+		0C3713E717D3FECA00766FD9 /* jmorecfg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138E17D3FECA00766FD9 /* jmorecfg.h */; };
+		0C3713E817D3FECA00766FD9 /* jmorecfg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138E17D3FECA00766FD9 /* jmorecfg.h */; };
+		0C3713E917D3FECA00766FD9 /* jpegcomp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138F17D3FECA00766FD9 /* jpegcomp.h */; };
+		0C3713EA17D3FECA00766FD9 /* jpegcomp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138F17D3FECA00766FD9 /* jpegcomp.h */; };
+		0C3713EB17D3FECA00766FD9 /* jpegint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139017D3FECA00766FD9 /* jpegint.h */; };
+		0C3713EC17D3FECA00766FD9 /* jpegint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139017D3FECA00766FD9 /* jpegint.h */; };
+		0C3713ED17D3FECA00766FD9 /* jpeglib.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139117D3FECA00766FD9 /* jpeglib.h */; };
+		0C3713EE17D3FECA00766FD9 /* jpeglib.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139117D3FECA00766FD9 /* jpeglib.h */; };
+		0C3713EF17D3FECA00766FD9 /* jsimd.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139217D3FECA00766FD9 /* jsimd.h */; };
+		0C3713F017D3FECA00766FD9 /* jsimd.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139217D3FECA00766FD9 /* jsimd.h */; };
+		0C3713F117D3FECA00766FD9 /* jsimddct.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139317D3FECA00766FD9 /* jsimddct.h */; };
+		0C3713F217D3FECA00766FD9 /* jsimddct.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139317D3FECA00766FD9 /* jsimddct.h */; };
+		0C3713F317D3FECA00766FD9 /* jversion.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139417D3FECA00766FD9 /* jversion.h */; };
+		0C3713F417D3FECA00766FD9 /* jversion.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139417D3FECA00766FD9 /* jversion.h */; };
+		0C3713F517D3FECA00766FD9 /* libturbojpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37139517D3FECA00766FD9 /* libturbojpeg.a */; };
+		0C3713F817D3FECA00766FD9 /* tjutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139617D3FECA00766FD9 /* tjutil.h */; };
+		0C3713F917D3FECA00766FD9 /* tjutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139617D3FECA00766FD9 /* tjutil.h */; };
+		0C3713FA17D3FECA00766FD9 /* transupp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139717D3FECA00766FD9 /* transupp.h */; };
+		0C3713FB17D3FECA00766FD9 /* transupp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139717D3FECA00766FD9 /* transupp.h */; };
+		0C3713FC17D3FECA00766FD9 /* turbojpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139817D3FECA00766FD9 /* turbojpeg.h */; };
+		0C3713FD17D3FECA00766FD9 /* turbojpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139817D3FECA00766FD9 /* turbojpeg.h */; };
+		0C3713FE17D3FECA00766FD9 /* NSMutableArray+Dwarf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139B17D3FECA00766FD9 /* NSMutableArray+Dwarf.h */; };
+		0C3713FF17D3FECA00766FD9 /* NSMutableArray+Dwarf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139B17D3FECA00766FD9 /* NSMutableArray+Dwarf.h */; };
+		0C37140017D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37139C17D3FECA00766FD9 /* NSMutableArray+Dwarf.m */; };
+		0C37140117D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37139C17D3FECA00766FD9 /* NSMutableArray+Dwarf.m */; };
+		0C37140217D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37139C17D3FECA00766FD9 /* NSMutableArray+Dwarf.m */; };
+		0C37140517D3FECA00766FD9 /* UIImageView+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37139F17D3FECA00766FD9 /* UIImageView+Dwarf.m */; };
+		0C37140D17D3FECA00766FD9 /* DFTask+DFTaskPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713A417D3FECA00766FD9 /* DFTask+DFTaskPrivate.h */; };
+		0C37140E17D3FECA00766FD9 /* DFTask+DFTaskPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713A417D3FECA00766FD9 /* DFTask+DFTaskPrivate.h */; };
+		0C37140F17D3FECA00766FD9 /* DFTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713A517D3FECA00766FD9 /* DFTask.h */; };
+		0C37141017D3FECA00766FD9 /* DFTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713A517D3FECA00766FD9 /* DFTask.h */; };
+		0C37141117D3FECA00766FD9 /* DFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A617D3FECA00766FD9 /* DFTask.m */; };
+		0C37141217D3FECA00766FD9 /* DFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A617D3FECA00766FD9 /* DFTask.m */; };
+		0C37141317D3FECA00766FD9 /* DFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A617D3FECA00766FD9 /* DFTask.m */; };
+		0C37141417D3FECA00766FD9 /* DFTaskQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713A717D3FECA00766FD9 /* DFTaskQueue.h */; };
+		0C37141517D3FECA00766FD9 /* DFTaskQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713A717D3FECA00766FD9 /* DFTaskQueue.h */; };
+		0C37141617D3FECA00766FD9 /* DFTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A817D3FECA00766FD9 /* DFTaskQueue.m */; };
+		0C37141717D3FECA00766FD9 /* DFTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A817D3FECA00766FD9 /* DFTaskQueue.m */; };
+		0C37141817D3FECA00766FD9 /* DFTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A817D3FECA00766FD9 /* DFTaskQueue.m */; };
+		0C37141B17D3FECA00766FD9 /* DFButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713AB17D3FECA00766FD9 /* DFButton.m */; };
+		0C37141E17D3FECA00766FD9 /* DFButtonLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713AC17D3FECA00766FD9 /* DFButtonLayout.h */; };
+		0C37141F17D3FECA00766FD9 /* DFButtonLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713AC17D3FECA00766FD9 /* DFButtonLayout.h */; };
+		0C37142017D3FECA00766FD9 /* DFButtonLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713AD17D3FECA00766FD9 /* DFButtonLayout.m */; };
+		0C37142317D3FECA00766FD9 /* DwarfDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713AE17D3FECA00766FD9 /* DwarfDefines.h */; };
+		0C37142417D3FECA00766FD9 /* DwarfDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713AE17D3FECA00766FD9 /* DwarfDefines.h */; };
+		0C37142717D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */; };
+		0C37142817D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */; };
+		0C37143217D3FECA00766FD9 /* DFImageFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713B717D3FECA00766FD9 /* DFImageFetchManager.m */; };
+		0C37143717D3FECA00766FD9 /* DFImageFetchTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713B917D3FECA00766FD9 /* DFImageFetchTask.m */; };
+		0C37143A17D3FECA00766FD9 /* DFBenchmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713BC17D3FECA00766FD9 /* DFBenchmark.h */; };
+		0C37143B17D3FECA00766FD9 /* DFBenchmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713BC17D3FECA00766FD9 /* DFBenchmark.h */; };
+		0C37143C17D3FECA00766FD9 /* DFBenchmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713BD17D3FECA00766FD9 /* DFBenchmark.m */; };
+		0C37143D17D3FECA00766FD9 /* DFBenchmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713BD17D3FECA00766FD9 /* DFBenchmark.m */; };
+		0C37143E17D3FECA00766FD9 /* DFBenchmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713BD17D3FECA00766FD9 /* DFBenchmark.m */; };
+		0C37143F17D3FECA00766FD9 /* DFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713BF17D3FECA00766FD9 /* DFCache.h */; };
+		0C37144017D3FECA00766FD9 /* DFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713BF17D3FECA00766FD9 /* DFCache.h */; };
+		0C37144117D3FECA00766FD9 /* DFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713C017D3FECA00766FD9 /* DFCache.m */; };
+		0C37144217D3FECA00766FD9 /* DFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713C017D3FECA00766FD9 /* DFCache.m */; };
+		0C37144317D3FECA00766FD9 /* DFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713C017D3FECA00766FD9 /* DFCache.m */; };
+		0C37144417D3FECA00766FD9 /* DFCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713C217D3FECA00766FD9 /* DFCrypto.h */; };
+		0C37144517D3FECA00766FD9 /* DFCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713C217D3FECA00766FD9 /* DFCrypto.h */; };
+		0C37144617D3FECA00766FD9 /* DFCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713C317D3FECA00766FD9 /* DFCrypto.m */; };
+		0C37144717D3FECA00766FD9 /* DFCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713C317D3FECA00766FD9 /* DFCrypto.m */; };
+		0C37144817D3FECA00766FD9 /* DFCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713C317D3FECA00766FD9 /* DFCrypto.m */; };
+		0C37144917D3FECA00766FD9 /* DFObjCExtenstions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713C417D3FECA00766FD9 /* DFObjCExtenstions.h */; };
+		0C37144A17D3FECA00766FD9 /* DFObjCExtenstions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713C417D3FECA00766FD9 /* DFObjCExtenstions.h */; };
+		0C37144B17D3FECA00766FD9 /* DFOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713C517D3FECA00766FD9 /* DFOptions.h */; };
+		0C37144C17D3FECA00766FD9 /* DFOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713C517D3FECA00766FD9 /* DFOptions.h */; };
+		0C37144D17D3FECA00766FD9 /* DFImageFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713C717D3FECA00766FD9 /* DFImageFunctions.h */; };
+		0C37144E17D3FECA00766FD9 /* DFImageFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713C717D3FECA00766FD9 /* DFImageFunctions.h */; };
+		0C37145117D3FECA00766FD9 /* DFImageProcessing.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713C917D3FECA00766FD9 /* DFImageProcessing.m */; };
+		0C37145617D3FECA00766FD9 /* DFJPEGTurbo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713CB17D3FECA00766FD9 /* DFJPEGTurbo.m */; };
+		0C37145917D3FECA00766FD9 /* DFTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713CD17D3FECA00766FD9 /* DFTesting.h */; };
+		0C37145A17D3FECA00766FD9 /* DFTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713CD17D3FECA00766FD9 /* DFTesting.h */; };
+		0C37146117D3FFE600766FD9 /* DFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713D017D3FECA00766FD9 /* DFImageView.m */; };
+		0C37146717D4006B00766FD9 /* DFImageFetchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713B517D3FECA00766FD9 /* DFImageFetchHandler.m */; };
+		0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +148,69 @@
 		0C37137917D3FC3D00766FD9 /* DwarfKit Mac Dynamic-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Mac Dynamic-Prefix.pch"; sourceTree = "<group>"; };
 		0C37137A17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DwarfKit_Mac_Dynamic.h; sourceTree = "<group>"; };
 		0C37137B17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DwarfKit_Mac_Dynamic.m; sourceTree = "<group>"; };
+		0C37138317D3FECA00766FD9 /* bmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bmp.h; sourceTree = "<group>"; };
+		0C37138417D3FECA00766FD9 /* cderror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cderror.h; sourceTree = "<group>"; };
+		0C37138517D3FECA00766FD9 /* cdjpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdjpeg.h; sourceTree = "<group>"; };
+		0C37138617D3FECA00766FD9 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		0C37138717D3FECA00766FD9 /* jchuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jchuff.h; sourceTree = "<group>"; };
+		0C37138817D3FECA00766FD9 /* jconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jconfig.h; sourceTree = "<group>"; };
+		0C37138917D3FECA00766FD9 /* jdct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jdct.h; sourceTree = "<group>"; };
+		0C37138A17D3FECA00766FD9 /* jdhuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jdhuff.h; sourceTree = "<group>"; };
+		0C37138B17D3FECA00766FD9 /* jerror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jerror.h; sourceTree = "<group>"; };
+		0C37138C17D3FECA00766FD9 /* jinclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jinclude.h; sourceTree = "<group>"; };
+		0C37138D17D3FECA00766FD9 /* jmemsys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jmemsys.h; sourceTree = "<group>"; };
+		0C37138E17D3FECA00766FD9 /* jmorecfg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jmorecfg.h; sourceTree = "<group>"; };
+		0C37138F17D3FECA00766FD9 /* jpegcomp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jpegcomp.h; sourceTree = "<group>"; };
+		0C37139017D3FECA00766FD9 /* jpegint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jpegint.h; sourceTree = "<group>"; };
+		0C37139117D3FECA00766FD9 /* jpeglib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jpeglib.h; sourceTree = "<group>"; };
+		0C37139217D3FECA00766FD9 /* jsimd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jsimd.h; sourceTree = "<group>"; };
+		0C37139317D3FECA00766FD9 /* jsimddct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jsimddct.h; sourceTree = "<group>"; };
+		0C37139417D3FECA00766FD9 /* jversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jversion.h; sourceTree = "<group>"; };
+		0C37139517D3FECA00766FD9 /* libturbojpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libturbojpeg.a; sourceTree = "<group>"; };
+		0C37139617D3FECA00766FD9 /* tjutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjutil.h; sourceTree = "<group>"; };
+		0C37139717D3FECA00766FD9 /* transupp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transupp.h; sourceTree = "<group>"; };
+		0C37139817D3FECA00766FD9 /* turbojpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turbojpeg.h; sourceTree = "<group>"; };
+		0C37139B17D3FECA00766FD9 /* NSMutableArray+Dwarf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Dwarf.h"; sourceTree = "<group>"; };
+		0C37139C17D3FECA00766FD9 /* NSMutableArray+Dwarf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Dwarf.m"; sourceTree = "<group>"; };
+		0C37139E17D3FECA00766FD9 /* UIImageView+Dwarf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Dwarf.h"; sourceTree = "<group>"; };
+		0C37139F17D3FECA00766FD9 /* UIImageView+Dwarf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Dwarf.m"; sourceTree = "<group>"; };
+		0C3713A017D3FECA00766FD9 /* UIView+Dwarf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Dwarf.h"; sourceTree = "<group>"; };
+		0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Dwarf.m"; sourceTree = "<group>"; };
+		0C3713A417D3FECA00766FD9 /* DFTask+DFTaskPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFTask+DFTaskPrivate.h"; sourceTree = "<group>"; };
+		0C3713A517D3FECA00766FD9 /* DFTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTask.h; sourceTree = "<group>"; };
+		0C3713A617D3FECA00766FD9 /* DFTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTask.m; sourceTree = "<group>"; };
+		0C3713A717D3FECA00766FD9 /* DFTaskQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTaskQueue.h; sourceTree = "<group>"; };
+		0C3713A817D3FECA00766FD9 /* DFTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTaskQueue.m; sourceTree = "<group>"; };
+		0C3713AA17D3FECA00766FD9 /* DFButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFButton.h; sourceTree = "<group>"; };
+		0C3713AB17D3FECA00766FD9 /* DFButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFButton.m; sourceTree = "<group>"; };
+		0C3713AC17D3FECA00766FD9 /* DFButtonLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFButtonLayout.h; sourceTree = "<group>"; };
+		0C3713AD17D3FECA00766FD9 /* DFButtonLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFButtonLayout.m; sourceTree = "<group>"; };
+		0C3713AE17D3FECA00766FD9 /* DwarfDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DwarfDefines.h; sourceTree = "<group>"; };
+		0C3713B017D3FECA00766FD9 /* DFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNetworking.h; sourceTree = "<group>"; };
+		0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNetworkingConstants.h; sourceTree = "<group>"; };
+		0C3713B317D3FECA00766FD9 /* DFImageCaching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageCaching.h; sourceTree = "<group>"; };
+		0C3713B417D3FECA00766FD9 /* DFImageFetchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageFetchHandler.h; sourceTree = "<group>"; };
+		0C3713B517D3FECA00766FD9 /* DFImageFetchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageFetchHandler.m; sourceTree = "<group>"; };
+		0C3713B617D3FECA00766FD9 /* DFImageFetchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageFetchManager.h; sourceTree = "<group>"; };
+		0C3713B717D3FECA00766FD9 /* DFImageFetchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageFetchManager.m; sourceTree = "<group>"; };
+		0C3713B817D3FECA00766FD9 /* DFImageFetchTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageFetchTask.h; sourceTree = "<group>"; };
+		0C3713B917D3FECA00766FD9 /* DFImageFetchTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageFetchTask.m; sourceTree = "<group>"; };
+		0C3713BC17D3FECA00766FD9 /* DFBenchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFBenchmark.h; sourceTree = "<group>"; };
+		0C3713BD17D3FECA00766FD9 /* DFBenchmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFBenchmark.m; sourceTree = "<group>"; };
+		0C3713BF17D3FECA00766FD9 /* DFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCache.h; sourceTree = "<group>"; };
+		0C3713C017D3FECA00766FD9 /* DFCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCache.m; sourceTree = "<group>"; };
+		0C3713C217D3FECA00766FD9 /* DFCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCrypto.h; sourceTree = "<group>"; };
+		0C3713C317D3FECA00766FD9 /* DFCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCrypto.m; sourceTree = "<group>"; };
+		0C3713C417D3FECA00766FD9 /* DFObjCExtenstions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFObjCExtenstions.h; sourceTree = "<group>"; };
+		0C3713C517D3FECA00766FD9 /* DFOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFOptions.h; sourceTree = "<group>"; };
+		0C3713C717D3FECA00766FD9 /* DFImageFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageFunctions.h; sourceTree = "<group>"; };
+		0C3713C817D3FECA00766FD9 /* DFImageProcessing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageProcessing.h; sourceTree = "<group>"; };
+		0C3713C917D3FECA00766FD9 /* DFImageProcessing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageProcessing.m; sourceTree = "<group>"; };
+		0C3713CA17D3FECA00766FD9 /* DFJPEGTurbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFJPEGTurbo.h; sourceTree = "<group>"; };
+		0C3713CB17D3FECA00766FD9 /* DFJPEGTurbo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFJPEGTurbo.m; sourceTree = "<group>"; };
+		0C3713CD17D3FECA00766FD9 /* DFTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTesting.h; sourceTree = "<group>"; };
+		0C3713CF17D3FECA00766FD9 /* DFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageView.h; sourceTree = "<group>"; };
+		0C3713D017D3FECA00766FD9 /* DFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */,
+				0C3713F517D3FECA00766FD9 /* libturbojpeg.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +245,7 @@
 		0C3712EB17D3F93F00766FD9 = {
 			isa = PBXGroup;
 			children = (
+				0C37138017D3FECA00766FD9 /* DwarfKit */,
 				0C37135817D3FC2500766FD9 /* DwarfKit iOS */,
 				0C37137717D3FC3D00766FD9 /* DwarfKit Mac Dynamic */,
 				0C37136817D3FC3300766FD9 /* DwarfKit Mac Static */,
@@ -176,6 +340,212 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0C37138017D3FECA00766FD9 /* DwarfKit */ = {
+			isa = PBXGroup;
+			children = (
+				0C37138117D3FECA00766FD9 /* 3rd Party */,
+				0C37139917D3FECA00766FD9 /* Categories */,
+				0C3713A217D3FECA00766FD9 /* Concurrency */,
+				0C3713A917D3FECA00766FD9 /* Controls */,
+				0C3713AE17D3FECA00766FD9 /* DwarfDefines.h */,
+				0C3713AF17D3FECA00766FD9 /* Networking */,
+				0C3713BA17D3FECA00766FD9 /* Tools */,
+				0C3713CE17D3FECA00766FD9 /* Views */,
+			);
+			path = DwarfKit;
+			sourceTree = "<group>";
+		};
+		0C37138117D3FECA00766FD9 /* 3rd Party */ = {
+			isa = PBXGroup;
+			children = (
+				0C37138217D3FECA00766FD9 /* libturbojpeg */,
+			);
+			path = "3rd Party";
+			sourceTree = "<group>";
+		};
+		0C37138217D3FECA00766FD9 /* libturbojpeg */ = {
+			isa = PBXGroup;
+			children = (
+				0C37138317D3FECA00766FD9 /* bmp.h */,
+				0C37138417D3FECA00766FD9 /* cderror.h */,
+				0C37138517D3FECA00766FD9 /* cdjpeg.h */,
+				0C37138617D3FECA00766FD9 /* config.h */,
+				0C37138717D3FECA00766FD9 /* jchuff.h */,
+				0C37138817D3FECA00766FD9 /* jconfig.h */,
+				0C37138917D3FECA00766FD9 /* jdct.h */,
+				0C37138A17D3FECA00766FD9 /* jdhuff.h */,
+				0C37138B17D3FECA00766FD9 /* jerror.h */,
+				0C37138C17D3FECA00766FD9 /* jinclude.h */,
+				0C37138D17D3FECA00766FD9 /* jmemsys.h */,
+				0C37138E17D3FECA00766FD9 /* jmorecfg.h */,
+				0C37138F17D3FECA00766FD9 /* jpegcomp.h */,
+				0C37139017D3FECA00766FD9 /* jpegint.h */,
+				0C37139117D3FECA00766FD9 /* jpeglib.h */,
+				0C37139217D3FECA00766FD9 /* jsimd.h */,
+				0C37139317D3FECA00766FD9 /* jsimddct.h */,
+				0C37139417D3FECA00766FD9 /* jversion.h */,
+				0C37139517D3FECA00766FD9 /* libturbojpeg.a */,
+				0C37139617D3FECA00766FD9 /* tjutil.h */,
+				0C37139717D3FECA00766FD9 /* transupp.h */,
+				0C37139817D3FECA00766FD9 /* turbojpeg.h */,
+			);
+			path = libturbojpeg;
+			sourceTree = "<group>";
+		};
+		0C37139917D3FECA00766FD9 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0C37139A17D3FECA00766FD9 /* FoundationKit */,
+				0C37139D17D3FECA00766FD9 /* UIKit */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		0C37139A17D3FECA00766FD9 /* FoundationKit */ = {
+			isa = PBXGroup;
+			children = (
+				0C37139B17D3FECA00766FD9 /* NSMutableArray+Dwarf.h */,
+				0C37139C17D3FECA00766FD9 /* NSMutableArray+Dwarf.m */,
+			);
+			path = FoundationKit;
+			sourceTree = "<group>";
+		};
+		0C37139D17D3FECA00766FD9 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				0C37139E17D3FECA00766FD9 /* UIImageView+Dwarf.h */,
+				0C37139F17D3FECA00766FD9 /* UIImageView+Dwarf.m */,
+				0C3713A017D3FECA00766FD9 /* UIView+Dwarf.h */,
+				0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		0C3713A217D3FECA00766FD9 /* Concurrency */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713A317D3FECA00766FD9 /* Tasks */,
+			);
+			path = Concurrency;
+			sourceTree = "<group>";
+		};
+		0C3713A317D3FECA00766FD9 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713A417D3FECA00766FD9 /* DFTask+DFTaskPrivate.h */,
+				0C3713A517D3FECA00766FD9 /* DFTask.h */,
+				0C3713A617D3FECA00766FD9 /* DFTask.m */,
+				0C3713A717D3FECA00766FD9 /* DFTaskQueue.h */,
+				0C3713A817D3FECA00766FD9 /* DFTaskQueue.m */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		0C3713A917D3FECA00766FD9 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713AA17D3FECA00766FD9 /* DFButton.h */,
+				0C3713AB17D3FECA00766FD9 /* DFButton.m */,
+				0C3713AC17D3FECA00766FD9 /* DFButtonLayout.h */,
+				0C3713AD17D3FECA00766FD9 /* DFButtonLayout.m */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		0C3713AF17D3FECA00766FD9 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713B017D3FECA00766FD9 /* DFNetworking.h */,
+				0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */,
+				0C3713B217D3FECA00766FD9 /* Image Fetching */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		0C3713B217D3FECA00766FD9 /* Image Fetching */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713B317D3FECA00766FD9 /* DFImageCaching.h */,
+				0C3713B417D3FECA00766FD9 /* DFImageFetchHandler.h */,
+				0C3713B517D3FECA00766FD9 /* DFImageFetchHandler.m */,
+				0C3713B617D3FECA00766FD9 /* DFImageFetchManager.h */,
+				0C3713B717D3FECA00766FD9 /* DFImageFetchManager.m */,
+				0C3713B817D3FECA00766FD9 /* DFImageFetchTask.h */,
+				0C3713B917D3FECA00766FD9 /* DFImageFetchTask.m */,
+			);
+			path = "Image Fetching";
+			sourceTree = "<group>";
+		};
+		0C3713BA17D3FECA00766FD9 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713BB17D3FECA00766FD9 /* Benchmark */,
+				0C3713BE17D3FECA00766FD9 /* Caching */,
+				0C3713C117D3FECA00766FD9 /* Crypto */,
+				0C3713C417D3FECA00766FD9 /* DFObjCExtenstions.h */,
+				0C3713C517D3FECA00766FD9 /* DFOptions.h */,
+				0C3713C617D3FECA00766FD9 /* Images */,
+				0C3713CC17D3FECA00766FD9 /* Testing */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		0C3713BB17D3FECA00766FD9 /* Benchmark */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713BC17D3FECA00766FD9 /* DFBenchmark.h */,
+				0C3713BD17D3FECA00766FD9 /* DFBenchmark.m */,
+			);
+			path = Benchmark;
+			sourceTree = "<group>";
+		};
+		0C3713BE17D3FECA00766FD9 /* Caching */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713BF17D3FECA00766FD9 /* DFCache.h */,
+				0C3713C017D3FECA00766FD9 /* DFCache.m */,
+			);
+			path = Caching;
+			sourceTree = "<group>";
+		};
+		0C3713C117D3FECA00766FD9 /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713C217D3FECA00766FD9 /* DFCrypto.h */,
+				0C3713C317D3FECA00766FD9 /* DFCrypto.m */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
+		0C3713C617D3FECA00766FD9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713C717D3FECA00766FD9 /* DFImageFunctions.h */,
+				0C3713C817D3FECA00766FD9 /* DFImageProcessing.h */,
+				0C3713C917D3FECA00766FD9 /* DFImageProcessing.m */,
+				0C3713CA17D3FECA00766FD9 /* DFJPEGTurbo.h */,
+				0C3713CB17D3FECA00766FD9 /* DFJPEGTurbo.m */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		0C3713CC17D3FECA00766FD9 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713CD17D3FECA00766FD9 /* DFTesting.h */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		0C3713CE17D3FECA00766FD9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0C3713CF17D3FECA00766FD9 /* DFImageView.h */,
+				0C3713D017D3FECA00766FD9 /* DFImageView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -183,6 +553,41 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C3713D217D3FECA00766FD9 /* bmp.h in Headers */,
+				0C3713D417D3FECA00766FD9 /* cderror.h in Headers */,
+				0C3713D617D3FECA00766FD9 /* cdjpeg.h in Headers */,
+				0C3713D817D3FECA00766FD9 /* config.h in Headers */,
+				0C3713DA17D3FECA00766FD9 /* jchuff.h in Headers */,
+				0C3713DC17D3FECA00766FD9 /* jconfig.h in Headers */,
+				0C3713DE17D3FECA00766FD9 /* jdct.h in Headers */,
+				0C3713E017D3FECA00766FD9 /* jdhuff.h in Headers */,
+				0C3713E217D3FECA00766FD9 /* jerror.h in Headers */,
+				0C3713E417D3FECA00766FD9 /* jinclude.h in Headers */,
+				0C3713E617D3FECA00766FD9 /* jmemsys.h in Headers */,
+				0C3713E817D3FECA00766FD9 /* jmorecfg.h in Headers */,
+				0C3713EA17D3FECA00766FD9 /* jpegcomp.h in Headers */,
+				0C3713EC17D3FECA00766FD9 /* jpegint.h in Headers */,
+				0C3713EE17D3FECA00766FD9 /* jpeglib.h in Headers */,
+				0C3713F017D3FECA00766FD9 /* jsimd.h in Headers */,
+				0C3713F217D3FECA00766FD9 /* jsimddct.h in Headers */,
+				0C3713F417D3FECA00766FD9 /* jversion.h in Headers */,
+				0C3713F917D3FECA00766FD9 /* tjutil.h in Headers */,
+				0C3713FB17D3FECA00766FD9 /* transupp.h in Headers */,
+				0C3713FD17D3FECA00766FD9 /* turbojpeg.h in Headers */,
+				0C3713FF17D3FECA00766FD9 /* NSMutableArray+Dwarf.h in Headers */,
+				0C37140E17D3FECA00766FD9 /* DFTask+DFTaskPrivate.h in Headers */,
+				0C37141017D3FECA00766FD9 /* DFTask.h in Headers */,
+				0C37141517D3FECA00766FD9 /* DFTaskQueue.h in Headers */,
+				0C37141F17D3FECA00766FD9 /* DFButtonLayout.h in Headers */,
+				0C37142417D3FECA00766FD9 /* DwarfDefines.h in Headers */,
+				0C37142817D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */,
+				0C37143B17D3FECA00766FD9 /* DFBenchmark.h in Headers */,
+				0C37144017D3FECA00766FD9 /* DFCache.h in Headers */,
+				0C37144517D3FECA00766FD9 /* DFCrypto.h in Headers */,
+				0C37144A17D3FECA00766FD9 /* DFObjCExtenstions.h in Headers */,
+				0C37144C17D3FECA00766FD9 /* DFOptions.h in Headers */,
+				0C37144E17D3FECA00766FD9 /* DFImageFunctions.h in Headers */,
+				0C37145A17D3FECA00766FD9 /* DFTesting.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +595,41 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C3713D117D3FECA00766FD9 /* bmp.h in Headers */,
+				0C3713D317D3FECA00766FD9 /* cderror.h in Headers */,
+				0C3713D517D3FECA00766FD9 /* cdjpeg.h in Headers */,
+				0C3713D717D3FECA00766FD9 /* config.h in Headers */,
+				0C3713D917D3FECA00766FD9 /* jchuff.h in Headers */,
+				0C3713DB17D3FECA00766FD9 /* jconfig.h in Headers */,
+				0C3713DD17D3FECA00766FD9 /* jdct.h in Headers */,
+				0C3713DF17D3FECA00766FD9 /* jdhuff.h in Headers */,
+				0C3713E117D3FECA00766FD9 /* jerror.h in Headers */,
+				0C3713E317D3FECA00766FD9 /* jinclude.h in Headers */,
+				0C3713E517D3FECA00766FD9 /* jmemsys.h in Headers */,
+				0C3713E717D3FECA00766FD9 /* jmorecfg.h in Headers */,
+				0C3713E917D3FECA00766FD9 /* jpegcomp.h in Headers */,
+				0C3713EB17D3FECA00766FD9 /* jpegint.h in Headers */,
+				0C3713ED17D3FECA00766FD9 /* jpeglib.h in Headers */,
+				0C3713EF17D3FECA00766FD9 /* jsimd.h in Headers */,
+				0C3713F117D3FECA00766FD9 /* jsimddct.h in Headers */,
+				0C3713F317D3FECA00766FD9 /* jversion.h in Headers */,
+				0C3713F817D3FECA00766FD9 /* tjutil.h in Headers */,
+				0C3713FA17D3FECA00766FD9 /* transupp.h in Headers */,
+				0C3713FC17D3FECA00766FD9 /* turbojpeg.h in Headers */,
+				0C3713FE17D3FECA00766FD9 /* NSMutableArray+Dwarf.h in Headers */,
+				0C37140D17D3FECA00766FD9 /* DFTask+DFTaskPrivate.h in Headers */,
+				0C37140F17D3FECA00766FD9 /* DFTask.h in Headers */,
+				0C37141417D3FECA00766FD9 /* DFTaskQueue.h in Headers */,
+				0C37141E17D3FECA00766FD9 /* DFButtonLayout.h in Headers */,
+				0C37142317D3FECA00766FD9 /* DwarfDefines.h in Headers */,
+				0C37142717D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */,
+				0C37143A17D3FECA00766FD9 /* DFBenchmark.h in Headers */,
+				0C37143F17D3FECA00766FD9 /* DFCache.h in Headers */,
+				0C37144417D3FECA00766FD9 /* DFCrypto.h in Headers */,
+				0C37144917D3FECA00766FD9 /* DFObjCExtenstions.h in Headers */,
+				0C37144B17D3FECA00766FD9 /* DFOptions.h in Headers */,
+				0C37144D17D3FECA00766FD9 /* DFImageFunctions.h in Headers */,
+				0C37145917D3FECA00766FD9 /* DFTesting.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +721,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C37135E17D3FC2500766FD9 /* DwarfKit_iOS.m in Sources */,
+				0C37140017D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
+				0C37140517D3FECA00766FD9 /* UIImageView+Dwarf.m in Sources */,
+				0C37141117D3FECA00766FD9 /* DFTask.m in Sources */,
+				0C37141617D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
+				0C37141B17D3FECA00766FD9 /* DFButton.m in Sources */,
+				0C37142017D3FECA00766FD9 /* DFButtonLayout.m in Sources */,
+				0C37143217D3FECA00766FD9 /* DFImageFetchManager.m in Sources */,
+				0C37143717D3FECA00766FD9 /* DFImageFetchTask.m in Sources */,
+				0C37143C17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
+				0C37144117D3FECA00766FD9 /* DFCache.m in Sources */,
+				0C37144617D3FECA00766FD9 /* DFCrypto.m in Sources */,
+				0C37145117D3FECA00766FD9 /* DFImageProcessing.m in Sources */,
+				0C37145617D3FECA00766FD9 /* DFJPEGTurbo.m in Sources */,
+				0C37146117D3FFE600766FD9 /* DFImageView.m in Sources */,
+				0C37146717D4006B00766FD9 /* DFImageFetchHandler.m in Sources */,
+				0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +745,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C37136D17D3FC3300766FD9 /* DwarfKit_Mac_Static.m in Sources */,
+				0C37140217D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
+				0C37141317D3FECA00766FD9 /* DFTask.m in Sources */,
+				0C37141817D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
+				0C37143E17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
+				0C37144317D3FECA00766FD9 /* DFCache.m in Sources */,
+				0C37144817D3FECA00766FD9 /* DFCrypto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +759,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C37137C17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.m in Sources */,
+				0C37140117D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
+				0C37141217D3FECA00766FD9 /* DFTask.m in Sources */,
+				0C37141717D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
+				0C37143D17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
+				0C37144217D3FECA00766FD9 /* DFCache.m in Sources */,
+				0C37144717D3FECA00766FD9 /* DFCrypto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +833,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DwarfKit iOS/DwarfKit iOS-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DwarfKit/3rd Party/libturbojpeg\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = DwarfKit;
 				SKIP_INSTALL = YES;
@@ -378,6 +850,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DwarfKit iOS/DwarfKit iOS-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DwarfKit/3rd Party/libturbojpeg\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = DwarfKit;
 				SKIP_INSTALL = YES;
@@ -396,6 +872,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DwarfKit Mac Static/DwarfKit Mac Static-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DwarfKit/3rd Party/libturbojpeg\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "DwarfKit-Mac";
 				SDKROOT = macosx;
@@ -415,6 +895,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DwarfKit Mac Static/DwarfKit Mac Static-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DwarfKit/3rd Party/libturbojpeg\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "DwarfKit-Mac";
 				SDKROOT = macosx;
@@ -435,6 +919,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DwarfKit Mac Dynamic/DwarfKit Mac Dynamic-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DwarfKit/3rd Party/libturbojpeg\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = DwarfKit;
 				SDKROOT = macosx;
@@ -456,6 +944,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DwarfKit Mac Dynamic/DwarfKit Mac Dynamic-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DwarfKit/3rd Party/libturbojpeg\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = DwarfKit;
 				SDKROOT = macosx;
@@ -481,6 +973,7 @@
 				0C37136117D3FC2500766FD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C37136E17D3FC3300766FD9 /* Build configuration list for PBXNativeTarget "DwarfKit Mac Static" */ = {
 			isa = XCConfigurationList;
@@ -489,6 +982,7 @@
 				0C37137017D3FC3300766FD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C37137D17D3FC3D00766FD9 /* Build configuration list for PBXNativeTarget "DwarfKit Mac Dynamic" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +991,7 @@
 				0C37137F17D3FC3D00766FD9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
