@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
-		0C37136717D3FC3300766FD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37132417D3F9C700766FD9 /* Cocoa.framework */; };
-		0C37137617D3FC3C00766FD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37132417D3F9C700766FD9 /* Cocoa.framework */; };
 		0C3713D117D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
 		0C3713D217D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
 		0C3713D317D3FECA00766FD9 /* cderror.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138417D3FECA00766FD9 /* cderror.h */; };
@@ -111,6 +109,9 @@
 		0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */; };
 		0C8C15CB17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */; };
 		0C8C15CC17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */; };
+		0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
+		0C8C15D017D406DD004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
+		0C8C15D117D40704004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -128,8 +129,6 @@
 /* Begin PBXFileReference section */
 		0C3712F717D3F93F00766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0C37130617D3F93F00766FD9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		0C37130817D3F93F00766FD9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		0C37132417D3F9C700766FD9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		0C37132717D3F9C700766FD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		0C37132817D3F9C700766FD9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0C37132917D3F9C700766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -203,6 +202,8 @@
 		0C3713CF17D3FECA00766FD9 /* DFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageView.h; sourceTree = "<group>"; };
 		0C3713D017D3FECA00766FD9 /* DFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageView.m; sourceTree = "<group>"; };
 		0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DwarfCrossPlatform.h; sourceTree = "<group>"; };
+		0C8C15CD17D406B4004B7DAA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0C8C15CF17D406DD004B7DAA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */,
 				0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */,
 				0C3713F517D3FECA00766FD9 /* libturbojpeg.a in Frameworks */,
 			);
@@ -219,7 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C37136717D3FC3300766FD9 /* Cocoa.framework in Frameworks */,
+				0C8C15D117D40704004B7DAA /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,7 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C37137617D3FC3C00766FD9 /* Cocoa.framework in Frameworks */,
+				0C8C15D017D406DD004B7DAA /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,10 +261,10 @@
 		0C3712F617D3F93F00766FD9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0C8C15CF17D406DD004B7DAA /* Cocoa.framework */,
 				0C3712F717D3F93F00766FD9 /* Foundation.framework */,
 				0C37130617D3F93F00766FD9 /* SenTestingKit.framework */,
-				0C37130817D3F93F00766FD9 /* UIKit.framework */,
-				0C37132417D3F9C700766FD9 /* Cocoa.framework */,
+				0C8C15CD17D406B4004B7DAA /* UIKit.framework */,
 				0C37132617D3F9C700766FD9 /* Other Frameworks */,
 			);
 			name = Frameworks;
