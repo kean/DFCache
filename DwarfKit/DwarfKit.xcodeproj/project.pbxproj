@@ -113,6 +113,8 @@
 		0C37146117D3FFE600766FD9 /* DFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713D017D3FECA00766FD9 /* DFImageView.m */; };
 		0C37146717D4006B00766FD9 /* DFImageFetchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713B517D3FECA00766FD9 /* DFImageFetchHandler.m */; };
 		0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */; };
+		0C8C15CB17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */; };
+		0C8C15CC17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -211,6 +213,7 @@
 		0C3713CD17D3FECA00766FD9 /* DFTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTesting.h; sourceTree = "<group>"; };
 		0C3713CF17D3FECA00766FD9 /* DFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageView.h; sourceTree = "<group>"; };
 		0C3713D017D3FECA00766FD9 /* DFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageView.m; sourceTree = "<group>"; };
+		0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DwarfCrossPlatform.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,11 +346,12 @@
 		0C37138017D3FECA00766FD9 /* DwarfKit */ = {
 			isa = PBXGroup;
 			children = (
+				0C3713AE17D3FECA00766FD9 /* DwarfDefines.h */,
+				0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */,
 				0C37138117D3FECA00766FD9 /* 3rd Party */,
 				0C37139917D3FECA00766FD9 /* Categories */,
 				0C3713A217D3FECA00766FD9 /* Concurrency */,
 				0C3713A917D3FECA00766FD9 /* Controls */,
-				0C3713AE17D3FECA00766FD9 /* DwarfDefines.h */,
 				0C3713AF17D3FECA00766FD9 /* Networking */,
 				0C3713BA17D3FECA00766FD9 /* Tools */,
 				0C3713CE17D3FECA00766FD9 /* Views */,
@@ -588,6 +592,7 @@
 				0C37144C17D3FECA00766FD9 /* DFOptions.h in Headers */,
 				0C37144E17D3FECA00766FD9 /* DFImageFunctions.h in Headers */,
 				0C37145A17D3FECA00766FD9 /* DFTesting.h in Headers */,
+				0C8C15CC17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +635,7 @@
 				0C37144B17D3FECA00766FD9 /* DFOptions.h in Headers */,
 				0C37144D17D3FECA00766FD9 /* DFImageFunctions.h in Headers */,
 				0C37145917D3FECA00766FD9 /* DFTesting.h in Headers */,
+				0C8C15CB17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

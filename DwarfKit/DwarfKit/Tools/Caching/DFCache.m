@@ -6,10 +6,11 @@
 //  Copyright (c) 2013 Alexander Grebenyuk. All rights reserved.
 //
 
-#import "DwarfDefines.h"
 #import "DFCache.h"
 #import "DFCrypto.h"
 #import "DFOptions.h"
+#import "DwarfCrossPlatform.h"
+#import "DwarfDefines.h"
 
 #if TARGET_OS_IPHONE
     #import "DFImageProcessing.h"
@@ -93,9 +94,9 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
         [self _initPathsWithName:name];
         [self _initMetatable];
         
-#if TARGET_OS_IPHONE
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanupDiskCache) name:UIApplicationWillResignActiveNotification object:nil];
-#endif
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center addObserver:self selector:@selector(applicationWillResignActive:) name:DFApplicationWillResignActiveNotification object:nil];
+        [center addObserver:self selector:@selector(applicationWillTerminate:) name:DFApplicationWillTerminateNotification object:nil];
     }
     return self;
 }
@@ -555,6 +556,19 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
     [self _createCacheDirectories];
     [_metatable writeToFile:_metatableFilepath atomically:YES];
     _flags.needsSyncMetatable = NO;
+}
+
+#pragma mark - Application Notifications
+
+- (void)applicationWillResignActive:(NSNotification *)notification {
+    [self cleanupDiskCache];
+}
+
+
+- (void)applicationWillTerminate:(NSNotification *)notification {
+    dispatch_barrier_sync(_metaQueue, ^{
+        [self _syncMetatable];
+    });
 }
 
 #pragma mark - <DFImageCaching>
