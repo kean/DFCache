@@ -8,12 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
-		0C37135C17D3FC2500766FD9 /* DwarfKit_iOS.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C37135B17D3FC2500766FD9 /* DwarfKit_iOS.h */; };
-		0C37135E17D3FC2500766FD9 /* DwarfKit_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37135D17D3FC2500766FD9 /* DwarfKit_iOS.m */; };
 		0C37136717D3FC3300766FD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37132417D3F9C700766FD9 /* Cocoa.framework */; };
-		0C37136D17D3FC3300766FD9 /* DwarfKit_Mac_Static.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37136C17D3FC3300766FD9 /* DwarfKit_Mac_Static.m */; };
 		0C37137617D3FC3C00766FD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37132417D3F9C700766FD9 /* Cocoa.framework */; };
-		0C37137C17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37137B17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.m */; };
 		0C3713D117D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
 		0C3713D217D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
 		0C3713D317D3FECA00766FD9 /* cderror.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138417D3FECA00766FD9 /* cderror.h */; };
@@ -124,7 +120,6 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				0C37135C17D3FC2500766FD9 /* DwarfKit_iOS.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,16 +135,10 @@
 		0C37132917D3F9C700766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0C37135617D3FC2500766FD9 /* libDwarfKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDwarfKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37135A17D3FC2500766FD9 /* DwarfKit iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DwarfKit iOS-Prefix.pch"; sourceTree = "<group>"; };
-		0C37135B17D3FC2500766FD9 /* DwarfKit_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DwarfKit_iOS.h; sourceTree = "<group>"; };
-		0C37135D17D3FC2500766FD9 /* DwarfKit_iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DwarfKit_iOS.m; sourceTree = "<group>"; };
 		0C37136617D3FC3300766FD9 /* libDwarfKit-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libDwarfKit-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37136A17D3FC3300766FD9 /* DwarfKit Mac Static-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Mac Static-Prefix.pch"; sourceTree = "<group>"; };
-		0C37136B17D3FC3300766FD9 /* DwarfKit_Mac_Static.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DwarfKit_Mac_Static.h; sourceTree = "<group>"; };
-		0C37136C17D3FC3300766FD9 /* DwarfKit_Mac_Static.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DwarfKit_Mac_Static.m; sourceTree = "<group>"; };
 		0C37137517D3FC3C00766FD9 /* DwarfKit.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = DwarfKit.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37137917D3FC3D00766FD9 /* DwarfKit Mac Dynamic-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Mac Dynamic-Prefix.pch"; sourceTree = "<group>"; };
-		0C37137A17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DwarfKit_Mac_Dynamic.h; sourceTree = "<group>"; };
-		0C37137B17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DwarfKit_Mac_Dynamic.m; sourceTree = "<group>"; };
 		0C37138317D3FECA00766FD9 /* bmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bmp.h; sourceTree = "<group>"; };
 		0C37138417D3FECA00766FD9 /* cderror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cderror.h; sourceTree = "<group>"; };
 		0C37138517D3FECA00766FD9 /* cdjpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdjpeg.h; sourceTree = "<group>"; };
@@ -292,8 +281,6 @@
 		0C37135817D3FC2500766FD9 /* DwarfKit iOS */ = {
 			isa = PBXGroup;
 			children = (
-				0C37135B17D3FC2500766FD9 /* DwarfKit_iOS.h */,
-				0C37135D17D3FC2500766FD9 /* DwarfKit_iOS.m */,
 				0C37135917D3FC2500766FD9 /* Supporting Files */,
 			);
 			path = "DwarfKit iOS";
@@ -310,8 +297,6 @@
 		0C37136817D3FC3300766FD9 /* DwarfKit Mac Static */ = {
 			isa = PBXGroup;
 			children = (
-				0C37136B17D3FC3300766FD9 /* DwarfKit_Mac_Static.h */,
-				0C37136C17D3FC3300766FD9 /* DwarfKit_Mac_Static.m */,
 				0C37136917D3FC3300766FD9 /* Supporting Files */,
 			);
 			path = "DwarfKit Mac Static";
@@ -328,8 +313,6 @@
 		0C37137717D3FC3D00766FD9 /* DwarfKit Mac Dynamic */ = {
 			isa = PBXGroup;
 			children = (
-				0C37137A17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.h */,
-				0C37137B17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.m */,
 				0C37137817D3FC3D00766FD9 /* Supporting Files */,
 			);
 			path = "DwarfKit Mac Dynamic";
@@ -726,7 +709,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C37135E17D3FC2500766FD9 /* DwarfKit_iOS.m in Sources */,
 				0C37140017D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
 				0C37140517D3FECA00766FD9 /* UIImageView+Dwarf.m in Sources */,
 				0C37141117D3FECA00766FD9 /* DFTask.m in Sources */,
@@ -750,7 +732,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C37136D17D3FC3300766FD9 /* DwarfKit_Mac_Static.m in Sources */,
 				0C37140217D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
 				0C37141317D3FECA00766FD9 /* DFTask.m in Sources */,
 				0C37141817D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
@@ -764,7 +745,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C37137C17D3FC3D00766FD9 /* DwarfKit_Mac_Dynamic.m in Sources */,
 				0C37140117D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
 				0C37141217D3FECA00766FD9 /* DFTask.m in Sources */,
 				0C37141717D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
