@@ -112,6 +112,8 @@
 		0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
 		0C8C15D017D406DD004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
 		0C8C15D117D40704004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
+		0C8C15DB17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0C8C15DA17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch */; };
+		0C8C15DC17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0C8C15DA17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -135,9 +137,7 @@
 		0C37135617D3FC2500766FD9 /* libDwarfKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDwarfKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37135A17D3FC2500766FD9 /* DwarfKit iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DwarfKit iOS-Prefix.pch"; sourceTree = "<group>"; };
 		0C37136617D3FC3300766FD9 /* libDwarfKit-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libDwarfKit-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C37136A17D3FC3300766FD9 /* DwarfKit Mac Static-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Mac Static-Prefix.pch"; sourceTree = "<group>"; };
 		0C37137517D3FC3C00766FD9 /* DwarfKit.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = DwarfKit.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C37137917D3FC3D00766FD9 /* DwarfKit Mac Dynamic-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Mac Dynamic-Prefix.pch"; sourceTree = "<group>"; };
 		0C37138317D3FECA00766FD9 /* bmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bmp.h; sourceTree = "<group>"; };
 		0C37138417D3FECA00766FD9 /* cderror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cderror.h; sourceTree = "<group>"; };
 		0C37138517D3FECA00766FD9 /* cdjpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdjpeg.h; sourceTree = "<group>"; };
@@ -204,6 +204,7 @@
 		0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DwarfCrossPlatform.h; sourceTree = "<group>"; };
 		0C8C15CD17D406B4004B7DAA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0C8C15CF17D406DD004B7DAA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		0C8C15DA17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Mac-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,8 +242,7 @@
 			children = (
 				0C37138017D3FECA00766FD9 /* DwarfKit */,
 				0C37135817D3FC2500766FD9 /* DwarfKit iOS */,
-				0C37137717D3FC3D00766FD9 /* DwarfKit Mac Dynamic */,
-				0C37136817D3FC3300766FD9 /* DwarfKit Mac Static */,
+				0C8C15D917D40D19004B7DAA /* DwarfKit Mac */,
 				0C3712F617D3F93F00766FD9 /* Frameworks */,
 				0C3712F517D3F93F00766FD9 /* Products */,
 			);
@@ -283,49 +283,9 @@
 		0C37135817D3FC2500766FD9 /* DwarfKit iOS */ = {
 			isa = PBXGroup;
 			children = (
-				0C37135917D3FC2500766FD9 /* Supporting Files */,
-			);
-			path = "DwarfKit iOS";
-			sourceTree = "<group>";
-		};
-		0C37135917D3FC2500766FD9 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
 				0C37135A17D3FC2500766FD9 /* DwarfKit iOS-Prefix.pch */,
 			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0C37136817D3FC3300766FD9 /* DwarfKit Mac Static */ = {
-			isa = PBXGroup;
-			children = (
-				0C37136917D3FC3300766FD9 /* Supporting Files */,
-			);
-			path = "DwarfKit Mac Static";
-			sourceTree = "<group>";
-		};
-		0C37136917D3FC3300766FD9 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				0C37136A17D3FC3300766FD9 /* DwarfKit Mac Static-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0C37137717D3FC3D00766FD9 /* DwarfKit Mac Dynamic */ = {
-			isa = PBXGroup;
-			children = (
-				0C37137817D3FC3D00766FD9 /* Supporting Files */,
-			);
-			path = "DwarfKit Mac Dynamic";
-			sourceTree = "<group>";
-		};
-		0C37137817D3FC3D00766FD9 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				0C37137917D3FC3D00766FD9 /* DwarfKit Mac Dynamic-Prefix.pch */,
-			);
-			name = "Supporting Files";
+			path = "DwarfKit iOS";
 			sourceTree = "<group>";
 		};
 		0C37138017D3FECA00766FD9 /* DwarfKit */ = {
@@ -535,6 +495,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		0C8C15D917D40D19004B7DAA /* DwarfKit Mac */ = {
+			isa = PBXGroup;
+			children = (
+				0C8C15DA17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch */,
+			);
+			path = "DwarfKit Mac";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -578,6 +546,7 @@
 				0C37144E17D3FECA00766FD9 /* DFImageFunctions.h in Headers */,
 				0C37145A17D3FECA00766FD9 /* DFTesting.h in Headers */,
 				0C8C15CC17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */,
+				0C8C15DC17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +590,7 @@
 				0C37144D17D3FECA00766FD9 /* DFImageFunctions.h in Headers */,
 				0C37145917D3FECA00766FD9 /* DFTesting.h in Headers */,
 				0C8C15CB17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */,
+				0C8C15DB17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,7 +828,7 @@
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DwarfKit Mac Static/DwarfKit Mac Static-Prefix.pch";
+				GCC_PREFIX_HEADER = "DwarfKit Mac/DwarfKit Mac-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -881,7 +851,7 @@
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DwarfKit Mac Static/DwarfKit Mac Static-Prefix.pch";
+				GCC_PREFIX_HEADER = "DwarfKit Mac/DwarfKit Mac-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -905,7 +875,7 @@
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DwarfKit Mac Dynamic/DwarfKit Mac Dynamic-Prefix.pch";
+				GCC_PREFIX_HEADER = "DwarfKit Mac/DwarfKit Mac-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -930,7 +900,7 @@
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DwarfKit Mac Dynamic/DwarfKit Mac Dynamic-Prefix.pch";
+				GCC_PREFIX_HEADER = "DwarfKit Mac/DwarfKit Mac-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
