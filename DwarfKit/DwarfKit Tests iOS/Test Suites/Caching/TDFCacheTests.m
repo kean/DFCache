@@ -9,10 +9,10 @@
 #import "DFCache.h"
 #import "DFOptions.h"
 #import "DFTesting.h"
-#import "DTCacheTests.h"
+#import "TDFCacheTests.h"
 
 
-@implementation DTCacheTests {
+@implementation TDFCacheTests {
     DFCache *_cache;
 }
 

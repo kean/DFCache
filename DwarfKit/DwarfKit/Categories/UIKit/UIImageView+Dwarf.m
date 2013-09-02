@@ -6,10 +6,8 @@
 //  Copyright (c) 2013 Alexander Grebenyuk. All rights reserved.
 //
 
-#import "DFImageFetchManager.h"
 #import "UIImageView+Dwarf.h"
 #import <QuartzCore/QuartzCore.h>
-#import <objc/runtime.h>
 
 
 @implementation UIImageView (Dwarf)

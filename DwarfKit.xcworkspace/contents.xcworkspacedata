@@ -4,4 +4,7 @@
    <FileRef
       location = "group:DwarfKit/DwarfKit.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:DwarfKit Sample iOS/DwarfKit Sample iOS.xcodeproj">
+   </FileRef>
 </Workspace>

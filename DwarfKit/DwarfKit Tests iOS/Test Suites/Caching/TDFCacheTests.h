@@ -8,6 +8,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface DTCacheTests : SenTestCase
+@interface TDFCacheTests : SenTestCase
 
 @end
