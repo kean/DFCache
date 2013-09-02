@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Alexander Grebenyuk. All rights reserved.
 //
 
-#import "DwarfDefines.h"
-#import "DFTaskQueue.h"
-#import "DFTask.h"
 #import "DFTask+DFTaskPrivate.h"
+#import "DFTask.h"
+#import "DFTaskQueue.h"
+#import "dwarf_private.h"
 
 
 @interface DFTaskQueue() <_DFTaskDelegate>

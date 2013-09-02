@@ -73,8 +73,6 @@
 		0C37141E17D3FECA00766FD9 /* DFButtonLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713AC17D3FECA00766FD9 /* DFButtonLayout.h */; };
 		0C37141F17D3FECA00766FD9 /* DFButtonLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713AC17D3FECA00766FD9 /* DFButtonLayout.h */; };
 		0C37142017D3FECA00766FD9 /* DFButtonLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713AD17D3FECA00766FD9 /* DFButtonLayout.m */; };
-		0C37142317D3FECA00766FD9 /* DwarfDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713AE17D3FECA00766FD9 /* DwarfDefines.h */; };
-		0C37142417D3FECA00766FD9 /* DwarfDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713AE17D3FECA00766FD9 /* DwarfDefines.h */; };
 		0C37142717D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */; };
 		0C37142817D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */; };
 		0C37143217D3FECA00766FD9 /* DFImageFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713B717D3FECA00766FD9 /* DFImageFetchManager.m */; };
@@ -107,14 +105,57 @@
 		0C37146117D3FFE600766FD9 /* DFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713D017D3FECA00766FD9 /* DFImageView.m */; };
 		0C37146717D4006B00766FD9 /* DFImageFetchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713B517D3FECA00766FD9 /* DFImageFetchHandler.m */; };
 		0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */; };
-		0C8C15CB17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */; };
-		0C8C15CC17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */; };
 		0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
 		0C8C15D017D406DD004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
 		0C8C15D117D40704004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
 		0C8C15DB17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0C8C15DA17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch */; };
 		0C8C15DC17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0C8C15DA17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch */; };
+		0C8C15E317D40DFC004B7DAA /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37130617D3F93F00766FD9 /* SenTestingKit.framework */; };
+		0C8C15E417D40DFC004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
+		0C8C15E517D40DFC004B7DAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
+		0C8C15EB17D40DFC004B7DAA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C8C15E917D40DFC004B7DAA /* InfoPlist.strings */; };
+		0C8C15F917D40E0C004B7DAA /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37130617D3F93F00766FD9 /* SenTestingKit.framework */; };
+		0C8C15FA17D40E0C004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
+		0C8C160017D40E0C004B7DAA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C8C15FE17D40E0C004B7DAA /* InfoPlist.strings */; };
+		0C8C160317D40E0C004B7DAA /* DwarfKit_Tests_Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C160217D40E0C004B7DAA /* DwarfKit_Tests_Mac.m */; };
+		0C8C160A17D40EB4004B7DAA /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C8C160917D40EB4004B7DAA /* image.jpeg */; };
+		0C8C160F17D40F9B004B7DAA /* DTCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C160E17D40F9B004B7DAA /* DTCacheTests.m */; };
+		0CEDE40E17D44DDA00D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
+		0CEDE40F17D44DE100D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
+		0CEDE41017D44DE400D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
+		0CEDE41117D44E7900D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
+		0CEDE41217D44E8000D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
+		0CEDE41917D4506800D617F7 /* dwarf_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CEDE41817D4506800D617F7 /* dwarf_private.h */; };
+		0CEDE41A17D4506800D617F7 /* dwarf_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CEDE41817D4506800D617F7 /* dwarf_private.h */; };
+		0CFC5CBC17D42367001C2951 /* libDwarfKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37135617D3FC2500766FD9 /* libDwarfKit.a */; };
+		0CFC5CBF17D423A1001C2951 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFC5CBD17D42393001C2951 /* QuartzCore.framework */; };
+		0CFC5CC017D423A4001C2951 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFC5CBD17D42393001C2951 /* QuartzCore.framework */; };
+		0CFC5CC117D423A6001C2951 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFC5CBD17D42393001C2951 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0CFC5CB617D42118001C2951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C3712EC17D3F93F00766FD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C37135517D3FC2500766FD9;
+			remoteInfo = "DwarfKit iOS";
+		};
+		0CFC5CB817D4211C001C2951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C3712EC17D3F93F00766FD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C37137417D3FC3C00766FD9;
+			remoteInfo = "DwarfKit Mac Dynamic";
+		};
+		0CFC5CBA17D4211C001C2951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C3712EC17D3F93F00766FD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C37136517D3FC3300766FD9;
+			remoteInfo = "DwarfKit Mac Static";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		0C37135417D3FC2500766FD9 /* CopyFiles */ = {
@@ -175,7 +216,6 @@
 		0C3713AB17D3FECA00766FD9 /* DFButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFButton.m; sourceTree = "<group>"; };
 		0C3713AC17D3FECA00766FD9 /* DFButtonLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFButtonLayout.h; sourceTree = "<group>"; };
 		0C3713AD17D3FECA00766FD9 /* DFButtonLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFButtonLayout.m; sourceTree = "<group>"; };
-		0C3713AE17D3FECA00766FD9 /* DwarfDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DwarfDefines.h; sourceTree = "<group>"; };
 		0C3713B017D3FECA00766FD9 /* DFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNetworking.h; sourceTree = "<group>"; };
 		0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNetworkingConstants.h; sourceTree = "<group>"; };
 		0C3713B317D3FECA00766FD9 /* DFImageCaching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageCaching.h; sourceTree = "<group>"; };
@@ -201,10 +241,25 @@
 		0C3713CD17D3FECA00766FD9 /* DFTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTesting.h; sourceTree = "<group>"; };
 		0C3713CF17D3FECA00766FD9 /* DFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageView.h; sourceTree = "<group>"; };
 		0C3713D017D3FECA00766FD9 /* DFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageView.m; sourceTree = "<group>"; };
-		0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DwarfCrossPlatform.h; sourceTree = "<group>"; };
 		0C8C15CD17D406B4004B7DAA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0C8C15CF17D406DD004B7DAA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		0C8C15DA17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Mac-Prefix.pch"; sourceTree = "<group>"; };
+		0C8C15E217D40DFC004B7DAA /* DwarfKit Tests iOS.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DwarfKit Tests iOS.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C8C15E817D40DFC004B7DAA /* DwarfKit Tests iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DwarfKit Tests iOS-Info.plist"; sourceTree = "<group>"; };
+		0C8C15EA17D40DFC004B7DAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0C8C15EF17D40DFC004B7DAA /* DwarfKit Tests iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Tests iOS-Prefix.pch"; sourceTree = "<group>"; };
+		0C8C15F817D40E0C004B7DAA /* DwarfKit Tests Mac.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DwarfKit Tests Mac.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C8C15FD17D40E0C004B7DAA /* DwarfKit Tests Mac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DwarfKit Tests Mac-Info.plist"; sourceTree = "<group>"; };
+		0C8C15FF17D40E0C004B7DAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0C8C160117D40E0C004B7DAA /* DwarfKit_Tests_Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DwarfKit_Tests_Mac.h; sourceTree = "<group>"; };
+		0C8C160217D40E0C004B7DAA /* DwarfKit_Tests_Mac.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DwarfKit_Tests_Mac.m; sourceTree = "<group>"; };
+		0C8C160417D40E0C004B7DAA /* DwarfKit Tests Mac-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Tests Mac-Prefix.pch"; sourceTree = "<group>"; };
+		0C8C160917D40EB4004B7DAA /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpeg; sourceTree = "<group>"; };
+		0C8C160D17D40F9B004B7DAA /* DTCacheTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCacheTests.h; sourceTree = "<group>"; };
+		0C8C160E17D40F9B004B7DAA /* DTCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCacheTests.m; sourceTree = "<group>"; };
+		0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0CEDE41817D4506800D617F7 /* dwarf_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dwarf_private.h; sourceTree = "<group>"; };
+		0CFC5CBD17D42393001C2951 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +267,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CEDE40E17D44DDA00D617F7 /* CoreGraphics.framework in Frameworks */,
+				0CFC5CBF17D423A1001C2951 /* QuartzCore.framework in Frameworks */,
 				0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */,
 				0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */,
 				0C3713F517D3FECA00766FD9 /* libturbojpeg.a in Frameworks */,
@@ -223,6 +280,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C8C15D117D40704004B7DAA /* Cocoa.framework in Frameworks */,
+				0CFC5CC117D423A6001C2951 /* QuartzCore.framework in Frameworks */,
+				0CEDE41017D44DE400D617F7 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,6 +290,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C8C15D017D406DD004B7DAA /* Cocoa.framework in Frameworks */,
+				0CFC5CC017D423A4001C2951 /* QuartzCore.framework in Frameworks */,
+				0CEDE40F17D44DE100D617F7 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C8C15DE17D40DFC004B7DAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CEDE41117D44E7900D617F7 /* CoreGraphics.framework in Frameworks */,
+				0CFC5CBC17D42367001C2951 /* libDwarfKit.a in Frameworks */,
+				0C8C15E317D40DFC004B7DAA /* SenTestingKit.framework in Frameworks */,
+				0C8C15E417D40DFC004B7DAA /* UIKit.framework in Frameworks */,
+				0C8C15E517D40DFC004B7DAA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C8C15F417D40E0C004B7DAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C8C15F917D40E0C004B7DAA /* SenTestingKit.framework in Frameworks */,
+				0C8C15FA17D40E0C004B7DAA /* Cocoa.framework in Frameworks */,
+				0CEDE41217D44E8000D617F7 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +326,8 @@
 				0C37138017D3FECA00766FD9 /* DwarfKit */,
 				0C37135817D3FC2500766FD9 /* DwarfKit iOS */,
 				0C8C15D917D40D19004B7DAA /* DwarfKit Mac */,
+				0C8C15E617D40DFC004B7DAA /* DwarfKit Tests iOS */,
+				0C8C15FB17D40E0C004B7DAA /* DwarfKit Tests Mac */,
 				0C3712F617D3F93F00766FD9 /* Frameworks */,
 				0C3712F517D3F93F00766FD9 /* Products */,
 			);
@@ -254,6 +339,8 @@
 				0C37135617D3FC2500766FD9 /* libDwarfKit.a */,
 				0C37136617D3FC3300766FD9 /* libDwarfKit-Mac.a */,
 				0C37137517D3FC3C00766FD9 /* DwarfKit.dylib */,
+				0C8C15E217D40DFC004B7DAA /* DwarfKit Tests iOS.octest */,
+				0C8C15F817D40E0C004B7DAA /* DwarfKit Tests Mac.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -261,6 +348,8 @@
 		0C3712F617D3F93F00766FD9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */,
+				0CFC5CBD17D42393001C2951 /* QuartzCore.framework */,
 				0C8C15CF17D406DD004B7DAA /* Cocoa.framework */,
 				0C3712F717D3F93F00766FD9 /* Foundation.framework */,
 				0C37130617D3F93F00766FD9 /* SenTestingKit.framework */,
@@ -291,8 +380,6 @@
 		0C37138017D3FECA00766FD9 /* DwarfKit */ = {
 			isa = PBXGroup;
 			children = (
-				0C3713AE17D3FECA00766FD9 /* DwarfDefines.h */,
-				0C8C15CA17D40553004B7DAA /* DwarfCrossPlatform.h */,
 				0C37138117D3FECA00766FD9 /* 3rd Party */,
 				0C37139917D3FECA00766FD9 /* Categories */,
 				0C3713A217D3FECA00766FD9 /* Concurrency */,
@@ -300,6 +387,7 @@
 				0C3713AF17D3FECA00766FD9 /* Networking */,
 				0C3713BA17D3FECA00766FD9 /* Tools */,
 				0C3713CE17D3FECA00766FD9 /* Views */,
+				0CEDE41717D4503C00D617F7 /* Private */,
 			);
 			path = DwarfKit;
 			sourceTree = "<group>";
@@ -503,6 +591,79 @@
 			path = "DwarfKit Mac";
 			sourceTree = "<group>";
 		};
+		0C8C15E617D40DFC004B7DAA /* DwarfKit Tests iOS */ = {
+			isa = PBXGroup;
+			children = (
+				0C8C160B17D40EDB004B7DAA /* Test Suites */,
+				0C8C160817D40EA7004B7DAA /* Resources */,
+				0C8C15E717D40DFC004B7DAA /* Supporting Files */,
+			);
+			path = "DwarfKit Tests iOS";
+			sourceTree = "<group>";
+		};
+		0C8C15E717D40DFC004B7DAA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C8C15E817D40DFC004B7DAA /* DwarfKit Tests iOS-Info.plist */,
+				0C8C15E917D40DFC004B7DAA /* InfoPlist.strings */,
+				0C8C15EF17D40DFC004B7DAA /* DwarfKit Tests iOS-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0C8C15FB17D40E0C004B7DAA /* DwarfKit Tests Mac */ = {
+			isa = PBXGroup;
+			children = (
+				0C8C160117D40E0C004B7DAA /* DwarfKit_Tests_Mac.h */,
+				0C8C160217D40E0C004B7DAA /* DwarfKit_Tests_Mac.m */,
+				0C8C15FC17D40E0C004B7DAA /* Supporting Files */,
+			);
+			path = "DwarfKit Tests Mac";
+			sourceTree = "<group>";
+		};
+		0C8C15FC17D40E0C004B7DAA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C8C15FD17D40E0C004B7DAA /* DwarfKit Tests Mac-Info.plist */,
+				0C8C15FE17D40E0C004B7DAA /* InfoPlist.strings */,
+				0C8C160417D40E0C004B7DAA /* DwarfKit Tests Mac-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0C8C160817D40EA7004B7DAA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0C8C160917D40EB4004B7DAA /* image.jpeg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0C8C160B17D40EDB004B7DAA /* Test Suites */ = {
+			isa = PBXGroup;
+			children = (
+				0C8C160C17D40F00004B7DAA /* Caching */,
+			);
+			path = "Test Suites";
+			sourceTree = "<group>";
+		};
+		0C8C160C17D40F00004B7DAA /* Caching */ = {
+			isa = PBXGroup;
+			children = (
+				0C8C160D17D40F9B004B7DAA /* DTCacheTests.h */,
+				0C8C160E17D40F9B004B7DAA /* DTCacheTests.m */,
+			);
+			path = Caching;
+			sourceTree = "<group>";
+		};
+		0CEDE41717D4503C00D617F7 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				0CEDE41817D4506800D617F7 /* dwarf_private.h */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -536,7 +697,6 @@
 				0C37141017D3FECA00766FD9 /* DFTask.h in Headers */,
 				0C37141517D3FECA00766FD9 /* DFTaskQueue.h in Headers */,
 				0C37141F17D3FECA00766FD9 /* DFButtonLayout.h in Headers */,
-				0C37142417D3FECA00766FD9 /* DwarfDefines.h in Headers */,
 				0C37142817D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */,
 				0C37143B17D3FECA00766FD9 /* DFBenchmark.h in Headers */,
 				0C37144017D3FECA00766FD9 /* DFCache.h in Headers */,
@@ -545,8 +705,8 @@
 				0C37144C17D3FECA00766FD9 /* DFOptions.h in Headers */,
 				0C37144E17D3FECA00766FD9 /* DFImageFunctions.h in Headers */,
 				0C37145A17D3FECA00766FD9 /* DFTesting.h in Headers */,
-				0C8C15CC17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */,
 				0C8C15DC17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch in Headers */,
+				0CEDE41A17D4506800D617F7 /* dwarf_private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,7 +740,6 @@
 				0C37140F17D3FECA00766FD9 /* DFTask.h in Headers */,
 				0C37141417D3FECA00766FD9 /* DFTaskQueue.h in Headers */,
 				0C37141E17D3FECA00766FD9 /* DFButtonLayout.h in Headers */,
-				0C37142317D3FECA00766FD9 /* DwarfDefines.h in Headers */,
 				0C37142717D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */,
 				0C37143A17D3FECA00766FD9 /* DFBenchmark.h in Headers */,
 				0C37143F17D3FECA00766FD9 /* DFCache.h in Headers */,
@@ -589,8 +748,8 @@
 				0C37144B17D3FECA00766FD9 /* DFOptions.h in Headers */,
 				0C37144D17D3FECA00766FD9 /* DFImageFunctions.h in Headers */,
 				0C37145917D3FECA00766FD9 /* DFTesting.h in Headers */,
-				0C8C15CB17D40553004B7DAA /* DwarfCrossPlatform.h in Headers */,
 				0C8C15DB17D40D19004B7DAA /* DwarfKit Mac-Prefix.pch in Headers */,
+				0CEDE41917D4506800D617F7 /* dwarf_private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +807,45 @@
 			productReference = 0C37137517D3FC3C00766FD9 /* DwarfKit.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		0C8C15E117D40DFC004B7DAA /* DwarfKit Tests iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C8C15F017D40DFC004B7DAA /* Build configuration list for PBXNativeTarget "DwarfKit Tests iOS" */;
+			buildPhases = (
+				0C8C15DD17D40DFC004B7DAA /* Sources */,
+				0C8C15DE17D40DFC004B7DAA /* Frameworks */,
+				0C8C15DF17D40DFC004B7DAA /* Resources */,
+				0C8C15E017D40DFC004B7DAA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0CFC5CB717D42118001C2951 /* PBXTargetDependency */,
+			);
+			name = "DwarfKit Tests iOS";
+			productName = "DwarfKit Tests iOS";
+			productReference = 0C8C15E217D40DFC004B7DAA /* DwarfKit Tests iOS.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		0C8C15F717D40E0C004B7DAA /* DwarfKit Tests Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C8C160517D40E0C004B7DAA /* Build configuration list for PBXNativeTarget "DwarfKit Tests Mac" */;
+			buildPhases = (
+				0C8C15F317D40E0C004B7DAA /* Sources */,
+				0C8C15F417D40E0C004B7DAA /* Frameworks */,
+				0C8C15F517D40E0C004B7DAA /* Resources */,
+				0C8C15F617D40E0C004B7DAA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0CFC5CB917D4211C001C2951 /* PBXTargetDependency */,
+				0CFC5CBB17D4211C001C2951 /* PBXTargetDependency */,
+			);
+			name = "DwarfKit Tests Mac";
+			productName = "DwarfKit Tests Mac";
+			productReference = 0C8C15F817D40E0C004B7DAA /* DwarfKit Tests Mac.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -672,9 +870,60 @@
 				0C37135517D3FC2500766FD9 /* DwarfKit iOS */,
 				0C37137417D3FC3C00766FD9 /* DwarfKit Mac Dynamic */,
 				0C37136517D3FC3300766FD9 /* DwarfKit Mac Static */,
+				0C8C15E117D40DFC004B7DAA /* DwarfKit Tests iOS */,
+				0C8C15F717D40E0C004B7DAA /* DwarfKit Tests Mac */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0C8C15DF17D40DFC004B7DAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C8C15EB17D40DFC004B7DAA /* InfoPlist.strings in Resources */,
+				0C8C160A17D40EB4004B7DAA /* image.jpeg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C8C15F517D40E0C004B7DAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C8C160017D40E0C004B7DAA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C8C15E017D40DFC004B7DAA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		0C8C15F617D40E0C004B7DAA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0C37135217D3FC2500766FD9 /* Sources */ = {
@@ -726,7 +975,60 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0C8C15DD17D40DFC004B7DAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C8C160F17D40F9B004B7DAA /* DTCacheTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C8C15F317D40E0C004B7DAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C8C160317D40E0C004B7DAA /* DwarfKit_Tests_Mac.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0CFC5CB717D42118001C2951 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C37135517D3FC2500766FD9 /* DwarfKit iOS */;
+			targetProxy = 0CFC5CB617D42118001C2951 /* PBXContainerItemProxy */;
+		};
+		0CFC5CB917D4211C001C2951 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C37137417D3FC3C00766FD9 /* DwarfKit Mac Dynamic */;
+			targetProxy = 0CFC5CB817D4211C001C2951 /* PBXContainerItemProxy */;
+		};
+		0CFC5CBB17D4211C001C2951 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C37136517D3FC3300766FD9 /* DwarfKit Mac Static */;
+			targetProxy = 0CFC5CBA17D4211C001C2951 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0C8C15E917D40DFC004B7DAA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C8C15EA17D40DFC004B7DAA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0C8C15FE17D40E0C004B7DAA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C8C15FF17D40E0C004B7DAA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0C37131717D3F93F00766FD9 /* Debug */ = {
@@ -912,6 +1214,75 @@
 			};
 			name = Release;
 		};
+		0C8C15F117D40DFC004B7DAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DwarfKit Tests iOS/DwarfKit Tests iOS-Prefix.pch";
+				INFOPLIST_FILE = "DwarfKit Tests iOS/DwarfKit Tests iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0C8C15F217D40DFC004B7DAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DwarfKit Tests iOS/DwarfKit Tests iOS-Prefix.pch";
+				INFOPLIST_FILE = "DwarfKit Tests iOS/DwarfKit Tests iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		0C8C160617D40E0C004B7DAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DwarfKit Tests Mac/DwarfKit Tests Mac-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "DwarfKit Tests Mac/DwarfKit Tests Mac-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0C8C160717D40E0C004B7DAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DwarfKit Tests Mac/DwarfKit Tests Mac-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "DwarfKit Tests Mac/DwarfKit Tests Mac-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -947,6 +1318,24 @@
 			buildConfigurations = (
 				0C37137E17D3FC3D00766FD9 /* Debug */,
 				0C37137F17D3FC3D00766FD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C8C15F017D40DFC004B7DAA /* Build configuration list for PBXNativeTarget "DwarfKit Tests iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C8C15F117D40DFC004B7DAA /* Debug */,
+				0C8C15F217D40DFC004B7DAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C8C160517D40E0C004B7DAA /* Build configuration list for PBXNativeTarget "DwarfKit Tests Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C8C160617D40E0C004B7DAA /* Debug */,
+				0C8C160717D40E0C004B7DAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

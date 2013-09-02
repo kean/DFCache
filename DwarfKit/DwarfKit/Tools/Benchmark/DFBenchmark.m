@@ -7,7 +7,7 @@
 //
 
 #import "DFBenchmark.h"
-#import "DwarfDefines.h"
+#import "dwarf_private.h"
 #import <mach/mach_time.h>
 
 

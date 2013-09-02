@@ -9,8 +9,8 @@
 #import "DFCache.h"
 #import "DFCrypto.h"
 #import "DFOptions.h"
-#import "DwarfCrossPlatform.h"
-#import "DwarfDefines.h"
+
+#import "dwarf_private.h"
 
 #if TARGET_OS_IPHONE
     #import "DFImageProcessing.h"
