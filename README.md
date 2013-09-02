@@ -1,6 +1,6 @@
 About DwarfKit
 =========
-DwarfKit is a set of highly reusable Objective-C (iOS/Mac OS X) classes and categories that is built for high performance and efficiency.
+DwarfKit is a set of highly reusable Objective-C (iOS/Mac OS X) classes and categories.
 Requirements
 ------------
 - ARC
