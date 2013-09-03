@@ -44,7 +44,7 @@
 
 
 - (void)addTask:(DFTask *)task {
-    dispatch_async(_syncQueue, ^{
+    dispatch_sync(_syncQueue, ^{
         [task _setImplDelegate:self];
         [_tasks addObject:task];
         [self _executeTasks];
@@ -82,7 +82,7 @@
 #pragma mark - _DFTaskDelegate
 
 - (void)_taskDidFinish:(DFTask *)task {
-    dispatch_async(_syncQueue, ^{
+    dispatch_sync(_syncQueue, ^{
         if (task.isExecuting) {
             _executingTaskCount--;
             [task _setExecuting:NO];
@@ -115,7 +115,7 @@
 #pragma mark - Task Cancellation
 
 - (void)cancelAllTasks {
-    dispatch_async(_syncQueue, ^{
+    dispatch_sync(_syncQueue, ^{
         for (DFTask *task in _tasks) {
             [task cancel];
         }
