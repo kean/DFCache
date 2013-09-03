@@ -13,7 +13,7 @@
 #import "dwarf_private.h"
 
 #if TARGET_OS_IPHONE
-    #import "DFImageProcessing.h"
+#import "DFImageProcessing.h"
 #endif
 
 
@@ -86,7 +86,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
         
         _metaQueue = dispatch_queue_create("dwarf.cache.metaqueue", DISPATCH_QUEUE_CONCURRENT);
         _ioQueue = dispatch_queue_create("dwarf.cache.ioqueue", DISPATCH_QUEUE_CONCURRENT);
-
+        
         _memoryCache = [NSCache new];
         _memoryCache.name = name;
         _name = name;
@@ -169,9 +169,11 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
             return;
         }
         
+        NSString *filename = metadata[DFCacheMetaFileNameKey];
+        
         dispatch_async(_ioQueue, ^{
             @autoreleasepool {
-                NSString *filepath = [self _filePathForKey:key];
+                NSString *filepath = [self _filePathWithName:filename];
                 NSData *data = [NSData dataWithContentsOfFile:filepath];
                 id object = data ? transform(data) : nil;
                 if (object) {
@@ -186,7 +188,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
         });
     });
 }
-                   
+
 
 - (void)_touchObjectForKey:(NSString *)key {
     dispatch_barrier_async(_metaQueue, ^{
@@ -203,7 +205,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
 #pragma mark - Caching (Write)
 
 - (void)storeObject:(id)object
-           metadata:(NSDictionary *)userMetadata
+           metadata:(NSDictionary *)metadata
              forKey:(NSString *)key
                cost:(NSUInteger)cost
                data:(NSData *)data
@@ -218,59 +220,22 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
         return;
     }
     
-    void (^_storeObjectMetadata)(void) = ^{
-        NSMutableDictionary *metadata = [NSMutableDictionary new];
-        
-        // 1. Default key-values.
-        // ======================
-        NSDate *date = [NSDate date];
-        NSDate *expirationDate = [date dateByAddingTimeInterval:_settings.filesExpirationPeriod];
-        NSString *filename = [DFCrypto MD5FromString:key];
-        
-        metadata[DFCacheMetaCreationDateKey] = date;
-        metadata[DFCacheMetaAccessDateKey] = date;
-        
-        if (filename) {
-            metadata[DFCacheMetaFileNameKey] = filename;
-        }
-        
-        if (data) {
-            metadata[DFCacheMetaFileSizeKey] = @(data.length);
-        }
-        
-        if (_settings.filesExpirationPeriod > 0 && expirationDate) {
-            metadata[DFCacheMetaExpirationDateKey] = expirationDate;
-        }
-        
-        // 2. User-defined key-values.
-        // ===========================
-        [metadata addEntriesFromDictionary:userMetadata];
-        
-        _metatable[key] = metadata;
-        [self _setNeedsSyncMetatable];
-    };
-    
-    void (^_storeObjectData)(_dwarf_bytes *length) = ^(_dwarf_bytes *length){
-        NSData *objData = data ? data : transform(object);
-        [self _createCacheDirectories];
-        [[NSFileManager defaultManager] createFileAtPath:[self _filePathForKey:key] contents:objData attributes:nil];
-        *length = objData.length;
-    };
-        
     dispatch_barrier_async(_metaQueue, ^{
-        _storeObjectMetadata();
-
+        NSString *filename = [DFCrypto MD5FromString:key];
+        if (!filename) {
+            return;
+        }
+        
+        [self _storeMetadataForKey:key filename:filename data:data userValues:metadata];
+        
         dispatch_barrier_async(_ioQueue, ^{
-            _dwarf_bytes length;
-            _storeObjectData(&length);
-
-            if (data) {
-                return;
-            }
+            NSData *objData = data ? data : transform(object);
+            [self _storeObjectData:objData filename:filename];
             
-            dispatch_barrier_async(_metaQueue, ^{
-                _metatable[key][DFCacheMetaFileSizeKey] = @(length);
-            });
+            if (!data) {
+                NSDictionary *sizeValue = @{ DFCacheMetaFileSizeKey : @(objData.length) };
+                [self setMetadataValues:sizeValue forKey:key];
+            }
         });
     });
 }
@@ -278,6 +243,37 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
 
 - (void)storeObject:(id)object forKey:(NSString *)key data:(NSData *)data transform:(NSData *(^)(id))transform {
     [self storeObject:object metadata:nil forKey:key cost:0 data:data transform:transform];
+}
+
+
+- (void)_storeMetadataForKey:(NSString *)key filename:(NSString *)filename data:(NSData *)data userValues:(NSDictionary *)keyedValues {
+    NSMutableDictionary *metadata = [NSMutableDictionary new];
+    
+    NSDate *date = [NSDate date];
+    NSDate *expirationDate = [date dateByAddingTimeInterval:_settings.filesExpirationPeriod];
+    
+    metadata[DFCacheMetaCreationDateKey] = date;
+    metadata[DFCacheMetaAccessDateKey] = date;
+    metadata[DFCacheMetaFileNameKey] = filename;
+    
+    if (data) {
+        metadata[DFCacheMetaFileSizeKey] = @(data.length);
+    }
+    
+    if (_settings.filesExpirationPeriod > 0 && expirationDate) {
+        metadata[DFCacheMetaExpirationDateKey] = expirationDate;
+    }
+    
+    [metadata addEntriesFromDictionary:keyedValues];
+    
+    _metatable[key] = metadata;
+    [self _setNeedsSyncMetatable];
+}
+
+
+- (void)_storeObjectData:(NSData *)data filename:(NSString *)filename {
+    [self _createCacheDirectories];
+    [[NSFileManager defaultManager] createFileAtPath:[self _filePathWithName:filename] contents:data attributes:nil];
 }
 
 
@@ -290,7 +286,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
     [_memoryCache setObject:object forKey:key];
 }
 
-#pragma mark - Metadata 
+#pragma mark - Metadata
 
 - (NSDictionary *)metadataForKey:(NSString *)key {
     __block NSDictionary *metadata;
@@ -303,7 +299,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
 
 - (void)setMetadataValues:(NSDictionary *)keyedValues forKey:(NSString *)key {
     if (keyedValues && key) {
-        dispatch_barrier_sync(_metaQueue, ^{
+        dispatch_barrier_async(_metaQueue, ^{
             NSMutableDictionary *metadata = _metatable[key];
             [metadata addEntriesFromDictionary:keyedValues];
         });
@@ -332,13 +328,22 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
 
 
 - (void)_removeObjectsForKeys:(NSArray *)keys {
+    NSMutableArray *filenames = [NSMutableArray new];
+    for (NSString *key in keys) {
+        NSDictionary *metadata = _metatable[key];
+        NSString *filename = metadata[DFCacheMetaFileNameKey];
+        if (filename) {
+            [filenames addObject:filename];
+        }
+    }
+    
     [_metatable removeObjectsForKeys:keys];
     [self _setNeedsSyncMetatable];
     
     dispatch_barrier_async(_ioQueue, ^{
         NSFileManager *manager = [NSFileManager defaultManager];
-        for (NSString *key in keys) {
-            NSString *filepath = [self _filePathForKey:key];
+        for (NSString *filename in filenames) {
+            NSString *filepath = [self _filePathWithName:filename];
             [manager removeItemAtPath:filepath error:nil];
         }
     });
@@ -425,14 +430,14 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
         
         NSMutableArray *metatableKeys = [NSMutableArray arrayWithObjects:keys count:count];
         NSMutableArray *metatableValues = [NSMutableArray arrayWithObjects:objects count:count];
-    
+        
         // Remove expired files.
         // =============================
         NSIndexSet *expiredIndexes = [metatableValues indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
             return _dwarf_entry_is_expired(obj);
         }];
         [removeKeys addObjectsFromArray:[metatableKeys objectsAtIndexes:expiredIndexes]];
-    
+        
         // Remove remaining files (until fit target size).
         // ===============================================
         if (_settings.diskCacheCapacity == 0) {
@@ -473,10 +478,8 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
 
 #pragma mark - Caching (Private)
 
-- (NSString *)_filePathForKey:(NSString *)key {
-    NSDictionary *metadata = _metatable[key];
-    NSString *filename = metadata[DFCacheMetaFileNameKey];
-    return filename ? [_entriesFolder stringByAppendingPathComponent:filename] : nil;
+- (NSString *)_filePathWithName:(NSString *)name {
+    return name ? [_entriesFolder stringByAppendingPathComponent:name] : nil;
 }
 
 
@@ -520,20 +523,20 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
         }
     };
     
-   dispatch_barrier_async(_metaQueue, ^{
-      NSMutableArray *removeKeys = [NSMutableArray new];
-      
-      [_metatable enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-         NSString *filepath = [self _filePathForKey:key];
-         if (![manager fileExistsAtPath:filepath]) {
-            [removeKeys addObject:key];
-         } else {
-            validateFilesize(obj, filepath);
-         }
-      }];
-      
-      [_metatable removeObjectsForKeys:removeKeys];
-   });
+    dispatch_barrier_async(_metaQueue, ^{
+        NSMutableArray *removeKeys = [NSMutableArray new];
+        
+        [_metatable enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            NSString *filepath = [self _filePathWithName:obj[DFCacheMetaFileNameKey]];
+            if (![manager fileExistsAtPath:filepath]) {
+                [removeKeys addObject:key];
+            } else {
+                validateFilesize(obj, filepath);
+            }
+        }];
+        
+        [_metatable removeObjectsForKeys:removeKeys];
+    });
 }
 
 

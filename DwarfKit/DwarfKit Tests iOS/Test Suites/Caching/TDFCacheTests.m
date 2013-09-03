@@ -141,6 +141,23 @@
 }
 
 
+- (void)testReadExpiredEntry {
+    NSString *object = @"d2fl3-2f";
+    NSString *key = @"key";
+    NSDictionary *metadata = @{ DFCacheMetaExpirationDateKey : [NSDate dateWithTimeIntervalSinceNow:-10.f] };
+    
+    [_cache storeCodingObject:object metadata:metadata cost:0.f forKey:key];
+    
+    __block BOOL isWaiting = YES;
+    [_cache codingObjectForKey:key queue:NULL completion:^(id object) {
+        STAssertNil(object, nil);
+        isWaiting = NO;
+    }];
+    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+}
+
+#pragma mark - Concurrency
+
 - (void)testCallbackOnBackgroundThread {
     NSDictionary *objects;
     NSArray *keys;
@@ -163,19 +180,86 @@
 }
 
 
-- (void)testReadExpiredEntry {
-    NSString *object = @"d2fl3-2f";
-    NSString *key = @"key";
-    NSDictionary *metadata = @{ DFCacheMetaExpirationDateKey : [NSDate dateWithTimeIntervalSinceNow:-10.f] };
+- (void)testConcurrencyStability {
+    NSString *(^randomKey)(void) = ^{
+        return [NSString stringWithFormat:@"key_%i", arc4random() % 100];
+    };
     
-    [_cache storeCodingObject:object metadata:metadata cost:0.f forKey:key];
+    NSString *(^randomString)(void) = ^{
+        size_t length = 20;
+        char data[length];
+        for (int x = 0; x < length; x++) {
+            data[x] = (char)('A' + arc4random_uniform(26));
+        }
+        return [[NSString alloc] initWithBytes:data length:length encoding:NSUTF8StringEncoding];
+    };
     
-    __block BOOL isWaiting = YES;
-    [_cache codingObjectForKey:key queue:NULL completion:^(id object) {
-        STAssertNil(object, nil);
-        isWaiting = NO;
-    }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    dispatch_queue_t (^randomQueue)(void) = ^{
+        NSUInteger idx = arc4random() % 2;
+        switch (idx) {
+            case 0: return dispatch_get_main_queue(); break; 
+            case 1: return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0); break;
+            default: return dispatch_get_main_queue(); break;
+        }
+    };
+    
+    NSMutableArray *actions = [NSMutableArray new];
+    
+    void (^actionWrite)(void) = ^{
+        NSString *key = randomKey();
+        NSString *string = randomString();
+        [_cache storeCodingObject:string metadata:nil cost:0.f forKey:key];
+    };
+    
+    void (^actionRead)(void) = ^{
+        [_cache codingObjectForKey:randomKey() queue:randomQueue() completion:^(id object) {
+            // Do nothing
+        }];
+    };
+    
+    void (^actionRemove)(void) = ^{
+        [_cache removeObjectForKey:randomKey()];
+    };
+    
+    void (^actionCleanup)(void) = ^{
+        [_cache cleanupDiskCache];
+    };
+    
+    void (^actionMetadataRead)(void) = ^{
+        NSDictionary *metadata = [_cache metadataForKey:randomKey()];
+        if (metadata) {
+            // Do nothing
+        }
+    };
+    
+    void (^actionMetadataWrite)(void) = ^{
+        [_cache setMetadataValues:@{ @"test" : @"test"} forKey:randomKey()];
+    };
+    
+    void (^actionAccessDiskSize)(void) = ^{
+        unsigned long long size = [_cache diskCacheSize];
+        if (size) {
+            // Do nothing
+        }
+    };
+    
+    [actions addObject:[actionWrite copy]];
+    [actions addObject:[actionRead copy]];
+    [actions addObject:[actionRemove copy]];
+    [actions addObject:[actionCleanup copy]];
+    [actions addObject:[actionMetadataRead copy]];
+    //[actions addObject:[actionMetadataWrite copy]];
+    //[actions addObject:[actionAccessDiskSize copy]];
+     
+    NSUInteger iterationCount = 500;
+    
+    for (NSUInteger i = 0; i < iterationCount; i++) {
+        NSUInteger actionIndex = arc4random() % [actions count];
+        dispatch_async(randomQueue(), actions[actionIndex]);
+    }
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5.f];
+    [[NSRunLoop currentRunLoop] runUntilDate:date];
 }
 
 #pragma mark - Removal
