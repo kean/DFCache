@@ -181,6 +181,8 @@
 
 
 - (void)testConcurrencyStability {
+    DFCache *cache = [[DFCache alloc] initWithName:@"concurrencty test"];
+    
     NSString *(^randomKey)(void) = ^{
         return [NSString stringWithFormat:@"key_%i", arc4random() % 100];
     };
@@ -208,58 +210,39 @@
     void (^actionWrite)(void) = ^{
         NSString *key = randomKey();
         NSString *string = randomString();
-        [_cache storeCodingObject:string metadata:nil cost:0.f forKey:key];
+        [cache storeCodingObject:string metadata:nil cost:0.f forKey:key];
     };
     
     void (^actionRead)(void) = ^{
-        [_cache codingObjectForKey:randomKey() queue:randomQueue() completion:^(id object) {
+        [cache codingObjectForKey:randomKey() queue:randomQueue() completion:^(id object) {
             // Do nothing
+            NSLog(@"read = %@", object);
         }];
     };
     
     void (^actionRemove)(void) = ^{
-        [_cache removeObjectForKey:randomKey()];
+        [cache removeObjectForKey:randomKey()];
     };
     
     void (^actionCleanup)(void) = ^{
-        [_cache cleanupDiskCache];
-    };
-    
-    void (^actionMetadataRead)(void) = ^{
-        NSDictionary *metadata = [_cache metadataForKey:randomKey()];
-        if (metadata) {
-            // Do nothing
-        }
-    };
-    
-    void (^actionMetadataWrite)(void) = ^{
-        [_cache setMetadataValues:@{ @"test" : @"test"} forKey:randomKey()];
-    };
-    
-    void (^actionAccessDiskSize)(void) = ^{
-        unsigned long long size = [_cache diskCacheSize];
-        if (size) {
-            // Do nothing
-        }
+        [cache cleanupDiskCache];
     };
     
     [actions addObject:[actionWrite copy]];
     [actions addObject:[actionRead copy]];
     [actions addObject:[actionRemove copy]];
     [actions addObject:[actionCleanup copy]];
-    [actions addObject:[actionMetadataRead copy]];
-    //[actions addObject:[actionMetadataWrite copy]];
-    //[actions addObject:[actionAccessDiskSize copy]];
      
-    NSUInteger iterationCount = 500;
+    NSUInteger iterationCount = 2000;
     
     for (NSUInteger i = 0; i < iterationCount; i++) {
         NSUInteger actionIndex = arc4random() % [actions count];
         dispatch_async(randomQueue(), actions[actionIndex]);
     }
     
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5.f];
-    [[NSRunLoop currentRunLoop] runUntilDate:date];
+    // Wait so that concurrency test won't interfere with other tests.
+    NSDate *runUntilDate = [NSDate dateWithTimeIntervalSinceNow:4.f];
+    [[NSRunLoop currentRunLoop] runUntilDate:runUntilDate];
 }
 
 #pragma mark - Removal

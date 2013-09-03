@@ -299,7 +299,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
 
 - (void)setMetadataValues:(NSDictionary *)keyedValues forKey:(NSString *)key {
     if (keyedValues && key) {
-        dispatch_barrier_async(_metaQueue, ^{
+        dispatch_barrier_sync(_metaQueue, ^{
             NSMutableDictionary *metadata = _metatable[key];
             [metadata addEntriesFromDictionary:keyedValues];
         });
