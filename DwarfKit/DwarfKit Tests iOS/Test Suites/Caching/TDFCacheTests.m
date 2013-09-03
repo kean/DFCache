@@ -220,7 +220,6 @@
     void (^actionRead)(void) = ^{
         [cache codingObjectForKey:randomKey() queue:randomQueue() completion:^(id object) {
             // Do nothing
-            NSLog(@"read = %@", object);
         }];
     };
     

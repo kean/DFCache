@@ -10,37 +10,17 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#define DWARF_UNUSED        __attribute__((unused))
+#import <Foundation/Foundation.h>
 
-#pragma mark - Backward Compatibility -
+@interface DFDispatchIO : NSObject
 
-#if OS_OBJECT_USE_OBJC
-    #define DWARF_DISPATCH_RETAIN(object)
-    #define DWARF_DISPATCH_RELEASE(object)
-#else
-    #define DWARF_DISPATCH_RETAIN(object) (dispatch_retain(object))
-    #define DWARF_DISPATCH_RELEASE(object) (dispatch_release(object))
-#endif
++ (void)readData:(NSString *)path
+           queue:(dispatch_queue_t)queue
+      completion:(void(^)(NSData *data))completion;
 
-#pragma mark - Cross Platform -
++ (void)writeData:(NSData *)data
+           toFile:(NSString *)path
+            queue:(dispatch_queue_t)queue
+       completion:(void (^)(NSError *error))completion;
 
-#if TARGET_OS_IPHONE
-    #define DFApplicationWillResignActiveNotification   UIApplicationWillResignActiveNotification
-    #define DFApplicationWillTerminateNotification  UIApplicationWillTerminateNotification
-#else
-    #define DFApplicationWillResignActiveNotification   NSApplicationWillResignActiveNotification
-    #define DFApplicationWillTerminateNotification  NSApplicationWillTerminateNotification
-#endif
-
-#pragma mark - Functions -
-
-static inline
-void
-_dwarf_callback(dispatch_queue_t queue, void (^block)(id), id object) {
-    if (!queue) {
-        queue = dispatch_get_main_queue();
-    }
-    dispatch_async(queue, ^{
-        block(object);
-    });
-}
+@end
