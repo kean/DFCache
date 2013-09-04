@@ -24,8 +24,6 @@
 static CGFloat _kMetatableSyncInterval = 2.f; // Seconds. 
 static long _kIOSemaphoreCount = 2; // Maximum number of concurrent disk I/O operations.
 
-
-typedef unsigned long long _dwarf_bytes;
 typedef NSArray *(^DFCleanupBlock)(NSDictionary *);
 
 
@@ -385,24 +383,13 @@ _dwarf_cache_size(NSArray *metatableValues) {
 - (DFCleanupBlock)_defaultCleanupBlock {
     return ^(NSDictionary *metatable){
         NSMutableArray *removeKeys = [NSMutableArray new];
+        NSMutableArray *metatableKeys, *metatableValues;
+        [self _metatable:metatable getKeys:&metatableKeys values:&metatableValues];
         
-        NSUInteger count = [metatable count];
-        id __unsafe_unretained keys[count];
-        id __unsafe_unretained objects[count];
-        [metatable getObjects:objects andKeys:keys];
-        
-        NSMutableArray *metatableKeys = [NSMutableArray arrayWithObjects:keys count:count];
-        NSMutableArray *metatableValues = [NSMutableArray arrayWithObjects:objects count:count];
-        
-        // Remove expired files.
-        // =============================
         NSIndexSet *expiredIndexes = [metatableValues indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
             return _dwarf_entry_is_expired(obj);
         }];
         [removeKeys addObjectsFromArray:[metatableKeys objectsAtIndexes:expiredIndexes]];
-        
-        // Remove remaining files (until fit target size).
-        // ===============================================
         if (_settings.diskCacheCapacity == 0) {
             return removeKeys;
         }
@@ -425,9 +412,18 @@ _dwarf_cache_size(NSArray *metatableValues) {
             [removeKeys addObject:metatableKeys[index]];
             cacheSize -= [value[DFCacheMetaFileSizeKey] unsignedLongLongValue];
         }
-        
+
         return removeKeys;
     };
+}
+
+- (void)_metatable:(NSDictionary *)metatable getKeys:(NSMutableArray **)keys values:(NSMutableArray **)values {
+    NSUInteger count = [metatable count];
+    id __unsafe_unretained _keys[count];
+    id __unsafe_unretained _values[count];
+    [metatable getObjects:_values andKeys:_keys];
+    *keys = [NSMutableArray arrayWithObjects:_keys count:count];
+    *values = [NSMutableArray arrayWithObjects:_values count:count];
 }
 
 - (_dwarf_bytes)diskCacheSize {

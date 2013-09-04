@@ -44,3 +44,7 @@ _dwarf_callback(dispatch_queue_t queue, void (^block)(id), id object) {
         block(object);
     });
 }
+
+#pragma mark - Types -
+
+typedef unsigned long long _dwarf_bytes;
