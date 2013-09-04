@@ -25,7 +25,7 @@ DFCache
  Key features:
  - General purpose. Store any Objective-C objects. Built-in support for `UIImage` and `<NSCodying>` objects. 
  - Metadata. Read/write entry's metadata at any time. Add your custom key-values.
- - Performance. Synchronization based on reader-writer pattern makes all metadata and disk read operation concurrent and fast. Image caching performance is fantastic due to [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) which is used under the hood. Disk cache faults are handled instantly without disk I/O.
+ - Performance. Image caching performance is fantastic due to [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) which is used under the hood. Disk cache faults are handled instantly without disk I/O.
  - LRU cleanup.
  - Thread safety. 
  
