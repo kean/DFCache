@@ -231,20 +231,41 @@
         [cache cleanupDiskCache];
     };
     
+    void (^actionReadMetadata)(void) = ^{
+        NSDictionary *metadata = [cache metadataForKey:randomKey()];
+        if (metadata) {
+            // Do nothing
+        }
+    };
+    
+    void (^actionWriteMetadata)(void) = ^{
+        NSDictionary *userValues = @{ @"user_key" : @"user_value" };
+        [cache setMetadataValues:userValues forKey:randomKey()];
+    };
+    
+    void (^actionReadDiskSize)(void) = ^{
+        unsigned long long size = [cache diskCacheSize];
+        if (size) {
+            // Do nothing
+        }
+    };
+    
     [actions addObject:[actionWrite copy]];
     [actions addObject:[actionRead copy]];
     [actions addObject:[actionRemove copy]];
     [actions addObject:[actionCleanup copy]];
+    [actions addObject:[actionReadMetadata copy]];
+    [actions addObject:[actionWriteMetadata copy]];
+    [actions addObject:[actionReadDiskSize copy]];
      
-    NSUInteger iterationCount = 2000;
-    
+    NSUInteger iterationCount = 20000;
     for (NSUInteger i = 0; i < iterationCount; i++) {
         NSUInteger actionIndex = arc4random() % [actions count];
         dispatch_async(randomQueue(), actions[actionIndex]);
-    }
+    } 
     
     // Wait so that concurrency test won't interfere with other tests.
-    NSDate *runUntilDate = [NSDate dateWithTimeIntervalSinceNow:4.f];
+    NSDate *runUntilDate = [NSDate dateWithTimeIntervalSinceNow:5.f];
     [[NSRunLoop currentRunLoop] runUntilDate:runUntilDate];
 }
 

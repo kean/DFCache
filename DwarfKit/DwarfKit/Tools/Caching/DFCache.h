@@ -54,8 +54,7 @@ DFCacheMetaFileSizeKey = @"_df_file_size"; // Becomes available only after file 
  - General purpose. Stores any Objective-C objects. Built-in support for image caching (<DFImageCaching> implementation) and caching of <NSCodying> objects. 
  - Metadata. Cache entries have associated metadata. You can read/write entry's metadata at any time and even add your custom keys.
  - LRU cleanup. Read more in - (void)cleanupDiskCache discussion.
- - Thread safety. Built on top of GCD. Two internal concurrent queues provide full thread safety and best performance. 
- - Performance. Synchronization based on reader-writer pattern allows all metadata and disk read operation to be concurrent and fast. Image caching performance is fantastic due to libjpeg-turbo which is used under the hood. Disk cache faults are handled instantly without disk I/O.
+ - Performance. Image caching performance is fantastic due to libjpeg-turbo which is used under the hood. Disk cache faults are handled instantly without disk I/O.
  */
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface DFCache : NSObject
@@ -74,7 +73,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  */
 @property (nonatomic) DFCacheSettings settings;
 
-/*! Memory cache implementation 
+/*! Memory cache implementation. 
  */
 @property (nonatomic, strong, readonly) NSCache *memoryCache;
 

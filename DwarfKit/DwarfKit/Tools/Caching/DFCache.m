@@ -21,6 +21,10 @@
 #endif
 
 
+static CGFloat _kMetatableSyncInterval = 2.f; // Seconds. 
+static long _kIOSemaphoreCount = 2; // Maximum number of concurrent disk I/O operations.
+
+
 typedef unsigned long long _dwarf_bytes;
 typedef NSArray *(^DFCleanupBlock)(NSDictionary *);
 
@@ -79,10 +83,6 @@ _dwarf_cache_size(NSArray *metatableValues) {
     return cacheSize;
 }
 
-
-static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
-
-
 #pragma mark - DFCache -
 
 @implementation DFCache {
@@ -90,6 +90,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
     _DFCachePaths *_paths;
     dispatch_queue_t _metaQueue;
     dispatch_queue_t _ioQueue;
+    dispatch_semaphore_t _ioSemaphore;
     NSMutableDictionary *_metatable;
     DFCleanupBlock _cleanupBlock;
     
@@ -102,7 +103,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     DWARF_DISPATCH_RELEASE(_metaQueue);
     DWARF_DISPATCH_RELEASE(_ioQueue);
-    
+    DWARF_DISPATCH_RELEASE(_ioSemaphore);
 }
 
 - (id)initWithName:(NSString *)name {
@@ -112,8 +113,9 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
         }
         [self _setDefaults];
         
-        _metaQueue = dispatch_queue_create("dwarf.cache.metaqueue", DISPATCH_QUEUE_CONCURRENT);
+        _metaQueue = dispatch_queue_create("dwarf.cache.metaqueue", DISPATCH_QUEUE_SERIAL);
         _ioQueue = dispatch_queue_create("dwarf.cache.ioqueue", DISPATCH_QUEUE_CONCURRENT);
+        _ioSemaphore = dispatch_semaphore_create(_kIOSemaphoreCount);
         _memoryCache = [NSCache new];
         _memoryCache.name = name;
         _name = name;
@@ -170,7 +172,9 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
         dispatch_async(_ioQueue, ^{
             @autoreleasepool {
                 NSString *filepath = [_paths entryPathWithName:filename];
+                dispatch_semaphore_wait(_ioSemaphore, DISPATCH_TIME_FOREVER);
                 NSData *data = [NSData dataWithContentsOfFile:filepath];
+                dispatch_semaphore_signal(_ioSemaphore);
                 id object = data ? transform(data) : nil;
                 if (object) {
                     [_memoryCache setObject:object forKey:key];
@@ -183,7 +187,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
 }
 
 - (void)_touchObjectForKey:(NSString *)key {
-    dispatch_barrier_async(_metaQueue, ^{
+    dispatch_async(_metaQueue, ^{
         NSMutableDictionary *metadata = _metatable[key];
         metadata[DFCacheMetaAccessDateKey] = [NSDate date];
     });
@@ -208,7 +212,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
     if (!data && !transform) {
         return;
     }
-    dispatch_barrier_async(_metaQueue, ^{
+    dispatch_async(_metaQueue, ^{
         NSString *filename = [DFCrypto MD5FromString:key];
         if (!filename) {
             return;
@@ -274,7 +278,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
 
 - (void)setMetadataValues:(NSDictionary *)keyedValues forKey:(NSString *)key {
     if (keyedValues && key) {
-        dispatch_barrier_sync(_metaQueue, ^{
+        dispatch_sync(_metaQueue, ^{
             NSMutableDictionary *metadata = _metatable[key];
             [metadata addEntriesFromDictionary:keyedValues];
         });
@@ -293,7 +297,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
         }
     }
     if (DF_OPTIONS_IS_ENABLED(options, DFCacheRemoveFromDisk)) {
-        dispatch_barrier_async(_metaQueue, ^{
+        dispatch_async(_metaQueue, ^{
             [self _removeObjectsForKeys:keys];
         });
     }
@@ -338,7 +342,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
         [_memoryCache removeAllObjects];
     }
     if (DF_OPTIONS_IS_ENABLED(options, DFCacheRemoveFromDisk)) {
-        dispatch_barrier_async(_metaQueue, ^{
+        dispatch_async(_metaQueue, ^{
             [_metatable removeAllObjects];
             [self _setNeedsSyncMetatable];
             dispatch_barrier_async(_ioQueue, ^{
@@ -355,7 +359,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
 #pragma mark - Maintenance
 
 - (void)cleanupDiskCache:(DFCleanupBlock)cleanupBlock {
-    dispatch_barrier_async(_metaQueue, ^{
+    dispatch_async(_metaQueue, ^{
         NSArray *removeKeys = cleanupBlock(_metatable);
         [self _removeObjectsForKeys:removeKeys];
     });
@@ -366,7 +370,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
 }
 
 - (void)setDiskCleanupBlock:(DFCleanupBlock)cleanupBlock {
-    dispatch_barrier_sync(_metaQueue, ^{
+    dispatch_sync(_metaQueue, ^{
         _cleanupBlock = [cleanupBlock copy];
     });
 }
@@ -474,7 +478,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
         }
     };
     
-    dispatch_barrier_async(_metaQueue, ^{
+    dispatch_async(_metaQueue, ^{
         NSMutableArray *removeKeys = [NSMutableArray new];
         [_metatable enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             NSString *filepath = [_paths entryPathWithName:obj[DFCacheMetaFileNameKey]];
@@ -514,7 +518,7 @@ static CGFloat _kMetatableSyncInterval = 2.f; // Seconds
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
-    dispatch_barrier_sync(_metaQueue, ^{
+    dispatch_sync(_metaQueue, ^{
         [self _syncMetatable];
     });
 }
