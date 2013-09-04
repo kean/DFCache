@@ -25,13 +25,12 @@
     dispatch_queue_t _syncQueue;
     NSMutableOrderedSet *_tasks;
     NSUInteger _executingTaskCount;
+    BOOL _suspended;
 }
-
 
 - (void)dealloc {
     DWARF_DISPATCH_RELEASE(_syncQueue);
 }
-
 
 - (id)init {
     if (self = [super init]) {
@@ -41,11 +40,9 @@
     return self;
 }
 
-
 - (void)_setDefaults {
     _maxConcurrentTaskCount = 3;
 }
-
 
 - (void)addTask:(DFTask *)task {
     dispatch_sync(_syncQueue, ^{
@@ -55,13 +52,20 @@
     });
 }
 
+- (NSOrderedSet *)tasks {
+    __block NSOrderedSet *tasks;
+    dispatch_sync(_syncQueue, ^{
+        tasks = [_tasks copy];
+    });
+    return tasks;
+}
+
 #pragma mark - Task Execution
 
 - (void)_executeTasks {
-    if (_paused) {
+    if (_suspended) {
         return;
     }
-    
     DFTask *task;
     while (_executingTaskCount < _maxConcurrentTaskCount &&
            (task = [self _taskToExecute])) {
@@ -72,7 +76,6 @@
         });
     }
 }
-
 
 - (DFTask *)_taskToExecute {
     for (DFTask *task in _tasks) {
@@ -93,7 +96,6 @@
             [task _setFinished:YES];
             [_tasks removeObject:task];
             [self _executeTasks];
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (task.completionBlock) {
                     task.completionBlock(task);
@@ -105,15 +107,23 @@
 
 #pragma mark - Pause
 
-- (void)setPaused:(BOOL)paused {
+- (void)setSuspended:(BOOL)suspended {
     dispatch_sync(_syncQueue, ^{
-        if (_paused != paused) {
-            _paused = paused;
-            if (!_paused) {
+        if (_suspended != suspended) {
+            _suspended = suspended;
+            if (!_suspended) {
                 [self _executeTasks];
             }
         }
     });
+}
+
+- (BOOL)isSuspended {
+    __block BOOL suspended;
+    dispatch_sync(_syncQueue, ^{
+        suspended = _suspended;
+    });
+    return suspended;
 }
 
 #pragma mark - Task Cancellation

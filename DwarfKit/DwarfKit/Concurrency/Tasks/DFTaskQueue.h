@@ -16,18 +16,31 @@
 @class DFTask;
 
 
-/*! Regulates execution of DFTask objects. DFTaskQueue and DFTask pair is a lightweight NSOperationQueue and NSOperation analog.
+/*! Regulates execution of DFTask objects. DFTaskQueue and DFTask pair is a lightweight NSOperationQueue and NSOperation analog. However it's much easier to implement your own concurrent tasks since DFTask has much more comprehensible semantics than NSOperation.
  
  Features:
  - Performance. Written entirely on top of grand central dispatch. Requires all methods to be called from the main thread to avoid unnecessary synchronizations.
  */
 @interface DFTaskQueue : NSObject
 
+/*! The maximum number of concurrent tasks that the queue can execute. Settings the new value does not affect tasks that are already executing.
+ */
 @property (nonatomic) NSUInteger maxConcurrentTaskCount;
-@property (nonatomic, getter = isPaused) BOOL paused;
+
+/*! Settings suspended property either suspends or resumes execution of tasks. Suspending a queue does not stop tasks that are already executing.
+ */
+@property (nonatomic, getter = isSuspended) BOOL suspended;
+
+/*! Returns a new set of tasks currently in the queue.
+ */
 @property (nonatomic, strong, readonly) NSOrderedSet *tasks;
 
+/*! Adds the specifid task to the queue. Queue holds strong reference to the task until task is finished and completion callback is called.
+ */
 - (void)addTask:(DFTask *)task;
+
+/*! Sends cancel message to all tasks currently in the queue. 
+ */
 - (void)cancelAllTasks;
 
 @end
