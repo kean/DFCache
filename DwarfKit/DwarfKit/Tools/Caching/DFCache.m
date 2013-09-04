@@ -173,7 +173,7 @@ _dwarf_cache_size(NSArray *metatableValues) {
             @autoreleasepool {
                 NSString *filepath = [_paths entryPathWithName:filename];
                 dispatch_semaphore_wait(_ioSemaphore, DISPATCH_TIME_FOREVER);
-                NSData *data = [NSData dataWithContentsOfFile:filepath];
+                NSData *data = [NSData dataWithContentsOfFile:filepath options:NSDataReadingUncached error:nil];
                 dispatch_semaphore_signal(_ioSemaphore);
                 id object = data ? transform(data) : nil;
                 if (object) {
