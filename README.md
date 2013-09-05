@@ -75,9 +75,11 @@ Key features:
                        scaling:(DFJPEGTurboScaling)scaling
                       rounding:(DFJPEGTurboRounding)rounding;
 ```
-
-DFBenchmark
+DFMapping
 ---------
+Simple concepts that helps to contruct tables and collection views with dynamic cells easily.
+DFBenchmark
+-----------
 Benchmark your code in terms of nanoseconds. Functions declared in mach_time.h are used to measure time (time is measured in processor cicles). Substracts the time benchmark implementation takes (for-loop, etc). Easy to use C API.
 ```c
 uint64_t dwarf_benchmark(BOOL verbose, void (^block)(void));
