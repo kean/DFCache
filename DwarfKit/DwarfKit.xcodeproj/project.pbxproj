@@ -123,6 +123,13 @@
 		0C8C160317D40E0C004B7DAA /* DwarfKit_Tests_Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C160217D40E0C004B7DAA /* DwarfKit_Tests_Mac.m */; };
 		0C8C160A17D40EB4004B7DAA /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C8C160917D40EB4004B7DAA /* image.jpeg */; };
 		0C8C160F17D40F9B004B7DAA /* TDFCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C160E17D40F9B004B7DAA /* TDFCacheTests.m */; };
+		0CED041C17D82B8800AEE503 /* DFMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041B17D82B8800AEE503 /* DFMapping.h */; };
+		0CED041D17D82B8800AEE503 /* DFMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041B17D82B8800AEE503 /* DFMapping.h */; };
+		0CED042017D82C0A00AEE503 /* DFMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041E17D82C0A00AEE503 /* DFMapper.h */; };
+		0CED042117D82C0A00AEE503 /* DFMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041E17D82C0A00AEE503 /* DFMapper.h */; };
+		0CED042217D82C0A00AEE503 /* DFMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CED041F17D82C0A00AEE503 /* DFMapper.m */; };
+		0CED042317D82C0A00AEE503 /* DFMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CED041F17D82C0A00AEE503 /* DFMapper.m */; };
+		0CED042417D82C0A00AEE503 /* DFMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CED041F17D82C0A00AEE503 /* DFMapper.m */; };
 		0CEDE40E17D44DDA00D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
 		0CEDE40F17D44DE100D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
 		0CEDE41017D44DE400D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
@@ -264,6 +271,9 @@
 		0C8C160917D40EB4004B7DAA /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpeg; sourceTree = "<group>"; };
 		0C8C160D17D40F9B004B7DAA /* TDFCacheTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFCacheTests.h; sourceTree = "<group>"; };
 		0C8C160E17D40F9B004B7DAA /* TDFCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFCacheTests.m; sourceTree = "<group>"; };
+		0CED041B17D82B8800AEE503 /* DFMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFMapping.h; sourceTree = "<group>"; };
+		0CED041E17D82C0A00AEE503 /* DFMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFMapper.h; sourceTree = "<group>"; };
+		0CED041F17D82C0A00AEE503 /* DFMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFMapper.m; sourceTree = "<group>"; };
 		0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0CEDE41817D4506800D617F7 /* dwarf_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dwarf_private.h; sourceTree = "<group>"; };
 		0CFA33EF17D4734900AE6EEF /* DwarfKit iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DwarfKit iOS-Prefix.pch"; sourceTree = "<group>"; };
@@ -394,6 +404,7 @@
 				0C3713A217D3FECA00766FD9 /* Concurrency */,
 				0C3713A917D3FECA00766FD9 /* Controls */,
 				0C1A0D0A17D58D8000872CE5 /* Filesystem */,
+				0CED041917D8161100AEE503 /* MVC */,
 				0C3713AF17D3FECA00766FD9 /* Networking */,
 				0C3713BA17D3FECA00766FD9 /* Tools */,
 				0C3713CE17D3FECA00766FD9 /* Views */,
@@ -658,6 +669,24 @@
 			path = Caching;
 			sourceTree = "<group>";
 		};
+		0CED041917D8161100AEE503 /* MVC */ = {
+			isa = PBXGroup;
+			children = (
+				0CED041A17D8162100AEE503 /* Mapping */,
+			);
+			path = MVC;
+			sourceTree = "<group>";
+		};
+		0CED041A17D8162100AEE503 /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				0CED041B17D82B8800AEE503 /* DFMapping.h */,
+				0CED041E17D82C0A00AEE503 /* DFMapper.h */,
+				0CED041F17D82C0A00AEE503 /* DFMapper.m */,
+			);
+			path = Mapping;
+			sourceTree = "<group>";
+		};
 		0CEDE41717D4503C00D617F7 /* Private */ = {
 			isa = PBXGroup;
 			children = (
@@ -720,6 +749,8 @@
 				0CFA33F217D4734900AE6EEF /* DwarfKit iOS-Prefix.pch in Headers */,
 				0CFA33F417D4734900AE6EEF /* DwarfKit Mac-Prefix.pch in Headers */,
 				0C1A0D0E17D58DA800872CE5 /* DFDispatchIO.h in Headers */,
+				0CED041D17D82B8800AEE503 /* DFMapping.h in Headers */,
+				0CED042117D82C0A00AEE503 /* DFMapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -765,6 +796,8 @@
 				0CFA33F117D4734900AE6EEF /* DwarfKit iOS-Prefix.pch in Headers */,
 				0CFA33F317D4734900AE6EEF /* DwarfKit Mac-Prefix.pch in Headers */,
 				0C1A0D0D17D58DA800872CE5 /* DFDispatchIO.h in Headers */,
+				0CED041C17D82B8800AEE503 /* DFMapping.h in Headers */,
+				0CED042017D82C0A00AEE503 /* DFMapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -962,6 +995,7 @@
 				0C37146717D4006B00766FD9 /* DFImageFetchHandler.m in Sources */,
 				0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */,
 				0C1A0D0F17D58DA800872CE5 /* DFDispatchIO.m in Sources */,
+				0CED042217D82C0A00AEE503 /* DFMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,6 +1010,7 @@
 				0C37144317D3FECA00766FD9 /* DFCache.m in Sources */,
 				0C37144817D3FECA00766FD9 /* DFCrypto.m in Sources */,
 				0C1A0D1117D58DA800872CE5 /* DFDispatchIO.m in Sources */,
+				0CED042417D82C0A00AEE503 /* DFMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -990,6 +1025,7 @@
 				0C37144217D3FECA00766FD9 /* DFCache.m in Sources */,
 				0C37144717D3FECA00766FD9 /* DFCrypto.m in Sources */,
 				0C1A0D1017D58DA800872CE5 /* DFDispatchIO.m in Sources */,
+				0CED042317D82C0A00AEE503 /* DFMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
