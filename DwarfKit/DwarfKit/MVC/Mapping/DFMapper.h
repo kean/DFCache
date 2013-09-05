@@ -14,6 +14,7 @@
 
 /*! <DFMapping> implementation based on simple class-class scheme.
  */
+NS_CLASS_AVAILABLE(10_7, 2_0)
 @interface DFMapper : NSObject <DFMapping>
 
 /*! Initializes mapper with mapping scheme.

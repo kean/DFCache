@@ -12,6 +12,7 @@
 
 /*! Provides a way to match the cell class with the entity. DFMapper provides default <DFMapping> implementation based on class-class scheme.
  */
+
 @protocol DFMapping <NSObject>
 
 - (Class)cellClassForItem:(id)item atIndexPath:(NSIndexPath *)indexPath;
