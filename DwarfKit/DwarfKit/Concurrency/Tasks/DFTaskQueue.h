@@ -16,10 +16,10 @@
 @class DFTask;
 
 
-/*! Regulates execution of DFTask objects. DFTaskQueue and DFTask pair is a lightweight NSOperationQueue and NSOperation analog. However it's much easier to implement your own concurrent tasks since DFTask has much more comprehensible semantics than NSOperation.
+/*! Regulates execution of DFTask objects. Similar to NSOperationQueue. However, it's much easier to implement your concurrent tasks using DFTask rather than NSOperation because of more comprehensive semantics.
  
  Features:
- - Performance. Written entirely on top of grand central dispatch. Requires all methods to be called from the main thread to avoid unnecessary synchronizations.
+ - Performance. Written entirely on top of grand central dispatch.
  */
 @interface DFTaskQueue : NSObject
 
@@ -35,7 +35,7 @@
  */
 @property (nonatomic, strong, readonly) NSOrderedSet *tasks;
 
-/*! Adds the specifid task to the queue. Queue holds strong reference to the task until task is finished and completion callback is called.
+/*! Adds the specified task to the queue. Queue holds strong reference to the task until task is finished and completion callback is called.
  */
 - (void)addTask:(DFTask *)task;
 

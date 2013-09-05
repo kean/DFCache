@@ -105,7 +105,7 @@
     });
 }
 
-#pragma mark - Pause
+#pragma mark - Suspension
 
 - (void)setSuspended:(BOOL)suspended {
     dispatch_sync(_syncQueue, ^{

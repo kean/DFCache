@@ -12,7 +12,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface DFTask : NSObject
 
 @property (nonatomic, readonly) BOOL isExecuting;

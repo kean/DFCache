@@ -44,14 +44,20 @@
  */
 @property (nonatomic, strong) id<DFImageCaching> cache;
 
-// TODO: Comments
+/*! Returns shared image fetch manager with initialized DFCache instance.
+ */
 + (instancetype)shared;
 
-/*!
- @discussion Returned DFImageFetchTask is guranteed not to be executed until the next run of main run loop.
+/*! Fetches image with specified URL and calls DFImageFetchHandler object success or failure block on completion.
  */
 - (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
+
+/*! Removes handler for specific image fetch task. If there are no handlers left fetch task is cancelled.
+ */
 - (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
+
+/*! Prefetches image with specified URL.
+ */
 - (void)prefetchImageWithURL:(NSString *)imageURL;
 
 @end

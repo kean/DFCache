@@ -30,7 +30,6 @@
 
 @end
 
-
 @implementation _DFFetchWrapper
 
 - (id)initWithTask:(DFImageFetchTask *)task
@@ -43,7 +42,6 @@
    }
    return self;
 }
-
 
 - (void)prepareForReuse {
    _imageURL = nil;
@@ -63,7 +61,6 @@
    NSUInteger _maxReusableTaskCount;
 }
 
-
 + (instancetype)shared {
    static DFImageFetchManager *shared = nil;
    static dispatch_once_t onceToken;
@@ -73,7 +70,6 @@
    });
    return shared;
 }
-
 
 - (id)initWithName:(NSString *)name {
    if (self = [super init]) {
@@ -86,11 +82,9 @@
    return self;
 }
 
-
 - (id)init {
    return [self initWithName:nil];
 }
-
 
 - (void)_setDefaults {
    _queue.maxConcurrentTaskCount = 3;
@@ -100,16 +94,14 @@
 #pragma mark - Fetching
 
 - (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
-   if (imageURL == nil || handler == nil) {
+   if (!imageURL || !handler) {
       return nil;
    }
-   
    _DFFetchWrapper *wrapper = [_wrappers objectForKey:imageURL];
    if (wrapper) {
       [wrapper.handlers addObject:handler];
       return wrapper.task;
-   }
-   else {
+   } else {
       DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL];
       task.cache = _cache;
       [task setCompletionBlock:^(DFTask *completedTask) {
@@ -131,17 +123,14 @@
    }
 }
 
-
 - (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
-   if (handler == nil || imageURL == nil) {
+   if (!handler || !imageURL) {
       return;
    }
-   
    _DFFetchWrapper *wrapper = [_wrappers objectForKey:imageURL];
-   if (wrapper == nil) {
+   if (!wrapper) {
       return;
    }
-   
    [wrapper.handlers removeObject:handler];
    if (wrapper.handlers.count == 0 && ! wrapper.task.isExecuting) {
       [wrapper.task cancel];
@@ -150,7 +139,6 @@
       [self _enqueueReusableWrapper:wrapper];
    }
 }
-
 
 - (void)prefetchImageWithURL:(NSString *)imageURL {
    [self fetchImageWithURL:imageURL handler:[DFImageFetchHandler new]];
@@ -167,7 +155,6 @@
    return wrapper;
 }
 
-
 - (void)_enqueueReusableWrapper:(_DFFetchWrapper *)wrapper {
    if (_reusableTasks.count < _maxReusableTaskCount) {
       [_reusableTasks addObject:wrapper];
@@ -181,27 +168,20 @@
    if (task.isCancelled) {
       return;
    }
-   
    _DFFetchWrapper *wrapper = [_wrappers objectForKey:task.imageURL];
-   
-   // SUCCESS
    if (task.image) {
       for (DFImageFetchHandler *handler in wrapper.handlers) {
          if (handler.success) {
             handler.success(task.image, task.source);
          }
       }
-   }
-   
-   // FAILURE
-   else {
+   } else {
       for (DFImageFetchHandler *handler in wrapper.handlers) {
          if (handler.failure) {
             handler.failure(task.error);
          }
       }
    }
-   
    [_wrappers removeObjectForKey:task.imageURL];
    [self _enqueueReusableWrapper:wrapper];
 }
