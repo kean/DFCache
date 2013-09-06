@@ -20,7 +20,6 @@
 
 - (void)_setImplDelegate:(id<_DFTaskDelegate>)delegate;
 - (void)_setExecuting:(BOOL)executing;
-- (void)_setFinished:(BOOL)finished;
 - (void)_setCanceled:(BOOL)canceled;
 
 @end

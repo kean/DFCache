@@ -18,21 +18,17 @@
     __weak id<_DFTaskDelegate> _impl_delegate;
 }
 
-
 - (BOOL)isEqual:(id)object {
     return self == object;
 }
-
 
 - (void)execute {
     return;
 }
 
-
 - (void)finish {
     [_impl_delegate _taskDidFinish:self];
 }
-
 
 - (void)cancel {
     [self _setCanceled:YES];
@@ -44,19 +40,12 @@
     _impl_delegate = delegate;
 }
 
-
-- (void)_setCanceled:(BOOL)canceled {
-    _isCancelled = canceled;
-}
-
-
 - (void)_setExecuting:(BOOL)executing {
     _isExecuting = executing;
 }
 
-
-- (void)_setFinished:(BOOL)finished {
-    _isFinished = finished;
+- (void)_setCanceled:(BOOL)canceled {
+    _isCancelled = canceled;
 }
 
 @end

@@ -104,7 +104,7 @@
    } else {
       DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL];
       task.cache = _cache;
-      [task setCompletionBlock:^(DFTask *completedTask) {
+      [task setCompletion:^(DFTask *completedTask) {
          [self _handleTaskCompletion:(id)completedTask];
       }];
       
@@ -134,7 +134,7 @@
    [wrapper.handlers removeObject:handler];
    if (wrapper.handlers.count == 0 && ! wrapper.task.isExecuting) {
       [wrapper.task cancel];
-      [wrapper.task setCompletionBlock:nil];
+      [wrapper.task setCompletion:nil];
       [_wrappers removeObjectForKey:imageURL];
       [self _enqueueReusableWrapper:wrapper];
    }

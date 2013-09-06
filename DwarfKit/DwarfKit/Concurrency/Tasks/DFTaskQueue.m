@@ -90,18 +90,14 @@
 
 - (void)_taskDidFinish:(DFTask *)task {
     dispatch_sync(_syncQueue, ^{
-        if (task.isExecuting) {
-            _executingTaskCount--;
-            [task _setExecuting:NO];
-            [task _setFinished:YES];
-            [_tasks removeObject:task];
-            [self _executeTasks];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (task.completionBlock) {
-                    task.completionBlock(task);
-                }
-            });
-        }
+        _executingTaskCount--;
+        [_tasks removeObject:task];
+        [self _executeTasks];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (task.completion) {
+                task.completion(task);
+            }
+        });
     });
 }
 

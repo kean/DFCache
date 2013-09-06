@@ -15,12 +15,11 @@
 @interface DFTask : NSObject
 
 @property (nonatomic, readonly) BOOL isExecuting;
-@property (nonatomic, readonly) BOOL isFinished;
 @property (nonatomic, readonly) BOOL isCancelled;
 
 @property (nonatomic) dispatch_queue_priority_t priority;
 
-@property (nonatomic, copy) void (^completionBlock)(DFTask *task);
+@property (nonatomic, copy) void (^completion)(DFTask *task);
 
 - (void)execute;
 - (void)finish;
