@@ -4,17 +4,13 @@ DwarfKit is a set of highly reusable Objective-C (iOS/Mac OS X) classes and cate
 License
 -------
 DwarfKit is available under the MIT license.
-Requirements
-------------
-- ARC
-
 DFImageFetchManager
 -------------------
 Image fetching with extreme performance. 
 
 Key features:
  - Performance and scalability. Built entirely on top of GCD. DFImageFetchManager is able to maintain thousands of image requests/request cancellations per second. Even on older devices.
- - JPEG images are decompressed via libjpeg-turbo. JPEG decompression is 3-4 times faster then iOS codec.
+ - JPEG images are decompressed via libjpeg-turbo.
  - Fully customizable cache (you can provide custom cache implementation or even use NSURLCache, cache implementation can be changed for the particular request, etc).
  - Resources with the same URL are never downloaded twice.
 
