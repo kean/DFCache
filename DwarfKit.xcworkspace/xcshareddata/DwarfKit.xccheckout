@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>28666B4C-0726-46A0-B1C9-DA9EED2A82C0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DwarfKit</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C053EE70-6A53-4169-BC92-4425AA02A548</key>
+		<string>https://github.com/kean/DwarfKit.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DwarfKit.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C053EE70-6A53-4169-BC92-4425AA02A548</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/kean/DwarfKit.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C053EE70-6A53-4169-BC92-4425AA02A548</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C053EE70-6A53-4169-BC92-4425AA02A548</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DwarfKit</string>
+		</dict>
+	</array>
+</dict>
+</plist>

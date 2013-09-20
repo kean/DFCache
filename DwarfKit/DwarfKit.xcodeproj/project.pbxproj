@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C1A0D0D17D58DA800872CE5 /* DFDispatchIO.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1A0D0B17D58DA800872CE5 /* DFDispatchIO.h */; };
-		0C1A0D0E17D58DA800872CE5 /* DFDispatchIO.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1A0D0B17D58DA800872CE5 /* DFDispatchIO.h */; };
-		0C1A0D0F17D58DA800872CE5 /* DFDispatchIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C1A0D0C17D58DA800872CE5 /* DFDispatchIO.m */; };
-		0C1A0D1017D58DA800872CE5 /* DFDispatchIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C1A0D0C17D58DA800872CE5 /* DFDispatchIO.m */; };
-		0C1A0D1117D58DA800872CE5 /* DFDispatchIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C1A0D0C17D58DA800872CE5 /* DFDispatchIO.m */; };
 		0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
 		0C3713D117D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
 		0C3713D217D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
@@ -184,8 +179,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0C1A0D0B17D58DA800872CE5 /* DFDispatchIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFDispatchIO.h; sourceTree = "<group>"; };
-		0C1A0D0C17D58DA800872CE5 /* DFDispatchIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFDispatchIO.m; sourceTree = "<group>"; };
 		0C3712F717D3F93F00766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0C37130617D3F93F00766FD9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0C37132717D3F9C700766FD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -339,15 +332,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C1A0D0A17D58D8000872CE5 /* Filesystem */ = {
-			isa = PBXGroup;
-			children = (
-				0C1A0D0B17D58DA800872CE5 /* DFDispatchIO.h */,
-				0C1A0D0C17D58DA800872CE5 /* DFDispatchIO.m */,
-			);
-			path = Filesystem;
-			sourceTree = "<group>";
-		};
 		0C3712EB17D3F93F00766FD9 = {
 			isa = PBXGroup;
 			children = (
@@ -403,7 +387,6 @@
 				0C37139917D3FECA00766FD9 /* Categories */,
 				0C3713A217D3FECA00766FD9 /* Concurrency */,
 				0C3713A917D3FECA00766FD9 /* Controls */,
-				0C1A0D0A17D58D8000872CE5 /* Filesystem */,
 				0CED041917D8161100AEE503 /* MVC */,
 				0C3713AF17D3FECA00766FD9 /* Networking */,
 				0C3713BA17D3FECA00766FD9 /* Tools */,
@@ -748,7 +731,6 @@
 				0CEDE41A17D4506800D617F7 /* dwarf_private.h in Headers */,
 				0CFA33F217D4734900AE6EEF /* DwarfKit iOS-Prefix.pch in Headers */,
 				0CFA33F417D4734900AE6EEF /* DwarfKit Mac-Prefix.pch in Headers */,
-				0C1A0D0E17D58DA800872CE5 /* DFDispatchIO.h in Headers */,
 				0CED041D17D82B8800AEE503 /* DFMapping.h in Headers */,
 				0CED042117D82C0A00AEE503 /* DFMapper.h in Headers */,
 			);
@@ -795,7 +777,6 @@
 				0CEDE41917D4506800D617F7 /* dwarf_private.h in Headers */,
 				0CFA33F117D4734900AE6EEF /* DwarfKit iOS-Prefix.pch in Headers */,
 				0CFA33F317D4734900AE6EEF /* DwarfKit Mac-Prefix.pch in Headers */,
-				0C1A0D0D17D58DA800872CE5 /* DFDispatchIO.h in Headers */,
 				0CED041C17D82B8800AEE503 /* DFMapping.h in Headers */,
 				0CED042017D82C0A00AEE503 /* DFMapper.h in Headers */,
 			);
@@ -900,7 +881,7 @@
 		0C3712EC17D3F93F00766FD9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = com.github.kean;
 			};
 			buildConfigurationList = 0C3712EF17D3F93F00766FD9 /* Build configuration list for PBXProject "DwarfKit" */;
@@ -994,7 +975,6 @@
 				0C37146117D3FFE600766FD9 /* DFImageView.m in Sources */,
 				0C37146717D4006B00766FD9 /* DFImageFetchHandler.m in Sources */,
 				0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */,
-				0C1A0D0F17D58DA800872CE5 /* DFDispatchIO.m in Sources */,
 				0CED042217D82C0A00AEE503 /* DFMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1009,7 +989,6 @@
 				0C37143E17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
 				0C37144317D3FECA00766FD9 /* DFCache.m in Sources */,
 				0C37144817D3FECA00766FD9 /* DFCrypto.m in Sources */,
-				0C1A0D1117D58DA800872CE5 /* DFDispatchIO.m in Sources */,
 				0CED042417D82C0A00AEE503 /* DFMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1024,7 +1003,6 @@
 				0C37143D17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
 				0C37144217D3FECA00766FD9 /* DFCache.m in Sources */,
 				0C37144717D3FECA00766FD9 /* DFCrypto.m in Sources */,
-				0C1A0D1017D58DA800872CE5 /* DFDispatchIO.m in Sources */,
 				0CED042317D82C0A00AEE503 /* DFMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1177,7 +1155,6 @@
 		0C37136F17D3FC3300766FD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
@@ -1199,7 +1176,6 @@
 		0C37137017D3FC3300766FD9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1222,7 +1198,6 @@
 		0C37137E17D3FC3D00766FD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1246,7 +1221,6 @@
 		0C37137F17D3FC3D00766FD9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1303,7 +1277,6 @@
 		0C8C160617D40E0C004B7DAA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1321,7 +1294,6 @@
 		0C8C160717D40E0C004B7DAA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";

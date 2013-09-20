@@ -139,10 +139,12 @@ static inline tjscalingfactor DFScalingFactor(int width, int height, CGSize desi
     result = tjDecompress2(decoder, jpegBuf, jpegSize, imageData, width, pitch, height, TJPF_RGBA, 0);
     if (result < 0) {
         free(imageData);
+        tjDestroy(decoder);
         return nil;
     }
     
     CGDataProviderRef imageDataProvider = CGDataProviderCreateWithData(imageData, imageData, capacity, &releaseData);
+    
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
     CGImageRef image = CGImageCreate(width, height, 8, 32, pitch, colorspace, kCGBitmapByteOrderDefault | kCGImageAlphaNoneSkipLast, imageDataProvider, NULL, NO, kCGRenderingIntentDefault);
     
@@ -151,6 +153,7 @@ static inline tjscalingfactor DFScalingFactor(int width, int height, CGSize desi
     CGImageRelease(image);
     CGDataProviderRelease(imageDataProvider);
     CGColorSpaceRelease(colorspace);
+    tjDestroy(decoder);
     
     return decompressedImage;
 }
