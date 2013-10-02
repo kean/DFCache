@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C2A95E317FBEF290016CB20 /* DFStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E017FBEF290016CB20 /* DFStream.m */; };
+		0C2A95E417FBEF290016CB20 /* DFStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E017FBEF290016CB20 /* DFStream.m */; };
+		0C2A95E517FBEF290016CB20 /* DFStreamChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E217FBEF290016CB20 /* DFStreamChain.m */; };
+		0C2A95E617FBEF290016CB20 /* DFStreamChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E217FBEF290016CB20 /* DFStreamChain.m */; };
 		0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
 		0C3713D117D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
 		0C3713D217D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
@@ -179,6 +183,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C2A95DF17FBEF290016CB20 /* DFStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStream.h; sourceTree = "<group>"; };
+		0C2A95E017FBEF290016CB20 /* DFStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFStream.m; sourceTree = "<group>"; };
+		0C2A95E117FBEF290016CB20 /* DFStreamChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStreamChain.h; sourceTree = "<group>"; };
+		0C2A95E217FBEF290016CB20 /* DFStreamChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFStreamChain.m; sourceTree = "<group>"; };
 		0C3712F717D3F93F00766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0C37130617D3F93F00766FD9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0C37132717D3F9C700766FD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -332,6 +340,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C2A95DE17FBEF290016CB20 /* Stream */ = {
+			isa = PBXGroup;
+			children = (
+				0C2A95DF17FBEF290016CB20 /* DFStream.h */,
+				0C2A95E017FBEF290016CB20 /* DFStream.m */,
+				0C2A95E117FBEF290016CB20 /* DFStreamChain.h */,
+				0C2A95E217FBEF290016CB20 /* DFStreamChain.m */,
+			);
+			path = Stream;
+			sourceTree = "<group>";
+		};
 		0C3712EB17D3F93F00766FD9 = {
 			isa = PBXGroup;
 			children = (
@@ -655,6 +674,7 @@
 		0CED041917D8161100AEE503 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
+				0C2A95DE17FBEF290016CB20 /* Stream */,
 				0CED041A17D8162100AEE503 /* Mapping */,
 			);
 			path = MVC;
@@ -962,6 +982,7 @@
 				0C37140017D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
 				0C37140517D3FECA00766FD9 /* UIImageView+Dwarf.m in Sources */,
 				0C37141117D3FECA00766FD9 /* DFTask.m in Sources */,
+				0C2A95E317FBEF290016CB20 /* DFStream.m in Sources */,
 				0C37141617D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
 				0C37141B17D3FECA00766FD9 /* DFButton.m in Sources */,
 				0C37142017D3FECA00766FD9 /* DFButtonLayout.m in Sources */,
@@ -969,6 +990,7 @@
 				0C37143717D3FECA00766FD9 /* DFImageFetchTask.m in Sources */,
 				0C37143C17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
 				0C37144117D3FECA00766FD9 /* DFCache.m in Sources */,
+				0C2A95E517FBEF290016CB20 /* DFStreamChain.m in Sources */,
 				0C37144617D3FECA00766FD9 /* DFCrypto.m in Sources */,
 				0C37145117D3FECA00766FD9 /* DFImageProcessing.m in Sources */,
 				0C37145617D3FECA00766FD9 /* DFJPEGTurbo.m in Sources */,
@@ -1012,6 +1034,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C8C160F17D40F9B004B7DAA /* TDFCacheTests.m in Sources */,
+				0C2A95E417FBEF290016CB20 /* DFStream.m in Sources */,
+				0C2A95E617FBEF290016CB20 /* DFStreamChain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
