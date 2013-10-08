@@ -46,7 +46,6 @@
     DFCache *cache = [[DFCache alloc] initWithName:name];
     STAssertTrue([cache.name isEqualToString:name], nil);
     STAssertTrue([cache.memoryCache.name isEqualToString:name], nil);
-    STAssertTrue(cache.settings.filesExpirationPeriod == 60 * 60 * 24 * 7 * 4, nil);
     STAssertTrue(cache.settings.diskCacheCapacity == 1048576 * 100, nil);
 }
 
@@ -139,22 +138,6 @@
     __block BOOL isWaiting = YES;
     [_cache codingObjectForKey:key queue:NULL completion:^(id  object) {
         STAssertTrue([text isEqualToString:object], nil);
-        isWaiting = NO;
-    }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
-}
-
-
-- (void)testReadExpiredEntry {
-    NSString *object = @"d2fl3-2f";
-    NSString *key = @"key";
-    NSDictionary *metadata = @{ DFCacheMetaExpirationDateKey : [NSDate dateWithTimeIntervalSinceNow:-10.f] };
-    
-    [_cache storeCodingObject:object metadata:metadata cost:0.f forKey:key];
-    
-    __block BOOL isWaiting = YES;
-    [_cache codingObjectForKey:key queue:NULL completion:^(id object) {
-        STAssertNil(object, nil);
         isWaiting = NO;
     }];
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
@@ -447,11 +430,6 @@
     void *raw2 = malloc(length);
     NSData *data2 = [NSData dataWithBytes:raw2 length:length];
     [_cache storeObject:data2 forKey:@"obj_untouched_2" data:data2 transform:nil];
-
-    void *raw3 = malloc(length);
-    NSData *data3 = [NSData dataWithBytes:raw3 length:length];
-    NSDictionary *metadata = @{ DFCacheMetaExpirationDateKey : [NSDate dateWithTimeIntervalSinceNow:-10.f] };
-    [_cache storeObject:data3 metadata:metadata forKey:@"obj_expired" cost:0.f data:data3 transform:nil];
     
     // 2: Update object latest access data.
     // ====================================
@@ -473,7 +451,7 @@
     
     // 4. Check results.
     // =================
-    __block NSUInteger semaphore = 4;
+    __block NSUInteger semaphore = 3;
     
     [_cache objectForKey:@"obj_untouched_1" queue:NULL transform:transform completion:^(id object) {
         STAssertNil(object, nil);
@@ -490,28 +468,6 @@
         semaphore -= 1;
     }];
     
-    [_cache objectForKey:@"obj_expired" queue:NULL transform:transform completion:^(id object) {
-        STAssertNil(object, nil);
-        semaphore -= 1;
-    }];
-    
-    DWARF_TEST_WAIT_SEMAPHORE(semaphore, 20.f);
-}
-
-
-- (void)testDiskCleanupNoExpiration {
-    DFCacheSettings settings = _cache.settings;
-    settings.filesExpirationPeriod = 0.f;
-    _cache.settings = settings;
-    
-    NSDictionary *objects;
-    NSArray *keys;
-    [self _storeStringsInCache:_cache objects:&objects keys:&keys];
-    
-    [_cache cleanupDiskCache];
-    
-    NSUInteger semaphore = [keys count];
-    [self _assertContainsObjectsForKeys:keys objects:objects semaphore:&semaphore];
     DWARF_TEST_WAIT_SEMAPHORE(semaphore, 20.f);
 }
 

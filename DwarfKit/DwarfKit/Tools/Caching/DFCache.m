@@ -59,18 +59,6 @@ typedef NSArray *(^DFCleanupBlock)(NSDictionary *);
 @end
 
 
-static inline
-BOOL
-_dwarf_entry_is_expired(NSDictionary *metadata) {
-    NSDate *currentDate = [NSDate date];
-    NSDate *expirationDate = metadata[DFCacheMetaExpirationDateKey];
-    if (!expirationDate) {
-        return NO;
-    }
-    return [currentDate compare:expirationDate] == NSOrderedDescending;
-}
-
-
 static
 _dwarf_bytes
 _dwarf_cache_size(NSArray *metatableValues) {
@@ -134,7 +122,6 @@ _dwarf_cache_size(NSArray *metatableValues) {
 }
 
 - (void)_setDefaults {
-    _settings.filesExpirationPeriod = 60 * 60 * 24 * 7 * 4; // 4 weeks
     _settings.diskCacheCapacity = 1048576 * 100; // 100 Mb
     _settings.cleanupTargetSizeRatio = 2.0;
 }
@@ -158,12 +145,6 @@ _dwarf_cache_size(NSArray *metatableValues) {
             _dwarf_callback(queue, completion, nil);
             return;
         }
-        if (_dwarf_entry_is_expired(metadata)) {
-            _dwarf_callback(queue, completion, nil);
-            [self _removeObjectsForKeys:@[key]];
-            return;
-        }
-        
         NSString *filename = metadata[DFCacheMetaFileNameKey];
         dispatch_async(_ioQueue, ^{
             @autoreleasepool {
@@ -235,10 +216,6 @@ _dwarf_cache_size(NSArray *metatableValues) {
     metadata[DFCacheMetaFileNameKey] = filename;
     if (data) {
         metadata[DFCacheMetaFileSizeKey] = @(data.length);
-    }
-    if (_settings.filesExpirationPeriod > 0) {
-        NSDate *expirationDate = [date dateByAddingTimeInterval:_settings.filesExpirationPeriod];
-        metadata[DFCacheMetaExpirationDateKey] = expirationDate;
     }
     [metadata addEntriesFromDictionary:keyedValues];
     _metatable[key] = metadata;
@@ -379,28 +356,20 @@ _dwarf_cache_size(NSArray *metatableValues) {
 - (DFCleanupBlock)_defaultCleanupBlock {
     return ^(NSDictionary *metatable){
         NSMutableArray *removeKeys = [NSMutableArray new];
-        NSMutableArray *metatableKeys, *metatableValues;
-        [self _metatable:metatable getKeys:&metatableKeys values:&metatableValues];
-        
-        NSIndexSet *expiredIndexes = [metatableValues indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-            return _dwarf_entry_is_expired(obj);
-        }];
-        [removeKeys addObjectsFromArray:[metatableKeys objectsAtIndexes:expiredIndexes]];
         if (_settings.diskCacheCapacity == 0) {
             return removeKeys;
         }
         
-        [metatableValues removeObjectsAtIndexes:expiredIndexes];
-        [metatableKeys removeObjectsAtIndexes:expiredIndexes];
-        
-        NSArray *remainingValues = [metatableValues sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSMutableArray *metatableKeys, *metatableValues;
+        [self _metatable:metatable getKeys:&metatableKeys values:&metatableValues];
+        NSArray *values = [metatableValues sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             return [obj1[DFCacheMetaAccessDateKey] compare:
                     obj2[DFCacheMetaAccessDateKey]];
         }];
         
-        _dwarf_bytes cacheSize = _dwarf_cache_size(remainingValues);
+        _dwarf_bytes cacheSize = _dwarf_cache_size(values);
         _dwarf_bytes targetSize = _settings.diskCacheCapacity / _settings.cleanupTargetSizeRatio;
-        for (NSDictionary *value in remainingValues) {
+        for (NSDictionary *value in values) {
             if (cacheSize <= targetSize) {
                 break;
             }
