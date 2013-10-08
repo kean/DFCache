@@ -44,7 +44,7 @@ DFCacheMetaFileSizeKey = @"_df_file_size"; // Becomes available only after file 
  Efficient memory and disk key-value storage.
  
  Features:
- - General purpose. Stores any Objective-C objects. Built-in support for image caching (<DFImageCaching> implementation) and caching of <NSCodying> objects. 
+ - General purpose. Stores any Objective-C objects. Built-in support for image caching (<DFImageCaching> implementation) and caching of <NSCoding> objects.
  - Metadata. Cache entries have associated metadata. You can read/write entry's metadata at any time and even add your custom keys.
  - LRU cleanup. Read more in - (void)cleanupDiskCache discussion.
  - Performance. Image caching performance is fantastic due to libjpeg-turbo which is used under the hood. Disk cache faults are handled instantly without disk I/O.
@@ -72,56 +72,51 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 #pragma mark - Caching (Read)
 
-/*! Calls completion block on the provided queue with object from disk cache. Memory cache isn't checked.
+/*! Calls completion block with an object from disk cache.
  @param key The unique key.
  @param queue Queue to execute completion block on. Main queue if NULL.
- @param transform Transformation block that returns object from data.
+ @param transform Transformation block that returns object from data. Default transformaion block returns data without any transformations.
  @param completion Completion block that gets called on the provided queue.
  */
-- (void)objectForKey:(NSString *)key
-               queue:(dispatch_queue_t)queue
-           transform:(id (^)(NSData *data))transform
-          completion:(void (^)(id object))completion;
-
-/*! Returns object from memory cache.
- */
-- (id)objectForKey:(NSString *)key;
+- (void)cachedObjectForKey:(NSString *)key
+                     queue:(dispatch_queue_t)queue
+                 transform:(id (^)(NSData *data))transform
+                completion:(void (^)(id object))completion;
 
 #pragma mark - Caching (Write)
 
-/*! Stores object into memory cache. Stores object data representation into disk cache if either data or transform parameter is present.
+/*! Stores object into memory cache. Stores data into disk cache.
  @param object The object to store into memory cache.
- @param metadata Keyed values to append to default metadata.
  @param key The unique key.
  @param cost The cost with which to associate the object (used by memory cache).
  @param data Data to store into disk cache.
  @param transform Transformation block that returns object data representation.
  */
 - (void)storeObject:(id)object
-           metadata:(NSDictionary *)metadata
              forKey:(NSString *)key
                cost:(NSUInteger)cost
-               data:(NSData *)data
-          transform:(NSData *(^)(id object))transform;
+               data:(NSData *)data;
 
-- (void)storeObject:(id)object
-             forKey:(NSString *)key
-               data:(NSData *)data
-          transform:(NSData *(^)(id))transform;
-
-/*! Stores object into memory cache.
+/*! Stores object into memory cache. Stores data representation provided by the transformation block into disk cache.
  @param object The object to store into memory cache.
  @param key The unique key.
- @param cost The cost with which to associate the object. Pass 0 if you don't wan't to specify the cost. Read NSCache setObject:forKey:cost: description to know more.
+ @param cost The cost with which to associate the object (used by memory cache).
+ @param transform Transformation block that returns object data representation.
  */
-- (void)storeObject:(id)object forKey:(NSString *)key cost:(NSUInteger)cost;
-- (void)storeObject:(id)object forKey:(NSString *)key;
+- (void)storeObject:(id)object
+             forKey:(NSString *)key
+               cost:(NSUInteger)cost
+          transform:(NSData *(^)(id object))transform;
 
 #pragma mark - Metadata
 
 /*! Returns copy of cache entry metadata for specified key.
 */
 - (NSDictionary *)metadataForKey:(NSString *)key;
+
+/*! Sets metadata for specified key
+ */
+- (void)setMetadata:(NSDictionary *)metadata forKey:(NSString *)key;
 
 /*! Sets metadata values for specified keys. You can set values for either built-in metadata keys or your custom keys.
  */
@@ -150,15 +145,9 @@ typedef NS_OPTIONS(NSUInteger, DFCacheRemoveOptions) {
 #pragma mark - Maintenance
 
 /*! Cleans disk cache.
- @param cleanupBlock Custom cleanup algorithm. If nil uses either custom algorithm set in - (void)setDiskCleanupBlock: or default cleanup algorithm.
- @discussion Defalut cleanup algorithm run only if max disk cache capacity is set to non-zero value. Calculates target size (half of max disk cache capacity). Files files are removed according to LRU algorithm until cache size fits target size.
+ @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Calculates target size (half of max disk cache capacity). Files files are removed according to LRU algorithm until cache size fits target size.
  */
-- (void)cleanupDiskCache:(NSArray *(^)(NSDictionary *metatable))cleanupBlock;
 - (void)cleanupDiskCache;
-
-/* Algorithm used to define which files should be deleted while cleaning disk. Return array of keys for cache entries that should be deleted.
- */
-- (void)setDiskCleanupBlock:(NSArray *(^)(NSDictionary *metatable))cleanupBlock;
 
 /*! Returns current disk cache size. Not a strict value since we don't now file size until it's written to disk.
 */

@@ -62,7 +62,7 @@
     STAssertTrue([_cache objectForKey:key] == value, nil);
     
     __block BOOL isWaiting = YES;
-    [_cache objectForKey:key queue:NULL transform:^id(NSData *data) {
+    [_cache cachedObjectForKey:key queue:NULL transform:^id(NSData *data) {
         return [UIImage imageWithData:data];
     } completion:^(UIImage *object) {
         [self _assertImage:value isEqualImage:object];
@@ -82,7 +82,7 @@
     STAssertTrue([_cache objectForKey:key] == value, nil);
     
     __block BOOL isWaiting = YES;
-    [_cache objectForKey:key queue:NULL transform:^id(NSData *data) {
+    [_cache cachedObjectForKey:key queue:NULL transform:^id(NSData *data) {
         return [UIImage imageWithData:data];
     } completion:^(UIImage *object) {
         [self _assertImage:value isEqualImage:object];
@@ -102,7 +102,7 @@
     STAssertTrue([_cache objectForKey:key] == value, nil);
     
     __block BOOL isWaiting = YES;
-    [_cache objectForKey:key queue:NULL transform:^id(NSData *data) {
+    [_cache cachedObjectForKey:key queue:NULL transform:^id(NSData *data) {
         return [NSKeyedUnarchiver unarchiveObjectWithData:data];
     } completion:^(id object) {
         STAssertNil(object, nil);
@@ -440,7 +440,7 @@
     sleep(2.f); // Access date step is 1 sec
     
     __block BOOL isWaiting = YES;
-    [_cache objectForKey:@"obj_most_recent_access" queue:NULL transform:transform completion:^(id object) {
+    [_cache cachedObjectForKey:@"obj_most_recent_access" queue:NULL transform:transform completion:^(id object) {
         isWaiting = NO;
     }];
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
@@ -453,17 +453,17 @@
     // =================
     __block NSUInteger semaphore = 3;
     
-    [_cache objectForKey:@"obj_untouched_1" queue:NULL transform:transform completion:^(id object) {
+    [_cache cachedObjectForKey:@"obj_untouched_1" queue:NULL transform:transform completion:^(id object) {
         STAssertNil(object, nil);
         semaphore -= 1;
     }];
     
-    [_cache objectForKey:@"obj_untouched_2" queue:NULL transform:transform completion:^(id object) {
+    [_cache cachedObjectForKey:@"obj_untouched_2" queue:NULL transform:transform completion:^(id object) {
         STAssertNil(object, nil);
         semaphore -= 1;
     }];
     
-    [_cache objectForKey:@"obj_most_recent_access" queue:NULL transform:transform completion:^(id object) {
+    [_cache cachedObjectForKey:@"obj_most_recent_access" queue:NULL transform:transform completion:^(id object) {
         STAssertNotNil(object, nil);
         semaphore -= 1;
     }];
