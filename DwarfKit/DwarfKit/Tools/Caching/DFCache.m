@@ -88,7 +88,6 @@ _dwarf_cache_size(NSArray *metatableValues) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     DWARF_DISPATCH_RELEASE(_metaQueue);
     DWARF_DISPATCH_RELEASE(_ioQueue);
-    DWARF_DISPATCH_RELEASE(_ioSemaphore);
 }
 
 - (id)initWithName:(NSString *)name {
