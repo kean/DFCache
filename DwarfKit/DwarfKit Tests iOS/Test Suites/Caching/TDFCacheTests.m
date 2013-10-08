@@ -55,11 +55,12 @@
     UIImage *value = [self _testImage];
     NSString *key = @"key1";
     
-    [_cache storeObject:value forKey:key data:nil transform:^NSData *(id object) {
+    [_cache storeObject:value forKey:key cost:0.f transform:^NSData *(id object) {
         return UIImageJPEGRepresentation(object, 1.0);
     }];
     
-    STAssertTrue([_cache objectForKey:key] == value, nil);
+    STAssertTrue([_cache cachedObjectForKey:key]  == value, nil);
+    [_cache.memoryCache removeObjectForKey:key];
     
     __block BOOL isWaiting = YES;
     [_cache cachedObjectForKey:key queue:NULL transform:^id(NSData *data) {
@@ -77,9 +78,10 @@
     NSString *key = @"key1";
     NSData *data = UIImageJPEGRepresentation(value, 1.0);
     
-    [_cache storeObject:value forKey:key data:data transform:nil];
+    [_cache storeObject:value forKey:key cost:0.f data:data];
     
-    STAssertTrue([_cache objectForKey:key] == value, nil);
+    STAssertTrue([_cache cachedObjectForKey:key] == value, nil);
+    [_cache.memoryCache removeObjectForKey:key];
     
     __block BOOL isWaiting = YES;
     [_cache cachedObjectForKey:key queue:NULL transform:^id(NSData *data) {
@@ -97,9 +99,10 @@
     NSString *value = @"test_string";
     NSString *key = @"key3";
     
-    [_cache storeObject:value forKey:key data:nil transform:nil];
+    [_cache storeObject:value forKey:key cost:0.f transform:nil];
     
-    STAssertTrue([_cache objectForKey:key] == value, nil);
+    STAssertTrue([_cache cachedObjectForKey:key] == value, nil);
+    [_cache.memoryCache removeObjectForKey:key];
     
     __block BOOL isWaiting = YES;
     [_cache cachedObjectForKey:key queue:NULL transform:^id(NSData *data) {

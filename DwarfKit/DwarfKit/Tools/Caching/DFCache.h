@@ -26,18 +26,6 @@ typedef struct {
 } DFCacheSettings;
 
 
-#pragma mark - DFCache Metadata -
-
-static NSString * const
-DFCacheMetaCreationDateKey = @"_df_creation_date";
-static NSString * const
-DFCacheMetaAccessDateKey = @"_df_access_date";
-static NSString * const
-DFCacheMetaFileNameKey = @"_df_file_name";
-static NSString * const
-DFCacheMetaFileSizeKey = @"_df_file_size"; // Becomes available only after file is written on disk
-
-
 #pragma mark - DFCache -
 
 /*!
@@ -82,6 +70,10 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
                      queue:(dispatch_queue_t)queue
                  transform:(id (^)(NSData *data))transform
                 completion:(void (^)(id object))completion;
+
+/*! Returns object from memory cache
+ */
+- (id)cachedObjectForKey:(NSString *)key;
 
 #pragma mark - Caching (Write)
 

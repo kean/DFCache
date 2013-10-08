@@ -168,6 +168,10 @@
     [url setResourceValue:[NSDate date] forKey:NSURLAttributeModificationDateKey error:nil];
 }
 
+- (id)cachedObjectForKey:(NSString *)key {
+    return key ? [_memoryCache objectForKey:key] : nil;
+}
+
 #pragma mark - Caching (Write)
 
 - (void)storeObject:(id)object
