@@ -21,8 +21,8 @@
 #endif
 
 
-static CGFloat _kMetatableSyncInterval = 2.f; // Seconds. 
-static long _kIOSemaphoreCount = 2; // Maximum number of concurrent disk I/O operations.
+static CGFloat _kMetatableSyncInterval = 3.f; // Seconds.
+
 
 typedef NSArray *(^DFCleanupBlock)(NSDictionary *);
 
@@ -88,7 +88,6 @@ _dwarf_cache_size(NSArray *metatableValues) {
     _DFCachePaths *_paths;
     dispatch_queue_t _metaQueue;
     dispatch_queue_t _ioQueue;
-    dispatch_semaphore_t _ioSemaphore;
     NSMutableDictionary *_metatable;
     DFCleanupBlock _cleanupBlock;
     
@@ -112,8 +111,7 @@ _dwarf_cache_size(NSArray *metatableValues) {
         [self _setDefaults];
         
         _metaQueue = dispatch_queue_create("dwarf.cache.metaqueue", DISPATCH_QUEUE_SERIAL);
-        _ioQueue = dispatch_queue_create("dwarf.cache.ioqueue", DISPATCH_QUEUE_CONCURRENT);
-        _ioSemaphore = dispatch_semaphore_create(_kIOSemaphoreCount);
+        _ioQueue = dispatch_queue_create("dwarf.cache.ioqueue", DISPATCH_QUEUE_SERIAL);
         _memoryCache = [NSCache new];
         _memoryCache.name = name;
         _name = name;
@@ -170,9 +168,7 @@ _dwarf_cache_size(NSArray *metatableValues) {
         dispatch_async(_ioQueue, ^{
             @autoreleasepool {
                 NSString *filepath = [_paths entryPathWithName:filename];
-                dispatch_semaphore_wait(_ioSemaphore, DISPATCH_TIME_FOREVER);
                 NSData *data = [NSData dataWithContentsOfFile:filepath options:NSDataReadingUncached error:nil];
-                dispatch_semaphore_signal(_ioSemaphore);
                 id object = data ? transform(data) : nil;
                 if (object) {
                     [_memoryCache setObject:object forKey:key];
@@ -216,7 +212,7 @@ _dwarf_cache_size(NSArray *metatableValues) {
             return;
         }
         [self _storeMetadataForKey:key filename:filename data:data userValues:metadata];
-        dispatch_barrier_async(_ioQueue, ^{
+        dispatch_async(_ioQueue, ^{
             NSData *objData = data ? data : transform(object);
             [self _storeObjectData:objData filename:filename];
             if (!data) {
@@ -312,7 +308,7 @@ _dwarf_cache_size(NSArray *metatableValues) {
     }
     [_metatable removeObjectsForKeys:keys];
     [self _setNeedsSyncMetatable];
-    dispatch_barrier_async(_ioQueue, ^{
+    dispatch_async(_ioQueue, ^{
         NSFileManager *manager = [NSFileManager defaultManager];
         for (NSString *filename in filenames) {
             NSString *filepath = [_paths entryPathWithName:filename];
@@ -343,7 +339,7 @@ _dwarf_cache_size(NSArray *metatableValues) {
         dispatch_async(_metaQueue, ^{
             [_metatable removeAllObjects];
             [self _setNeedsSyncMetatable];
-            dispatch_barrier_async(_ioQueue, ^{
+            dispatch_async(_ioQueue, ^{
                 [[NSFileManager defaultManager] removeItemAtPath:_paths.entries error:nil];
             });
         });
