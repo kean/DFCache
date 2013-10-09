@@ -61,6 +61,7 @@
 @implementation DFCache {
     _DFCachePaths *_paths;
     dispatch_queue_t _ioQueue;
+    dispatch_queue_t _processingQueue;
     NSCache *_memorizedHashes;
 }
 
@@ -105,6 +106,15 @@
     _settings.cleanupTargetSizeRatio = 0.5;
 }
 
+- (void)setProcessingQueue:(dispatch_queue_t)queue {
+    if (_processingQueue) {
+        DWARF_DISPATCH_RELEASE(_processingQueue);
+        _processingQueue = nil;
+    }
+    _processingQueue = queue;
+    DWARF_DISPATCH_RETAIN(queue);
+}
+
 #pragma mark - Caching (Read)
 
 - (void)cachedObjectForKey:(NSString *)key
@@ -146,16 +156,30 @@
             _dwarf_callback(queue, completion, nil);
             return;
         }
-        id object = transform(data);
-        if (object) {
-            [_memoryCache setObject:object forKey:key];
-            [self _touchObjectWithPath:filepath];
-        }
-        _dwarf_callback(queue, completion, object);
+        [self _touchEntryWithPath:filepath];
+        [self _processData:data forKey:key queue:_processingQueue transform:transform completion:completion];
     });
 }
 
-- (void)_touchObjectWithPath:(NSString *)path {
+- (void)_processData:(NSData *)data
+              forKey:(NSString *)key
+               queue:(dispatch_queue_t)queue
+           transform:(id (^)(NSData *))transform
+          completion:(void (^)(id))completion {
+    if (queue) {
+        dispatch_async(queue, ^{
+            [self _processData:data forKey:key queue:NULL transform:transform completion:completion];
+        });
+        return;
+    }
+    id object = transform(data);
+    if (object) {
+        [_memoryCache setObject:object forKey:key];
+    }
+    _dwarf_callback(queue, completion, object);
+}
+
+- (void)_touchEntryWithPath:(NSString *)path {
     NSURL *url = [NSURL fileURLWithPath:path];
     [url setResourceValue:[NSDate date] forKey:NSURLAttributeModificationDateKey error:nil];
 }

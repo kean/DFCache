@@ -58,6 +58,10 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  */
 @property (nonatomic, strong, readonly) NSCache *memoryCache;
 
+/*! Processing queue that transform blocks are executed on.
+ */
+- (void)setProcessingQueue:(dispatch_queue_t)queue;
+
 #pragma mark - Caching (Read)
 
 /*! Calls completion block with an object from disk cache.
