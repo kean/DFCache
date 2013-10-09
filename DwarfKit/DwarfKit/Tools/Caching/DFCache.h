@@ -10,19 +10,19 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#if TARGET_OS_IPHONE
-#import "DFImageCaching.h"
-#endif
+typedef NSUInteger (^DFCacheCostBlock)(id object);
+typedef id (^DFCacheDecodeBlock)(NSData *data);
+typedef NSData *(^DFCacheEncodeBlock)(id object);
 
 typedef struct {
-    /*! Maximum disk cache capacity. Not a strict limit. Disk cache is actually cleared each time application resigns active (for iOS) and any time - (void)cleanupDiskCache gets called.
-     */
-    unsigned long long diskCacheCapacity; // Bytes
-    
-    /*! Used to calculate target size by deafult clenaup algorithm.
-     */
-    CGFloat cleanupTargetSizeRatio;
-    
+   /*! Maximum disk cache capacity. Not a strict limit. Disk cache is actually cleared each time application resigns active (for iOS) and any time - (void)cleanupDiskCache gets called.
+    */
+   unsigned long long diskCacheCapacity; // Bytes
+   
+   /*! Used to calculate target size by deafult clenaup algorithm.
+    */
+   CGFloat cleanupTargetSizeRatio;
+   
 } DFCacheSettings;
 
 
@@ -40,10 +40,6 @@ typedef struct {
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface DFCache : NSObject
 
-#if TARGET_OS_IPHONE
-<DFImageCaching>
-#endif
-
 /*! Init cache with specified name. Name defines paths to cache folders.
  */
 - (id)initWithName:(NSString *)name;
@@ -54,7 +50,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  */
 @property (nonatomic) DFCacheSettings settings;
 
-/*! Memory cache implementation. 
+/*! Memory cache implementation.
  */
 @property (nonatomic, strong, readonly) NSCache *memoryCache;
 
@@ -72,12 +68,19 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  */
 - (void)cachedObjectForKey:(NSString *)key
                      queue:(dispatch_queue_t)queue
-                 transform:(id (^)(NSData *data))transform
+                    decode:(DFCacheDecodeBlock)decode
+                      cost:(DFCacheCostBlock)cost
                 completion:(void (^)(id object))completion;
 
-/*! Returns object from memory cache
+/*! Returns object from memory cache.
  */
 - (id)cachedObjectForKey:(NSString *)key;
+
+/*! Returns object from memory/disk cache synchorounsly.
+ */
+- (id)cachedObjectForKey:(NSString *)key
+                    cost:(NSUInteger (^)(id object))cost
+                  decode:(DFCacheDecodeBlock)decode;
 
 #pragma mark - Caching (Write)
 
@@ -102,12 +105,12 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 - (void)storeObject:(id)object
              forKey:(NSString *)key
                cost:(NSUInteger)cost
-          transform:(NSData *(^)(id object))transform;
+             encode:(DFCacheEncodeBlock)encode;
 
 #pragma mark - Metadata
 
 /*! Returns copy of cache entry metadata for specified key.
-*/
+ */
 - (NSDictionary *)metadataForKey:(NSString *)key;
 
 /*! Sets metadata for specified key
@@ -118,7 +121,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  */
 - (void)setMetadataValues:(NSDictionary *)keyedValues forKey:(NSString *)key;
 
-/*! Removes metadata for key 
+/*! Removes metadata for key
  */
 - (void)removeMetadataForKey:(NSString *)key;
 
@@ -133,8 +136,8 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 /*! Options used be removal methods.
  */
 typedef NS_OPTIONS(NSUInteger, DFCacheRemoveOptions) {
-    DFCacheRemoveFromMemory = (1 << 0),
-    DFCacheRemoveFromDisk = (1 << 1)
+   DFCacheRemoveFromMemory = (1 << 0),
+   DFCacheRemoveFromDisk = (1 << 1)
 };
 
 /*! Removes objects from memory and/or disk cache based on options */
@@ -150,10 +153,10 @@ typedef NS_OPTIONS(NSUInteger, DFCacheRemoveOptions) {
 - (void)cleanupDiskCache;
 
 /*! Returns current disk cache size. Not a strict value since we don't now file size until it's written to disk.
-*/
+ */
 - (unsigned long long)diskCacheSize;
 
-#pragma mark - <DFImageCaching> -
+#pragma mark - UIImage
 
 #if TARGET_OS_IPHONE
 
@@ -173,35 +176,10 @@ typedef NS_OPTIONS(NSUInteger, DFCacheRemoveOptions) {
  @param queue Queue that is used to execute completion block on.
  @param completion Completion block that gets called on the main queue (or on your queue if queue parameter isn't NULL).
  */
-- (void)imageForKey:(NSString *)key
-              queue:(dispatch_queue_t)queue
-         completion:(void (^)(UIImage *image))completion;
-
-/*! Returns image from memory cache.
- */
-- (UIImage *)imageForKey:(NSString *)key;
+- (void)cachedImageForKey:(NSString *)key
+                    queue:(dispatch_queue_t)queue
+               completion:(void (^)(UIImage *image))completion;
 
 #endif
-
-#pragma mark - <NSCoding> -
-
-/*! Stores object in memory cache. Archives object and stores data in disk cache.
- @discussion Use - (void)storeObject:forKey: if you need to store the object only in memory cache.
- */
-- (void)storeCodingObject:(id<NSCoding>)object
-                 metadata:(NSDictionary *)metadata
-                     cost:(NSUInteger)cost
-                   forKey:(NSString *)key;
-
-/*! Calls completion block with object from disk cache. Doesn't check memory cache.
- @param key The unique key.
- @param queue Queue that is used to execute completion block on.
- @param completion Completion block that gets called on the main queue (or on your queue if queue parameter isn't NULL).
- @discussion Use - (void)objectForKey method to get object from memory cache.
- */
-- (void)codingObjectForKey:(NSString *)key
-                     queue:(dispatch_queue_t)queue
-                completion:(void (^)(id object))completion;
-
 
 @end
