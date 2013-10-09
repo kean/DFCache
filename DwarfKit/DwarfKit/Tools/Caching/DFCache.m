@@ -29,6 +29,7 @@
 
 - (id)initWithName:(NSString *)name;
 - (NSString *)entryPathWithName:(NSString *)name;
+- (NSString *)metadataPathWithName:(NSString *)name;
 
 @end
 
@@ -42,20 +43,6 @@
         _metadata = [_root stringByAppendingPathComponent:@"metadata"];
     }
     return self;
-}
-
-- (NSString *)fileNameWithKey:(NSString *)key {
-    return [DFCrypto MD5FromString:key];
-}
-
-- (NSString *)entryPathWithKey:(NSString *)key {
-    NSString *filename = [self fileNameWithKey:key];
-    return [self entryPathWithName:filename];
-}
-
-- (NSString *)metadataPathWithKey:(NSString *)key {
-    NSString *filename = [self fileNameWithKey:key];
-    return [self metadataPathWithName:filename];
 }
 
 - (NSString *)entryPathWithName:(NSString *)name {
@@ -74,6 +61,7 @@
 @implementation DFCache {
     _DFCachePaths *_paths;
     dispatch_queue_t _ioQueue;
+    NSCache *_memorizedHashes;
 }
 
 - (void)dealloc {
@@ -89,6 +77,9 @@
         [self _setDefaults];
         
         _ioQueue = dispatch_queue_create("dwarf.cache.ioqueue", DISPATCH_QUEUE_SERIAL);
+        
+        _memorizedHashes = [NSCache new];
+        _memorizedHashes.countLimit = 200;
         
         _memoryCache = [NSCache new];
         _memoryCache.name = name;
@@ -148,7 +139,8 @@
         return;
     }
     dispatch_async(_ioQueue, ^{
-        NSString *filepath = [_paths entryPathWithKey:key];
+        NSString *hash = [self _hashWithKey:key];
+        NSString *filepath = [_paths entryPathWithName:hash];
         NSData *data = [NSData dataWithContentsOfFile:filepath options:NSDataReadingUncached error:nil];
         if (!data) {
             _dwarf_callback(queue, completion, nil);
@@ -208,7 +200,8 @@
 
 - (void)_storeObjectData:(NSData *)data forKey:(NSString *)key {
     [self _createCacheDirectories];
-    NSString *filepath = [_paths entryPathWithKey:key];
+    NSString *hash = [self _hashWithKey:key];
+    NSString *filepath = [_paths entryPathWithName:hash];
     NSFileManager *manager = [NSFileManager defaultManager];
     [manager createFileAtPath:filepath contents:data attributes:nil];
 }
@@ -216,12 +209,14 @@
 #pragma mark - Metadata
 
 - (NSDictionary *)metadataForKey:(NSString *)key {
-    NSString *filepath = [_paths metadataPathWithKey:key];
+    NSString *hash = [self _hashWithKey:key];
+    NSString *filepath = [_paths metadataPathWithName:hash];
     return [NSDictionary dictionaryWithContentsOfFile:filepath];
 }
 
 - (void)setMetadata:(NSDictionary *)metadata forKey:(NSString *)key {
-    NSString *filepath = [_paths metadataPathWithKey:key];
+    NSString *hash = [self _hashWithKey:key];
+    NSString *filepath = [_paths metadataPathWithName:hash];
     [metadata writeToFile:filepath atomically:YES];
 }
 
@@ -258,10 +253,10 @@
     }
     NSFileManager *manager = [NSFileManager defaultManager];
     for (NSString *key in keys) {
-        NSString *filename = [_paths fileNameWithKey:key];
-        NSString *filepath = [_paths entryPathWithName:filename];
+        NSString *hash = [self _hashWithKey:key];
+        NSString *filepath = [_paths entryPathWithName:hash];
         [manager removeItemAtPath:filepath error:nil];
-        NSString *metadataPath = [_paths metadataPathWithName:filename];
+        NSString *metadataPath = [_paths metadataPathWithName:hash];
         [manager removeItemAtPath:metadataPath error:nil];
     }
 }
@@ -360,6 +355,15 @@
 }
 
 #pragma mark - Caching (Private)
+
+- (NSString *)_hashWithKey:(NSString *)key {
+    NSString *hash = [_memorizedHashes objectForKey:key];
+    if (!hash) {
+        hash = [DFCrypto MD5FromString:key];
+        [_memorizedHashes setObject:hash forKey:key];
+    }
+    return hash;
+}
 
 - (void)_createCacheDirectories {
     [self _createDirectoryAtPath:_paths.root];
