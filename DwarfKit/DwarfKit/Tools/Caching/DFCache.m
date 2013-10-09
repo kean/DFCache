@@ -233,24 +233,46 @@
 #pragma mark - Metadata
 
 - (NSDictionary *)metadataForKey:(NSString *)key {
-    NSString *hash = [self _hashWithKey:key];
-    NSString *filepath = [_paths metadataPathWithName:hash];
-    return [NSDictionary dictionaryWithContentsOfFile:filepath];
+    __block NSDictionary *metadata;
+    dispatch_sync(_ioQueue, ^{
+        NSString *hash = [self _hashWithKey:key];
+        NSString *filepath = [_paths metadataPathWithName:hash];
+        metadata = [NSDictionary dictionaryWithContentsOfFile:filepath];
+    });
+    return metadata;
 }
 
 - (void)setMetadata:(NSDictionary *)metadata forKey:(NSString *)key {
-    NSString *hash = [self _hashWithKey:key];
-    NSString *filepath = [_paths metadataPathWithName:hash];
-    [metadata writeToFile:filepath atomically:YES];
+    if (!metadata || !key) {
+        return;
+    }
+    dispatch_sync(_ioQueue, ^{
+        NSString *hash = [self _hashWithKey:key];
+        NSString *filepath = [_paths metadataPathWithName:hash];
+        [metadata writeToFile:filepath atomically:YES];
+    });
 }
 
 - (void)setMetadataValues:(NSDictionary *)keyedValues forKey:(NSString *)key {
     if (!keyedValues || !key) {
         return;
     }
-    NSMutableDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:[self metadataForKey:key]];
-    [metadata addEntriesFromDictionary:keyedValues];
-    [self setMetadata:metadata forKey:key];
+    dispatch_sync(_ioQueue, ^{
+        NSMutableDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:[self metadataForKey:key]];
+        [metadata addEntriesFromDictionary:keyedValues];
+        [self setMetadata:metadata forKey:key];
+    });
+}
+
+- (void)removeMetadataForKey:(NSString *)key {
+    if (!key) {
+        return;
+    }
+    dispatch_sync(_ioQueue, ^{
+        NSString *hash = [self _hashWithKey:key];
+        NSString *filepath = [_paths metadataPathWithName:hash];
+        [[NSFileManager defaultManager] removeItemAtPath:filepath error:nil];
+    });
 }
 
 #pragma mark - Caching (Remove)

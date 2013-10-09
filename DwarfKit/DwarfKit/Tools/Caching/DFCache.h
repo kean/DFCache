@@ -118,6 +118,10 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  */
 - (void)setMetadataValues:(NSDictionary *)keyedValues forKey:(NSString *)key;
 
+/*! Removes metadata for key 
+ */
+- (void)removeMetadataForKey:(NSString *)key;
+
 #pragma mark - Caching (Remove)
 
 /*! Removes object from both disk and memory cache.
