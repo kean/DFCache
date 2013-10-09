@@ -219,6 +219,7 @@
     dispatch_async(_ioQueue, ^{
         NSData *objData = data ? data : transform(object);
         [self _storeObjectData:objData forKey:key];
+        [self _removeMetadataForKey:key];
     });
 }
 
@@ -269,10 +270,14 @@
         return;
     }
     dispatch_sync(_ioQueue, ^{
-        NSString *hash = [self _hashWithKey:key];
-        NSString *filepath = [_paths metadataPathWithName:hash];
-        [[NSFileManager defaultManager] removeItemAtPath:filepath error:nil];
+        [self _removeMetadataForKey:key];
     });
+}
+
+- (void)_removeMetadataForKey:(NSString *)key {
+    NSString *hash = [self _hashWithKey:key];
+    NSString *filepath = [_paths metadataPathWithName:hash];
+    [[NSFileManager defaultManager] removeItemAtPath:filepath error:nil];
 }
 
 #pragma mark - Caching (Remove)
