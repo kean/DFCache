@@ -10,23 +10,22 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFImageFetchHandler.h"
-#import "DFImageFetchTask.h"
+#import "DFImageProviderHandler.h"
+#import "DFImageProviderTask.h"
 #import "DFTaskQueue.h"
 
 
-@interface DFImageFetchManager : NSObject
+@interface DFImageProvider : NSObject
 
 @property (nonatomic, readonly) DFTaskQueue *queue;
 
-- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
-- (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
-- (void)prefetchImageWithURL:(NSString *)imageURL;
+- (DFImageProviderTask *)requestImageWithURL:(NSString *)imageURL handler:(DFImageProviderHandler *)handler;
+- (void)cancelRequestWithURL:(NSString *)imageURL handler:(DFImageProviderHandler *)handler;
 
 @end
 
 
-@interface DFImageFetchManager (Shared)
+@interface DFImageProvider (Shared)
 
 + (instancetype)shared;
 

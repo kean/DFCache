@@ -33,7 +33,7 @@
 
 /*! Returns a new set of tasks currently in the queue.
  */
-@property (nonatomic, strong, readonly) NSOrderedSet *tasks;
+@property (nonatomic, readonly) NSOrderedSet *tasks;
 
 /*! Adds the specified task to the queue. Queue holds strong reference to the task until task is finished and completion callback is called.
  */

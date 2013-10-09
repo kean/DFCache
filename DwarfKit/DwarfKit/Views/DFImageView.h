@@ -13,7 +13,7 @@
 
 @interface DFImageView : UIImageView
 
-@property (nonatomic, strong) NSString *imageURL;
+@property (nonatomic) NSString *imageURL;
 
 - (void)setImageWithURL:(NSString *)imageURL;
 - (void)setImageWithURL:(NSString *)imageURL placeholder:(UIImage *)placeholder;

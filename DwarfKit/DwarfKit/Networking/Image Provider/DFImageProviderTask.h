@@ -10,24 +10,18 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFImageFetchHandler.h"
-#import "DFImageFetchTask.h"
-#import "DFTaskQueue.h"
+#import "DFTask.h"
+#import "DFNetworkingConstants.h"
 
 
-@interface DFImageFetchManager : NSObject
+@interface DFImageProviderTask : DFTask
 
-@property (nonatomic, readonly) DFTaskQueue *queue;
+@property (nonatomic, readonly) NSString *imageURL;
+@property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) NSError *error;
+@property (nonatomic, readonly) DFResponseSource source;
+@property (nonatomic, readonly) BOOL isFetching;
 
-- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
-- (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
-- (void)prefetchImageWithURL:(NSString *)imageURL;
-
-@end
-
-
-@interface DFImageFetchManager (Shared)
-
-+ (instancetype)shared;
+- (id)initWithURL:(NSString *)imageURL;
 
 @end

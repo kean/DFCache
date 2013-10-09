@@ -14,7 +14,7 @@
 
 @implementation DFImageFetchHandler
 
-+ (instancetype)handlerWithSuccess:(void (^)(UIImage *, DFResponseSource))success failure:(void (^)(NSError *))failure {
++ (instancetype)handlerWithSuccess:(void (^)(UIImage *))success failure:(void (^)(NSError *))failure {
    DFImageFetchHandler *handler = [DFImageFetchHandler new];
    handler.success = success;
    handler.failure = failure;

@@ -10,29 +10,31 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFImageFetchManager.h"
+#import "DFImageProvider.h"
 #import "DFReusablePool.h"
 
 
 #pragma mark - _DFFetchWrapper -
 
-@interface _DFFetchWrapper : NSObject <DFReusable>
+@interface _DFProviderWrapper : NSObject <DFReusable>
 
 @property (nonatomic) NSString *imageURL;
-@property (nonatomic) DFImageFetchTask *task;
+@property (nonatomic) DFImageProviderTask *task;
 @property (nonatomic) NSMutableArray *handlers;
 
-- (id)initWithTask:(DFImageFetchTask *)task
+- (id)initWithTask:(DFImageProviderTask *)task
           imageURL:(NSString *)imageURL
-           handler:(DFImageFetchHandler *)handler;
+           handler:(DFImageProviderHandler *)handler;
+
+- (void)prepareForReuse;
 
 @end
 
-@implementation _DFFetchWrapper
+@implementation _DFProviderWrapper
 
-- (id)initWithTask:(DFImageFetchTask *)task
+- (id)initWithTask:(DFImageProviderTask *)task
           imageURL:(NSString *)imageURL
-           handler:(DFImageFetchHandler *)handler {
+           handler:(DFImageProviderHandler *)handler {
     if (self = [super init]) {
         _imageURL = imageURL;
         _task = task;
@@ -50,9 +52,9 @@
 @end
 
 
-#pragma mark - MMImageFetchManager -
+#pragma mark - DFImageProvider -
 
-@implementation DFImageFetchManager {
+@implementation DFImageProvider {
     NSMutableDictionary *_wrappers;
     DFReusablePool *_reusableWrappers;
 }
@@ -68,32 +70,32 @@
 }
 
 - (void)_setDefaults {
-    _queue.maxConcurrentTaskCount = 3;
+    _queue.maxConcurrentTaskCount = 20;
 }
 
-#pragma mark - Fetching
+#pragma mark - Requests
 
-- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
+- (DFImageProviderTask *)requestImageWithURL:(NSString *)imageURL handler:(DFImageProviderHandler *)handler {
     if (!imageURL || !handler) {
         return nil;
     }
-    _DFFetchWrapper *wrapper = [_wrappers objectForKey:imageURL];
+    _DFProviderWrapper *wrapper = [_wrappers objectForKey:imageURL];
     if (wrapper) {
         [wrapper.handlers addObject:handler];
         return wrapper.task;
     } else {
-        DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL];
+        DFImageProviderTask *task = [[DFImageProviderTask alloc] initWithURL:imageURL];
         [task setCompletion:^(DFTask *completedTask) {
             [self _handleTaskCompletion:(id)completedTask];
         }];
         
-        _DFFetchWrapper *wrapper = [_reusableWrappers dequeueObject];
+        _DFProviderWrapper *wrapper = [_reusableWrappers dequeueObject];
         if (wrapper) {
             wrapper.task = task;
             wrapper.imageURL = imageURL;
             [wrapper.handlers addObject:handler];
         } else {
-            wrapper = [[_DFFetchWrapper alloc] initWithTask:task imageURL:imageURL handler:handler];
+            wrapper = [[_DFProviderWrapper alloc] initWithTask:task imageURL:imageURL handler:handler];
         }
         [_wrappers setObject:wrapper forKey:imageURL];
         
@@ -102,16 +104,16 @@
     }
 }
 
-- (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
+- (void)cancelRequestWithURL:(NSString *)imageURL handler:(DFImageProviderHandler *)handler {
     if (!handler || !imageURL) {
         return;
     }
-    _DFFetchWrapper *wrapper = [_wrappers objectForKey:imageURL];
+    _DFProviderWrapper *wrapper = [_wrappers objectForKey:imageURL];
     if (!wrapper) {
         return;
     }
     [wrapper.handlers removeObject:handler];
-    if (wrapper.handlers.count == 0 && !wrapper.task.isExecuting) {
+    if (wrapper.handlers.count == 0 && !wrapper.task.isFetching) {
         [wrapper.task cancel];
         [wrapper.task setCompletion:nil];
         [_wrappers removeObjectForKey:imageURL];
@@ -119,25 +121,21 @@
     }
 }
 
-- (void)prefetchImageWithURL:(NSString *)imageURL {
-    [self fetchImageWithURL:imageURL handler:[DFImageFetchHandler new]];
-}
+#pragma mark - DFImageProviderTask Completion
 
-#pragma mark - MMImageFetchTask Completion
-
-- (void)_handleTaskCompletion:(DFImageFetchTask *)task {
+- (void)_handleTaskCompletion:(DFImageProviderTask *)task {
     if (task.isCancelled) {
         return;
     }
-    _DFFetchWrapper *wrapper = [_wrappers objectForKey:task.imageURL];
+    _DFProviderWrapper *wrapper = [_wrappers objectForKey:task.imageURL];
     if (task.image) {
-        for (DFImageFetchHandler *handler in wrapper.handlers) {
+        for (DFImageProviderHandler *handler in wrapper.handlers) {
             if (handler.success) {
-                handler.success(task.image);
+                handler.success(task.image, task.source);
             }
         }
     } else {
-        for (DFImageFetchHandler *handler in wrapper.handlers) {
+        for (DFImageProviderHandler *handler in wrapper.handlers) {
             if (handler.failure) {
                 handler.failure(task.error);
             }
@@ -150,10 +148,10 @@
 @end
 
 
-@implementation DFImageFetchManager (Shared)
+@implementation DFImageProvider (Shared)
 
 + (instancetype)shared {
-    static DFImageFetchManager *shared = nil;
+    static DFImageProvider *shared = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shared = [[self class] new];

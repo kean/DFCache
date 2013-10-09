@@ -11,14 +11,14 @@
  */
 
 #import "SDFImageView.h"
-#import "DFImageFetchHandler.h"
 #import "SDFImageFetchManager.h"
+#import "DFCache.h"
 #import "UIImageView+Dwarf.h"
 
 
 @implementation SDFImageView {
     NSString *_imageURL;
-    __weak DFImageFetchHandler *_handler;
+    __weak DFImageProviderHandler *_handler;
 }
 
 
@@ -27,14 +27,14 @@
     
     _imageURL = imageURL;
     
-    UIImage *image = [[SDFImageFetchManager sharedStressTestManager].cache imageForKey:imageURL];
+    UIImage *image = [[DFCache imageCache].memoryCache objectForKey:imageURL];
     if (image) {
         self.image = image;
         return;
     }
     
     __weak DFImageView *weakSelf = self;
-    DFImageFetchHandler *handler = [DFImageFetchHandler handlerWithSuccess:^(UIImage *image, DFResponseSource source) {
+    DFImageProviderHandler *handler = [DFImageProviderHandler handlerWithSuccess:^(UIImage *image, DFResponseSource source) {
         DFImageView *strongSelf = weakSelf;
         if (strongSelf) {
             BOOL animated = (source != DFResponseSourceMemory);
@@ -42,14 +42,14 @@
         }
     } failure:nil];
     
-    [[SDFImageFetchManager sharedStressTestManager] fetchImageWithURL:imageURL handler:handler];
+    [[SDFImageFetchManager sharedStressTestManager] requestImageWithURL:imageURL handler:handler];
     _handler = handler;
 }
 
 
 - (void)cancelRequestOperation {
     if (_imageURL && _handler) {
-        [[SDFImageFetchManager sharedStressTestManager] cancelFetchingWithURL:_imageURL handler:_handler];
+        [[SDFImageFetchManager sharedStressTestManager] cancelRequestWithURL:_imageURL handler:_handler];
         _handler = nil;
     }
 }

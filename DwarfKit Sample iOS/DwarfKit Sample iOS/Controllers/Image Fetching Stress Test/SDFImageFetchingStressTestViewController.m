@@ -148,7 +148,7 @@
 - (void)redrawInfoLabel {
     if (_recentPhotos.isLoaded) {
         SDFImageFetchManager *manager = [SDFImageFetchManager sharedStressTestManager];
-        NSString *text = [NSString stringWithFormat:@"Concurrent tasks: %i\nImage request count: %i\nImage request cancel count: %i", 6, manager.imageRequestCount, manager.imageRequestCancelCount];
+        NSString *text = [NSString stringWithFormat:@"Concurrent tasks: %i\nImage request count: %i\nImage request cancel count: %i", manager.queue.maxConcurrentTaskCount, manager.imageRequestCount, manager.imageRequestCancelCount];
         _infoLabel.text = text;
         
     }

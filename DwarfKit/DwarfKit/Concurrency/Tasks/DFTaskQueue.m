@@ -80,7 +80,6 @@
         _executingTaskCount--;
         [_tasks removeObject:task];
         [self _executeTasks];
-        
         if (task.completion) {
             task.completion(task);
         }

@@ -10,17 +10,15 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFNetworkingConstants.h"
-
 
 @interface DFImageFetchHandler : NSObject
 
-@property (nonatomic, copy) void (^success)(UIImage *, DFResponseSource);
+@property (nonatomic, copy) void (^success)(UIImage *);
 @property (nonatomic, copy) void (^failure)(NSError *);
 
-- (void)setSuccess:(void (^)(UIImage *image, DFResponseSource source))success;
+- (void)setSuccess:(void (^)(UIImage *image))success;
 - (void)setFailure:(void (^)(NSError * error))failure;
 
-+ (instancetype)handlerWithSuccess:(void (^)(UIImage *image, DFResponseSource source))success failure:(void (^)(NSError *failure))failure;
++ (instancetype)handlerWithSuccess:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
 
 @end

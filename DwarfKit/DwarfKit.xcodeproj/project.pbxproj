@@ -109,6 +109,14 @@
 		0C37146117D3FFE600766FD9 /* DFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713D017D3FECA00766FD9 /* DFImageView.m */; };
 		0C37146717D4006B00766FD9 /* DFImageFetchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713B517D3FECA00766FD9 /* DFImageFetchHandler.m */; };
 		0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */; };
+		0C721DC61805D713003695D0 /* DFImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DC51805D713003695D0 /* DFImageProvider.m */; };
+		0C721DC71805D713003695D0 /* DFImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DC51805D713003695D0 /* DFImageProvider.m */; };
+		0C721DCA1805D760003695D0 /* DFImageProviderHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DC91805D760003695D0 /* DFImageProviderHandler.m */; };
+		0C721DCB1805D760003695D0 /* DFImageProviderHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DC91805D760003695D0 /* DFImageProviderHandler.m */; };
+		0C721DCE1805D7AC003695D0 /* DFImageProviderTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DCD1805D7AC003695D0 /* DFImageProviderTask.m */; };
+		0C721DCF1805D7AC003695D0 /* DFImageProviderTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DCD1805D7AC003695D0 /* DFImageProviderTask.m */; };
+		0C721DDC18060164003695D0 /* DFReusablePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DDB18060164003695D0 /* DFReusablePool.m */; };
+		0C721DDD18060164003695D0 /* DFReusablePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DDB18060164003695D0 /* DFReusablePool.m */; };
 		0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
 		0C8C15D017D406DD004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
 		0C8C15D117D40704004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
@@ -257,6 +265,14 @@
 		0C3713CD17D3FECA00766FD9 /* DFTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTesting.h; sourceTree = "<group>"; };
 		0C3713CF17D3FECA00766FD9 /* DFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageView.h; sourceTree = "<group>"; };
 		0C3713D017D3FECA00766FD9 /* DFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageView.m; sourceTree = "<group>"; };
+		0C721DC41805D713003695D0 /* DFImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageProvider.h; sourceTree = "<group>"; };
+		0C721DC51805D713003695D0 /* DFImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageProvider.m; sourceTree = "<group>"; };
+		0C721DC81805D760003695D0 /* DFImageProviderHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageProviderHandler.h; sourceTree = "<group>"; };
+		0C721DC91805D760003695D0 /* DFImageProviderHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageProviderHandler.m; sourceTree = "<group>"; };
+		0C721DCC1805D7AC003695D0 /* DFImageProviderTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageProviderTask.h; sourceTree = "<group>"; };
+		0C721DCD1805D7AC003695D0 /* DFImageProviderTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageProviderTask.m; sourceTree = "<group>"; };
+		0C721DDA18060164003695D0 /* DFReusablePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFReusablePool.h; sourceTree = "<group>"; };
+		0C721DDB18060164003695D0 /* DFReusablePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFReusablePool.m; sourceTree = "<group>"; };
 		0C8C15CD17D406B4004B7DAA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0C8C15CF17D406DD004B7DAA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		0C8C15E217D40DFC004B7DAA /* DwarfKit Tests iOS.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DwarfKit Tests iOS.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -517,6 +533,7 @@
 			children = (
 				0C3713B017D3FECA00766FD9 /* DFNetworking.h */,
 				0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */,
+				0C721DC31805D70A003695D0 /* Image Provider */,
 				0C3713B217D3FECA00766FD9 /* Image Fetching */,
 			);
 			path = Networking;
@@ -539,6 +556,7 @@
 		0C3713BA17D3FECA00766FD9 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				0C721DD918060143003695D0 /* Reusing */,
 				0C3713BB17D3FECA00766FD9 /* Benchmark */,
 				0C3713BE17D3FECA00766FD9 /* Caching */,
 				0C3713C117D3FECA00766FD9 /* Crypto */,
@@ -604,6 +622,28 @@
 				0C3713D017D3FECA00766FD9 /* DFImageView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0C721DC31805D70A003695D0 /* Image Provider */ = {
+			isa = PBXGroup;
+			children = (
+				0C721DC41805D713003695D0 /* DFImageProvider.h */,
+				0C721DC51805D713003695D0 /* DFImageProvider.m */,
+				0C721DC81805D760003695D0 /* DFImageProviderHandler.h */,
+				0C721DC91805D760003695D0 /* DFImageProviderHandler.m */,
+				0C721DCC1805D7AC003695D0 /* DFImageProviderTask.h */,
+				0C721DCD1805D7AC003695D0 /* DFImageProviderTask.m */,
+			);
+			path = "Image Provider";
+			sourceTree = "<group>";
+		};
+		0C721DD918060143003695D0 /* Reusing */ = {
+			isa = PBXGroup;
+			children = (
+				0C721DDA18060164003695D0 /* DFReusablePool.h */,
+				0C721DDB18060164003695D0 /* DFReusablePool.m */,
+			);
+			path = Reusing;
 			sourceTree = "<group>";
 		};
 		0C8C15E617D40DFC004B7DAA /* DwarfKit Tests iOS */ = {
@@ -979,14 +1019,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C721DCA1805D760003695D0 /* DFImageProviderHandler.m in Sources */,
 				0C37140017D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
+				0C721DDC18060164003695D0 /* DFReusablePool.m in Sources */,
 				0C37140517D3FECA00766FD9 /* UIImageView+Dwarf.m in Sources */,
+				0C721DCE1805D7AC003695D0 /* DFImageProviderTask.m in Sources */,
 				0C37141117D3FECA00766FD9 /* DFTask.m in Sources */,
 				0C2A95E317FBEF290016CB20 /* DFStream.m in Sources */,
 				0C37141617D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
 				0C37141B17D3FECA00766FD9 /* DFButton.m in Sources */,
 				0C37142017D3FECA00766FD9 /* DFButtonLayout.m in Sources */,
 				0C37143217D3FECA00766FD9 /* DFImageFetchManager.m in Sources */,
+				0C721DC61805D713003695D0 /* DFImageProvider.m in Sources */,
 				0C37143717D3FECA00766FD9 /* DFImageFetchTask.m in Sources */,
 				0C37143C17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
 				0C37144117D3FECA00766FD9 /* DFCache.m in Sources */,
@@ -1033,9 +1077,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C721DC71805D713003695D0 /* DFImageProvider.m in Sources */,
 				0C8C160F17D40F9B004B7DAA /* TDFCacheTests.m in Sources */,
+				0C721DDD18060164003695D0 /* DFReusablePool.m in Sources */,
 				0C2A95E417FBEF290016CB20 /* DFStream.m in Sources */,
+				0C721DCB1805D760003695D0 /* DFImageProviderHandler.m in Sources */,
 				0C2A95E617FBEF290016CB20 /* DFStreamChain.m in Sources */,
+				0C721DCF1805D7AC003695D0 /* DFImageProviderTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

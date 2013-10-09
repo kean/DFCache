@@ -21,7 +21,6 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shared = [[self class] new];
-        shared.cache = [[DFCache alloc] initWithName:@"df_shared_manager_cache"];
     });
     return shared;
 }
@@ -29,21 +28,20 @@
 
 - (id)init {
     if (self = [super init]) {
-        self.queue.maxConcurrentTaskCount = 6;
+        self.queue.maxConcurrentTaskCount = 40;
     }
     return self;
 }
 
 
-- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
+- (DFImageProviderTask *)requestImageWithURL:(NSString *)imageURL handler:(DFImageProviderHandler *)handler {
     _imageRequestCount += 1;
-    return [super fetchImageWithURL:imageURL handler:handler];
+    return [super requestImageWithURL:imageURL handler:handler];
 }
 
-
-- (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
+- (void)cancelRequestWithURL:(NSString *)imageURL handler:(DFImageProviderHandler *)handler {
     _imageRequestCancelCount += 1;
-    [super cancelFetchingWithURL:imageURL handler:handler];
+    [super cancelRequestWithURL:imageURL handler:handler];
 }
 
 @end

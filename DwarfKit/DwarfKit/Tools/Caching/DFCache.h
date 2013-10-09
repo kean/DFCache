@@ -183,3 +183,10 @@ typedef NS_OPTIONS(NSUInteger, DFCacheRemoveOptions) {
 #endif
 
 @end
+
+
+@interface DFCache (Shared)
+
++ (instancetype)imageCache;
+
+@end

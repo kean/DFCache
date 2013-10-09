@@ -508,3 +508,17 @@
 #endif
 
 @end
+
+
+@implementation DFCache (Shared)
+
++ (instancetype)imageCache {
+    static DFCache *shared = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shared = [[DFCache alloc] initWithName:@"_df_image_cache"];
+    });
+    return shared;
+}
+
+@end

@@ -10,24 +10,18 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFImageFetchHandler.h"
-#import "DFImageFetchTask.h"
-#import "DFTaskQueue.h"
+@protocol DFReusable <NSObject>
 
-
-@interface DFImageFetchManager : NSObject
-
-@property (nonatomic, readonly) DFTaskQueue *queue;
-
-- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
-- (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
-- (void)prefetchImageWithURL:(NSString *)imageURL;
+- (void)prepareForReuse;
 
 @end
 
 
-@interface DFImageFetchManager (Shared)
+@interface DFReusablePool : NSObject
 
-+ (instancetype)shared;
+@property (nonatomic) NSUInteger maxReusableCount;
+
+- (id<DFReusable>)dequeueObject;
+- (void)enqueueObject:(id<DFReusable>)object;
 
 @end

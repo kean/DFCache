@@ -10,24 +10,34 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFImageFetchHandler.h"
-#import "DFImageFetchTask.h"
-#import "DFTaskQueue.h"
+#import "DFReusablePool.h"
 
+@implementation DFReusablePool {
+    NSMutableArray *_pool;
+}
 
-@interface DFImageFetchManager : NSObject
+- (id)init {
+    if (self = [super init]) {
+        _pool = [NSMutableArray new];
+        _maxReusableCount = 40;
+    }
+    return self;
+}
 
-@property (nonatomic, readonly) DFTaskQueue *queue;
+- (void)enqueueObject:(id<DFReusable>)object {
+    if (_pool.count < _maxReusableCount) {
+        [_pool addObject:object];
+        [object prepareForReuse];
+    }
+}
 
-- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
-- (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
-- (void)prefetchImageWithURL:(NSString *)imageURL;
-
-@end
-
-
-@interface DFImageFetchManager (Shared)
-
-+ (instancetype)shared;
+- (id<DFReusable>)dequeueObject {
+    id<DFReusable> object;
+    if (_pool.count > 0) {
+        object = [_pool lastObject];
+        [_pool removeLastObject];
+    }
+    return object;
+}
 
 @end
