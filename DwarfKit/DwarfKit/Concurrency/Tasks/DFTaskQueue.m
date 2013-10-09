@@ -22,19 +22,12 @@
 
 
 @implementation DFTaskQueue {
-    dispatch_queue_t _syncQueue;
     NSMutableOrderedSet *_tasks;
     NSUInteger _executingTaskCount;
-    BOOL _suspended;
-}
-
-- (void)dealloc {
-    DWARF_DISPATCH_RELEASE(_syncQueue);
 }
 
 - (id)init {
     if (self = [super init]) {
-        _syncQueue = dispatch_queue_create("dwarf.task.queue", DISPATCH_QUEUE_SERIAL);
         _tasks = [NSMutableOrderedSet new];
     }
     return self;
@@ -45,19 +38,13 @@
 }
 
 - (void)addTask:(DFTask *)task {
-    dispatch_sync(_syncQueue, ^{
-        [task _setImplDelegate:self];
-        [_tasks addObject:task];
-        [self _executeTasks];
-    });
+    [task _setImplDelegate:self];
+    [_tasks addObject:task];
+    [self _executeTasks];
 }
 
 - (NSOrderedSet *)tasks {
-    __block NSOrderedSet *tasks;
-    dispatch_sync(_syncQueue, ^{
-        tasks = [_tasks copy];
-    });
-    return tasks;
+    return _tasks;
 }
 
 #pragma mark - Task Execution
@@ -89,47 +76,34 @@
 #pragma mark - _DFTaskDelegate
 
 - (void)_taskDidFinish:(DFTask *)task {
-    dispatch_sync(_syncQueue, ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         _executingTaskCount--;
         [_tasks removeObject:task];
         [self _executeTasks];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (task.completion) {
-                task.completion(task);
-            }
-        });
+        
+        if (task.completion) {
+            task.completion(task);
+        }
     });
 }
 
 #pragma mark - Suspension
 
 - (void)setSuspended:(BOOL)suspended {
-    dispatch_sync(_syncQueue, ^{
-        if (_suspended != suspended) {
-            _suspended = suspended;
-            if (!_suspended) {
-                [self _executeTasks];
-            }
+    if (_suspended != suspended) {
+        _suspended = suspended;
+        if (!_suspended) {
+            [self _executeTasks];
         }
-    });
-}
-
-- (BOOL)isSuspended {
-    __block BOOL suspended;
-    dispatch_sync(_syncQueue, ^{
-        suspended = _suspended;
-    });
-    return suspended;
+    }
 }
 
 #pragma mark - Task Cancellation
 
 - (void)cancelAllTasks {
-    dispatch_sync(_syncQueue, ^{
-        for (DFTask *task in _tasks) {
-            [task cancel];
-        }
-    });
+    for (DFTask *task in _tasks) {
+        [task cancel];
+    }
 }
 
 @end

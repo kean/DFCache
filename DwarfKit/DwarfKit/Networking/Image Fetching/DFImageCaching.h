@@ -24,9 +24,9 @@
  @param queue Queue that is used to execute completion block on.
  @param completion Completion block that gets called on the main queue (or on your queue if queue parameter isn't NULL).
  */
-- (void)imageForKey:(NSString *)key
-              queue:(dispatch_queue_t)queue
-         completion:(void (^)(UIImage *image))completion;
+- (void)cachedImageForKey:(NSString *)key
+                    queue:(dispatch_queue_t)queue
+               completion:(void (^)(UIImage *image))completion;
 
 /*! Store image in either memory or disk cache (or both).
  @param image Image to store in memory cache.

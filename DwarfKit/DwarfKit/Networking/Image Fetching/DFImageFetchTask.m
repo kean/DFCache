@@ -23,14 +23,12 @@
    NSMutableData *_imageData;
 }
 
-
 - (id)initWithURL:(NSString *)imageURL {
    if (self = [super init]) {
       _imageURL = imageURL;
    }
    return self;
 }
-
 
 - (NSUInteger)hash {
    return [_imageURL hash];
@@ -46,7 +44,6 @@
    }
 }
 
-
 - (void)_checkCaches {
    _image = [_cache imageForKey:_imageURL];
    if (_image) {
@@ -56,9 +53,9 @@
    }
    
    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-   [_cache imageForKey:_imageURL
-                 queue:queue
-            completion:^(UIImage *image) {
+   [_cache cachedImageForKey:_imageURL
+                       queue:queue
+                  completion:^(UIImage *image) {
       if (image) {
          _image = image;
          _source = DFResponseSourceDisk;
@@ -68,7 +65,6 @@
       }
    }];
 }
-
 
 - (void)_fetchImage {
    if ([self isCancelled]) {
@@ -101,7 +97,6 @@
    [connection start];
 }
 
-
 - (NSURLRequest *)_requestWithURL:(NSString *)imageURL {
    NSURL *URL = [NSURL URLWithString:imageURL];
    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.f];
@@ -116,11 +111,9 @@
    _imageData = [NSMutableData data];
 }
 
-
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
    [_imageData appendData:data];
 }
-
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse {
    if (_cache) {
@@ -128,7 +121,6 @@
    }
    return cachedResponse;
 }
-
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -147,7 +139,6 @@
       }
    });
 }
-
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
    _error = error;

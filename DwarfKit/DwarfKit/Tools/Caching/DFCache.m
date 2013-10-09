@@ -501,6 +501,10 @@
    return block;
 }
 
+- (UIImage *)imageForKey:(NSString *)key {
+    return [self.memoryCache objectForKey:key];
+}
+
 #endif
 
 @end
