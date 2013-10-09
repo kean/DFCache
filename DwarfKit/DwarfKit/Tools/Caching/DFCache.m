@@ -258,11 +258,9 @@
     if (!keyedValues || !key) {
         return;
     }
-    dispatch_sync(_ioQueue, ^{
-        NSMutableDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:[self metadataForKey:key]];
-        [metadata addEntriesFromDictionary:keyedValues];
-        [self setMetadata:metadata forKey:key];
-    });
+    NSMutableDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:[self metadataForKey:key]];
+   [metadata addEntriesFromDictionary:keyedValues];
+   [self setMetadata:metadata forKey:key];
 }
 
 - (void)removeMetadataForKey:(NSString *)key {
