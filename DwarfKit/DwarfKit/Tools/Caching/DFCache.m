@@ -67,7 +67,9 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    DWARF_DISPATCH_RELEASE(_ioQueue);
+    if (_processingQueue) {
+       DWARF_DISPATCH_RELEASE(_processingQueue);
+    }
 }
 
 - (id)initWithName:(NSString *)name {
