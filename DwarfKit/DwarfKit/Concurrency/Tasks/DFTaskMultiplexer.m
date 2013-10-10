@@ -104,7 +104,7 @@
     if (wrapper.task.isCancelled) {
         return;
     }
-    [_delegate multiplexer:self handleTaskCompletion:wrapper];
+    [_delegate handleTaskCompletion:wrapper];
     [_wrappers removeObjectForKey:wrapper.token];
     [_reusableWrappers enqueueObject:wrapper];
 }

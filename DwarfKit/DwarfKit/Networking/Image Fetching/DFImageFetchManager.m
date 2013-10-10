@@ -12,7 +12,6 @@
 
 #import "DFImageFetchManager.h"
 #import "DFTaskMultiplexer.h"
-#import "DFReusablePool.h"
 
 
 @interface DFImageFetchManager() <DFTaskMultiplexerDelegate>
@@ -63,7 +62,7 @@
 
 #pragma mark - DFTaskMultiplexer Delegate
 
-- (void)multiplexer:(DFTaskMultiplexer *)multiplexer handleTaskCompletion:(DFTaskWrapper *)wrapper {
+- (void)handleTaskCompletion:(DFTaskWrapper *)wrapper {
     DFImageFetchTask *imageTask = (id)wrapper.task;
     if (imageTask.image) {
         for (DFImageFetchHandler *handler in wrapper.handlers) {

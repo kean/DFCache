@@ -32,7 +32,7 @@
 
 @protocol DFTaskMultiplexerDelegate <NSObject>
 
-- (void)multiplexer:(DFTaskMultiplexer *)multiplexer handleTaskCompletion:(DFTaskWrapper *)wrapper;
+- (void)handleTaskCompletion:(DFTaskWrapper *)wrapper;
 
 @end
 
