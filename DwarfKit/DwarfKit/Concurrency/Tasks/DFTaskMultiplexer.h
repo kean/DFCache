@@ -10,21 +10,41 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFImageFetchHandler.h"
-#import "DFImageFetchTask.h"
+#import "DFTaskQueue.h"
+#import "DFReusablePool.h"
 
 
-@interface DFImageFetchManager : NSObject
+@class DFTaskMultiplexer;
 
-- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
-- (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
-- (void)prefetchImageWithURL:(NSString *)imageURL;
+
+@interface DFTaskWrapper : NSObject <DFReusable>
+
+@property (nonatomic) NSString *token;
+@property (nonatomic) DFTask *task;
+@property (nonatomic) NSMutableArray *handlers;
+
+- (id)initWithToken:(NSString *)token
+               task:(DFTask *)task
+            handler:(id)handler;
 
 @end
 
 
-@interface DFImageFetchManager (Shared)
+@protocol DFTaskMultiplexerDelegate <NSObject>
 
-+ (instancetype)shared;
+- (void)multiplexer:(DFTaskMultiplexer *)multiplexer handleTaskCompletion:(DFTaskWrapper *)wrapper;
+
+@end
+
+
+@interface DFTaskMultiplexer : NSObject
+
+@property (nonatomic, weak) id<DFTaskMultiplexerDelegate> delegate;
+@property (nonatomic, readonly) DFTaskQueue *queue;
+
+- (DFTaskWrapper *)addHandler:(id)handler withToken:(NSString *)token;
+- (DFTaskWrapper *)addTask:(DFTask *)task withToken:(NSString *)token handler:(id)handler;
+- (DFTaskWrapper *)removeHandler:(id)handler withToken:(NSString *)token;
+- (void)cancelTaskWithToken:(NSString *)token;
 
 @end

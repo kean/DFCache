@@ -29,12 +29,9 @@
 - (id)init {
     if (self = [super init]) {
         _tasks = [NSMutableOrderedSet new];
+        _maxConcurrentTaskCount = 3;
     }
     return self;
-}
-
-- (void)_setDefaults {
-    _maxConcurrentTaskCount = 3;
 }
 
 - (void)addTask:(DFTask *)task {

@@ -11,64 +11,25 @@
  */
 
 #import "DFImageFetchManager.h"
+#import "DFTaskMultiplexer.h"
 #import "DFReusablePool.h"
 
 
-#pragma mark - _DFFetchWrapper -
-
-@interface _DFFetchWrapper : NSObject <DFReusable>
-
-@property (nonatomic) NSString *imageURL;
-@property (nonatomic) DFImageFetchTask *task;
-@property (nonatomic) NSMutableArray *handlers;
-
-- (id)initWithTask:(DFImageFetchTask *)task
-          imageURL:(NSString *)imageURL
-           handler:(DFImageFetchHandler *)handler;
+@interface DFImageFetchManager() <DFTaskMultiplexerDelegate>
 
 @end
 
-@implementation _DFFetchWrapper
-
-- (id)initWithTask:(DFImageFetchTask *)task
-          imageURL:(NSString *)imageURL
-           handler:(DFImageFetchHandler *)handler {
-    if (self = [super init]) {
-        _imageURL = imageURL;
-        _task = task;
-        _handlers = [NSMutableArray arrayWithObject:handler];
-    }
-    return self;
-}
-
-- (void)prepareForReuse {
-    _imageURL = nil;
-    _task = nil;
-    [_handlers removeAllObjects];
-}
-
-@end
-
-
-#pragma mark - MMImageFetchManager -
 
 @implementation DFImageFetchManager {
-    NSMutableDictionary *_wrappers;
-    DFReusablePool *_reusableWrappers;
+    DFTaskMultiplexer *_multiplexer;
 }
 
 - (id)init {
     if (self = [super init]) {
-        _queue = [DFTaskQueue new];
-        _wrappers = [NSMutableDictionary new];
-        _reusableWrappers = [DFReusablePool new];
-        [self _setDefaults];
+        _multiplexer = [DFTaskMultiplexer new];
+        _multiplexer.delegate = self;
     }
     return self;
-}
-
-- (void)_setDefaults {
-    _queue.maxConcurrentTaskCount = 3;
 }
 
 #pragma mark - Fetching
@@ -77,45 +38,22 @@
     if (!imageURL || !handler) {
         return nil;
     }
-    _DFFetchWrapper *wrapper = [_wrappers objectForKey:imageURL];
+    DFTaskWrapper *wrapper = [_multiplexer addHandler:handler withToken:imageURL];
     if (wrapper) {
-        [wrapper.handlers addObject:handler];
-        return wrapper.task;
-    } else {
-        DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL];
-        [task setCompletion:^(DFTask *completedTask) {
-            [self _handleTaskCompletion:(id)completedTask];
-        }];
-        
-        _DFFetchWrapper *wrapper = [_reusableWrappers dequeueObject];
-        if (wrapper) {
-            wrapper.task = task;
-            wrapper.imageURL = imageURL;
-            [wrapper.handlers addObject:handler];
-        } else {
-            wrapper = [[_DFFetchWrapper alloc] initWithTask:task imageURL:imageURL handler:handler];
-        }
-        [_wrappers setObject:wrapper forKey:imageURL];
-        
-        [_queue addTask:task];
-        return task;
+        return (id)wrapper.task;
     }
+    DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL];
+    [_multiplexer addTask:task withToken:imageURL handler:handler];
+    return task;
 }
 
 - (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
     if (!handler || !imageURL) {
         return;
     }
-    _DFFetchWrapper *wrapper = [_wrappers objectForKey:imageURL];
-    if (!wrapper) {
-        return;
-    }
-    [wrapper.handlers removeObject:handler];
+    DFTaskWrapper *wrapper = [_multiplexer removeHandler:handler withToken:imageURL];
     if (wrapper.handlers.count == 0 && !wrapper.task.isExecuting) {
-        [wrapper.task cancel];
-        [wrapper.task setCompletion:nil];
-        [_wrappers removeObjectForKey:imageURL];
-        [_reusableWrappers enqueueObject:wrapper];
+        [_multiplexer cancelTaskWithToken:imageURL];
     }
 }
 
@@ -123,28 +61,23 @@
     [self fetchImageWithURL:imageURL handler:[DFImageFetchHandler new]];
 }
 
-#pragma mark - MMImageFetchTask Completion
+#pragma mark - DFTaskMultiplexer Delegate
 
-- (void)_handleTaskCompletion:(DFImageFetchTask *)task {
-    if (task.isCancelled) {
-        return;
-    }
-    _DFFetchWrapper *wrapper = [_wrappers objectForKey:task.imageURL];
-    if (task.image) {
+- (void)multiplexer:(DFTaskMultiplexer *)multiplexer handleTaskCompletion:(DFTaskWrapper *)wrapper {
+    DFImageFetchTask *imageTask = (id)wrapper.task;
+    if (imageTask.image) {
         for (DFImageFetchHandler *handler in wrapper.handlers) {
             if (handler.success) {
-                handler.success(task.image);
+                handler.success(imageTask.image);
             }
         }
     } else {
         for (DFImageFetchHandler *handler in wrapper.handlers) {
             if (handler.failure) {
-                handler.failure(task.error);
+                handler.failure(imageTask.error);
             }
         }
     }
-    [_wrappers removeObjectForKey:task.imageURL];
-    [_reusableWrappers enqueueObject:wrapper];
 }
 
 @end
