@@ -15,9 +15,10 @@
 #import "DFTaskQueue.h"
 
 
-@interface DFProcessingCenter : NSObject
+@interface DFProcessingCenter : NSObject <DFProcessingTaskCaching>
 
 @property (nonatomic, readonly) DFTaskQueue *queue;
+@property (nonatomic, readonly) NSCache *cache;
 
 - (DFProcessingTask *)processInput:(id)input
                                key:(NSString *)key
@@ -26,5 +27,7 @@
 
 - (void)cancelProcessingWithKey:(NSString *)key
                         handler:(DFProcessingHandler *)handler;
+
+- (void)setCostBlock:(NSUInteger(^)(id object))cost;
 
 @end

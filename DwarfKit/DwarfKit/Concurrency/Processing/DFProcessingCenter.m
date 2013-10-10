@@ -51,6 +51,7 @@
 @implementation DFProcessingCenter {
     NSMutableDictionary *_wrappers;
     DFReusablePool *_reusableWrappers;
+    NSUInteger (^_costBlock)(id);
 }
 
 - (id)init {
@@ -58,6 +59,7 @@
         _queue = [DFTaskQueue new];
         _wrappers = [NSMutableDictionary new];
         _reusableWrappers = [DFReusablePool new];
+        _cache = [NSCache new];
         [self _setDefaults];
     }
     return self;
@@ -65,6 +67,12 @@
 
 - (void)_setDefaults {
     _queue.maxConcurrentTaskCount = 2;
+}
+
+- (void)setCostBlock:(NSUInteger (^)(id))cost {
+    if (cost) {
+        _costBlock = [cost copy];
+    }
 }
 
 #pragma mark - Requests
@@ -127,6 +135,19 @@
     }
     [_wrappers removeObjectForKey:task.key];
     [_reusableWrappers enqueueObject:wrapper];
+}
+
+#pragma mark - DFProcessingTaskCaching
+
+- (void)storeObject:(id)object forKey:(id<NSCopying>)key {
+    if (object && key) {
+        NSUInteger cost = _costBlock ? _costBlock(object) : 0;
+        [_cache setObject:object forKey:key cost:cost];
+    }
+}
+
+- (id)cachedObjectForKey:(id<NSCopying>)key {
+    return [_cache objectForKey:key];
 }
 
 @end
