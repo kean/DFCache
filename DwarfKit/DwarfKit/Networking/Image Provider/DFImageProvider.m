@@ -58,9 +58,9 @@
     }
 }
 
-#pragma mark - DFImageProviderTask Completion
+#pragma mark - DFTaskMultiplexer Delegate
 
-- (void)handleTaskCompletion:(DFTaskWrapper *)wrapper {
+- (void)multiplexer:(DFTaskMultiplexer *)multiplexer didCompleteTask:(DFTaskWrapper *)wrapper {
     DFImageProviderTask *task = (id)wrapper.task;
     if (task.image) {
         for (DFImageProviderHandler *handler in wrapper.handlers) {

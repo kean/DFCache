@@ -11,62 +11,27 @@
  */
 
 #import "DFProcessingCenter.h"
-#import "DFReusablePool.h"
+#import "DFTaskMultiplexer.h"
 
 
-#pragma mark - _DFProcessingWrapper -
-
-@interface _DFProcessingWrapper : NSObject <DFReusable>
-
-@property (nonatomic, strong) NSString *key;
-@property (nonatomic, strong) DFProcessingTask *task;
-@property (nonatomic, strong) NSMutableArray *handlers;
-
-- (id)initWithTask:(DFProcessingTask *)task key:(NSString *)key handler:(DFProcessingHandler *)handler;
+@interface DFProcessingCenter() <DFTaskMultiplexerDelegate>
 
 @end
 
-@implementation _DFProcessingWrapper
-
-- (id)initWithTask:(DFProcessingTask *)task key:(NSString *)key handler:(DFProcessingHandler *)handler {
-    if (self = [super init]) {
-        _key = key;
-        _task = task;
-        _handlers = [NSMutableArray arrayWithObject:handler];
-    }
-    return self;
-}
-
-- (void)prepareForReuse {
-    _key = nil;
-    _task = nil;
-    [_handlers removeAllObjects];
-}
-
-@end
-
-
-#pragma mark - DFProcessingCenter
 
 @implementation DFProcessingCenter {
-    NSMutableDictionary *_wrappers;
-    DFReusablePool *_reusableWrappers;
+    DFTaskMultiplexer *_multiplexer;
     NSUInteger (^_costBlock)(id);
 }
 
 - (id)init {
     if (self = [super init]) {
-        _queue = [DFTaskQueue new];
-        _wrappers = [NSMutableDictionary new];
-        _reusableWrappers = [DFReusablePool new];
+        _multiplexer = [DFTaskMultiplexer new];
+        _multiplexer.queue.maxConcurrentTaskCount = 2;
+        _multiplexer.delegate = self;
         _cache = [NSCache new];
-        [self _setDefaults];
     }
     return self;
-}
-
-- (void)_setDefaults {
-    _queue.maxConcurrentTaskCount = 2;
 }
 
 - (void)setCostBlock:(NSUInteger (^)(id))cost {
@@ -81,60 +46,32 @@
     if (!key || !input || !processingBlock) {
         return nil;
     }
-    _DFProcessingWrapper *wrapper = [_wrappers objectForKey:key];
+    DFTaskWrapper *wrapper = [_multiplexer addHandler:handler withToken:key];
     if (wrapper) {
-        [wrapper.handlers addObject:handler];
-        return wrapper.task;
-    } else {
-        DFProcessingTask *task = [[DFProcessingTask alloc] initWithInput:input key:key processingBlock:processingBlock];
-        [task setCompletion:^(DFTask *completedTask) {
-            [self _handleTaskCompletion:(id)completedTask];
-        }];
-        
-        _DFProcessingWrapper *wrapper = [_reusableWrappers dequeueObject];
-        if (wrapper) {
-            wrapper.task = task;
-            wrapper.key = key;
-            [wrapper.handlers addObject:handler];
-        } else {
-            wrapper = [[_DFProcessingWrapper alloc] initWithTask:task key:key handler:handler];
-        }
-        [_wrappers setObject:wrapper forKey:key];
-        
-        [_queue addTask:task];
-        return task;
+        return (id)wrapper.task;
     }
+    DFProcessingTask *task = [[DFProcessingTask alloc] initWithInput:input key:key processingBlock:processingBlock];
+    [_multiplexer addTask:task withToken:key handler:handler];
+    return task;
 }
 
 - (void)cancelProcessingWithKey:(NSString *)key handler:(DFProcessingHandler *)handler {
     if (!handler || !key) {
         return;
     }
-    _DFProcessingWrapper *wrapper = [_wrappers objectForKey:key];
-    if (!wrapper) {
-        return;
-    }
-    [wrapper.handlers removeObject:handler];
+    DFTaskWrapper *wrapper = [_multiplexer removeHandler:handler withToken:key];
     if (wrapper.handlers.count == 0) {
-        [wrapper.task cancel];
-        [wrapper.task setCompletion:nil];
-        [_wrappers removeObjectForKey:key];
-        [_reusableWrappers enqueueObject:wrapper];
+        [_multiplexer cancelTaskWithToken:key];
     }
 }
 
-#pragma mark - DFProcessingTask Completion
+#pragma mark - DFTaskMultiplexer Delegate
 
-- (void)_handleTaskCompletion:(DFProcessingTask *)task {
-    if (task.isCancelled) {
-        return;
-    }
-    _DFProcessingWrapper *wrapper = [_wrappers objectForKey:task.key];
+- (void)multiplexer:(DFTaskMultiplexer *)multiplexer didCompleteTask:(DFTaskWrapper *)wrapper {
+    DFProcessingTask *task = (id)wrapper.task;
     for (DFProcessingHandler *handler in wrapper.handlers) {
         handler.completion(task.output, task.fromCache);
     }
-    [_wrappers removeObjectForKey:task.key];
-    [_reusableWrappers enqueueObject:wrapper];
 }
 
 #pragma mark - DFProcessingTaskCaching
