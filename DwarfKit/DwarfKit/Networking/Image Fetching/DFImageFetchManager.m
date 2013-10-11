@@ -64,17 +64,17 @@
 #pragma mark - DFTaskMultiplexer Delegate
 
 - (void)handleTaskCompletion:(DFTaskWrapper *)wrapper {
-    DFImageFetchTask *imageTask = (id)wrapper.task;
-    if (imageTask.image) {
+    DFImageFetchTask *task = (id)wrapper.task;
+    if (task.image) {
         for (DFImageFetchHandler *handler in wrapper.handlers) {
             if (handler.success) {
-                handler.success(imageTask.image);
+                handler.success(task.image);
             }
         }
     } else {
         for (DFImageFetchHandler *handler in wrapper.handlers) {
             if (handler.failure) {
-                handler.failure(imageTask.error);
+                handler.failure(task.error);
             }
         }
     }

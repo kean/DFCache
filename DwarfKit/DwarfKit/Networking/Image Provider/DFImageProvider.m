@@ -11,66 +11,25 @@
  */
 
 #import "DFImageProvider.h"
-#import "DFReusablePool.h
+#import "DFTaskMultiplexer.h"
 
 
-#pragma mark - _DFFetchWrapper -
-
-@interface _DFProviderWrapper : NSObject <DFReusable>
-
-@property (nonatomic) NSString *imageURL;
-@property (nonatomic) DFImageProviderTask *task;
-@property (nonatomic) NSMutableArray *handlers;
-
-- (id)initWithTask:(DFImageProviderTask *)task
-          imageURL:(NSString *)imageURL
-           handler:(DFImageProviderHandler *)handler;
-
-- (void)prepareForReuse;
+@interface DFImageProvider() <DFTaskMultiplexerDelegate>
 
 @end
 
-@implementation _DFProviderWrapper
-
-- (id)initWithTask:(DFImageProviderTask *)task
-          imageURL:(NSString *)imageURL
-           handler:(DFImageProviderHandler *)handler {
-    if (self = [super init]) {
-        _imageURL = imageURL;
-        _task = task;
-        _handlers = [NSMutableArray arrayWithObject:handler];
-    }
-    return self;
-}
-
-- (void)prepareForReuse {
-    _imageURL = nil;
-    _task = nil;
-    [_handlers removeAllObjects];
-}
-
-@end
-
-
-#pragma mark - DFImageProvider -
 
 @implementation DFImageProvider {
-    NSMutableDictionary *_wrappers;
-    DFReusablePool *_reusableWrappers;
+    DFTaskMultiplexer *_multiplexer;
 }
 
 - (id)init {
     if (self = [super init]) {
-        _queue = [DFTaskQueue new];
-        _wrappers = [NSMutableDictionary new];
-        _reusableWrappers = [DFReusablePool new];
-        [self _setDefaults];
+        _multiplexer = [DFTaskMultiplexer new];
+        _multiplexer.queue.maxConcurrentTaskCount = 20;
+        _multiplexer.delegate = self;
     }
     return self;
-}
-
-- (void)_setDefaults {
-    _queue.maxConcurrentTaskCount = 20;
 }
 
 #pragma mark - Requests
@@ -79,55 +38,30 @@
     if (!imageURL || !handler) {
         return nil;
     }
-    _DFProviderWrapper *wrapper = [_wrappers objectForKey:imageURL];
+    DFTaskWrapper *wrapper = [_multiplexer addHandler:handler withToken:imageURL];
     if (wrapper) {
-        [wrapper.handlers addObject:handler];
-        return wrapper.task;
-    } else {
-        DFImageProviderTask *task = [[DFImageProviderTask alloc] initWithURL:imageURL];
-        [task setCompletion:^(DFTask *completedTask) {
-            [self _handleTaskCompletion:(id)completedTask];
-        }];
-        
-        _DFProviderWrapper *wrapper = [_reusableWrappers dequeueObject];
-        if (wrapper) {
-            wrapper.task = task;
-            wrapper.imageURL = imageURL;
-            [wrapper.handlers addObject:handler];
-        } else {
-            wrapper = [[_DFProviderWrapper alloc] initWithTask:task imageURL:imageURL handler:handler];
-        }
-        [_wrappers setObject:wrapper forKey:imageURL];
-        
-        [_queue addTask:task];
-        return task;
+        return (id)wrapper.task;
     }
+    DFImageProviderTask *task = [[DFImageProviderTask alloc] initWithURL:imageURL];
+    [_multiplexer addTask:task withToken:imageURL handler:handler];
+    return task;
 }
 
 - (void)cancelRequestWithURL:(NSString *)imageURL handler:(DFImageProviderHandler *)handler {
-    if (!handler || !imageURL) {
+    if (!imageURL || !handler) {
         return;
     }
-    _DFProviderWrapper *wrapper = [_wrappers objectForKey:imageURL];
-    if (!wrapper) {
-        return;
-    }
-    [wrapper.handlers removeObject:handler];
-    if (wrapper.handlers.count == 0 && !wrapper.task.isFetching) {
-        [wrapper.task cancel];
-        [wrapper.task setCompletion:nil];
-        [_wrappers removeObjectForKey:imageURL];
-        [_reusableWrappers enqueueObject:wrapper];
+    DFTaskWrapper *wrapper = [_multiplexer removeHandler:handler withToken:imageURL];
+    DFImageProviderTask *task = (id)wrapper.task;
+    if (wrapper.handlers.count == 0 && !task.isFetching) {
+        [_multiplexer cancelTaskWithToken:imageURL];
     }
 }
 
 #pragma mark - DFImageProviderTask Completion
 
-- (void)_handleTaskCompletion:(DFImageProviderTask *)task {
-    if (task.isCancelled) {
-        return;
-    }
-    _DFProviderWrapper *wrapper = [_wrappers objectForKey:task.imageURL];
+- (void)handleTaskCompletion:(DFTaskWrapper *)wrapper {
+    DFImageProviderTask *task = (id)wrapper.task;
     if (task.image) {
         for (DFImageProviderHandler *handler in wrapper.handlers) {
             if (handler.success) {
@@ -141,8 +75,6 @@
             }
         }
     }
-    [_wrappers removeObjectForKey:task.imageURL];
-    [_reusableWrappers enqueueObject:wrapper];
 }
 
 @end

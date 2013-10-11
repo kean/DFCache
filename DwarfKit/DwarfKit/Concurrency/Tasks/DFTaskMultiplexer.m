@@ -54,11 +54,11 @@
     return [self initWithQueue:[DFTaskQueue new]];
 }
 
-- (DFTask *)addHandler:(id)handler withToken:(NSString *)token {
+- (DFTaskWrapper *)addHandler:(id)handler withToken:(NSString *)token {
     DFTaskWrapper *wrapper = [_wrappers objectForKey:token];
     if (wrapper) {
         [wrapper.handlers addObject:handler];
-        return wrapper.task;
+        return wrapper;
     }
     return nil;
 }
