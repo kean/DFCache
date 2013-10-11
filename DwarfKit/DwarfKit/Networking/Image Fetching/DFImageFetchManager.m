@@ -57,10 +57,6 @@
     }
 }
 
-- (void)prefetchImageWithURL:(NSString *)imageURL {
-    [self fetchImageWithURL:imageURL handler:[DFImageFetchHandler new]];
-}
-
 #pragma mark - DFTaskMultiplexer Delegate
 
 - (void)multiplexer:(DFTaskMultiplexer *)multiplexer didCompleteTask:(DFTaskWrapper *)wrapper {
