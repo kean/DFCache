@@ -36,17 +36,22 @@
 
 
 @implementation DFTaskMultiplexer {
+    DFTaskQueue *_queue;
     NSMutableDictionary *_wrappers;
     DFReusablePool *_reusableWrappers;
 }
 
-- (id)init {
+- (id)initWithQueue:(DFTaskQueue *)queue {
     if (self = [super init]) {
         _wrappers = [NSMutableDictionary new];
         _reusableWrappers = [DFReusablePool new];
         _queue = [DFTaskQueue new];
     }
     return self;
+}
+
+- (id)init {
+    return [self initWithQueue:[DFTaskQueue new]];
 }
 
 - (DFTask *)addHandler:(id)handler withToken:(NSString *)token {

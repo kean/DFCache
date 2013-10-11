@@ -11,7 +11,7 @@
  */
 
 #import "DFImageProvider.h"
-#import "DFReusablePool.h"
+#import "DFReusablePool.h
 
 
 #pragma mark - _DFFetchWrapper -

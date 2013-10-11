@@ -26,6 +26,7 @@
 - (id)init {
     if (self = [super init]) {
         _multiplexer = [DFTaskMultiplexer new];
+        _multiplexer.queue.maxConcurrentTaskCount = 3;
         _multiplexer.delegate = self;
     }
     return self;

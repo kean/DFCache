@@ -42,6 +42,8 @@
 @property (nonatomic, weak) id<DFTaskMultiplexerDelegate> delegate;
 @property (nonatomic, readonly) DFTaskQueue *queue;
 
+- (id)initWithQueue:(DFTaskQueue *)queue;
+
 - (DFTaskWrapper *)addHandler:(id)handler withToken:(NSString *)token;
 - (DFTaskWrapper *)addTask:(DFTask *)task withToken:(NSString *)token handler:(id)handler;
 - (DFTaskWrapper *)removeHandler:(id)handler withToken:(NSString *)token;
