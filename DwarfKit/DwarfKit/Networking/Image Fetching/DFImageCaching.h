@@ -25,7 +25,6 @@
  @param completion Completion block that gets called on the main queue (or on your queue if queue parameter isn't NULL).
  */
 - (void)cachedImageForKey:(NSString *)key
-                    queue:(dispatch_queue_t)queue
                completion:(void (^)(UIImage *image))completion;
 
 /*! Store image in either memory or disk cache (or both).

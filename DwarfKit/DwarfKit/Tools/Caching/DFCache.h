@@ -14,176 +14,239 @@ typedef NSUInteger (^DFCacheCostBlock)(id object);
 typedef id (^DFCacheDecodeBlock)(NSData *data);
 typedef NSData *(^DFCacheEncodeBlock)(id object);
 
-typedef struct {
-   /*! Maximum disk cache capacity. Not a strict limit. Disk cache is actually cleared each time application resigns active (for iOS) and any time - (void)cleanupDiskCache gets called.
-    */
-   unsigned long long diskCacheCapacity; // Bytes
-   
-   /*! Used to calculate target size by deafult clenaup algorithm.
-    */
-   CGFloat cleanupTargetSizeRatio;
-   
-} DFCacheSettings;
-
+/* DFCache Features.
+ 
+ - General purpose. Store any Objective-C objects. Built-in support for caching UIImage, <NSCoding> and JSON objects.
+ - Metadata. Add custom metadata for any key.
+ - LRU cleanup. Read more in - (void)cleanupDisk discussion.
+ - Performance. Image caching performance is fantastic due to libjpeg-turbo which is used under the hood.
+ */
 
 #pragma mark - DFCache -
 
-/*!
- Efficient memory and disk key-value storage.
- 
- Features:
- - General purpose. Stores any Objective-C objects. Built-in support for image caching (<DFImageCaching> implementation) and caching of <NSCoding> objects.
- - Metadata. Cache entries have associated metadata. You can read/write entry's metadata at any time and even add your custom keys.
- - LRU cleanup. Read more in - (void)cleanupDiskCache discussion.
- - Performance. Image caching performance is fantastic due to libjpeg-turbo which is used under the hood. Disk cache faults are handled instantly without disk I/O.
+/** Efficient memory and file key-value storage.
  */
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface DFCache : NSObject
 
-/*! Init cache with specified name. Name defines paths to cache folders.
+/** Initializes and returns cache with provided name and memory cache.
+ @param name Defines paths to cache folders.
+ @param memoryCache Memory cache. Pass nil to disable memory caching.
  */
-- (id)initWithName:(NSString *)name;
+- (id)initWithName:(NSString *)name memoryCache:(NSCache *)memoryCache;
 
-@property (nonatomic, strong, readonly) NSString *name;
-
-/*! Settings. For more information DFCacheSettings struct description.
+/** Returns the name of the cache.
  */
-@property (nonatomic) DFCacheSettings settings;
+@property (nonatomic, readonly) NSString *name;
 
-/*! Memory cache implementation.
+/*! Returns memory cache or nil if cache was initialized without the memory cache.
  */
-@property (nonatomic, strong, readonly) NSCache *memoryCache;
+@property (nonatomic, readonly) NSCache *memoryCache;
 
-/*! Processing queue that transform blocks are executed on.
+/** Maximum disk cache capacity. If 0 then disk space is unlimited.
+ @discussion Not a strict limit. Disk cache is actually cleaned up each time application resigns active (for iOS) and any time - (void)cleanupDisk gets called.
  */
-- (void)setProcessingQueue:(dispatch_queue_t)queue;
+@property (nonatomic) unsigned long long diskCapacity;
 
-#pragma mark - Caching (Read)
+/** Remaining disk usage after cleanup. The rate must be in the range of 0.0 to 1.0 where 1.0 represents full disk capacity.
+ */
+@property (nonatomic) CGFloat cleanupRate;
 
-/*! Calls completion block with an object from disk cache.
+#pragma mark - Read
+
+/** Reads data from disk.
  @param key The unique key.
- @param queue Queue to execute completion block on. Main queue if NULL.
- @param transform Transformation block that returns object from data. Default transformaion block returns data without any transformations.
- @param completion Completion block that gets called on the provided queue.
+ @param completion Completion block.
+ */
+- (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *data))completion;
+
+/** Reads object from disk.
+ @param key The unique key.
+ @param decode Decoding block returning object from data.
+ @param cost Cost block returning cost for memory cache.
+ @param completion Completion block.
  */
 - (void)cachedObjectForKey:(NSString *)key
-                     queue:(dispatch_queue_t)queue
                     decode:(DFCacheDecodeBlock)decode
                       cost:(DFCacheCostBlock)cost
                 completion:(void (^)(id object))completion;
 
-/*! Returns object from memory cache.
+/** Returns object from disk synchorounsly.
+ @param key The unique key.
+ @param decode Decoding block returning object from data.
+ @param cost Cost block returning cost for memory cache.
+ */
+- (id)cachedObjectForKey:(NSString *)key
+                  decode:(DFCacheDecodeBlock)decode
+                    cost:(DFCacheCostBlock)cost;
+
+/** Checks if object for key exists in cache.
+ */
+- (BOOL)containsObjectForKey:(NSString *)key;
+
+/** Returns object from memory cache.
  */
 - (id)cachedObjectForKey:(NSString *)key;
 
-/*! Returns object from memory/disk cache synchorounsly.
+#pragma mark - Read (Multiple Keys)
+
+/** Reads objects for provided keys.
+ @param keys Array of unique keys.
+ @param decode Decoding block returning object from data.
+ @param cost Cost block returning cost for memory cache.
+ @param completion Completion block.
  */
-- (id)cachedObjectForKey:(NSString *)key
-                    cost:(NSUInteger (^)(id object))cost
-                  decode:(DFCacheDecodeBlock)decode;
+- (void)cachedObjectsForKeys:(NSArray *)keys
+                      decode:(DFCacheDecodeBlock)decode
+                        cost:(DFCacheCostBlock)cost
+                  completion:(void (^)(NSDictionary *objects))completion;
 
-#pragma mark - Caching (Write)
+/*! Reads first found object for provided keys.
+ @param key The unique key.
+ @param decode Decoding block returning object from data.
+ @param cost Cost block returning cost for memory cache.
+ @param completion Completion block.
+ */
+- (void)cachedObjectForKeys:(NSArray *)keys
+                     decode:(DFCacheDecodeBlock)decode
+                       cost:(DFCacheCostBlock)cost
+                 completion:(void (^)(id object, NSString *key))completion;
 
-/*! Stores object into memory cache. Stores data into disk cache.
+#pragma mark - Write
+
+/** Stores data into disk cache.
+ @param data Data to store into disk cache.
+ @param key The unique key.
+ */
+- (void)storeData:(NSData *)data forKey:(NSString *)key;
+
+
+/** Stores object into memory cache. Stores data into disk cache.
  @param object The object to store into memory cache.
  @param key The unique key.
  @param cost The cost with which to associate the object (used by memory cache).
  @param data Data to store into disk cache.
- @param transform Transformation block that returns object data representation.
  */
 - (void)storeObject:(id)object
              forKey:(NSString *)key
                cost:(NSUInteger)cost
                data:(NSData *)data;
 
-/*! Stores object into memory cache. Stores data representation provided by the transformation block into disk cache.
+/** Stores object into memory cache. Stores data representation provided by the transformation block into disk cache.
  @param object The object to store into memory cache.
  @param key The unique key.
  @param cost The cost with which to associate the object (used by memory cache).
- @param transform Transformation block that returns object data representation.
+ @param encode Encoder block returning object's data representation.
  */
 - (void)storeObject:(id)object
              forKey:(NSString *)key
                cost:(NSUInteger)cost
              encode:(DFCacheEncodeBlock)encode;
 
+/*! Stores object into memory cache.
+ @param object Object.
+ @param key The unique key.
+ @param cost The cost with which to associate the object (used by memory cache).
+ */
+- (void)storeObject:(id)object
+             forKey:(NSString *)key
+               cost:(NSUInteger)cost;
+
 #pragma mark - Metadata
 
-/*! Returns copy of cache entry metadata for specified key.
+/** Returns copy of metadata for provided key.
+ @param key The unique key.
+ @return Copy of metadata for key.
  */
 - (NSDictionary *)metadataForKey:(NSString *)key;
 
-/*! Sets metadata for specified key
+/** Reads metadata for provided key. Calls completion block with copy of metadata.
+ @param key The unique key.
+ @param completion Completion block.
+ */
+- (void)metadataForKey:(NSString *)key completion:(void (^)(NSDictionary *metadata))completion;
+
+/** Sets metadata for provided key.
+ @param metadata Dictionary with metadata.
+ @param key The unique key.
  */
 - (void)setMetadata:(NSDictionary *)metadata forKey:(NSString *)key;
 
-/*! Sets metadata values for specified keys. You can set values for either built-in metadata keys or your custom keys.
+/** Sets metadata values for providerd keys.
+ @param keyedValues Dictionary with metadata.
+ @param key The unique key.
  */
 - (void)setMetadataValues:(NSDictionary *)keyedValues forKey:(NSString *)key;
 
-/*! Removes metadata for key
+/** Removes metadata for key.
+ @param key The unique key.
  */
 - (void)removeMetadataForKey:(NSString *)key;
 
-#pragma mark - Caching (Remove)
+#pragma mark - Remove
 
-/*! Removes object from both disk and memory cache.
+/** Removes object from both disk and memory cache.
  */
 - (void)removeObjectsForKeys:(NSArray *)keys;
 - (void)removeObjectForKey:(NSString *)key;
 - (void)removeAllObjects;
 
-/*! Options used be removal methods.
+/** Options used be removal methods.
  */
 typedef NS_OPTIONS(NSUInteger, DFCacheRemoveOptions) {
    DFCacheRemoveFromMemory = (1 << 0),
    DFCacheRemoveFromDisk = (1 << 1)
 };
 
-/*! Removes objects from memory and/or disk cache based on options */
+/** Removes objects from memory and/or disk cache based on options */
 - (void)removeObjectsForKeys:(NSArray *)keys options:(DFCacheRemoveOptions)options;
 - (void)removeObjectForKey:(NSString *)key options:(DFCacheRemoveOptions)options;
 - (void)removeAllObjects:(DFCacheRemoveOptions)options;
 
 #pragma mark - Maintenance
 
-/*! Cleans disk cache.
- @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Calculates target size (half of max disk cache capacity). Files files are removed according to LRU algorithm until cache size fits target size.
+/** Cleans up disk by removing entries by LRU algorithm.
+ @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Calculates target size by multiplying disk capacity and cleanup rate. Files are removed according to LRU algorithm until cache size fits target size.
  */
-- (void)cleanupDiskCache;
+- (void)cleanupDisk;
 
-/*! Returns current disk cache size. Not a strict value since we don't now file size until it's written to disk.
+/** Returns the current size of the receiver’s on-disk cache, in bytes.
+ @warning Very expensive. Should be run rarely.
  */
-- (unsigned long long)diskCacheSize;
-
-#pragma mark - UIImage
-
-#if TARGET_OS_IPHONE
-
-/*! Stores image in both memory and disk cache.
- @param image Image to store in memory cache.
- @param imageData Image data to store in disk cache. IF imageData is nil images are compressed and stored in JPEG files.
- @param key The unique key.
- @discussion Method calculates image cost by multiplying it's pixel size and width. You may take advantage of NSCache - (void)setTotalCostLimit: by setting it for - (NSCache)memoryCache property.
- @discussion Use - (void)storeObject:forKey: if you need to store the object in memory cache only.
- */
-- (void)storeImage:(UIImage *)image
-         imageData:(NSData *)imageData
-            forKey:(NSString *)key;
-
-/*! Calls completion block with image from disk cache. Doesn't check memory cache.
- @param key The unique key.
- @param queue Queue that is used to execute completion block on.
- @param completion Completion block that gets called on the main queue (or on your queue if queue parameter isn't NULL).
- */
-- (void)cachedImageForKey:(NSString *)key
-                    queue:(dispatch_queue_t)queue
-               completion:(void (^)(UIImage *image))completion;
-
-#endif
+- (unsigned long long)currentDiskUsage;
 
 @end
 
+
+#pragma mark - DFCache (Blocks) -
+
+@interface DFCache (Blocks)
+
+@property (nonatomic, readonly) DFCacheDecodeBlock blockUIImageDecode;
+@property (nonatomic, readonly) DFCacheEncodeBlock blockUIImageEncode;
+@property (nonatomic, readonly) DFCacheCostBlock blockUIImageCost;
+
+@property (nonatomic, readonly) DFCacheDecodeBlock blockJSONDecode;
+@property (nonatomic, readonly) DFCacheEncodeBlock blockJSONEncode;
+
+@end
+
+
+#pragma mark - DFCache (UIImage) -
+
+#if TARGET_OS_IPHONE
+@interface DFCache (UIImage)
+
+- (void)storeImage:(UIImage *)image imageData:(NSData *)data forKey:(NSString *)key;
+- (void)cachedImageForKey:(NSString *)key completion:(void (^)(UIImage *image))completion;
+- (void)cachedImageForKeys:(NSArray *)keys
+                completion:(void (^)(UIImage *image, NSString *key))completion;
+
+@end
+#endif
+
+
+#pragma mark - DFCache (Shared) -
 
 @interface DFCache (Shared)
 

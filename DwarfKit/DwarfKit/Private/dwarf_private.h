@@ -36,11 +36,8 @@
 
 static inline
 void
-_dwarf_callback(dispatch_queue_t queue, void (^block)(id), id object) {
-    if (!queue) {
-        queue = dispatch_get_main_queue();
-    }
-    dispatch_async(queue, ^{
+_dwarf_callback(void (^block)(id), id object) {
+    dispatch_async(dispatch_get_main_queue(), ^{
         block(object);
     });
 }

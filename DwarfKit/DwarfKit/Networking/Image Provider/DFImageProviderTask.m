@@ -42,7 +42,7 @@
         return;
     }
     
-    [cache cachedImageForKey:_imageURL queue:NULL completion:^(UIImage *image) {
+    [cache cachedImageForKey:_imageURL completion:^(UIImage *image) {
         if (image) {
             _image = image;
             _source = DFResponseSourceDisk;
