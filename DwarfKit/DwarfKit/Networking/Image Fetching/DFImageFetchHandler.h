@@ -11,14 +11,21 @@
  */
 
 
+typedef void (^DFImageFetchSuccess)(UIImage *image);
+typedef void (^DFImageFetchNotModified)();
+typedef void (^DFImageFetchFailure)(NSError *error);
+
+
 @interface DFImageFetchHandler : NSObject
 
-@property (nonatomic, copy) void (^success)(UIImage *);
-@property (nonatomic, copy) void (^failure)(NSError *);
+@property (nonatomic, copy) DFImageFetchSuccess success;
+@property (nonatomic, copy) DFImageFetchNotModified notModified;
+@property (nonatomic, copy) DFImageFetchFailure failure;
 
-- (void)setSuccess:(void (^)(UIImage *image))success;
-- (void)setFailure:(void (^)(NSError * error))failure;
-
-+ (instancetype)handlerWithSuccess:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
++ (instancetype)handlerWithSuccess:(DFImageFetchSuccess)success
+                       notModified:(DFImageFetchNotModified)notModified
+                           failure:(DFImageFetchFailure)failure;
++ (instancetype)handlerWithSuccess:(DFImageFetchSuccess)success
+                           failure:(DFImageFetchFailure)failure;
 
 @end

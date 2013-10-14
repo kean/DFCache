@@ -12,8 +12,11 @@
 
 #import "DFImageFetchTask.h"
 #import "DFImageProcessing.h"
-#import "DFImageCaching.h"
 #import "DFCache.h"
+
+
+static NSString * const _kLastModifiedKey = @"Last-Modified";
+static NSString * const _kIfModifiedSinceKey = @"If-Modified-Since";
 
 
 @interface DFImageFetchTask() <NSURLConnectionDataDelegate>
@@ -22,20 +25,35 @@
 
 
 @implementation DFImageFetchTask {
+    NSHTTPURLResponse *_response;
     NSMutableData *_data;
+    NSString *_ifModifiedSince;
+    BOOL _revalidate;
+    DFImageFetchCaching _cachingBlock;
+}
+
+- (id)initWithURL:(NSString *)imageURL revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince {
+    if (self = [super init]) {
+        _imageURL = imageURL;
+        _ifModifiedSince = ifModifiedSince;
+        _revalidate = revalidate;
+    }
+    return self;
 }
 
 - (id)initWithURL:(NSString *)imageURL {
-    if (self = [super init]) {
-        _imageURL = imageURL;
-    }
-    return self;
+    return [self initWithURL:imageURL revalidate:NO ifModifiedSince:nil];
 }
 
 - (NSUInteger)hash {
     return [_imageURL hash];
 }
 
+- (void)setCachingBlock:(DFImageFetchCaching)cachingBlock {
+    if (!_cachingBlock) {
+        _cachingBlock = [cachingBlock copy];
+    }
+}
 #pragma mark - Task Implementation
 
 - (void)execute {
@@ -69,6 +87,9 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.f];
     [request setHTTPShouldHandleCookies:NO];
     [request setHTTPShouldUsePipelining:YES];
+    if (_revalidate && _ifModifiedSince) {
+        [request setValue:_ifModifiedSince forHTTPHeaderField:_kIfModifiedSinceKey];
+    }
     return request;
 }
 
@@ -90,7 +111,10 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @autoreleasepool {
             _image = [DFImageProcessing decompressedImageWithData:_data];
-            [[DFCache imageCache] storeImage:_image imageData:_data forKey:_imageURL];
+            if (_cachingBlock && _image) {
+                NSString *lastModified = [_response allHeaderFields][_kLastModifiedKey];
+                _cachingBlock(_image, _data, lastModified);
+            }
             [self finish];
         }
     });

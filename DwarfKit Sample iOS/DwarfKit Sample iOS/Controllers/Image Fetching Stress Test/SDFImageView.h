@@ -14,6 +14,4 @@
 
 @interface SDFImageView : DFImageView
 
-- (void)setImageWithURL:(NSString *)imageURL;
-
 @end

@@ -34,14 +34,14 @@
 }
 
 
-- (DFImageProviderTask *)requestImageWithURL:(NSString *)imageURL handler:(DFImageProviderHandler *)handler {
-    _imageRequestCount += 1;
-    return [super requestImageWithURL:imageURL handler:handler];
+- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
+    _imageRequestCount++;
+    return [super fetchImageWithURL:imageURL handler:handler];
 }
 
-- (void)cancelRequestWithURL:(NSString *)imageURL handler:(DFImageProviderHandler *)handler {
-    _imageRequestCancelCount += 1;
-    [super cancelRequestWithURL:imageURL handler:handler];
+- (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
+    _imageRequestCancelCount++;
+    return [super cancelFetchingWithURL:imageURL handler:handler];
 }
 
 @end

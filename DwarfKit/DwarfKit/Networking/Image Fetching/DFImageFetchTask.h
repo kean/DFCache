@@ -13,12 +13,18 @@
 #import "DFTask.h"
 
 
+typedef void (^DFImageFetchCaching)(UIImage *image, NSData *data, NSString *lastModified);
+
+
 @interface DFImageFetchTask : DFTask
 
 @property (nonatomic, readonly) NSString *imageURL;
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) NSError *error;
+@property (nonatomic, readonly) BOOL notModified;
 
 - (id)initWithURL:(NSString *)imageURL;
+- (id)initWithURL:(NSString *)imageURL revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince;
+- (void)setCachingBlock:(DFImageFetchCaching)cachingBlock;
 
 @end

@@ -101,7 +101,9 @@
     DFTaskWrapper *wrapper = [_wrappers objectForKey:token];
     [wrapper.task cancel];
     [wrapper.task setCompletion:nil];
-    [_wrappers removeObjectForKey:token];
+    if (token) {
+        [_wrappers removeObjectForKey:token];
+    }
     [_reusableWrappers enqueueObject:wrapper];
 }
 
@@ -110,7 +112,9 @@
         return;
     }
     [_delegate multiplexer:self didCompleteTask:wrapper];
-    [_wrappers removeObjectForKey:wrapper.token];
+    if (wrapper.token) {
+        [_wrappers removeObjectForKey:wrapper.token];
+    }
     [_reusableWrappers enqueueObject:wrapper];
 }
 

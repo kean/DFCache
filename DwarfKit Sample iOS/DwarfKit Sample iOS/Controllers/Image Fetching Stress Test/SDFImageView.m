@@ -17,39 +17,29 @@
 
 
 @implementation SDFImageView {
-    NSString *_imageURL;
-    __weak DFImageProviderHandler *_handler;
+    __weak DFImageFetchHandler *_handler;
 }
 
-
-- (void)setImageWithURL:(NSString *)imageURL {
-    [self cancelRequestOperation];
-    
-    _imageURL = imageURL;
-    
-    UIImage *image = [[DFCache imageCache].memoryCache objectForKey:imageURL];
-    if (image) {
-        self.image = image;
-        return;
-    }
-    
+- (void)_fetchImage {
     __weak DFImageView *weakSelf = self;
-    DFImageProviderHandler *handler = [DFImageProviderHandler handlerWithSuccess:^(UIImage *image, DFResponseSource source) {
-        DFImageView *strongSelf = weakSelf;
-        if (strongSelf) {
-            BOOL animated = (source != DFResponseSourceMemory);
-            [self setImage:image animated:animated];
-        }
-    } failure:nil];
-    
-    [[SDFImageFetchManager sharedStressTestManager] requestImageWithURL:imageURL handler:handler];
+    DFImageFetchHandler *handler = [DFImageFetchHandler handlerWithSuccess:^(UIImage *image) {
+        [weakSelf setImage:image animated:YES];
+    } failure:^(NSError *error) {
+        // Do nothing
+    }];
     _handler = handler;
+    
+    DFImageFetchTask *task = [[SDFImageFetchManager shared] fetchImageWithURL:self.imageURL handler:handler];
+    [task setCachingBlock:^(UIImage *image, NSData *data, NSString *lastModified) {
+        DFCache *cache = [DFCache imageCache];
+        [cache storeImage:image imageData:data forKey:self.imageURL];
+    }];
 }
 
 
-- (void)cancelRequestOperation {
-    if (_imageURL && _handler) {
-        [[SDFImageFetchManager sharedStressTestManager] cancelRequestWithURL:_imageURL handler:_handler];
+- (void)_cancelFetching {
+    if (self.imageURL && _handler) {
+        [[SDFImageFetchManager shared] cancelFetchingWithURL:self.imageURL handler:_handler];
         _handler = nil;
     }
 }

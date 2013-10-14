@@ -14,11 +14,19 @@
 
 @implementation DFImageFetchHandler
 
-+ (instancetype)handlerWithSuccess:(void (^)(UIImage *))success failure:(void (^)(NSError *))failure {
-   DFImageFetchHandler *handler = [DFImageFetchHandler new];
-   handler.success = success;
-   handler.failure = failure;
-   return handler;
++ (instancetype)handlerWithSuccess:(DFImageFetchSuccess)success
+                       notModified:(DFImageFetchNotModified)notModified
+                           failure:(DFImageFetchFailure)failure {
+    DFImageFetchHandler *handler = [DFImageFetchHandler new];
+    handler.success = success;
+    handler.failure = failure;
+    handler.notModified = notModified;
+    return handler;
+}
+
++ (instancetype)handlerWithSuccess:(DFImageFetchSuccess)success
+                           failure:(DFImageFetchFailure)failure {
+    return [self handlerWithSuccess:success notModified:nil failure:failure];
 }
 
 @end

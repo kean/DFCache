@@ -34,7 +34,7 @@
 
 #pragma mark - Fetching
 
-- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
+- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince {
     if (!imageURL || !handler) {
         return nil;
     }
@@ -42,9 +42,13 @@
     if (wrapper) {
         return (id)wrapper.task;
     }
-    DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL];
+    DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL revalidate:revalidate ifModifiedSince:ifModifiedSince];
     [_multiplexer addTask:task withToken:imageURL handler:handler];
     return task;
+}
+
+- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
+    return [self fetchImageWithURL:imageURL handler:handler revalidate:NO ifModifiedSince:nil];
 }
 
 - (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler {
@@ -57,7 +61,7 @@
     }
 }
 
-#pragma mark - DFTaskMultiplexer Delegate
+#pragma mark - MMImageFetchTask Completion
 
 - (void)multiplexer:(DFTaskMultiplexer *)multiplexer didCompleteTask:(DFTaskWrapper *)wrapper {
     DFImageFetchTask *task = (id)wrapper.task;
@@ -65,6 +69,12 @@
         for (DFImageFetchHandler *handler in wrapper.handlers) {
             if (handler.success) {
                 handler.success(task.image);
+            }
+        }
+    } else if (task.notModified) {
+        for (DFImageFetchHandler *handler in wrapper.handlers) {
+            if (handler.notModified) {
+                handler.notModified();
             }
         }
     } else {
@@ -91,3 +101,4 @@
 }
 
 @end
+

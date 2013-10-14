@@ -12,11 +12,15 @@
 
 #import "DFImageFetchHandler.h"
 #import "DFImageFetchTask.h"
+#import "DFTaskQueue.h"
 
 
 @interface DFImageFetchManager : NSObject
 
+@property (nonatomic, readonly) DFTaskQueue *queue;
+
 - (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
+- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince;
 - (void)cancelFetchingWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler;
 
 @end

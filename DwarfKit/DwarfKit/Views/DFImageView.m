@@ -10,14 +10,14 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFImageProvider.h"
 #import "DFCache.h"
+#import "DFImageFetchManager.h"
 #import "DFImageView.h"
 #import "UIImageView+Dwarf.h"
 
 
 @implementation DFImageView {
-   __weak DFImageProviderHandler *_handler;
+   __weak DFImageFetchHandler *_handler;
 }
 
 
@@ -27,37 +27,54 @@
 
 
 - (void)setImageWithURL:(NSString *)imageURL placeholder:(UIImage *)placeholder {
-   [self cancelRequestOperation];
+   [self _cancelFetching];
 
    _imageURL = imageURL;
    
-    UIImage *image = [[DFCache imageCache].memoryCache objectForKey:imageURL];
-   if (image) {
-      self.image = image;
-      return;
-   }
+    // Query memory cache
+    UIImage *image = [[DFCache imageCache] cachedObjectForKey:imageURL];
+    if (image) {
+        self.image = image;
+        return;
+    }
+    
    
    if (placeholder) {
       self.image = placeholder;
    }
    
-   __weak DFImageView *weakSelf = self;
-   DFImageProviderHandler *handler = [DFImageProviderHandler handlerWithSuccess:^(UIImage *image, DFResponseSource source) {
-      DFImageView *strongSelf = weakSelf;
-      if (strongSelf) {
-         BOOL animated = (source != DFResponseSourceMemory);
-         [self setImage:image animated:animated];
-      }
-   } failure:nil];
-   
-    [[DFImageProvider shared] requestImageWithURL:imageURL handler:handler];
-   _handler = handler;
+    // Query disk cache
+    [[DFCache imageCache] cachedImageForKey:imageURL completion:^(UIImage *image) {
+        if (_imageURL != imageURL) {
+            return;
+        }
+        if (image) {
+            [self setImage:image animated:YES];
+        } else {
+            [self _fetchImage];
+        }
+    }];
 }
 
+- (void)_fetchImage {
+    __weak DFImageView *weakSelf = self;
+    DFImageFetchHandler *handler = [DFImageFetchHandler handlerWithSuccess:^(UIImage *image) {
+        [weakSelf setImage:image animated:YES];
+    } failure:^(NSError *error) {
+        // Do nothing
+    }];
+    _handler = handler;
+    
+    DFImageFetchTask *task = [[DFImageFetchManager shared] fetchImageWithURL:_imageURL handler:handler];
+    [task setCachingBlock:^(UIImage *image, NSData *data, NSString *lastModified) {
+        DFCache *cache = [DFCache imageCache];
+        [cache storeImage:image imageData:data forKey:_imageURL];
+    }];
+}
 
-- (void)cancelRequestOperation {
+- (void)_cancelFetching {
    if (_imageURL && _handler) {
-      [[DFImageProvider shared] cancelRequestWithURL:_imageURL handler:_handler];
+       [[DFImageFetchManager shared] cancelFetchingWithURL:_imageURL handler:_handler];
       _handler = nil;
    }
 }

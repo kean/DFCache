@@ -117,12 +117,6 @@
 		0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */; };
 		0C3A7EFB180719FF00A46FF6 /* DFTaskMultiplexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3A7EFA180719FF00A46FF6 /* DFTaskMultiplexer.m */; };
 		0C3A7EFC180719FF00A46FF6 /* DFTaskMultiplexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3A7EFA180719FF00A46FF6 /* DFTaskMultiplexer.m */; };
-		0C721DC61805D713003695D0 /* DFImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DC51805D713003695D0 /* DFImageProvider.m */; };
-		0C721DC71805D713003695D0 /* DFImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DC51805D713003695D0 /* DFImageProvider.m */; };
-		0C721DCA1805D760003695D0 /* DFImageProviderHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DC91805D760003695D0 /* DFImageProviderHandler.m */; };
-		0C721DCB1805D760003695D0 /* DFImageProviderHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DC91805D760003695D0 /* DFImageProviderHandler.m */; };
-		0C721DCE1805D7AC003695D0 /* DFImageProviderTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DCD1805D7AC003695D0 /* DFImageProviderTask.m */; };
-		0C721DCF1805D7AC003695D0 /* DFImageProviderTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DCD1805D7AC003695D0 /* DFImageProviderTask.m */; };
 		0C721DDC18060164003695D0 /* DFReusablePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DDB18060164003695D0 /* DFReusablePool.m */; };
 		0C721DDD18060164003695D0 /* DFReusablePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DDB18060164003695D0 /* DFReusablePool.m */; };
 		0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
@@ -256,7 +250,6 @@
 		0C3713AD17D3FECA00766FD9 /* DFButtonLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFButtonLayout.m; sourceTree = "<group>"; };
 		0C3713B017D3FECA00766FD9 /* DFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNetworking.h; sourceTree = "<group>"; };
 		0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNetworkingConstants.h; sourceTree = "<group>"; };
-		0C3713B317D3FECA00766FD9 /* DFImageCaching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageCaching.h; sourceTree = "<group>"; };
 		0C3713B417D3FECA00766FD9 /* DFImageFetchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageFetchHandler.h; sourceTree = "<group>"; };
 		0C3713B517D3FECA00766FD9 /* DFImageFetchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageFetchHandler.m; sourceTree = "<group>"; };
 		0C3713B617D3FECA00766FD9 /* DFImageFetchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageFetchManager.h; sourceTree = "<group>"; };
@@ -281,12 +274,6 @@
 		0C3713D017D3FECA00766FD9 /* DFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageView.m; sourceTree = "<group>"; };
 		0C3A7EF9180719FF00A46FF6 /* DFTaskMultiplexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTaskMultiplexer.h; sourceTree = "<group>"; };
 		0C3A7EFA180719FF00A46FF6 /* DFTaskMultiplexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTaskMultiplexer.m; sourceTree = "<group>"; };
-		0C721DC41805D713003695D0 /* DFImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageProvider.h; sourceTree = "<group>"; };
-		0C721DC51805D713003695D0 /* DFImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageProvider.m; sourceTree = "<group>"; };
-		0C721DC81805D760003695D0 /* DFImageProviderHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageProviderHandler.h; sourceTree = "<group>"; };
-		0C721DC91805D760003695D0 /* DFImageProviderHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageProviderHandler.m; sourceTree = "<group>"; };
-		0C721DCC1805D7AC003695D0 /* DFImageProviderTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageProviderTask.h; sourceTree = "<group>"; };
-		0C721DCD1805D7AC003695D0 /* DFImageProviderTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageProviderTask.m; sourceTree = "<group>"; };
 		0C721DDA18060164003695D0 /* DFReusablePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFReusablePool.h; sourceTree = "<group>"; };
 		0C721DDB18060164003695D0 /* DFReusablePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFReusablePool.m; sourceTree = "<group>"; };
 		0C8C15CD17D406B4004B7DAA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -565,7 +552,6 @@
 			children = (
 				0C3713B017D3FECA00766FD9 /* DFNetworking.h */,
 				0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */,
-				0C721DC31805D70A003695D0 /* Image Provider */,
 				0C3713B217D3FECA00766FD9 /* Image Fetching */,
 			);
 			path = Networking;
@@ -574,7 +560,6 @@
 		0C3713B217D3FECA00766FD9 /* Image Fetching */ = {
 			isa = PBXGroup;
 			children = (
-				0C3713B317D3FECA00766FD9 /* DFImageCaching.h */,
 				0C3713B417D3FECA00766FD9 /* DFImageFetchHandler.h */,
 				0C3713B517D3FECA00766FD9 /* DFImageFetchHandler.m */,
 				0C3713B617D3FECA00766FD9 /* DFImageFetchManager.h */,
@@ -654,19 +639,6 @@
 				0C3713D017D3FECA00766FD9 /* DFImageView.m */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		0C721DC31805D70A003695D0 /* Image Provider */ = {
-			isa = PBXGroup;
-			children = (
-				0C721DC41805D713003695D0 /* DFImageProvider.h */,
-				0C721DC51805D713003695D0 /* DFImageProvider.m */,
-				0C721DC81805D760003695D0 /* DFImageProviderHandler.h */,
-				0C721DC91805D760003695D0 /* DFImageProviderHandler.m */,
-				0C721DCC1805D7AC003695D0 /* DFImageProviderTask.h */,
-				0C721DCD1805D7AC003695D0 /* DFImageProviderTask.m */,
-			);
-			path = "Image Provider";
 			sourceTree = "<group>";
 		};
 		0C721DD918060143003695D0 /* Reusing */ = {
@@ -1051,18 +1023,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C721DCA1805D760003695D0 /* DFImageProviderHandler.m in Sources */,
 				0C37140017D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
 				0C721DDC18060164003695D0 /* DFReusablePool.m in Sources */,
 				0C37140517D3FECA00766FD9 /* UIImageView+Dwarf.m in Sources */,
-				0C721DCE1805D7AC003695D0 /* DFImageProviderTask.m in Sources */,
 				0C37141117D3FECA00766FD9 /* DFTask.m in Sources */,
 				0C2A95E317FBEF290016CB20 /* DFStream.m in Sources */,
 				0C37141617D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
 				0C37141B17D3FECA00766FD9 /* DFButton.m in Sources */,
 				0C37142017D3FECA00766FD9 /* DFButtonLayout.m in Sources */,
 				0C37143217D3FECA00766FD9 /* DFImageFetchManager.m in Sources */,
-				0C721DC61805D713003695D0 /* DFImageProvider.m in Sources */,
 				0C37143717D3FECA00766FD9 /* DFImageFetchTask.m in Sources */,
 				0C091D8C1806B8F1000CCB11 /* DFProcessingHandler.m in Sources */,
 				0C37143C17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
@@ -1113,16 +1082,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C721DC71805D713003695D0 /* DFImageProvider.m in Sources */,
 				0C8C160F17D40F9B004B7DAA /* TDFCacheTests.m in Sources */,
 				0C721DDD18060164003695D0 /* DFReusablePool.m in Sources */,
 				0C091D8D1806B8F1000CCB11 /* DFProcessingHandler.m in Sources */,
 				0C2A95E417FBEF290016CB20 /* DFStream.m in Sources */,
-				0C721DCB1805D760003695D0 /* DFImageProviderHandler.m in Sources */,
 				0C3A7EFC180719FF00A46FF6 /* DFTaskMultiplexer.m in Sources */,
 				0C2A95E617FBEF290016CB20 /* DFStreamChain.m in Sources */,
 				0C091D911806B981000CCB11 /* DFProcessingTask.m in Sources */,
-				0C721DCF1805D7AC003695D0 /* DFImageProviderTask.m in Sources */,
 				0C091D891806B8AA000CCB11 /* DFProcessingCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
