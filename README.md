@@ -19,40 +19,11 @@ DFCache
  Efficient memory and disk key-value storage.
  
  Key features:
- - General purpose. Store any Objective-C objects. Built-in support for `UIImage` and `<NSCodying>` objects. 
- - Metadata. Read/write entry's metadata at any time. Add your custom key-values.
- - Performance. Image caching performance is fantastic due to [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) which is used under the hood. Disk cache faults are handled instantly without disk I/O.
+ - General purpose. Store any Objective-C objects. Built-in support for caching UIImage, <NSCoding> and JSON objects.
+ - Metadata. Add custom metadata for cached objects.
  - LRU cleanup.
+ - Performance. Image caching performance is fantastic due to libjpeg-turbo.
  - Thread safety. 
- 
-Quick example of cache usage:
-```objective-c
-[cache storeObject:image forKey:@"key" data:data transform:^NSData *(id object) {
-    return UIImageJPEGRepresentation(object, 1.0); // Isn't used since we provided data.
-}];
-    
-[cache setMetadataValues:@{ @"UserKey" : @"UserValue" } forKey:@"key"];
-    
-NSDictionary *metadata = [cache metadataForKey:@"key"];
-NSLog(@"Metadata: %@", metadata);
-
-[cache objectForKey:@"key" queue:NULL transform:^id(NSData *data) {
-    return [DFImageProcessing decompressedImageWithData:data];
-} completion:^(id object) {
-    // Display image
-}];
-
-
-2013-09-01 06:25:39.580 otest[1846:303] Metadata: {
-    UserKey = UserValue;
-    "_df_access_date" = "2013-09-01 02:25:39 +0000";
-    "_df_creation_date" = "2013-09-01 02:25:39 +0000";
-    "_df_expiration_date" = "2013-09-29 02:25:39 +0000";
-    "_df_file_name" = 3c6e0b8a9c15224a8228b9a98ca1531d;
-    "_df_file_size" = 59776;
-}
-
-```
 
 DFJPEGTurbo
 -----------
