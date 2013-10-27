@@ -20,6 +20,17 @@
 @end
 
 
+#define _df_reuseable_pool(__pools, __id) \
+({ \
+    _DFReusablePool *pool = [__pools objectForKey:__id]; \
+    if (!pool) { \
+        pool = [_DFReusablePool new]; \
+        [__pools setObject:pool forKey:__id]; \
+    } \
+    pool; \
+}) \
+
+
 @implementation DFReusablePool {
     _DFReusablePool *_anonymousPool;
     NSMutableDictionary *_pools;
@@ -27,6 +38,7 @@
 
 - (id)init {
     if (self = [super init]) {
+        _anonymousPool = [_DFReusablePool new];
         _pools = [NSMutableDictionary new];
     }
     return self;
@@ -37,7 +49,7 @@
 }
 
 - (id<DFReusable>)dequeueObjectWithIdentifier:(NSString *)identifier {
-    return [[self _poolWithIdentifier:identifier] dequeueObject];
+    return [_df_reuseable_pool(_pools, identifier) dequeueObject];
 }
 
 - (void)enqueueObject:(id<DFReusable>)object {
@@ -45,17 +57,7 @@
 }
 
 - (void)enqueueObject:(id<DFReusable>)object withIdentifier:(NSString *)identifier {
-    [[self _poolWithIdentifier:identifier] enqueueObject:object];
-}
-
-- (_DFReusablePool *)_poolWithIdentifier:(NSString *)identifier {
-    _DFReusablePool *pool = [_pools objectForKey:identifier];
-    if (pool) {
-        return pool;
-    }
-    pool = [_DFReusablePool new];
-    [_pools setObject:pool forKey:identifier];
-    return pool;
+    [_df_reuseable_pool(_pools, identifier) enqueueObject:object];
 }
 
 @end
