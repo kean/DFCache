@@ -11,6 +11,8 @@
  */
 
 #import "DFImageFetchHandler.h"
+#import "DFImageFetchTask.h"
+
 
 @implementation DFImageFetchHandler
 
@@ -27,6 +29,22 @@
 + (instancetype)handlerWithSuccess:(DFImageFetchSuccess)success
                            failure:(DFImageFetchFailure)failure {
     return [self handlerWithSuccess:success notModified:nil failure:failure];
+}
+
+- (void)handleTaskCompletion:(DFImageFetchTask *)task {
+    if (task.image) {
+        if (_success) {
+            _success(task.image);
+        }
+    } else if (task.notModified) {
+        if (_notModified) {
+            _notModified();
+        }
+    } else {
+        if (_failure) {
+            _failure(task.error);
+        }
+    }
 }
 
 @end

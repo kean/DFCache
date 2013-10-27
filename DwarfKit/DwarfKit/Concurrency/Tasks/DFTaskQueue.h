@@ -10,16 +10,14 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Foundation/Foundation.h>
-
-
-@class DFTask;
+#import "DFTask.h"
 
 
 /*! Regulates execution of DFTask objects. Similar to NSOperationQueue. However, it's much easier to implement your concurrent tasks using DFTask rather than NSOperation because of more comprehensive semantics.
  
- Features:
- - Performance. Written entirely on top of grand central dispatch.
+ @discussion One of the main task queue features is a great performance (especially compared to NSOperationQueue). It is written entirely on top of grand central dispatch.
+ @discussion In order to get absolute best performance from DFTaskQueue your tasks should implement  - (NSUInteger)hash and - (BOOL)isEqual: methods.
+ @warning DFTaskQueue has an absolute minimum synchronization. All queue methods must be called from the main thread.
  */
 @interface DFTaskQueue : NSObject
 

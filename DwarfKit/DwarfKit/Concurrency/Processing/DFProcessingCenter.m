@@ -14,11 +14,6 @@
 #import "DFTaskMultiplexer.h"
 
 
-@interface DFProcessingCenter() <DFTaskMultiplexerDelegate>
-
-@end
-
-
 @implementation DFProcessingCenter {
     DFTaskMultiplexer *_multiplexer;
     NSUInteger (^_costBlock)(id);
@@ -28,7 +23,6 @@
     if (self = [super init]) {
         _multiplexer = [DFTaskMultiplexer new];
         _multiplexer.queue.maxConcurrentTaskCount = 2;
-        _multiplexer.delegate = self;
         _cache = [NSCache new];
     }
     return self;
@@ -42,7 +36,7 @@
 
 #pragma mark - Requests
 
-- (DFProcessingTask *)processInput:(id)input key:(NSString *)key handler:(DFProcessingHandler *)handler usingBlock:(id (^)(id))processingBlock {
+- (DFProcessingTask *)processInput:(id)input key:(NSString *)key handler:(DFTaskHandler *)handler usingBlock:(id (^)(id))processingBlock {
     if (!key || !input || !processingBlock) {
         return nil;
     }
@@ -55,22 +49,13 @@
     return task;
 }
 
-- (void)cancelProcessingWithKey:(NSString *)key handler:(DFProcessingHandler *)handler {
+- (void)cancelProcessingWithKey:(NSString *)key handler:(DFTaskHandler *)handler {
     if (!handler || !key) {
         return;
     }
     DFTaskWrapper *wrapper = [_multiplexer removeHandler:handler withToken:key];
     if (wrapper.handlers.count == 0) {
         [_multiplexer cancelTaskWithToken:key];
-    }
-}
-
-#pragma mark - DFTaskMultiplexer Delegate
-
-- (void)multiplexer:(DFTaskMultiplexer *)multiplexer didCompleteTask:(DFTaskWrapper *)wrapper {
-    DFProcessingTask *task = (id)wrapper.task;
-    for (DFProcessingHandler *handler in wrapper.handlers) {
-        handler.completion(task.output, task.fromCache);
     }
 }
 

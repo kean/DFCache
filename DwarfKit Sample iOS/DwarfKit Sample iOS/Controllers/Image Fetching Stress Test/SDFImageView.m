@@ -29,11 +29,7 @@
     }];
     _handler = handler;
     
-    DFImageFetchTask *task = [[SDFImageFetchManager shared] fetchImageWithURL:self.imageURL handler:handler];
-    [task setCachingBlock:^(UIImage *image, NSData *data, NSString *lastModified) {
-        DFCache *cache = [DFCache imageCache];
-        [cache storeImage:image imageData:data forKey:self.imageURL];
-    }];
+    [[SDFImageFetchManager shared] fetchImageWithURL:self.imageURL handler:handler];
 }
 
 

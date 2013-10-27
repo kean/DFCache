@@ -12,11 +12,7 @@
 
 #import "DFImageFetchManager.h"
 #import "DFTaskMultiplexer.h"
-
-
-@interface DFImageFetchManager() <DFTaskMultiplexerDelegate>
-
-@end
+#import "DFCache.h"
 
 
 @implementation DFImageFetchManager {
@@ -27,7 +23,6 @@
     if (self = [super init]) {
         _multiplexer = [DFTaskMultiplexer new];
         _multiplexer.queue.maxConcurrentTaskCount = 3;
-        _multiplexer.delegate = self;
     }
     return self;
 }
@@ -43,6 +38,7 @@
         return (id)wrapper.task;
     }
     DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL revalidate:revalidate ifModifiedSince:ifModifiedSince];
+    task.delegate = self;
     [_multiplexer addTask:task withToken:imageURL handler:handler];
     return task;
 }
@@ -61,29 +57,10 @@
     }
 }
 
-#pragma mark - MMImageFetchTask Completion
+#pragma mark - DFImageFetchTaskDelegate
 
-- (void)multiplexer:(DFTaskMultiplexer *)multiplexer didCompleteTask:(DFTaskWrapper *)wrapper {
-    DFImageFetchTask *task = (id)wrapper.task;
-    if (task.image) {
-        for (DFImageFetchHandler *handler in wrapper.handlers) {
-            if (handler.success) {
-                handler.success(task.image);
-            }
-        }
-    } else if (task.notModified) {
-        for (DFImageFetchHandler *handler in wrapper.handlers) {
-            if (handler.notModified) {
-                handler.notModified();
-            }
-        }
-    } else {
-        for (DFImageFetchHandler *handler in wrapper.handlers) {
-            if (handler.failure) {
-                handler.failure(task.error);
-            }
-        }
-    }
+- (void)imageFetchTaskDidFinishProcessingImage:(DFImageFetchTask *)task {
+    [[DFCache imageCache] storeImage:task.image imageData:task.data forKey:task.imageURL];
 }
 
 @end

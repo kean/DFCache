@@ -10,19 +10,35 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Foundation/Foundation.h>
 
+@class DFTask;
+
+
+typedef void (^DFTaskCompletion)(DFTask *task);
+
+/*! The DFTask is an abstract class you use to encapsulate the code and data associated with a single task. This class is used by either subclassing and providing your own - (void)execute implementation or by user predifined DFTaskWithBlock class.
+ @discussion Tasks are executed by instance of DFTaskQueue class. Queue executes task by calling it's - (void)execute method on the global GCD queue with the priority specified by DFTask priority property.
+ */
 @interface DFTask : NSObject
 
 @property (nonatomic, readonly) BOOL isExecuting;
 @property (nonatomic, readonly) BOOL isCancelled;
+@property (nonatomic, readonly) BOOL isFinished;
 
 @property (nonatomic) dispatch_queue_priority_t priority;
+@property (nonatomic, copy) DFTaskCompletion completion;
 
-@property (nonatomic, copy) void (^completion)(DFTask *task);
+- (void)setCompletion:(DFTaskCompletion)completion;
 
 - (void)execute;
 - (void)finish;
 - (void)cancel;
+
+@end
+
+
+@interface DFTaskWithBlock : DFTask
+
+- (id)initWithBlock:(void (^)(void))block;
 
 @end

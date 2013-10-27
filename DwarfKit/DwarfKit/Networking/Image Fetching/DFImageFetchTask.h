@@ -13,18 +13,31 @@
 #import "DFTask.h"
 
 
+@protocol DFImageFetchTaskDelegate;
+
+
 typedef void (^DFImageFetchCaching)(UIImage *image, NSData *data, NSString *lastModified);
 
 
 @interface DFImageFetchTask : DFTask
 
+@property (nonatomic, weak) id<DFImageFetchTaskDelegate> delegate;
 @property (nonatomic, readonly) NSString *imageURL;
 @property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) NSData *data;
+@property (nonatomic, readonly) NSHTTPURLResponse *response;
 @property (nonatomic, readonly) NSError *error;
 @property (nonatomic, readonly) BOOL notModified;
 
 - (id)initWithURL:(NSString *)imageURL;
 - (id)initWithURL:(NSString *)imageURL revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince;
-- (void)setCachingBlock:(DFImageFetchCaching)cachingBlock;
+
+@end
+
+
+@protocol DFImageFetchTaskDelegate
+
+- (NSURLRequest *)requestForImageFetchingTask:(DFImageFetchTask *)task;
+- (void)imageFetchTaskDidFinishProcessingImage:(DFImageFetchTask *)task;
 
 @end

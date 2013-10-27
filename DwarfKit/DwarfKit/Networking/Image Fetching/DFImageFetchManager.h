@@ -15,7 +15,7 @@
 #import "DFTaskQueue.h"
 
 
-@interface DFImageFetchManager : NSObject
+@interface DFImageFetchManager : NSObject <DFImageFetchTaskDelegate>
 
 @property (nonatomic, readonly) DFTaskQueue *queue;
 

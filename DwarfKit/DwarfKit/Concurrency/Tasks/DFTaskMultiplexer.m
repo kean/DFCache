@@ -111,11 +111,30 @@
     if (wrapper.task.isCancelled) {
         return;
     }
-    [_delegate multiplexer:self didCompleteTask:wrapper];
+    for (DFTaskHandler *handler in wrapper.handlers) {
+        [handler handleTaskCompletion:wrapper.task];
+    }
     if (wrapper.token) {
         [_wrappers removeObjectForKey:wrapper.token];
     }
     [_reusableWrappers enqueueObject:wrapper];
+}
+
+@end
+
+
+@implementation DFTaskHandler
+
++ (instancetype)handlerWithSuccess:(DFTaskCompletion)completion {
+    DFTaskHandler *handler = [DFTaskHandler new];
+    handler.completion = completion;
+    return handler;
+}
+
+- (void)handleTaskCompletion:(DFTask *)task {
+    if (_completion) {
+        _completion(task);
+    }
 }
 
 @end

@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		0C091D881806B8AA000CCB11 /* DFProcessingCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D871806B8AA000CCB11 /* DFProcessingCenter.m */; };
 		0C091D891806B8AA000CCB11 /* DFProcessingCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D871806B8AA000CCB11 /* DFProcessingCenter.m */; };
-		0C091D8C1806B8F1000CCB11 /* DFProcessingHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D8B1806B8F1000CCB11 /* DFProcessingHandler.m */; };
-		0C091D8D1806B8F1000CCB11 /* DFProcessingHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D8B1806B8F1000CCB11 /* DFProcessingHandler.m */; };
 		0C091D901806B981000CCB11 /* DFProcessingTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D8F1806B981000CCB11 /* DFProcessingTask.m */; };
 		0C091D911806B981000CCB11 /* DFProcessingTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D8F1806B981000CCB11 /* DFProcessingTask.m */; };
 		0C2A95E317FBEF290016CB20 /* DFStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E017FBEF290016CB20 /* DFStream.m */; };
@@ -115,8 +113,6 @@
 		0C37146117D3FFE600766FD9 /* DFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713D017D3FECA00766FD9 /* DFImageView.m */; };
 		0C37146717D4006B00766FD9 /* DFImageFetchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713B517D3FECA00766FD9 /* DFImageFetchHandler.m */; };
 		0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */; };
-		0C3A7EFB180719FF00A46FF6 /* DFTaskMultiplexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3A7EFA180719FF00A46FF6 /* DFTaskMultiplexer.m */; };
-		0C3A7EFC180719FF00A46FF6 /* DFTaskMultiplexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3A7EFA180719FF00A46FF6 /* DFTaskMultiplexer.m */; };
 		0C721DDC18060164003695D0 /* DFReusablePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DDB18060164003695D0 /* DFReusablePool.m */; };
 		0C721DDD18060164003695D0 /* DFReusablePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DDB18060164003695D0 /* DFReusablePool.m */; };
 		0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
@@ -132,6 +128,8 @@
 		0C8C160317D40E0C004B7DAA /* DwarfKit_Tests_Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C160217D40E0C004B7DAA /* DwarfKit_Tests_Mac.m */; };
 		0C8C160A17D40EB4004B7DAA /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C8C160917D40EB4004B7DAA /* image.jpeg */; };
 		0C8C160F17D40F9B004B7DAA /* TDFCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C160E17D40F9B004B7DAA /* TDFCacheTests.m */; };
+		0CB5EADD181D7DBF0040CB68 /* DFTaskMultiplexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB5EADC181D7DBF0040CB68 /* DFTaskMultiplexer.m */; };
+		0CB5EADE181D7DBF0040CB68 /* DFTaskMultiplexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB5EADC181D7DBF0040CB68 /* DFTaskMultiplexer.m */; };
 		0CED041C17D82B8800AEE503 /* DFMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041B17D82B8800AEE503 /* DFMapping.h */; };
 		0CED041D17D82B8800AEE503 /* DFMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041B17D82B8800AEE503 /* DFMapping.h */; };
 		0CED042017D82C0A00AEE503 /* DFMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041E17D82C0A00AEE503 /* DFMapper.h */; };
@@ -195,8 +193,6 @@
 /* Begin PBXFileReference section */
 		0C091D861806B8AA000CCB11 /* DFProcessingCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFProcessingCenter.h; sourceTree = "<group>"; };
 		0C091D871806B8AA000CCB11 /* DFProcessingCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFProcessingCenter.m; sourceTree = "<group>"; };
-		0C091D8A1806B8F1000CCB11 /* DFProcessingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFProcessingHandler.h; sourceTree = "<group>"; };
-		0C091D8B1806B8F1000CCB11 /* DFProcessingHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFProcessingHandler.m; sourceTree = "<group>"; };
 		0C091D8E1806B981000CCB11 /* DFProcessingTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFProcessingTask.h; sourceTree = "<group>"; };
 		0C091D8F1806B981000CCB11 /* DFProcessingTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFProcessingTask.m; sourceTree = "<group>"; };
 		0C2A95DF17FBEF290016CB20 /* DFStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStream.h; sourceTree = "<group>"; };
@@ -272,8 +268,6 @@
 		0C3713CD17D3FECA00766FD9 /* DFTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTesting.h; sourceTree = "<group>"; };
 		0C3713CF17D3FECA00766FD9 /* DFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageView.h; sourceTree = "<group>"; };
 		0C3713D017D3FECA00766FD9 /* DFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageView.m; sourceTree = "<group>"; };
-		0C3A7EF9180719FF00A46FF6 /* DFTaskMultiplexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTaskMultiplexer.h; sourceTree = "<group>"; };
-		0C3A7EFA180719FF00A46FF6 /* DFTaskMultiplexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTaskMultiplexer.m; sourceTree = "<group>"; };
 		0C721DDA18060164003695D0 /* DFReusablePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFReusablePool.h; sourceTree = "<group>"; };
 		0C721DDB18060164003695D0 /* DFReusablePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFReusablePool.m; sourceTree = "<group>"; };
 		0C8C15CD17D406B4004B7DAA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -291,6 +285,8 @@
 		0C8C160917D40EB4004B7DAA /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpeg; sourceTree = "<group>"; };
 		0C8C160D17D40F9B004B7DAA /* TDFCacheTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFCacheTests.h; sourceTree = "<group>"; };
 		0C8C160E17D40F9B004B7DAA /* TDFCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFCacheTests.m; sourceTree = "<group>"; };
+		0CB5EADB181D7DBF0040CB68 /* DFTaskMultiplexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTaskMultiplexer.h; sourceTree = "<group>"; };
+		0CB5EADC181D7DBF0040CB68 /* DFTaskMultiplexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTaskMultiplexer.m; sourceTree = "<group>"; };
 		0CED041B17D82B8800AEE503 /* DFMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFMapping.h; sourceTree = "<group>"; };
 		0CED041E17D82C0A00AEE503 /* DFMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFMapper.h; sourceTree = "<group>"; };
 		0CED041F17D82C0A00AEE503 /* DFMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFMapper.m; sourceTree = "<group>"; };
@@ -364,8 +360,6 @@
 			children = (
 				0C091D861806B8AA000CCB11 /* DFProcessingCenter.h */,
 				0C091D871806B8AA000CCB11 /* DFProcessingCenter.m */,
-				0C091D8A1806B8F1000CCB11 /* DFProcessingHandler.h */,
-				0C091D8B1806B8F1000CCB11 /* DFProcessingHandler.m */,
 				0C091D8E1806B981000CCB11 /* DFProcessingTask.h */,
 				0C091D8F1806B981000CCB11 /* DFProcessingTask.m */,
 			);
@@ -525,13 +519,13 @@
 		0C3713A317D3FECA00766FD9 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
-				0C3713A417D3FECA00766FD9 /* DFTask+DFTaskPrivate.h */,
 				0C3713A517D3FECA00766FD9 /* DFTask.h */,
 				0C3713A617D3FECA00766FD9 /* DFTask.m */,
 				0C3713A717D3FECA00766FD9 /* DFTaskQueue.h */,
 				0C3713A817D3FECA00766FD9 /* DFTaskQueue.m */,
-				0C3A7EF9180719FF00A46FF6 /* DFTaskMultiplexer.h */,
-				0C3A7EFA180719FF00A46FF6 /* DFTaskMultiplexer.m */,
+				0CB5EADB181D7DBF0040CB68 /* DFTaskMultiplexer.h */,
+				0CB5EADC181D7DBF0040CB68 /* DFTaskMultiplexer.m */,
+				0C3713A417D3FECA00766FD9 /* DFTask+DFTaskPrivate.h */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -1033,7 +1027,7 @@
 				0C37142017D3FECA00766FD9 /* DFButtonLayout.m in Sources */,
 				0C37143217D3FECA00766FD9 /* DFImageFetchManager.m in Sources */,
 				0C37143717D3FECA00766FD9 /* DFImageFetchTask.m in Sources */,
-				0C091D8C1806B8F1000CCB11 /* DFProcessingHandler.m in Sources */,
+				0CB5EADD181D7DBF0040CB68 /* DFTaskMultiplexer.m in Sources */,
 				0C37143C17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
 				0C091D901806B981000CCB11 /* DFProcessingTask.m in Sources */,
 				0C37144117D3FECA00766FD9 /* DFCache.m in Sources */,
@@ -1041,7 +1035,6 @@
 				0C37144617D3FECA00766FD9 /* DFCrypto.m in Sources */,
 				0C37145117D3FECA00766FD9 /* DFImageProcessing.m in Sources */,
 				0C37145617D3FECA00766FD9 /* DFJPEGTurbo.m in Sources */,
-				0C3A7EFB180719FF00A46FF6 /* DFTaskMultiplexer.m in Sources */,
 				0C37146117D3FFE600766FD9 /* DFImageView.m in Sources */,
 				0C37146717D4006B00766FD9 /* DFImageFetchHandler.m in Sources */,
 				0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */,
@@ -1083,10 +1076,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C8C160F17D40F9B004B7DAA /* TDFCacheTests.m in Sources */,
+				0CB5EADE181D7DBF0040CB68 /* DFTaskMultiplexer.m in Sources */,
 				0C721DDD18060164003695D0 /* DFReusablePool.m in Sources */,
-				0C091D8D1806B8F1000CCB11 /* DFProcessingHandler.m in Sources */,
 				0C2A95E417FBEF290016CB20 /* DFStream.m in Sources */,
-				0C3A7EFC180719FF00A46FF6 /* DFTaskMultiplexer.m in Sources */,
 				0C2A95E617FBEF290016CB20 /* DFStreamChain.m in Sources */,
 				0C091D911806B981000CCB11 /* DFProcessingTask.m in Sources */,
 				0C091D891806B8AA000CCB11 /* DFProcessingCenter.m in Sources */,

@@ -18,6 +18,13 @@
     __weak id<_DFTaskDelegate> _impl_delegate;
 }
 
+- (id)init {
+    if (self = [super init]) {
+        _priority = DISPATCH_QUEUE_PRIORITY_DEFAULT;
+    }
+    return self;
+}
+
 - (BOOL)isEqual:(id)object {
     return self == object;
 }
@@ -46,6 +53,31 @@
 
 - (void)_setCanceled:(BOOL)canceled {
     _isCancelled = canceled;
+}
+
+- (void)_setFinished:(BOOL)finished {
+    _isFinished = finished;
+}
+
+@end
+
+
+@implementation DFTaskWithBlock {
+    void (^_block)(void);
+}
+
+- (id)initWithBlock:(void (^)(void))block {
+    if (!block) {
+        return nil;
+    }
+    if (self = [super init]) {
+        _block = [block copy];
+    }
+    return self;
+}
+
+- (void)execute {
+    _block();
 }
 
 @end

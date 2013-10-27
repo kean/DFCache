@@ -10,11 +10,15 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFTaskQueue.h"
 #import "DFReusablePool.h"
+#import "DFTaskQueue.h"
 
 
-@class DFTaskMultiplexer;
+@protocol DFTaskHandler
+
+- (void)handleTaskCompletion:(DFTask *)task;
+
+@end
 
 
 @interface DFTaskWrapper : NSObject <DFReusable>
@@ -23,30 +27,34 @@
 @property (nonatomic) DFTask *task;
 @property (nonatomic) NSMutableArray *handlers;
 
-- (id)initWithToken:(NSString *)token
-               task:(DFTask *)task
-            handler:(id)handler;
+- (id)initWithToken:(NSString *)token task:(DFTask *)task handler:(id)handler;
 
 @end
 
 
-@protocol DFTaskMultiplexerDelegate <NSObject>
-
-- (void)multiplexer:(DFTaskMultiplexer *)multiplexer didCompleteTask:(DFTaskWrapper *)wrapper;
-
-@end
-
-
+/*! Task multiplexing is a simple model built on top of DFTask and DFTaskQueue that allows multiple user requests with the same token to be handled by a single task. 
+ @discussion Multiplexing and demultiplexing is implemented by wrapping tasks into instances of DFTaskWrapper class having array of handlers (objects conforming to <DFTaskHandler> protocol). DFTaskMultiplexer provides it's own <DFTaskHandler> implementation (DFTaskHandler class) with a single completion block (original DFTaskCompletion block of DFTask).
+ */
 @interface DFTaskMultiplexer : NSObject
 
-@property (nonatomic, weak) id<DFTaskMultiplexerDelegate> delegate;
 @property (nonatomic, readonly) DFTaskQueue *queue;
 
 - (id)initWithQueue:(DFTaskQueue *)queue;
 
-- (DFTaskWrapper *)addHandler:(id)handler withToken:(NSString *)token;
-- (DFTaskWrapper *)addTask:(DFTask *)task withToken:(NSString *)token handler:(id)handler;
-- (DFTaskWrapper *)removeHandler:(id)handler withToken:(NSString *)token;
+- (DFTaskWrapper *)addHandler:(id<DFTaskHandler>)handler withToken:(NSString *)token;
+- (DFTaskWrapper *)addTask:(DFTask *)task withToken:(NSString *)token handler:(id<DFTaskHandler>)handler;
+- (DFTaskWrapper *)removeHandler:(id<DFTaskHandler>)handler withToken:(NSString *)token;
 - (void)cancelTaskWithToken:(NSString *)token;
+
+@end
+
+
+/*! Basic <DFTaskHandler> implementation with a single completion block (original DFTaskCompletion block of DFTask).
+ */
+@interface DFTaskHandler : NSObject <DFTaskHandler>
+
+@property (nonatomic, copy) DFTaskCompletion completion;
+
++ (instancetype)handlerWithSuccess:(DFTaskCompletion)completion;
 
 @end

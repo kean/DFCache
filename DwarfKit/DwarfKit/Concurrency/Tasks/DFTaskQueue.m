@@ -40,10 +40,6 @@
     [self _executeTasks];
 }
 
-- (NSOrderedSet *)tasks {
-    return _tasks;
-}
-
 #pragma mark - Task Execution
 
 - (void)_executeTasks {
@@ -74,12 +70,16 @@
 
 - (void)_taskDidFinish:(DFTask *)task {
     dispatch_async(dispatch_get_main_queue(), ^{
-        _executingTaskCount--;
-        [_tasks removeObject:task];
-        [self _executeTasks];
+        if (task.isFinished) {
+            return;
+        }
         if (task.completion) {
             task.completion(task);
         }
+        [task _setFinished:YES];
+        _executingTaskCount--;
+        [_tasks removeObject:task];
+        [self _executeTasks];
     });
 }
 

@@ -29,7 +29,6 @@ static NSString * const _kIfModifiedSinceKey = @"If-Modified-Since";
     NSMutableData *_data;
     NSString *_ifModifiedSince;
     BOOL _revalidate;
-    DFImageFetchCaching _cachingBlock;
 }
 
 - (id)initWithURL:(NSString *)imageURL revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince {
@@ -49,11 +48,6 @@ static NSString * const _kIfModifiedSinceKey = @"If-Modified-Since";
     return [_imageURL hash];
 }
 
-- (void)setCachingBlock:(DFImageFetchCaching)cachingBlock {
-    if (!_cachingBlock) {
-        _cachingBlock = [cachingBlock copy];
-    }
-}
 #pragma mark - Task Implementation
 
 - (void)execute {
@@ -111,9 +105,8 @@ static NSString * const _kIfModifiedSinceKey = @"If-Modified-Since";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @autoreleasepool {
             _image = [DFImageProcessing decompressedImageWithData:_data];
-            if (_cachingBlock && _image) {
-                NSString *lastModified = [_response allHeaderFields][_kLastModifiedKey];
-                _cachingBlock(_image, _data, lastModified);
+            if (_image) {
+                [_delegate imageFetchTaskDidFinishProcessingImage:self];
             }
             [self finish];
         }
