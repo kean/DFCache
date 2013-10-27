@@ -19,9 +19,9 @@
 
 @interface DFReusablePool : NSObject
 
-@property (nonatomic) NSUInteger maxReusableCount;
-
 - (id<DFReusable>)dequeueObject;
+- (id<DFReusable>)dequeueObjectWithIdentifier:(NSString *)identifier;
 - (void)enqueueObject:(id<DFReusable>)object;
+- (void)enqueueObject:(id<DFReusable>)object withIdentifier:(NSString *)identifier;
 
 @end

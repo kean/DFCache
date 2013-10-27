@@ -12,29 +12,76 @@
 
 #import "DFReusablePool.h"
 
+@interface _DFReusablePool : NSObject
+
+- (void)enqueueObject:(id<DFReusable>)object;
+- (id<DFReusable>)dequeueObject;
+
+@end
+
+
 @implementation DFReusablePool {
+    _DFReusablePool *_anonymousPool;
+    NSMutableDictionary *_pools;
+}
+
+- (id)init {
+    if (self = [super init]) {
+        _pools = [NSMutableDictionary new];
+    }
+    return self;
+}
+
+- (id<DFReusable>)dequeueObject {
+    return [_anonymousPool dequeueObject];
+}
+
+- (id<DFReusable>)dequeueObjectWithIdentifier:(NSString *)identifier {
+    return [[self _poolWithIdentifier:identifier] dequeueObject];
+}
+
+- (void)enqueueObject:(id<DFReusable>)object {
+    [_anonymousPool enqueueObject:object];
+}
+
+- (void)enqueueObject:(id<DFReusable>)object withIdentifier:(NSString *)identifier {
+    [[self _poolWithIdentifier:identifier] enqueueObject:object];
+}
+
+- (_DFReusablePool *)_poolWithIdentifier:(NSString *)identifier {
+    _DFReusablePool *pool = [_pools objectForKey:identifier];
+    if (pool) {
+        return pool;
+    }
+    pool = [_DFReusablePool new];
+    [_pools setObject:pool forKey:identifier];
+    return pool;
+}
+
+@end
+
+
+@implementation _DFReusablePool {
     NSMutableArray *_pool;
 }
 
 - (id)init {
     if (self = [super init]) {
         _pool = [NSMutableArray new];
-        _maxReusableCount = 40;
     }
     return self;
 }
 
 - (void)enqueueObject:(id<DFReusable>)object {
-    if (_pool.count < _maxReusableCount) {
+    if (object) {
         [_pool addObject:object];
         [object prepareForReuse];
     }
 }
 
 - (id<DFReusable>)dequeueObject {
-    id<DFReusable> object;
-    if (_pool.count > 0) {
-        object = [_pool lastObject];
+    id<DFReusable> object = [_pool lastObject];
+    if (object) {
         [_pool removeLastObject];
     }
     return object;
