@@ -70,6 +70,9 @@ Example:
 ```objective-c
 NSDictionary *JSON = safe_cast(NSDictionary, response);
 ```
+DFReusablePool
+--------------
+Supports object reuse. Helps to avoid unnecessery memory allocations.
 Installation
 ------------
 1. If you are going to use DwarfKit categories: In your project go to Target / Build Settings, search for "Other Linker Flags" and add '-ObjC'.
