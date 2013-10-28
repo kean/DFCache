@@ -55,6 +55,6 @@
 
 @property (nonatomic, copy) DFTaskCompletion completion;
 
-+ (instancetype)handlerWithSuccess:(DFTaskCompletion)completion;
++ (instancetype)handlerWithCompletion:(DFTaskCompletion)completion;
 
 @end

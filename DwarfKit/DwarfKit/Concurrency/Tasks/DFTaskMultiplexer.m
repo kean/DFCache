@@ -125,7 +125,7 @@
 
 @implementation DFTaskHandler
 
-+ (instancetype)handlerWithSuccess:(DFTaskCompletion)completion {
++ (instancetype)handlerWithCompletion:(DFTaskCompletion)completion {
     DFTaskHandler *handler = [DFTaskHandler new];
     handler.completion = completion;
     return handler;
