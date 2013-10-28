@@ -16,8 +16,10 @@
 
 typedef void (^DFTaskCompletion)(DFTask *task);
 
-/*! The DFTask is an abstract class you use to encapsulate the code and data associated with a single task. This class is used by either subclassing and providing your own - (void)execute implementation or by user predifined DFTaskWithBlock class.
- @discussion Tasks are executed by instance of DFTaskQueue class. Queue executes task by calling it's - (void)execute method on the global GCD queue with the priority specified by DFTask priority property.
+/*! The DFTask is an abstract class that is used to encapsulate the code and data associated with a single task. This class is used by either subclassing and providing your own - (void)execute implementation or by using predifined DFTaskWithBlock class.
+ @discussion Task is a single-shot object, it cannot be reused. Tasks are executed by adding them a queue (an instance of DFTaskQueue class). Queue executes task by calling it's - (void)execute method on the global GCD queue with a priority specified by DFTask priority property.
+ @discussion Concurrent tasks semantics are fairly simple. All you need to do is implement - (void)execute method and call - (void)finish when the work is done. You might also want to define getter methods to access the resulting data from the task. You may also want to respond to the cancellation of the task by either overriding - (void)cancel method or quering - (BOOL)isCancelled while executing. All you need to do is call - (void)finish.
+ @warning DFTask is not multhithread-aware (in order to get best performance out of it). If you intend to call - (void)cancel method then call it from the main thread.
  */
 @interface DFTask : NSObject
 

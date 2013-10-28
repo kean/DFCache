@@ -32,8 +32,8 @@
 @end
 
 
-/*! Task multiplexing is a simple model built on top of DFTask and DFTaskQueue that allows multiple user requests with the same token to be handled by a single task. 
- @discussion Multiplexing and demultiplexing is implemented by wrapping tasks into instances of DFTaskWrapper class having array of handlers (objects conforming to <DFTaskHandler> protocol). DFTaskMultiplexer provides it's own <DFTaskHandler> implementation (DFTaskHandler class) with a single completion block (original DFTaskCompletion block of DFTask).
+/*! Task multiplexing is a simple model built on top of DFTask and DFTaskQueue that allows multiple requests with the same token to be handled by a single task.
+ @discussion Multiplexing and demultiplexing is implemented by wrapping tasks into instances of DFTaskWrapper class having array of handlers (objects conforming to <DFTaskHandler> protocol). DFTaskMultiplexer provides it's own <DFTaskHandler> implementation (DFTaskHandler class) with a single completion block (which is the same as the original DFTaskCompletion block of DFTask).
  */
 @interface DFTaskMultiplexer : NSObject
 
@@ -49,7 +49,7 @@
 @end
 
 
-/*! Basic <DFTaskHandler> implementation with a single completion block (original DFTaskCompletion block of DFTask).
+/*! Basic <DFTaskHandler> implementation with a single completion block (which is the same as the original DFTaskCompletion block of DFTask).
  */
 @interface DFTaskHandler : NSObject <DFTaskHandler>
 

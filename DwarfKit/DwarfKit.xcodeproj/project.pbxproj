@@ -237,7 +237,7 @@
 		0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Dwarf.m"; sourceTree = "<group>"; };
 		0C3713A417D3FECA00766FD9 /* DFTask+DFTaskPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFTask+DFTaskPrivate.h"; sourceTree = "<group>"; };
 		0C3713A517D3FECA00766FD9 /* DFTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTask.h; sourceTree = "<group>"; };
-		0C3713A617D3FECA00766FD9 /* DFTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTask.m; sourceTree = "<group>"; };
+		0C3713A617D3FECA00766FD9 /* DFTask.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = DFTask.m; sourceTree = "<group>"; tabWidth = 4; };
 		0C3713A717D3FECA00766FD9 /* DFTaskQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTaskQueue.h; sourceTree = "<group>"; };
 		0C3713A817D3FECA00766FD9 /* DFTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTaskQueue.m; sourceTree = "<group>"; };
 		0C3713AA17D3FECA00766FD9 /* DFButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFButton.h; sourceTree = "<group>"; };

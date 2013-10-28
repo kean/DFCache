@@ -98,7 +98,7 @@
 
 - (void)cancelAllTasks {
     for (DFTask *task in _tasks) {
-        [task cancel];
+       [task cancel];
     }
 }
 

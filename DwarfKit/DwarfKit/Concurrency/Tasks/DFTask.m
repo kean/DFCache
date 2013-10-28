@@ -30,7 +30,7 @@
 }
 
 - (void)execute {
-    return;
+    [self doesNotRecognizeSelector:_cmd];
 }
 
 - (void)finish {
@@ -38,7 +38,7 @@
 }
 
 - (void)cancel {
-    [self _setCanceled:YES];
+    _isCancelled = YES;
 }
 
 #pragma mark - DFTask+DFTaskPrivate
@@ -49,10 +49,6 @@
 
 - (void)_setExecuting:(BOOL)executing {
     _isExecuting = executing;
-}
-
-- (void)_setCanceled:(BOOL)canceled {
-    _isCancelled = canceled;
 }
 
 - (void)_setFinished:(BOOL)finished {
