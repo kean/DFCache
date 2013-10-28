@@ -18,7 +18,7 @@ typedef void (^DFImageFetchNotModified)();
 typedef void (^DFImageFetchFailure)(NSError *error);
 
 
-@interface DFImageFetchHandler : NSObject <DFTaskHandler>
+@interface DFImageFetchHandler : NSObject <DFTaskHandling>
 
 @property (nonatomic, copy) DFImageFetchSuccess success;
 @property (nonatomic, copy) DFImageFetchNotModified notModified;

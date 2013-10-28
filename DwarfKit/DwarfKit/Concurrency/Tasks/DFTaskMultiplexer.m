@@ -17,9 +17,8 @@
 
 @implementation DFTaskWrapper
 
-- (id)initWithToken:(NSString *)token task:(DFTask *)task handler:(id)handler {
+- (id)initWithTask:(DFTask *)task handler:(id)handler {
     if (self = [super init]) {
-        _token = token;
         _task = task;
         _handlers = [NSMutableArray arrayWithObject:handler];
     }
@@ -27,7 +26,6 @@
 }
 
 - (void)prepareForReuse {
-    _token = nil;
     _task = nil;
     [_handlers removeAllObjects];
 }
@@ -43,9 +41,9 @@
 
 - (id)initWithQueue:(DFTaskQueue *)queue {
     if (self = [super init]) {
+        _queue = [DFTaskQueue new];
         _wrappers = [NSMutableDictionary new];
         _reusableWrappers = [DFReusablePool new];
-        _queue = [DFTaskQueue new];
     }
     return self;
 }
@@ -54,42 +52,39 @@
     return [self initWithQueue:[DFTaskQueue new]];
 }
 
-- (DFTaskWrapper *)addHandler:(id)handler withToken:(NSString *)token {
-    DFTaskWrapper *wrapper = [_wrappers objectForKey:token];
-    if (wrapper) {
-        [wrapper.handlers addObject:handler];
-        return wrapper;
+- (DFTaskWrapper *)addHandler:(id<DFTaskHandling>)handler withKey:(id<NSCopying>)key {
+    DFTaskWrapper *wrapper = [_wrappers objectForKey:key];
+    if (!wrapper) {
+        return nil;
     }
-    return nil;
-}
-
-- (DFTaskWrapper *)dequeueReusableWrapper {
-    return [_reusableWrappers dequeueObject];
-}
-
-- (DFTaskWrapper *)addTask:(DFTask *)task withToken:(NSString *)token handler:(id)handler {
-    DFTaskWrapper *wrapper = [_reusableWrappers dequeueObject];
-    if (wrapper) {
-        wrapper.task = task;
-        wrapper.token = token;
-        [wrapper.handlers addObject:handler];
-    } else {
-        wrapper = [[DFTaskWrapper alloc] initWithToken:token task:task handler:handler];
-    }
-    __weak DFTaskWrapper *weakWrapper = wrapper;
-    [wrapper.task setCompletion:^(DFTask *task) {
-        [self _handleTaskCompletion:weakWrapper];
-    }];
-    [_wrappers setObject:wrapper forKey:token];
-    [_queue addTask:wrapper.task];
+    [wrapper.handlers addObject:handler];
     return wrapper;
 }
 
-- (DFTaskWrapper *)removeHandler:(id)handler withToken:(NSString *)token {
-    if (!handler || !token) {
+- (DFTaskWrapper *)addTask:(DFTask *)task withKey:(id<NSCopying>)key handler:(id<DFTaskHandling>)handler {
+    DFTaskWrapper *wrapper = [_reusableWrappers dequeueObject];
+    if (wrapper) {
+        wrapper.task = task;
+        [wrapper.handlers addObject:handler];
+    } else {
+        wrapper = [[DFTaskWrapper alloc] initWithTask:task handler:handler];
+    }
+    __weak DFTaskMultiplexer *weakSelf = self;
+    __weak DFTaskWrapper *weakWrapper = wrapper;
+    id<NSCopying> keyCopy = [key copyWithZone:nil];
+    [wrapper.task setCompletion:^(DFTask *task) {
+        [weakSelf _handleTaskCompletion:task wrapper:weakWrapper key:keyCopy];
+    }];
+    [_wrappers setObject:wrapper forKey:key];
+    [_queue addTask:task];
+    return wrapper;
+}
+
+- (DFTaskWrapper *)removeHandler:(id<DFTaskHandling>)handler withKey:(id<NSCopying>)key {
+    if (!handler || !key) {
         return nil;
     }
-    DFTaskWrapper *wrapper = [_wrappers objectForKey:token];
+    DFTaskWrapper *wrapper = [_wrappers objectForKey:key];
     if (!wrapper) {
         return nil;
     }
@@ -97,25 +92,12 @@
     return wrapper;
 }
 
-- (void)cancelTaskWithToken:(NSString *)token {
-    DFTaskWrapper *wrapper = [_wrappers objectForKey:token];
-    [wrapper.task cancel];
-    [wrapper.task setCompletion:nil];
-    if (token) {
-        [_wrappers removeObjectForKey:token];
+- (void)_handleTaskCompletion:(DFTask *)task wrapper:(DFTaskWrapper *)wrapper key:(id<NSCopying>)key {
+    for (id<DFTaskHandling> handler in wrapper.handlers) {
+        [handler handleTaskCompletion:task];
     }
-    [_reusableWrappers enqueueObject:wrapper];
-}
-
-- (void)_handleTaskCompletion:(DFTaskWrapper *)wrapper {
-    if (wrapper.task.isCancelled) {
-        return;
-    }
-    for (DFTaskHandler *handler in wrapper.handlers) {
-        [handler handleTaskCompletion:wrapper.task];
-    }
-    if (wrapper.token) {
-        [_wrappers removeObjectForKey:wrapper.token];
+    if (key) {
+        [_wrappers removeObjectForKey:key];
     }
     [_reusableWrappers enqueueObject:wrapper];
 }

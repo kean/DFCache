@@ -40,12 +40,12 @@
     if (!key || !input || !processingBlock) {
         return nil;
     }
-    DFTaskWrapper *wrapper = [_multiplexer addHandler:handler withToken:key];
+    DFTaskWrapper *wrapper = [_multiplexer addHandler:handler withKey:key];
     if (wrapper) {
         return (id)wrapper.task;
     }
     DFProcessingTask *task = [[DFProcessingTask alloc] initWithInput:input key:key processingBlock:processingBlock];
-    [_multiplexer addTask:task withToken:key handler:handler];
+    [_multiplexer addTask:task withKey:key handler:handler];
     return task;
 }
 
@@ -53,9 +53,9 @@
     if (!handler || !key) {
         return;
     }
-    DFTaskWrapper *wrapper = [_multiplexer removeHandler:handler withToken:key];
+    DFTaskWrapper *wrapper = [_multiplexer removeHandler:handler withKey:key];
     if (wrapper.handlers.count == 0) {
-        [_multiplexer cancelTaskWithToken:key];
+        [wrapper.task cancel];
     }
 }
 

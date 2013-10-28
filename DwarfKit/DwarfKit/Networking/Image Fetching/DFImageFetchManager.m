@@ -27,19 +27,23 @@
     return self;
 }
 
+- (DFTaskQueue *)queue {
+    return _multiplexer.queue;
+}
+
 #pragma mark - Fetching
 
 - (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince {
     if (!imageURL || !handler) {
         return nil;
     }
-    DFTaskWrapper *wrapper = [_multiplexer addHandler:handler withToken:imageURL];
+    DFTaskWrapper *wrapper = [_multiplexer addHandler:handler withKey:imageURL];
     if (wrapper) {
         return (id)wrapper.task;
     }
     DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL revalidate:revalidate ifModifiedSince:ifModifiedSince];
     task.delegate = self;
-    [_multiplexer addTask:task withToken:imageURL handler:handler];
+    [_multiplexer addTask:task withKey:imageURL handler:handler];
     return task;
 }
 
@@ -51,9 +55,9 @@
     if (!handler || !imageURL) {
         return;
     }
-    DFTaskWrapper *wrapper = [_multiplexer removeHandler:handler withToken:imageURL];
+    DFTaskWrapper *wrapper = [_multiplexer removeHandler:handler withKey:imageURL];
     if (wrapper.handlers.count == 0 && !wrapper.task.isExecuting) {
-        [_multiplexer cancelTaskWithToken:imageURL];
+        [wrapper.task cancel];
     }
 }
 

@@ -14,6 +14,7 @@
 #import "DFSFlickrPhoto.h"
 #import "DFSFlickrRecentPhotos.h"
 #import "DFImageView.h"
+#import "DFImageFetchManager.h"
 
 
 static NSString *_kCellReusableIdentifier = @"reuse_id";
@@ -77,6 +78,11 @@ static NSString *_kCellReusableIdentifier = @"reuse_id";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadFlickrPhotos];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[DFImageFetchManager shared].queue cancelAllTasks];
 }
 
 #pragma mark - Loading Data
