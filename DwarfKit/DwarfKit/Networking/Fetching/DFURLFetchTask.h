@@ -12,6 +12,7 @@
 
 #import "DFTask.h"
 
+
 @interface DFURLFetchTask : DFTask <NSURLConnectionDelegate>
 
 @property (nonatomic, readonly) NSString *URL;

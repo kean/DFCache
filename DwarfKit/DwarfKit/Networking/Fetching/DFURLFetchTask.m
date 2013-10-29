@@ -12,6 +12,7 @@
 
 #import "DFURLFetchTask.h"
 
+
 @implementation DFURLFetchTask {
     NSMutableData *_data;
 }
@@ -36,7 +37,6 @@
     }
 
     NSURLRequest *request = [self requestWithURL:_URL];
-    
     _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
     if (!_connection) {
         [self finish];

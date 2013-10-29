@@ -15,8 +15,8 @@
 #import "DFCache.h"
 
 
-static NSString * const _kLastModifiedKey = @"Last-Modified";
-static NSString * const _kIfModifiedSinceKey = @"If-Modified-Since";
+static NSString *const _kLastModifiedKey = @"Last-Modified";
+static NSString *const _kIfModifiedSinceKey = @"If-Modified-Since";
 
 
 @interface DFImageFetchTask() <NSURLConnectionDataDelegate>
