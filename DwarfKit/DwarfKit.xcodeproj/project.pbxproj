@@ -115,6 +115,8 @@
 		0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */; };
 		0C721DDC18060164003695D0 /* DFReusablePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DDB18060164003695D0 /* DFReusablePool.m */; };
 		0C721DDD18060164003695D0 /* DFReusablePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C721DDB18060164003695D0 /* DFReusablePool.m */; };
+		0C86997F182031AC009F07D2 /* DFURLFetchTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C86997E182031AC009F07D2 /* DFURLFetchTask.m */; };
+		0C869980182031AC009F07D2 /* DFURLFetchTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C86997E182031AC009F07D2 /* DFURLFetchTask.m */; };
 		0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
 		0C8C15D017D406DD004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
 		0C8C15D117D40704004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
@@ -270,6 +272,8 @@
 		0C3713D017D3FECA00766FD9 /* DFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageView.m; sourceTree = "<group>"; };
 		0C721DDA18060164003695D0 /* DFReusablePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFReusablePool.h; sourceTree = "<group>"; };
 		0C721DDB18060164003695D0 /* DFReusablePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFReusablePool.m; sourceTree = "<group>"; };
+		0C86997D182031AC009F07D2 /* DFURLFetchTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFURLFetchTask.h; sourceTree = "<group>"; };
+		0C86997E182031AC009F07D2 /* DFURLFetchTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFURLFetchTask.m; sourceTree = "<group>"; };
 		0C8C15CD17D406B4004B7DAA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0C8C15CF17D406DD004B7DAA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		0C8C15E217D40DFC004B7DAA /* DwarfKit Tests iOS.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DwarfKit Tests iOS.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -546,6 +550,7 @@
 			children = (
 				0C3713B017D3FECA00766FD9 /* DFNetworking.h */,
 				0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */,
+				0C86997C1820319F009F07D2 /* Fetching */,
 				0C3713B217D3FECA00766FD9 /* Image Fetching */,
 			);
 			path = Networking;
@@ -642,6 +647,15 @@
 				0C721DDB18060164003695D0 /* DFReusablePool.m */,
 			);
 			path = Reusing;
+			sourceTree = "<group>";
+		};
+		0C86997C1820319F009F07D2 /* Fetching */ = {
+			isa = PBXGroup;
+			children = (
+				0C86997D182031AC009F07D2 /* DFURLFetchTask.h */,
+				0C86997E182031AC009F07D2 /* DFURLFetchTask.m */,
+			);
+			path = Fetching;
 			sourceTree = "<group>";
 		};
 		0C8C15E617D40DFC004B7DAA /* DwarfKit Tests iOS */ = {
@@ -1038,6 +1052,7 @@
 				0C37146117D3FFE600766FD9 /* DFImageView.m in Sources */,
 				0C37146717D4006B00766FD9 /* DFImageFetchHandler.m in Sources */,
 				0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */,
+				0C86997F182031AC009F07D2 /* DFURLFetchTask.m in Sources */,
 				0CED042217D82C0A00AEE503 /* DFMapper.m in Sources */,
 				0C091D881806B8AA000CCB11 /* DFProcessingCenter.m in Sources */,
 			);
@@ -1080,6 +1095,7 @@
 				0C721DDD18060164003695D0 /* DFReusablePool.m in Sources */,
 				0C2A95E417FBEF290016CB20 /* DFStream.m in Sources */,
 				0C2A95E617FBEF290016CB20 /* DFStreamChain.m in Sources */,
+				0C869980182031AC009F07D2 /* DFURLFetchTask.m in Sources */,
 				0C091D911806B981000CCB11 /* DFProcessingTask.m in Sources */,
 				0C091D891806B8AA000CCB11 /* DFProcessingCenter.m in Sources */,
 			);

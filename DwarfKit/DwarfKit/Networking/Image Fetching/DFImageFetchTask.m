@@ -25,15 +25,12 @@ static NSString * const _kIfModifiedSinceKey = @"If-Modified-Since";
 
 
 @implementation DFImageFetchTask {
-    NSHTTPURLResponse *_response;
-    NSMutableData *_data;
     NSString *_ifModifiedSince;
     BOOL _revalidate;
 }
 
 - (id)initWithURL:(NSString *)imageURL revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince {
-    if (self = [super init]) {
-        _imageURL = imageURL;
+    if (self = [super initWithURL:imageURL]) {
         _ifModifiedSince = ifModifiedSince;
         _revalidate = revalidate;
     }
@@ -44,41 +41,8 @@ static NSString * const _kIfModifiedSinceKey = @"If-Modified-Since";
     return [self initWithURL:imageURL revalidate:NO ifModifiedSince:nil];
 }
 
-- (NSUInteger)hash {
-    return [_imageURL hash];
-}
-
-#pragma mark - Task Implementation
-
-- (void)execute {
-    if ([self isCancelled]) {
-        [self finish];
-        return;
-    }
-    
-    NSURLRequest *request = [self _requestWithURL:_imageURL];
-    
-    NSURLConnection *connection =
-    [[NSURLConnection alloc] initWithRequest:request
-                                    delegate:self
-                            startImmediately:NO];
-    if (connection == nil) {
-        [self finish];
-        return;
-    }
-    
-    if ([self isCancelled]) {
-        [self finish];
-        return;
-    }
-    
-    [connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
-    [connection start];
-}
-
-- (NSURLRequest *)_requestWithURL:(NSString *)imageURL {
-    NSURL *URL = [NSURL URLWithString:imageURL];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.f];
+- (NSMutableURLRequest *)requestWithURL:(NSString *)URL {
+    NSMutableURLRequest *request = [super requestWithURL:URL];
     [request setHTTPShouldHandleCookies:NO];
     [request setHTTPShouldUsePipelining:YES];
     if (_revalidate && _ifModifiedSince) {
@@ -89,33 +53,16 @@ static NSString * const _kIfModifiedSinceKey = @"If-Modified-Since";
 
 #pragma mark - NSURLConnectionDelegate
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    _data = [NSMutableData data];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [_data appendData:data];
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse {
-    return nil;
-}
-
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @autoreleasepool {
-            _image = [DFImageProcessing decompressedImageWithData:_data];
+            _image = [DFImageProcessing decompressedImageWithData:self.data];
             if (_image) {
                 [_delegate imageFetchTaskDidFinishProcessingImage:self];
             }
             [self finish];
         }
     });
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    _error = error;
-    [self finish];
 }
 
 @end

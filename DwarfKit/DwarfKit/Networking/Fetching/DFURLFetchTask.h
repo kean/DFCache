@@ -10,31 +10,21 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFURLFetchTask.h"
+#import "DFTask.h"
 
+@interface DFURLFetchTask : DFTask <NSURLConnectionDelegate>
 
-@protocol DFImageFetchTaskDelegate;
+@property (nonatomic, readonly) NSString *URL;
+@property (nonatomic, readonly) NSURLConnection *connection;
+@property (nonatomic, readonly) NSURLResponse *response;
+@property (nonatomic, readonly) NSData *data;
+@property (nonatomic, readonly) NSError *error;
 
+- (id)initWithURL:(NSString *)URL;
 
-typedef void (^DFImageFetchCaching)(UIImage *image, NSData *data, NSString *lastModified);
+#pragma mark - Override
 
-
-@interface DFImageFetchTask : DFURLFetchTask
-
-@property (nonatomic, weak) id<DFImageFetchTaskDelegate> delegate;
-@property (nonatomic, readonly) UIImage *image;
-@property (nonatomic, readonly) NSHTTPURLResponse *response;
-@property (nonatomic, readonly) BOOL notModified;
-
-- (id)initWithURL:(NSString *)imageURL;
-- (id)initWithURL:(NSString *)imageURL revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince;
-
-@end
-
-
-@protocol DFImageFetchTaskDelegate
-
-- (NSURLRequest *)requestForImageFetchingTask:(DFImageFetchTask *)task;
-- (void)imageFetchTaskDidFinishProcessingImage:(DFImageFetchTask *)task;
+- (NSMutableURLRequest *)requestWithURL:(NSString *)URL;
+- (void)startConnection:(NSURLConnection *)connection;
 
 @end

@@ -62,7 +62,7 @@
 #pragma mark - DFImageFetchTaskDelegate
 
 - (void)imageFetchTaskDidFinishProcessingImage:(DFImageFetchTask *)task {
-    [[DFCache imageCache] storeImage:task.image imageData:task.data forKey:task.imageURL];
+    [[DFCache imageCache] storeImage:task.image imageData:task.data forKey:task.URL];
 }
 
 @end
