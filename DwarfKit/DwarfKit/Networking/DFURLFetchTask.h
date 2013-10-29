@@ -23,8 +23,6 @@
 
 - (id)initWithURL:(NSString *)URL;
 
-#pragma mark - Override
-
 - (NSMutableURLRequest *)requestWithURL:(NSString *)URL;
 - (void)startConnection:(NSURLConnection *)connection;
 

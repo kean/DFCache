@@ -35,14 +35,12 @@
         [self finish];
         return;
     }
-
     NSURLRequest *request = [self requestWithURL:_URL];
     _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
     if (!_connection) {
         [self finish];
         return;
     }
-    
     [self startConnection:_connection];
 }
 
