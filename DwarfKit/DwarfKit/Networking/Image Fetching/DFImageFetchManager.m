@@ -22,15 +22,11 @@
 - (id)init {
     if (self = [super init]) {
         _multiplexer = [DFTaskMultiplexer new];
-        _multiplexer.queue.maxConcurrentTaskCount = 3;
+        _queue = [DFTaskQueue new];
+        _queue.maxConcurrentTaskCount = 3;
     }
     return self;
 }
-
-- (DFTaskQueue *)queue {
-    return _multiplexer.queue;
-}
-
 #pragma mark - Fetching
 
 - (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(DFImageFetchHandler *)handler revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince {
@@ -44,6 +40,7 @@
     DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL revalidate:revalidate ifModifiedSince:ifModifiedSince];
     task.delegate = self;
     [_multiplexer addTask:task withKey:imageURL handler:handler];
+    [_queue addTask:task];
     return task;
 }
 
@@ -58,6 +55,7 @@
     DFTaskWrapper *wrapper = [_multiplexer removeHandler:handler withKey:imageURL];
     if (wrapper.handlers.count == 0 && !wrapper.task.isExecuting) {
         [wrapper.task cancel];
+        [_multiplexer removeTaskWithKey:imageURL];
     }
 }
 

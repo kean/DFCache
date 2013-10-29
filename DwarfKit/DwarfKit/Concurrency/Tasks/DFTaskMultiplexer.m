@@ -34,22 +34,16 @@
 
 
 @implementation DFTaskMultiplexer {
-    DFTaskQueue *_queue;
     NSMutableDictionary *_wrappers;
     DFReusablePool *_reusableWrappers;
 }
 
-- (id)initWithQueue:(DFTaskQueue *)queue {
+- (id)init {
     if (self = [super init]) {
-        _queue = [DFTaskQueue new];
         _wrappers = [NSMutableDictionary new];
         _reusableWrappers = [DFReusablePool new];
     }
     return self;
-}
-
-- (id)init {
-    return [self initWithQueue:[DFTaskQueue new]];
 }
 
 - (DFTaskWrapper *)addHandler:(id<DFTaskHandling>)handler withKey:(id<NSCopying>)key {
@@ -75,8 +69,8 @@
     [wrapper.task setCompletion:^(DFTask *task) {
         [weakSelf _handleTaskCompletion:task wrapper:weakWrapper key:keyCopy];
     }];
+    
     [_wrappers setObject:wrapper forKey:key];
-    [_queue addTask:task];
     return wrapper;
 }
 
@@ -92,13 +86,24 @@
     return wrapper;
 }
 
+- (void)removeTaskWithKey:(id<NSCopying>)key {
+    if (!key) {
+        return;
+    }
+    DFTaskWrapper *wrapper = [_wrappers objectForKey:key];
+    if (!wrapper) {
+        return;
+    }
+    [wrapper.task setCompletion:nil];
+    [_wrappers removeObjectForKey:key];
+    [_reusableWrappers enqueueObject:wrapper];
+}
+
 - (void)_handleTaskCompletion:(DFTask *)task wrapper:(DFTaskWrapper *)wrapper key:(id<NSCopying>)key {
     for (id<DFTaskHandling> handler in wrapper.handlers) {
         [handler handleTaskCompletion:task];
     }
-    if (key) {
-        [_wrappers removeObjectForKey:key];
-    }
+    [_wrappers removeObjectForKey:key];
     [_reusableWrappers enqueueObject:wrapper];
 }
 

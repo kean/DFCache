@@ -22,7 +22,8 @@
 - (id)init {
     if (self = [super init]) {
         _multiplexer = [DFTaskMultiplexer new];
-        _multiplexer.queue.maxConcurrentTaskCount = 2;
+        _queue = [DFTaskQueue new];
+        _queue.maxConcurrentTaskCount = 2;
         _cache = [NSCache new];
     }
     return self;
@@ -46,6 +47,7 @@
     }
     DFProcessingTask *task = [[DFProcessingTask alloc] initWithInput:input key:key processingBlock:processingBlock];
     [_multiplexer addTask:task withKey:key handler:handler];
+    [_queue addTask:task];
     return task;
 }
 
@@ -56,6 +58,7 @@
     DFTaskWrapper *wrapper = [_multiplexer removeHandler:handler withKey:key];
     if (wrapper.handlers.count == 0) {
         [wrapper.task cancel];
+        [_multiplexer removeTaskWithKey:key];
     }
 }
 

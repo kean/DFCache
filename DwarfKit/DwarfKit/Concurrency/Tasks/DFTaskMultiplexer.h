@@ -35,13 +35,9 @@
  */
 @interface DFTaskMultiplexer : NSObject
 
-@property (nonatomic, readonly) DFTaskQueue *queue;
-
 /*! Returns a pointer to the actual wrappers dictionary.
  */
 @property (nonatomic, readonly) NSMutableDictionary *wrappers;
-
-- (id)initWithQueue:(DFTaskQueue *)queue;
 
 /*! Adds handler to the wrapper with the provided key. Returns the wrapper if it exists.
  */
@@ -54,6 +50,10 @@
 /*! Removes handler from the wrapper with the provided key. Returns the wrapper if it exists.
  */
 - (DFTaskWrapper *)removeHandler:(id<DFTaskHandling>)handler withKey:(id<NSCopying>)key;
+
+/*! Removes task with provided key. Removed task completion is no longer handled by task multiplexer.
+ */
+- (void)removeTaskWithKey:(id<NSCopying>)key;
 
 @end
 
