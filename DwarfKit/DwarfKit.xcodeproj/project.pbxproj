@@ -154,6 +154,7 @@
 		0CFC5CC117D423A6001C2951 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFC5CBD17D42393001C2951 /* QuartzCore.framework */; };
 		0CFCB2841820503600589990 /* DFURLFetchTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCB2831820503600589990 /* DFURLFetchTask.m */; };
 		0CFCB2851820503600589990 /* DFURLFetchTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCB2831820503600589990 /* DFURLFetchTask.m */; };
+		0CFCB28A18218B4300589990 /* TDFTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCB28818218B4300589990 /* TDFTasks.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -299,6 +300,8 @@
 		0CFC5CBD17D42393001C2951 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0CFCB2821820503600589990 /* DFURLFetchTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFURLFetchTask.h; sourceTree = "<group>"; };
 		0CFCB2831820503600589990 /* DFURLFetchTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFURLFetchTask.m; sourceTree = "<group>"; };
+		0CFCB28718218B4300589990 /* TDFTasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFTasks.h; sourceTree = "<group>"; };
+		0CFCB28818218B4300589990 /* TDFTasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFTasks.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -701,6 +704,7 @@
 		0C8C160B17D40EDB004B7DAA /* Test Suites */ = {
 			isa = PBXGroup;
 			children = (
+				0CFCB28618218B3800589990 /* Tasks */,
 				0C8C160C17D40F00004B7DAA /* Caching */,
 			);
 			path = "Test Suites";
@@ -749,6 +753,15 @@
 				0CFA33F017D4734900AE6EEF /* DwarfKit Mac-Prefix.pch */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0CFCB28618218B3800589990 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				0CFCB28718218B4300589990 /* TDFTasks.h */,
+				0CFCB28818218B4300589990 /* TDFTasks.m */,
+			);
+			path = Tasks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1082,6 +1095,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CFCB28A18218B4300589990 /* TDFTasks.m in Sources */,
 				0C8C160F17D40F9B004B7DAA /* TDFCacheTests.m in Sources */,
 				0CB5EADE181D7DBF0040CB68 /* DFTaskMultiplexer.m in Sources */,
 				0C721DDD18060164003695D0 /* DFReusablePool.m in Sources */,

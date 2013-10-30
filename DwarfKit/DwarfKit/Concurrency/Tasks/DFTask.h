@@ -12,19 +12,18 @@
 
 @class DFTask;
 
-
 typedef void (^DFTaskCompletion)(DFTask *task);
 
 /*! The DFTask is an abstract class that is used to encapsulate the code and data associated with a single task. This class is used by either subclassing and providing your own - (void)execute implementation or by using predifined DFTaskWithBlock class.
- @discussion Task is a single-shot object, it cannot be reused. Tasks are executed by adding them a queue (an instance of DFTaskQueue class). Queue executes task by calling it's - (void)execute method on the global GCD queue with a priority specified by DFTask priority property.
- @discussion Concurrent tasks semantics are fairly simple. All you need to do is implement - (void)execute method and call - (void)finish when the work is done. You might also want to define getter methods to access the resulting data from the task. You may also want to respond to the cancellation of the task by either overriding - (void)cancel method or quering - (BOOL)isCancelled while executing. All you need to do is call - (void)finish.
+ @discussion Task is a single-shot object, it cannot be reused. Tasks are executed by adding them a queue (an instance of DFTaskQueue class). Queue executes task by calling it's - (void)execute method on the global GCD queue with a priority specified by DFTask priority property. There is no way to execute task manually without a queue.
+ @discussion Tasks semantics are fairly simple. There is no need to manually manage states. All you need to do is implement - (void)execute method and call - (void)finish when the work is done. You might also want to define getter methods to access the resulting data from the task. You may also want to respond to the cancellation of the task by either overriding - (void)cancel method or quering - (BOOL)isCancelled periodically while executing. All you need to do is call - (void)finish.
  @warning DFTask is not multhithread-aware (in order to get best performance out of it). If you intend to call - (void)cancel method you must call it from the main thread.
  */
 @interface DFTask : NSObject
 
 @property (nonatomic, readonly) BOOL isExecuting;
-@property (nonatomic, readonly) BOOL isCancelled;
 @property (nonatomic, readonly) BOOL isFinished;
+@property (nonatomic, readonly) BOOL isCancelled;
 
 @property (nonatomic) dispatch_queue_priority_t priority;
 @property (nonatomic, copy) DFTaskCompletion completion;
@@ -40,6 +39,6 @@ typedef void (^DFTaskCompletion)(DFTask *task);
 
 @interface DFTaskWithBlock : DFTask
 
-- (id)initWithBlock:(void (^)(void))block;
+- (id)initWithBlock:(void (^)(DFTask *task))block;
 
 @end

@@ -21,7 +21,7 @@
  */
 @interface DFTaskQueue : NSObject
 
-/*! The maximum number of concurrent tasks that the queue can execute. Settings the new value does not affect tasks that are already executing.
+/*! The maximum number of concurrent tasks that the queue can execute. Setting the new value does not affect tasks that are already executing.
  */
 @property (nonatomic) NSUInteger maxConcurrentTaskCount;
 

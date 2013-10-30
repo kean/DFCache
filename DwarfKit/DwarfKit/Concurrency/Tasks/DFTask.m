@@ -59,13 +59,10 @@
 
 
 @implementation DFTaskWithBlock {
-    void (^_block)(void);
+    void (^_block)(DFTask *);
 }
 
-- (id)initWithBlock:(void (^)(void))block {
-    if (!block) {
-        return nil;
-    }
+- (id)initWithBlock:(void (^)(DFTask *))block {
     if (self = [super init]) {
         _block = [block copy];
     }
@@ -73,7 +70,10 @@
 }
 
 - (void)execute {
-    _block();
+    if (_block) {
+        _block(self);
+    }
+    [self finish];
 }
 
 @end

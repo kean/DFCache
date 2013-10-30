@@ -29,7 +29,7 @@
 - (id)init {
     if (self = [super init]) {
         _tasks = [NSMutableOrderedSet new];
-        _maxConcurrentTaskCount = 3;
+        _maxConcurrentTaskCount = INFINITY;
     }
     return self;
 }
@@ -73,10 +73,10 @@
         if (task.isFinished) {
             return;
         }
+        [task _setFinished:YES];
         if (task.completion) {
             task.completion(task);
         }
-        [task _setFinished:YES];
         _executingTaskCount--;
         [_tasks removeObject:task];
         [self _executeTasks];
