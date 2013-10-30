@@ -16,6 +16,10 @@
 #import "dwarf_private.h"
 
 
+static NSNotificationCenter *_queueNotificationCenter;
+static NSString *_DFQueueDidHandleFinishedTaskNotification = @"_df_queue_did_handle_task";
+
+
 @interface DFTaskQueue() <_DFTaskDelegate>
 
 @end
@@ -26,10 +30,19 @@
     NSUInteger _executingTaskCount;
 }
 
+- (void)dealloc {
+    [_queueNotificationCenter removeObserver:self];
+}
+
 - (id)init {
     if (self = [super init]) {
         _tasks = [NSMutableOrderedSet new];
         _maxConcurrentTaskCount = INFINITY;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            _queueNotificationCenter = [NSNotificationCenter new];
+        });
+        [_queueNotificationCenter addObserver:self selector:@selector(_taskFinishHandledNotification:) name:_DFQueueDidHandleFinishedTaskNotification object:nil];
     }
     return self;
 }
@@ -79,8 +92,14 @@
         }
         _executingTaskCount--;
         [_tasks removeObject:task];
-        [self _executeTasks];
+        [_queueNotificationCenter postNotificationName:_DFQueueDidHandleFinishedTaskNotification object:self];
     });
+}
+
+#pragma mark - Queue Notifications
+
+- (void)_taskFinishHandledNotification:(NSNotification *)notification {
+    [self _executeTasks];
 }
 
 #pragma mark - Suspension
