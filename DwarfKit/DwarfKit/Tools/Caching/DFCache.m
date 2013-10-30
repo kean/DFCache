@@ -62,6 +62,7 @@
         _name = name;
         
         [self _addNotificationObservers];
+        [self _createCacheDirectories];
     }
     return self;
 }
@@ -404,6 +405,7 @@
             [_memorizedMetadata removeAllObjects];
             [manager removeItemAtPath:_entriesPath error:nil];
             [manager removeItemAtPath:_metadataPath error:nil];
+            [self _createCacheDirectories];
         });
     }
 }
@@ -555,7 +557,6 @@
 }
 
 - (void)_storeData:(NSData *)data forKey:(NSString *)key {
-    [self _createCacheDirectories];
     NSString *filepath = [self _entryPathWithKey:key];
     NSFileManager *manager = [NSFileManager defaultManager];
     [manager createFileAtPath:filepath contents:data attributes:nil];
@@ -571,7 +572,6 @@
         return;
     }
     [_memorizedMetadata setObject:metadata forKey:key];
-    [self _createCacheDirectories];
     NSString *filepath = [self _metadataPathWithKey:key];
     [metadata writeToFile:filepath atomically:YES];
 }
@@ -594,7 +594,9 @@
     }
     [_memorizedMetadata removeObjectForKey:key];
     NSString *filepath = [self _metadataPathWithKey:key];
-    [[NSFileManager defaultManager] removeItemAtPath:filepath error:nil];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filepath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:filepath error:nil];
+    }
 }
 
 - (BOOL)_fileExistsForKey:(NSString *)key {
