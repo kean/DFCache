@@ -12,7 +12,6 @@
 
 #import "DFTask.h"
 
-
 @protocol _DFTaskDelegate;
 
 

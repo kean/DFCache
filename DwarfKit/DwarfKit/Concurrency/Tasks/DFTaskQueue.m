@@ -59,7 +59,7 @@
 
 - (DFTask *)_taskToExecute {
     for (DFTask *task in _tasks) {
-        if (!task.isExecuting) {
+        if (!task.isExecuting && task.isReady) {
             return task;
         }
     }
@@ -100,6 +100,15 @@
     for (DFTask *task in _tasks) {
        [task cancel];
     }
+}
+
+@end
+
+
+@implementation DFTaskQueue (Convenience)
+
+- (void)addTaskWithBlock:(void (^)(DFTask *))block {
+    [self addTask:[[DFTaskWithBlock alloc] initWithBlock:block]];
 }
 
 @end

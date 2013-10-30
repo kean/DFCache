@@ -40,7 +40,7 @@
     [task setCompletion:^(DFTask *task) {
         STAssertTrue([task isExecuting], nil);
         STAssertTrue([task isFinished], nil);
-        STAssertTrue(![task isCancelled], nil);
+        STAssertFalse([task isCancelled], nil);
         isWaiting = NO;
     }];
     [queue addTask:task];
@@ -67,6 +67,55 @@
     }];
     [queue addTask:task];
     [task cancel];
+    DWARF_TEST_WAIT_WHILE(isWaiting, 3.f);
+}
+
+- (void)testDependencies {
+    DFTaskQueue *queue = [DFTaskQueue new];
+    queue.maxConcurrentTaskCount = 10;
+    __block BOOL isFirstTaskRun = NO;
+    __block BOOL isWaiting = YES;
+    DFTaskWithBlock *task1 = [[DFTaskWithBlock alloc] initWithBlock:^(DFTask *task) {
+        isFirstTaskRun = YES;
+        isWaiting = NO;
+        DFTask *dependency = [task.dependencies firstObject];
+        STAssertTrue([dependency isFinished], nil);
+        STAssertTrue(dependency.priority == 15, nil); // Check "result" of task 2.
+    }];
+    DFTaskWithBlock *task2 = [[DFTaskWithBlock alloc] initWithBlock:^(DFTask *task) {
+        STAssertFalse(isFirstTaskRun, nil);
+        task.priority = 15;
+        sleep(0.25);
+    }];
+    [task1 addDependency:task2];
+    
+    [queue addTask:task1];
+    [queue addTask:task2];
+    DWARF_TEST_WAIT_WHILE(isWaiting, 3.f);
+}
+
+- (void)testDependenciesOnDifferentQueues {
+    DFTaskQueue *queue1 = [DFTaskQueue new];
+    DFTaskQueue *queue2 = [DFTaskQueue new];
+
+    __block BOOL isFirstTaskRun = NO;
+    __block BOOL isWaiting = YES;
+    DFTaskWithBlock *task1 = [[DFTaskWithBlock alloc] initWithBlock:^(DFTask *task) {
+        isFirstTaskRun = YES;
+        isWaiting = NO;
+        DFTask *dependency = [task.dependencies firstObject];
+        STAssertTrue([dependency isFinished], nil);
+        STAssertTrue(dependency.priority == 15, nil); // Check "result" of task 2.
+    }];
+    DFTaskWithBlock *task2 = [[DFTaskWithBlock alloc] initWithBlock:^(DFTask *task) {
+        STAssertFalse(isFirstTaskRun, nil);
+        task.priority = 15;
+        sleep(0.25);
+    }];
+    [task1 addDependency:task2];
+
+    [queue1 addTask:task1];
+    [queue2 addTask:task2];
     DWARF_TEST_WAIT_WHILE(isWaiting, 3.f);
 }
 

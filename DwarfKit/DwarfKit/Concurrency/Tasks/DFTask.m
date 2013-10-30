@@ -16,6 +16,7 @@
 
 @implementation DFTask {
     __weak id<_DFTaskDelegate> _impl_delegate;
+    NSMutableArray *_dependencies;
 }
 
 - (id)init {
@@ -39,6 +40,41 @@
 
 - (void)cancel {
     _isCancelled = YES;
+}
+
+#pragma mark - Dependencies
+
+- (BOOL)isReady {
+    if (!_dependencies) {
+        return YES;
+    }
+    for (DFTask *task in _dependencies) {
+        if (!task.isFinished) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+- (void)addDependency:(DFTask *)task {
+    if (!task) {
+        return;
+    }
+    [[self _dependencies] addObject:task];
+}
+
+- (void)removeDependency:(DFTask *)task {
+    if (!task) {
+        return;
+    }
+    [[self _dependencies] removeObject:task];
+}
+
+- (NSMutableArray *)_dependencies {
+    if (!_dependencies) {
+        _dependencies = [NSMutableArray new];
+    }
+    return _dependencies;
 }
 
 #pragma mark - DFTask+DFTaskPrivate

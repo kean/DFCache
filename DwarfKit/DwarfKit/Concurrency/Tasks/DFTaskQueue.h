@@ -42,3 +42,10 @@
 - (void)cancelAllTasks;
 
 @end
+
+
+@interface DFTaskQueue (Convenience)
+
+- (void)addTaskWithBlock:(void (^)(DFTask *task))block;
+
+@end
