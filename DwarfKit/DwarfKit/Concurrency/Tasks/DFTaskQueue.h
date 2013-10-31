@@ -14,10 +14,9 @@
 
 
 /*! Regulates execution of DFTask objects. Similar to NSOperationQueue. However, it's much easier to implement your concurrent tasks using DFTask rather than NSOperation because of more comprehensive semantics.
- 
  @discussion One of the main task queue features is a great performance (especially compared to NSOperationQueue). It is written entirely on top of grand central dispatch.
  @discussion In order to get absolute best performance from DFTaskQueue your tasks should implement  - (NSUInteger)hash and - (BOOL)isEqual: methods.
- @warning DFTaskQueue has an absolute minimum synchronization. All queue methods must be called from the main thread.
+ @warning DFTaskQueue is not multhithread-aware (in order to get best performance out of it). All methods must be called from the main thread.
  */
 @interface DFTaskQueue : NSObject
 
