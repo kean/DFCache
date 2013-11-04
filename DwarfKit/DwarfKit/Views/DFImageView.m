@@ -20,30 +20,25 @@
    __weak DFImageFetchHandler *_handler;
 }
 
-
 - (void)setImageWithURL:(NSString *)imageURL {
    [self setImageWithURL:imageURL placeholder:nil];
 }
-
 
 - (void)setImageWithURL:(NSString *)imageURL placeholder:(UIImage *)placeholder {
    [self _cancelFetching];
 
    _imageURL = imageURL;
    
-    // Query memory cache
     UIImage *image = [[DFCache imageCache] cachedObjectForKey:imageURL];
     if (image) {
         self.image = image;
         return;
     }
     
-   
    if (placeholder) {
       self.image = placeholder;
    }
    
-    // Query disk cache
     [[DFCache imageCache] cachedImageForKey:imageURL completion:^(UIImage *image) {
         if (_imageURL != imageURL) {
             return;

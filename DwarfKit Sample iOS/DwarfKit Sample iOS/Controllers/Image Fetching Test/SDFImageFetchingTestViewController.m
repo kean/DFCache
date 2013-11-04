@@ -34,14 +34,12 @@ static NSString *_kCellReusableIdentifier = @"reuse_id";
     UICollectionView *_collectionView;
 }
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         _photos = [NSArray new];
     }
     return self;
 }
-
 
 - (void)loadView {
     [super loadView];
@@ -89,7 +87,6 @@ static NSString *_kCellReusableIdentifier = @"reuse_id";
 
 - (void)loadFlickrPhotos {
     [_activityIndicatorView startAnimating];
-    
     DFSFlickrRecentPhotos *recentPhotos = [DFSFlickrRecentPhotos new];
     [recentPhotos loadPhotosWithPageCount:1 completion:^{
         _photos = recentPhotos.photos;
@@ -103,7 +100,6 @@ static NSString *_kCellReusableIdentifier = @"reuse_id";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return _photos.count;
 }
-
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:_kCellReusableIdentifier forIndexPath:indexPath];

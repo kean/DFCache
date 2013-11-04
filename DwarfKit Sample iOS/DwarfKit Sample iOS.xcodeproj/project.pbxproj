@@ -19,8 +19,6 @@
 		0CEDE44117D4514200D617F7 /* SDFMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE44017D4514200D617F7 /* SDFMenuViewController.m */; };
 		0CEDE44F17D4522400D617F7 /* DFSFlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE44C17D4522400D617F7 /* DFSFlickrPhoto.m */; };
 		0CEDE45017D4522400D617F7 /* DFSFlickrRecentPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE44E17D4522400D617F7 /* DFSFlickrRecentPhotos.m */; };
-		0CEDE46F17D4531600D617F7 /* SDFImageFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE46517D4531600D617F7 /* SDFImageFetchManager.m */; };
-		0CEDE47017D4531600D617F7 /* SDFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE46717D4531600D617F7 /* SDFImageView.m */; };
 		0CEDE47117D4531600D617F7 /* SDFImageFetchingStressTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE46917D4531600D617F7 /* SDFImageFetchingStressTestViewController.m */; };
 		0CEDE47217D4531600D617F7 /* SDFImagesStressTestTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE46B17D4531600D617F7 /* SDFImagesStressTestTableCell.m */; };
 		0CEDE47317D4531600D617F7 /* SDFImageFetchingTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE46E17D4531600D617F7 /* SDFImageFetchingTestViewController.m */; };
@@ -48,10 +46,6 @@
 		0CEDE44C17D4522400D617F7 /* DFSFlickrPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFSFlickrPhoto.m; sourceTree = "<group>"; };
 		0CEDE44D17D4522400D617F7 /* DFSFlickrRecentPhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFSFlickrRecentPhotos.h; sourceTree = "<group>"; };
 		0CEDE44E17D4522400D617F7 /* DFSFlickrRecentPhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFSFlickrRecentPhotos.m; sourceTree = "<group>"; };
-		0CEDE46417D4531600D617F7 /* SDFImageFetchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFImageFetchManager.h; sourceTree = "<group>"; };
-		0CEDE46517D4531600D617F7 /* SDFImageFetchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFImageFetchManager.m; sourceTree = "<group>"; };
-		0CEDE46617D4531600D617F7 /* SDFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFImageView.h; sourceTree = "<group>"; };
-		0CEDE46717D4531600D617F7 /* SDFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFImageView.m; sourceTree = "<group>"; };
 		0CEDE46817D4531600D617F7 /* SDFImageFetchingStressTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFImageFetchingStressTestViewController.h; sourceTree = "<group>"; };
 		0CEDE46917D4531600D617F7 /* SDFImageFetchingStressTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFImageFetchingStressTestViewController.m; sourceTree = "<group>"; };
 		0CEDE46A17D4531600D617F7 /* SDFImagesStressTestTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFImagesStressTestTableCell.h; sourceTree = "<group>"; };
@@ -59,7 +53,7 @@
 		0CEDE46D17D4531600D617F7 /* SDFImageFetchingTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFImageFetchingTestViewController.h; sourceTree = "<group>"; };
 		0CEDE46E17D4531600D617F7 /* SDFImageFetchingTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFImageFetchingTestViewController.m; sourceTree = "<group>"; };
 		0CEDE47417D4570D00D617F7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		0CEDE47A17D4575200D617F7 /* libDwarfKit.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libDwarfKit.a; path = "../DwarfKit/build/Release-iphoneos/libDwarfKit.a"; sourceTree = "<group>"; };
+		0CEDE47A17D4575200D617F7 /* libDwarfKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDwarfKit.a; path = "../DwarfKit/build/Release-iphoneos/libDwarfKit.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,10 +152,6 @@
 		0CEDE46317D4531600D617F7 /* Image Fetching Stress Test */ = {
 			isa = PBXGroup;
 			children = (
-				0CEDE46417D4531600D617F7 /* SDFImageFetchManager.h */,
-				0CEDE46517D4531600D617F7 /* SDFImageFetchManager.m */,
-				0CEDE46617D4531600D617F7 /* SDFImageView.h */,
-				0CEDE46717D4531600D617F7 /* SDFImageView.m */,
 				0CEDE46817D4531600D617F7 /* SDFImageFetchingStressTestViewController.h */,
 				0CEDE46917D4531600D617F7 /* SDFImageFetchingStressTestViewController.m */,
 				0CEDE46A17D4531600D617F7 /* SDFImagesStressTestTableCell.h */,
@@ -249,8 +239,6 @@
 				0CEDE44117D4514200D617F7 /* SDFMenuViewController.m in Sources */,
 				0CEDE44F17D4522400D617F7 /* DFSFlickrPhoto.m in Sources */,
 				0CEDE45017D4522400D617F7 /* DFSFlickrRecentPhotos.m in Sources */,
-				0CEDE46F17D4531600D617F7 /* SDFImageFetchManager.m in Sources */,
-				0CEDE47017D4531600D617F7 /* SDFImageView.m in Sources */,
 				0CEDE47117D4531600D617F7 /* SDFImageFetchingStressTestViewController.m in Sources */,
 				0CEDE47217D4531600D617F7 /* SDFImagesStressTestTableCell.m in Sources */,
 				0CEDE47317D4531600D617F7 /* SDFImageFetchingTestViewController.m in Sources */,
@@ -372,6 +360,7 @@
 				0CEDE44917D4514200D617F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

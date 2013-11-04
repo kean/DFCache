@@ -79,6 +79,10 @@ static NSString *_DFQueueDidHandleFinishedTaskNotification = @"_df_queue_did_han
     return nil;
 }
 
+- (void)_taskFinishHandledNotification:(NSNotification *)notification {
+    [self _executeTasks];
+}
+
 #pragma mark - _DFTaskDelegate
 
 - (void)_taskDidFinish:(DFTask *)task {
@@ -94,12 +98,6 @@ static NSString *_DFQueueDidHandleFinishedTaskNotification = @"_df_queue_did_han
         [_tasks removeObject:task];
         [_queueNotificationCenter postNotificationName:_DFQueueDidHandleFinishedTaskNotification object:self];
     });
-}
-
-#pragma mark - Queue Notifications
-
-- (void)_taskFinishHandledNotification:(NSNotification *)notification {
-    [self _executeTasks];
 }
 
 #pragma mark - Suspension

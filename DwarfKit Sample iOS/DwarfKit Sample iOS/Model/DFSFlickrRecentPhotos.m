@@ -18,7 +18,6 @@
     NSMutableArray *_photos;
 }
 
-
 - (id)init {
     if (self = [super init]) {
         _photos = [NSMutableArray new];
@@ -29,7 +28,6 @@
 - (void)loadPhotosWithPageCount:(NSUInteger)pageCount completion:(void (^)(void))completion {
     [self _loadFlickrPhotosFromPage:1 toPage:pageCount completion:completion];
 }
-
 
 - (void)_loadFlickrPhotosFromPage:(NSUInteger)fromPage toPage:(NSUInteger)toPage completion:(void (^)(void))completion {
     if (fromPage > toPage) {
@@ -43,7 +41,6 @@
     }
     
 }
-
 
 - (void)_loadFlickrPhotosForPage:(NSUInteger)page completion:(void (^)(NSArray *photos, NSUInteger page))completion {
     NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?api_key=a292d5f86afcbab8b0b8161ecee51184&format=json&method=flickr.photos.getRecent&nojsoncallback=1&page=%i", page];

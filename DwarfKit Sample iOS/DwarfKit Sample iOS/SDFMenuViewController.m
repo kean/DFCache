@@ -44,7 +44,6 @@
     return self;
 }
 
-
 - (void)loadView {
     [super loadView];
     
@@ -62,16 +61,13 @@
     return _sections.count;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [_rows[section] count];
 }
 
-
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return _sections[section];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuitem"];
@@ -82,7 +78,6 @@
     cell.textLabel.text = _rows[indexPath.section][indexPath.row];
     return cell;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Class controllerClass = _controllers[indexPath.section][indexPath.row];
