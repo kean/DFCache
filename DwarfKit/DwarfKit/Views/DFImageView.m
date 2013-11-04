@@ -17,7 +17,7 @@
 
 
 @implementation DFImageView {
-   __weak DFImageFetchHandler *_handler;
+   __weak DFTaskHandler *_handler;
 }
 
 - (void)setImageWithURL:(NSString *)imageURL {
@@ -53,13 +53,13 @@
 
 - (void)_fetchImage {
     __weak DFImageView *weakSelf = self;
-    DFImageFetchHandler *handler = [DFImageFetchHandler handlerWithSuccess:^(UIImage *image) {
-        [weakSelf setImage:image animated:YES];
-    } failure:^(NSError *error) {
-        // Do nothing
+    DFTaskHandler *handler = [DFTaskHandler handlerWithCompletion:^(DFTask *task) {
+        DFImageFetchTask *fetchTask = (id)task;
+        if (fetchTask.image) {
+            [weakSelf setImage:fetchTask.image animated:YES];
+        }
     }];
     _handler = handler;
-    
     [[DFImageFetchManager shared] fetchImageWithURL:_imageURL handler:handler];
 }
 

@@ -10,24 +10,19 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFTaskMultiplexer.h"
+#import "DFURLFetchTask.h"
 
 
-typedef void (^DFImageFetchSuccess)(UIImage *image);
-typedef void (^DFImageFetchNotModified)();
-typedef void (^DFImageFetchFailure)(NSError *error);
+typedef void (^DFImageFetchCaching)(UIImage *image, NSData *data, NSString *lastModified);
 
 
-@interface DFImageFetchHandler : NSObject <DFTaskHandling>
+@interface DFImageFetchTask : DFURLFetchTask
 
-@property (nonatomic, copy) DFImageFetchSuccess success;
-@property (nonatomic, copy) DFImageFetchNotModified notModified;
-@property (nonatomic, copy) DFImageFetchFailure failure;
+@property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) NSHTTPURLResponse *response;
+@property (nonatomic, readonly) BOOL notModified;
 
-+ (instancetype)handlerWithSuccess:(DFImageFetchSuccess)success
-                       notModified:(DFImageFetchNotModified)notModified
-                           failure:(DFImageFetchFailure)failure;
-+ (instancetype)handlerWithSuccess:(DFImageFetchSuccess)success
-                           failure:(DFImageFetchFailure)failure;
+- (id)initWithURL:(NSString *)imageURL;
+- (id)initWithURL:(NSString *)imageURL ifModifiedSince:(NSString *)ifModifiedSince;
 
 @end

@@ -26,26 +26,24 @@ static NSString *const _kIfModifiedSinceKey = @"If-Modified-Since";
 
 @implementation DFImageFetchTask {
     NSString *_ifModifiedSince;
-    BOOL _revalidate;
 }
 
-- (id)initWithURL:(NSString *)imageURL revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince {
+- (id)initWithURL:(NSString *)imageURL ifModifiedSince:(NSString *)ifModifiedSince {
     if (self = [super initWithURL:imageURL]) {
         _ifModifiedSince = ifModifiedSince;
-        _revalidate = revalidate;
     }
     return self;
 }
 
 - (id)initWithURL:(NSString *)imageURL {
-    return [self initWithURL:imageURL revalidate:NO ifModifiedSince:nil];
+    return [self initWithURL:imageURL ifModifiedSince:nil];
 }
 
 - (NSMutableURLRequest *)requestWithURL:(NSString *)URL {
     NSMutableURLRequest *request = [super requestWithURL:URL];
     [request setHTTPShouldHandleCookies:NO];
     [request setHTTPShouldUsePipelining:YES];
-    if (_revalidate && _ifModifiedSince) {
+    if (_ifModifiedSince) {
         [request setValue:_ifModifiedSince forHTTPHeaderField:_kIfModifiedSinceKey];
     }
     return request;
@@ -58,7 +56,7 @@ static NSString *const _kIfModifiedSinceKey = @"If-Modified-Since";
         @autoreleasepool {
             _image = [DFImageProcessing decompressedImageWithData:self.data];
             if (_image) {
-                [_delegate imageFetchTaskDidFinishProcessingImage:self];
+                [[DFCache imageCache] storeImage:_image imageData:self.data forKey:self.URL];
             }
             [self finish];
         }
