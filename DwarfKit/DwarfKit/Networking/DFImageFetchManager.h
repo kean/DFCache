@@ -19,7 +19,6 @@
 @property (nonatomic, readonly) DFTaskQueue *queue;
 
 - (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(id<DFTaskHandling>)handler;
-- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(id<DFTaskHandling>)handler revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince;
 - (void)cancelFetchingWithURL:(NSString *)imageURL handler:(id<DFTaskHandling>)handler;
 
 @end

@@ -21,7 +21,4 @@ typedef void (^DFImageFetchCaching)(UIImage *image, NSData *data, NSString *last
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) NSHTTPURLResponse *response;
 
-- (id)initWithURL:(NSString *)imageURL;
-- (id)initWithURL:(NSString *)imageURL ifModifiedSince:(NSString *)ifModifiedSince;
-
 @end

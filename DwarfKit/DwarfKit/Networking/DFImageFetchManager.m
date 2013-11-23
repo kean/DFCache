@@ -29,7 +29,7 @@
 }
 #pragma mark - Fetching
 
-- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(id<DFTaskHandling>)handler revalidate:(BOOL)revalidate ifModifiedSince:(NSString *)ifModifiedSince {
+- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(id<DFTaskHandling>)handler {
     if (!imageURL || !handler) {
         return nil;
     }
@@ -37,14 +37,10 @@
     if (wrapper) {
         return (id)wrapper.task;
     }
-    DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL ifModifiedSince:ifModifiedSince];
+    DFImageFetchTask *task = [[DFImageFetchTask alloc] initWithURL:imageURL];
     [_multiplexer addTask:task withKey:imageURL handler:handler];
     [_queue addTask:task];
     return task;
-}
-
-- (DFImageFetchTask *)fetchImageWithURL:(NSString *)imageURL handler:(id<DFTaskHandling>)handler {
-    return [self fetchImageWithURL:imageURL handler:handler revalidate:NO ifModifiedSince:nil];
 }
 
 - (void)cancelFetchingWithURL:(NSString *)imageURL handler:(id<DFTaskHandling>)handler {

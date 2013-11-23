@@ -15,37 +15,17 @@
 #import "DFCache.h"
 
 
-static NSString *const _kLastModifiedKey = @"Last-Modified";
-static NSString *const _kIfModifiedSinceKey = @"If-Modified-Since";
-
-
 @interface DFImageFetchTask() <NSURLConnectionDataDelegate>
 
 @end
 
 
-@implementation DFImageFetchTask {
-    NSString *_ifModifiedSince;
-}
-
-- (id)initWithURL:(NSString *)imageURL ifModifiedSince:(NSString *)ifModifiedSince {
-    if (self = [super initWithURL:imageURL]) {
-        _ifModifiedSince = ifModifiedSince;
-    }
-    return self;
-}
-
-- (id)initWithURL:(NSString *)imageURL {
-    return [self initWithURL:imageURL ifModifiedSince:nil];
-}
+@implementation DFImageFetchTask
 
 - (NSMutableURLRequest *)requestWithURL:(NSString *)URL {
     NSMutableURLRequest *request = [super requestWithURL:URL];
     [request setHTTPShouldHandleCookies:NO];
     [request setHTTPShouldUsePipelining:YES];
-    if (_ifModifiedSince) {
-        [request setValue:_ifModifiedSince forHTTPHeaderField:_kIfModifiedSinceKey];
-    }
     return request;
 }
 
