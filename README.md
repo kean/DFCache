@@ -44,13 +44,24 @@ Key features:
 ```
 DFMapping
 ---------
-Simple concepts that helps to contruct tables and collection views with dynamic cells easily.
+Simple concept that helps to construct tables and collection views with dynamic cells.
 DFBenchmark
 -----------
-Benchmark your code in terms of nanoseconds. Functions declared in mach_time.h are used to measure time (time is measured in processor cicles). Substracts the time benchmark implementation takes (for-loop, etc). Easy to use C API.
+Benchmark your code in terms of nanoseconds. Based on Apple's libdispatch benchmark implementation. Functions declared in mach_time.h are used to measure time (time is measured in processor cicles). Substracts the time benchmark implementation takes (for-loop, etc). Easy to use C API.
 ```c
 uint64_t dwarf_benchmark(BOOL verbose, void (^block)(void));
 uint64_t dwarf_benchmark_loop(uint32_t count, BOOL verbose, void (^block)(void));
+```
+DFCrypto
+--------
+Convenience functions producing hash values using common digest algorithms. All functions return hash values expressed as NSString representing hexademical number. For example, `dwarf_md5` produces 128-bit hash value and returns NSString with 32 digit hexademical number.
+```c
+extern NSString *dwarf_md5(const char *data, uint32_t length);
+extern NSString *dwarf_sha1(const char *data, uint32_t length);
+extern NSString *dwarf_sha224(const char *data, uint32_t length);
+extern NSString *dwarf_sha256(const char *data, uint32_t length);
+extern NSString *dwarf_sha384(const char *data, uint32_t length);
+extern NSString *dwarf_sha512(const char *data, uint32_t length);
 ```
 DFOptions
 ---------
