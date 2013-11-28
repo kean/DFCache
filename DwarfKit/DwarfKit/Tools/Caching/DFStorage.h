@@ -88,18 +88,18 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 #pragma mark - Maintenance
 
-/** Cleans up disk by removing entries by LRU algorithm.
- @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Calculates target size by multiplying disk capacity and cleanup rate. Files are removed according to LRU algorithm until cache size fits target size.
- */
-- (void)cleanup;
-
 /** Returns the current size of the receiver contents, in bytes.
  */
 - (unsigned long long)contentsSize;
 
-/** Returns URLs of items contained into storage. 
+/** Returns URLs of items contained into storage.
  @param keys An array of keys that identify the file properties that you want pre-fetched for each item in the storage. For each returned URL, the specified properties are fetched and cached in the NSURL object. For a list of keys you can specify, see Common File System Resource Keys.
  */
 - (NSArray *)contentsWithResourceKeys:(NSArray *)keys;
+
+/** Cleans up disk by removing entries by LRU algorithm.
+ @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Calculates target size by multiplying disk capacity and cleanup rate. Files are removed according to LRU algorithm until cache size fits target size.
+ */
+- (void)cleanup;
 
 @end

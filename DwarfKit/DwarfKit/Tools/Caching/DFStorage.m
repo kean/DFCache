@@ -64,6 +64,7 @@
     __block NSData *data;
     dispatch_sync(_ioQueue, ^{
         data = [self _dataForKey:key];
+        
     });
     return data;
 }
@@ -80,8 +81,8 @@
         NSMutableDictionary *batch = [NSMutableDictionary new];
         for (NSString *key in keys) {
             NSData *data = [self _dataForKey:key];
-            if (data && _diskCapacity != DFStorageDiskCapacityUnlimited) {
-                [self _touchFileForKey:key];
+            if (data) {
+                batch[key] = batch;
             }
         }
         _dwarf_callback(completion, batch);
@@ -170,7 +171,12 @@
 
 - (NSData *)_dataForKey:(NSString *)key {
     NSString *filepath = [self _pathWithKey:key];
-    return [NSData dataWithContentsOfFile:filepath options:NSDataReadingUncached error:nil];
+    // TODO: Uncached?
+    NSData *data = [NSData dataWithContentsOfFile:filepath options:NSDataReadingUncached error:nil];
+    if (data && _diskCapacity != DFStorageDiskCapacityUnlimited) {
+        [self _touchFileForKey:key];
+    }
+    return data;
 }
 
 - (void)_touchFileForKey:(NSString *)key {
@@ -197,6 +203,22 @@
 
 #pragma mark - Maintenance
 
+- (_dwarf_bytes)contentsSize {
+    _dwarf_bytes contentsSize = 0;
+    NSArray *contents = [self contentsWithResourceKeys:@[NSURLFileAllocatedSizeKey]];
+    for (NSURL *fileURL in contents) {
+        NSNumber *fileSize;
+        [fileURL getResourceValue:&fileSize forKey:NSURLFileAllocatedSizeKey error:NULL];
+        contentsSize += [fileSize unsignedLongLongValue];
+    }
+    return contentsSize;
+}
+
+- (NSArray *)contentsWithResourceKeys:(NSArray *)keys {
+    NSURL *rootURL = [NSURL fileURLWithPath:_path isDirectory:YES];
+    return [[NSFileManager defaultManager] contentsOfDirectoryAtURL:rootURL includingPropertiesForKeys:keys options:NSDirectoryEnumerationSkipsHiddenFiles error:NULL];
+}
+
 - (void)cleanup {
     if (_diskCapacity == 0) {
         return;
@@ -215,9 +237,9 @@
     for (NSURL *fileURL in contents) {
         NSDictionary *resourceValues = [fileURL resourceValuesForKeys:resourceKeys error:NULL];
         if (resourceValues) {
-            NSNumber *size = resourceValues[NSURLFileAllocatedSizeKey];
-            currentSize += [size unsignedLongLongValue];
             files[fileURL] = resourceValues;
+            NSNumber *fileSize = resourceValues[NSURLFileAllocatedSizeKey];
+            currentSize += [fileSize unsignedLongLongValue];
         }
     }
     if (currentSize < _diskCapacity) {
@@ -236,22 +258,6 @@
             currentSize -= [fileSize unsignedLongLongValue];
         }
     }
-}
-
-- (_dwarf_bytes)contentsSize {
-    _dwarf_bytes contentsSize = 0;
-    NSArray *contents = [self contentsWithResourceKeys:@[NSURLFileAllocatedSizeKey]];
-    for (NSURL *fileURL in contents) {
-        NSNumber *fileSize;
-        [fileURL getResourceValue:&fileSize forKey:NSURLFileAllocatedSizeKey error:NULL];
-        contentsSize += [fileSize unsignedLongLongValue];
-    }
-    return contentsSize;
-}
-
-- (NSArray *)contentsWithResourceKeys:(NSArray *)keys {
-    NSURL *rootURL = [NSURL fileURLWithPath:_path isDirectory:YES];
-    return [[NSFileManager defaultManager] contentsOfDirectoryAtURL:rootURL includingPropertiesForKeys:keys options:NSDirectoryEnumerationSkipsHiddenFiles error:NULL];
 }
 
 #pragma mark - Application Notifications
