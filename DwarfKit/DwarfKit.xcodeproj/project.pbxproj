@@ -11,6 +11,7 @@
 		0C091D891806B8AA000CCB11 /* DFProcessingCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D871806B8AA000CCB11 /* DFProcessingCenter.m */; };
 		0C091D901806B981000CCB11 /* DFProcessingTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D8F1806B981000CCB11 /* DFProcessingTask.m */; };
 		0C091D911806B981000CCB11 /* DFProcessingTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D8F1806B981000CCB11 /* DFProcessingTask.m */; };
+		0C0B1151184735E1009962D0 /* DFStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0B1150184735E1009962D0 /* DFStorage.m */; };
 		0C2A95E317FBEF290016CB20 /* DFStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E017FBEF290016CB20 /* DFStream.m */; };
 		0C2A95E417FBEF290016CB20 /* DFStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E017FBEF290016CB20 /* DFStream.m */; };
 		0C2A95E517FBEF290016CB20 /* DFStreamChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E217FBEF290016CB20 /* DFStreamChain.m */; };
@@ -199,6 +200,8 @@
 		0C091D871806B8AA000CCB11 /* DFProcessingCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFProcessingCenter.m; sourceTree = "<group>"; };
 		0C091D8E1806B981000CCB11 /* DFProcessingTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFProcessingTask.h; sourceTree = "<group>"; };
 		0C091D8F1806B981000CCB11 /* DFProcessingTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFProcessingTask.m; sourceTree = "<group>"; };
+		0C0B114F184735E1009962D0 /* DFStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStorage.h; sourceTree = "<group>"; };
+		0C0B1150184735E1009962D0 /* DFStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFStorage.m; sourceTree = "<group>"; };
 		0C2A95DF17FBEF290016CB20 /* DFStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStream.h; sourceTree = "<group>"; };
 		0C2A95E017FBEF290016CB20 /* DFStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFStream.m; sourceTree = "<group>"; };
 		0C2A95E117FBEF290016CB20 /* DFStreamChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStreamChain.h; sourceTree = "<group>"; };
@@ -591,6 +594,8 @@
 			children = (
 				0C3713BF17D3FECA00766FD9 /* DFCache.h */,
 				0C3713C017D3FECA00766FD9 /* DFCache.m */,
+				0C0B114F184735E1009962D0 /* DFStorage.h */,
+				0C0B1150184735E1009962D0 /* DFStorage.m */,
 			);
 			path = Caching;
 			sourceTree = "<group>";
@@ -1038,6 +1043,7 @@
 				0C091D901806B981000CCB11 /* DFProcessingTask.m in Sources */,
 				0C37144117D3FECA00766FD9 /* DFCache.m in Sources */,
 				0C2A95E517FBEF290016CB20 /* DFStreamChain.m in Sources */,
+				0C0B1151184735E1009962D0 /* DFStorage.m in Sources */,
 				0C37144617D3FECA00766FD9 /* DFCrypto.m in Sources */,
 				0C46819E18280139000C7B6D /* DFImageFetchManager.m in Sources */,
 				0C4681A018280139000C7B6D /* DFImageFetchTask.m in Sources */,
