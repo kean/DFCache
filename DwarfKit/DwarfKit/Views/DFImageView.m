@@ -29,7 +29,7 @@
 
    _imageURL = imageURL;
    
-    UIImage *image = [[DFCache imageCache] cachedObjectForKey:imageURL];
+    UIImage *image = [[DFCache imageCache].memoryCache objectForKey:imageURL];
     if (image) {
         self.image = image;
         return;

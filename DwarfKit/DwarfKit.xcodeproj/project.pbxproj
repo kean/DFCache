@@ -11,6 +11,12 @@
 		0C091D891806B8AA000CCB11 /* DFProcessingCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D871806B8AA000CCB11 /* DFProcessingCenter.m */; };
 		0C091D901806B981000CCB11 /* DFProcessingTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D8F1806B981000CCB11 /* DFProcessingTask.m */; };
 		0C091D911806B981000CCB11 /* DFProcessingTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C091D8F1806B981000CCB11 /* DFProcessingTask.m */; };
+		0C0B115D1847A183009962D0 /* DFStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0B115B1847A183009962D0 /* DFStorage.h */; };
+		0C0B115E1847A183009962D0 /* DFStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0B115B1847A183009962D0 /* DFStorage.h */; };
+		0C0B115F1847A183009962D0 /* DFStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0B115C1847A183009962D0 /* DFStorage.m */; };
+		0C0B11601847A183009962D0 /* DFStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0B115C1847A183009962D0 /* DFStorage.m */; };
+		0C0B11611847A183009962D0 /* DFStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0B115C1847A183009962D0 /* DFStorage.m */; };
+		0C0B11621847A183009962D0 /* DFStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0B115C1847A183009962D0 /* DFStorage.m */; };
 		0C2A95E317FBEF290016CB20 /* DFStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E017FBEF290016CB20 /* DFStream.m */; };
 		0C2A95E417FBEF290016CB20 /* DFStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E017FBEF290016CB20 /* DFStream.m */; };
 		0C2A95E517FBEF290016CB20 /* DFStreamChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E217FBEF290016CB20 /* DFStreamChain.m */; };
@@ -199,6 +205,8 @@
 		0C091D871806B8AA000CCB11 /* DFProcessingCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFProcessingCenter.m; sourceTree = "<group>"; };
 		0C091D8E1806B981000CCB11 /* DFProcessingTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFProcessingTask.h; sourceTree = "<group>"; };
 		0C091D8F1806B981000CCB11 /* DFProcessingTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFProcessingTask.m; sourceTree = "<group>"; };
+		0C0B115B1847A183009962D0 /* DFStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStorage.h; sourceTree = "<group>"; };
+		0C0B115C1847A183009962D0 /* DFStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFStorage.m; sourceTree = "<group>"; };
 		0C2A95DF17FBEF290016CB20 /* DFStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStream.h; sourceTree = "<group>"; };
 		0C2A95E017FBEF290016CB20 /* DFStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFStream.m; sourceTree = "<group>"; };
 		0C2A95E117FBEF290016CB20 /* DFStreamChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStreamChain.h; sourceTree = "<group>"; };
@@ -372,6 +380,23 @@
 			path = Processing;
 			sourceTree = "<group>";
 		};
+		0C0B11591847A154009962D0 /* Filesystem */ = {
+			isa = PBXGroup;
+			children = (
+				0C0B115A1847A183009962D0 /* Key-Value Storage */,
+			);
+			path = Filesystem;
+			sourceTree = "<group>";
+		};
+		0C0B115A1847A183009962D0 /* Key-Value Storage */ = {
+			isa = PBXGroup;
+			children = (
+				0C0B115B1847A183009962D0 /* DFStorage.h */,
+				0C0B115C1847A183009962D0 /* DFStorage.m */,
+			);
+			path = "Key-Value Storage";
+			sourceTree = "<group>";
+		};
 		0C2A95DE17FBEF290016CB20 /* Stream */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +465,7 @@
 				0C3713A917D3FECA00766FD9 /* Controls */,
 				0CED041917D8161100AEE503 /* MVC */,
 				0C3713AF17D3FECA00766FD9 /* Networking */,
+				0C0B11591847A154009962D0 /* Filesystem */,
 				0C3713BA17D3FECA00766FD9 /* Tools */,
 				0C3713CE17D3FECA00766FD9 /* Views */,
 				0CEDE41717D4503C00D617F7 /* Private */,
@@ -784,6 +810,7 @@
 				0C3713FF17D3FECA00766FD9 /* NSMutableArray+Dwarf.h in Headers */,
 				0C37140E17D3FECA00766FD9 /* DFTask+DFTaskPrivate.h in Headers */,
 				0C37141017D3FECA00766FD9 /* DFTask.h in Headers */,
+				0C0B115E1847A183009962D0 /* DFStorage.h in Headers */,
 				0C37141517D3FECA00766FD9 /* DFTaskQueue.h in Headers */,
 				0C37141F17D3FECA00766FD9 /* DFButtonLayout.h in Headers */,
 				0C37142817D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */,
@@ -830,6 +857,7 @@
 				0C3713FE17D3FECA00766FD9 /* NSMutableArray+Dwarf.h in Headers */,
 				0C37140D17D3FECA00766FD9 /* DFTask+DFTaskPrivate.h in Headers */,
 				0C37140F17D3FECA00766FD9 /* DFTask.h in Headers */,
+				0C0B115D1847A183009962D0 /* DFStorage.h in Headers */,
 				0C37141417D3FECA00766FD9 /* DFTaskQueue.h in Headers */,
 				0C37141E17D3FECA00766FD9 /* DFButtonLayout.h in Headers */,
 				0C37142717D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */,
@@ -1038,6 +1066,7 @@
 				0C091D901806B981000CCB11 /* DFProcessingTask.m in Sources */,
 				0C37144117D3FECA00766FD9 /* DFCache.m in Sources */,
 				0C2A95E517FBEF290016CB20 /* DFStreamChain.m in Sources */,
+				0C0B115F1847A183009962D0 /* DFStorage.m in Sources */,
 				0C37144617D3FECA00766FD9 /* DFCrypto.m in Sources */,
 				0C46819E18280139000C7B6D /* DFImageFetchManager.m in Sources */,
 				0C4681A018280139000C7B6D /* DFImageFetchTask.m in Sources */,
@@ -1060,6 +1089,7 @@
 				0C37141817D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
 				0C37143E17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
 				0C37144317D3FECA00766FD9 /* DFCache.m in Sources */,
+				0C0B11611847A183009962D0 /* DFStorage.m in Sources */,
 				0C37144817D3FECA00766FD9 /* DFCrypto.m in Sources */,
 				0CED042417D82C0A00AEE503 /* DFMapper.m in Sources */,
 			);
@@ -1074,6 +1104,7 @@
 				0C37141717D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
 				0C37143D17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
 				0C37144217D3FECA00766FD9 /* DFCache.m in Sources */,
+				0C0B11601847A183009962D0 /* DFStorage.m in Sources */,
 				0C37144717D3FECA00766FD9 /* DFCrypto.m in Sources */,
 				0CED042317D82C0A00AEE503 /* DFMapper.m in Sources */,
 			);
@@ -1084,6 +1115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CFCB28A18218B4300589990 /* TDFTasks.m in Sources */,
+				0C0B11621847A183009962D0 /* DFStorage.m in Sources */,
 				0C8C160F17D40F9B004B7DAA /* TDFCacheTests.m in Sources */,
 				0C46819F18280139000C7B6D /* DFImageFetchManager.m in Sources */,
 				0CB5EADE181D7DBF0040CB68 /* DFTaskMultiplexer.m in Sources */,
