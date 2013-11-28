@@ -165,7 +165,7 @@
     if (!key) {
         return nil;
     }
-    NSString *hash = [DFCrypto MD5FromString:key];
+    NSString *hash = dwarf_md5([key UTF8String]);
     return [_path stringByAppendingPathComponent:hash];
 }
 
