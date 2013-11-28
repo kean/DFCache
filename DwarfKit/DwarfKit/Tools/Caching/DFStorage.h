@@ -98,4 +98,9 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  */
 - (unsigned long long)currentDiskUsage;
 
+/** Returns URLs of items contained into storage. 
+ @param keys An array of keys that identify the file properties that you want pre-fetched for each item in the storage. For each returned URL, the specified properties are fetched and cached in the NSURL object. For a list of keys you can specify, see Common File System Resource Keys.
+ */
+- (NSArray *)contentsWithResourceKeys:(NSArray *)keys;
+
 @end

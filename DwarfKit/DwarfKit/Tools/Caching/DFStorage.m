@@ -211,43 +211,32 @@
 
 - (void)_cleanup {
     NSFileManager *manager = [NSFileManager defaultManager];
-    NSURL *entriesURL = [NSURL fileURLWithPath:_rootPath isDirectory:YES];
-    NSArray *resourceKeys = @[ NSURLIsDirectoryKey,
-                               NSURLContentModificationDateKey,
-                               NSURLFileAllocatedSizeKey ];
-    NSDirectoryEnumerator *fileEnumerator =
-    [manager enumeratorAtURL:entriesURL
-  includingPropertiesForKeys:resourceKeys
-                     options:NSDirectoryEnumerationSkipsHiddenFiles
-                errorHandler:NULL];
-    
+    NSArray *resourceKeys = @[ NSURLContentModificationDateKey, NSURLFileAllocatedSizeKey ];
+    NSArray *contents = [self contentsWithResourceKeys:resourceKeys];
     NSMutableDictionary *files = [NSMutableDictionary dictionary];
     _dwarf_bytes currentSize = 0;
-    for (NSURL *fileURL in fileEnumerator) {
+    for (NSURL *fileURL in contents) {
         NSDictionary *resourceValues = [fileURL resourceValuesForKeys:resourceKeys error:NULL];
-        if ([resourceValues[NSURLIsDirectoryKey] boolValue]) {
-            continue;
+        if (resourceValues) {
+            NSNumber *size = resourceValues[NSURLFileAllocatedSizeKey];
+            currentSize += [size unsignedLongLongValue];
+            files[fileURL] = resourceValues;
         }
-        NSNumber *fileSize = resourceValues[NSURLFileAllocatedSizeKey];
-        currentSize += [fileSize unsignedLongLongValue];
-        files[fileURL] = resourceValues;
     }
-    if (currentSize > _diskCapacity) {
-        const _dwarf_bytes desiredSize = _diskCapacity * _cleanupRate;
-        NSArray *sortedFiles =
-        [files keysSortedByValueWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [obj1[NSURLContentModificationDateKey] compare:
-                    obj2[NSURLContentModificationDateKey]];
-        }];
-        for (NSURL *fileURL in sortedFiles) {
-            if ([manager removeItemAtURL:fileURL error:nil]) {
-                NSDictionary *resourceValues = files[fileURL];
-                NSNumber *fileSize = resourceValues[NSURLFileAllocatedSizeKey];
-                currentSize -= [fileSize unsignedLongLongValue];
-                if (currentSize < desiredSize) {
-                    break;
-                }
-            }
+    if (currentSize < _diskCapacity) {
+        return;
+    }
+    const _dwarf_bytes desiredSize = _diskCapacity * _cleanupRate;
+    NSArray *sortedFiles = [files keysSortedByValueWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1[NSURLContentModificationDateKey] compare:obj2[NSURLContentModificationDateKey]];
+    }];
+    for (NSURL *fileURL in sortedFiles) {
+        if (currentSize < desiredSize) {
+            break;
+        }
+        if ([manager removeItemAtURL:fileURL error:nil]) {
+            NSNumber *fileSize = files[fileURL][NSURLFileAllocatedSizeKey];
+            currentSize -= [fileSize unsignedLongLongValue];
         }
     }
 }
@@ -255,24 +244,19 @@
 - (_dwarf_bytes)currentDiskUsage {
     __block _dwarf_bytes size = 0;
     dispatch_sync(_ioQueue, ^{
-        NSFileManager *manager = [NSFileManager defaultManager];
-        NSURL *entriesURL = [NSURL fileURLWithPath:_rootPath isDirectory:YES];
-        NSArray *resourceKeys = @[ NSURLIsDirectoryKey,
-                                   NSURLFileAllocatedSizeKey ];
-        NSDirectoryEnumerator *fileEnumerator =
-        [manager enumeratorAtURL:entriesURL
-      includingPropertiesForKeys:resourceKeys
-                         options:NSDirectoryEnumerationSkipsHiddenFiles
-                    errorHandler:NULL];
-        for (NSURL *fileURL in fileEnumerator) {
+        NSArray *resourceKeys = @[ NSURLFileAllocatedSizeKey ];
+        NSArray *contents = [self contentsWithResourceKeys:resourceKeys];
+        for (NSURL *fileURL in contents) {
             NSDictionary *resourceValues = [fileURL resourceValuesForKeys:resourceKeys error:NULL];
-            if ([resourceValues[NSURLIsDirectoryKey] boolValue]) {
-                continue;
-            }
             size += [resourceValues[NSURLFileAllocatedSizeKey] unsignedLongLongValue];
         }
     });
     return size;
+}
+
+- (NSArray *)contentsWithResourceKeys:(NSArray *)keys {
+    NSURL *rootURL = [NSURL fileURLWithPath:_rootPath isDirectory:YES];
+    return [[NSFileManager defaultManager] contentsOfDirectoryAtURL:rootURL includingPropertiesForKeys:keys options:NSDirectoryEnumerationSkipsHiddenFiles error:NULL];
 }
 
 #pragma mark - Application Notifications
