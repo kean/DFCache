@@ -33,8 +33,9 @@
         _diskCache = diskCache;
         _memoryCache = memoryCache;
         
-        NSString *metadataStorageName = [_diskCache.name stringByAppendingString:@"-metadata"];
-        _metadataStorage = [[DFStorage alloc] initWithName:metadataStorageName];
+        NSString *metadataName = [[_diskCache.path lastPathComponent] stringByAppendingString:@"-df_metadata"];
+        NSString *metadataPath = [[self _cachesPath] stringByAppendingPathComponent:metadataName];
+        _metadataStorage = [[DFStorage alloc] initWithPath:metadataPath];
         
         _memorizedMetadata = [NSCache new];
         _memorizedMetadata.countLimit = 50;
@@ -46,7 +47,9 @@
     if (!name.length) {
         [NSException raise:@"DFCache" format:@"Attemting to initialize DFCache without a name"];
     }
-    DFStorage *storage = [[DFStorage alloc] initWithName:name];
+    NSString *storagePath = [[self _cachesPath] stringByAppendingPathComponent:name];
+    
+    DFStorage *storage = [[DFStorage alloc] initWithPath:storagePath];
     storage.diskCapacity = 1024 * 1024 * 100; // 100 Mb
     storage.cleanupRate = 0.5;
     return [self initWithDiskCache:storage memoryCache:memoryCache];
@@ -56,6 +59,10 @@
     NSCache *memoryCache = [NSCache new];
     memoryCache.totalCostLimit = 1024 * 1024 * 15; // 15 Mb
     return [self initWithName:name memoryCache:memoryCache];
+}
+
+- (NSString *)_cachesPath {
+    return NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
 }
 
 #pragma mark - Read

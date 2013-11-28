@@ -17,17 +17,17 @@ static const unsigned long long DFStorageDiskCapacityUnlimited = 0;
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface DFStorage : NSObject
 
-/** Initializes and returns cache with provided name.
- @param name Name defines the name of the folder used by storage.
+/** Initializes and returns cache with provided root folder path.
+ @param path Storage root folder path.
  */
-- (id)initWithName:(NSString *)name;
+- (id)initWithPath:(NSString *)path;
 
-/** Returns storage name.
+/** Returns storage root folder path.
  */
-@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSString *path;
 
 /** Maximum storage capacity. If 0 then disk space is unlimited.
- @discussion Not a strict limit. Disk storage is actually cleaned up each time application resigns active (for iOS) and any time - (void)cleanupDisk gets called.
+ @discussion Not a strict limit. Disk storage is actually cleaned up each time application resigns active (for iOS) and any time - (void)cleanup gets called.
  */
 @property (nonatomic) unsigned long long diskCapacity;
 
@@ -93,10 +93,9 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  */
 - (void)cleanup;
 
-/** Returns the current size of the receiver’s on-disk cache, in bytes.
- @warning This operation is expensive.
+/** Returns the current size of the receiver contents, in bytes.
  */
-- (unsigned long long)currentDiskUsage;
+- (unsigned long long)contentsSize;
 
 /** Returns URLs of items contained into storage. 
  @param keys An array of keys that identify the file properties that you want pre-fetched for each item in the storage. For each returned URL, the specified properties are fetched and cached in the NSURL object. For a list of keys you can specify, see Common File System Resource Keys.

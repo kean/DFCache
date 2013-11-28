@@ -16,7 +16,6 @@
 
 
 @implementation DFStorage {
-    NSString *_rootPath;
     dispatch_queue_t _ioQueue;
 }
 
@@ -25,15 +24,13 @@
     DWARF_DISPATCH_RELEASE(_ioQueue);
 }
 
-- (id)initWithName:(NSString *)name {
+- (id)initWithPath:(NSString *)path {
     if (self = [super init]) {
-        if (!name.length) {
-            [NSException raise:@"DFCache" format:@"Attempting to initialize cache without name"];
+        if (!path.length) {
+            [NSException raise:@"DFCache" format:@"Attempting to initialize cache without root folder path"];
         }
-        _name = name;
+        _path = path;
         
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        _rootPath = [paths[0] stringByAppendingPathComponent:name];
         [self _createRootFolder];
         
         _ioQueue = dispatch_queue_create("_df_storage_io_queue", DISPATCH_QUEUE_SERIAL);
@@ -149,7 +146,7 @@
 
 - (void)removeAllData {
     dispatch_async(_ioQueue, ^{
-        [[NSFileManager defaultManager] removeItemAtPath:_rootPath error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:_path error:nil];
         [self _createRootFolder];
     });
 }
@@ -158,8 +155,8 @@
 
 - (void)_createRootFolder {
     NSFileManager *manager = [NSFileManager defaultManager];
-    if (![manager fileExistsAtPath:_rootPath]) {
-        [manager createDirectoryAtPath:_rootPath withIntermediateDirectories:YES attributes:nil error:NULL];
+    if (![manager fileExistsAtPath:_path]) {
+        [manager createDirectoryAtPath:_path withIntermediateDirectories:YES attributes:nil error:NULL];
     }
 }
 
@@ -168,7 +165,7 @@
         return nil;
     }
     NSString *hash = [DFCrypto MD5FromString:key];
-    return [_rootPath stringByAppendingPathComponent:hash];
+    return [_path stringByAppendingPathComponent:hash];
 }
 
 - (NSData *)_dataForKey:(NSString *)key {
@@ -241,21 +238,19 @@
     }
 }
 
-- (_dwarf_bytes)currentDiskUsage {
-    __block _dwarf_bytes size = 0;
-    dispatch_sync(_ioQueue, ^{
-        NSArray *resourceKeys = @[ NSURLFileAllocatedSizeKey ];
-        NSArray *contents = [self contentsWithResourceKeys:resourceKeys];
-        for (NSURL *fileURL in contents) {
-            NSDictionary *resourceValues = [fileURL resourceValuesForKeys:resourceKeys error:NULL];
-            size += [resourceValues[NSURLFileAllocatedSizeKey] unsignedLongLongValue];
-        }
-    });
-    return size;
+- (_dwarf_bytes)contentsSize {
+    _dwarf_bytes contentsSize = 0;
+    NSArray *contents = [self contentsWithResourceKeys:@[NSURLFileAllocatedSizeKey]];
+    for (NSURL *fileURL in contents) {
+        NSNumber *fileSize;
+        [fileURL getResourceValue:&fileSize forKey:NSURLFileAllocatedSizeKey error:NULL];
+        contentsSize += [fileSize unsignedLongLongValue];
+    }
+    return contentsSize;
 }
 
 - (NSArray *)contentsWithResourceKeys:(NSArray *)keys {
-    NSURL *rootURL = [NSURL fileURLWithPath:_rootPath isDirectory:YES];
+    NSURL *rootURL = [NSURL fileURLWithPath:_path isDirectory:YES];
     return [[NSFileManager defaultManager] contentsOfDirectoryAtURL:rootURL includingPropertiesForKeys:keys options:NSDirectoryEnumerationSkipsHiddenFiles error:NULL];
 }
 
