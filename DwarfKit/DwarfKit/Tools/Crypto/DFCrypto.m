@@ -13,15 +13,56 @@
 #import "DFCrypto.h"
 #import <CommonCrypto/CommonCrypto.h>
 
+static inline
 NSString *
-dwarf_md5(const char *data) {
-    unsigned char md5[CC_MD5_DIGEST_LENGTH];
-    CC_MD5(data, (CC_LONG)strlen(data), md5);
-    char hash[2 * CC_MD5_DIGEST_LENGTH + 1];
-    char *tmp = hash;
-    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++ ) {
-        snprintf( tmp, 3, "%02x", md5[i] );
-        tmp += 2;
+_dwarf_hash_to_string(unsigned char *hash, unsigned int length) {
+    char utf8[2 * length + 1];
+    char *temp = utf8;
+    for (int i = 0; i < length; i++) {
+        snprintf(temp, 3, "%02x", hash[i]);
+        temp += 2;
     }
-    return [NSString stringWithUTF8String:hash];
+    return [NSString stringWithUTF8String:utf8];
+}
+
+NSString *
+dwarf_md5(const char *data, uint32_t length) {
+    unsigned char hash[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(data, (CC_LONG)length, hash);
+    return _dwarf_hash_to_string(hash, CC_MD5_DIGEST_LENGTH);
+}
+
+NSString *
+dwarf_sha1(const char *data, uint32_t length) {
+    unsigned char hash[CC_SHA1_DIGEST_LENGTH];
+    CC_SHA1(data, (CC_LONG)length, hash);
+    return _dwarf_hash_to_string(hash, CC_SHA1_DIGEST_LENGTH);
+}
+
+NSString *
+dwarf_sha224(const char *data, uint32_t length) {
+    unsigned char hash[CC_SHA224_DIGEST_LENGTH];
+    CC_SHA224(data, (CC_LONG)length, hash);
+    return _dwarf_hash_to_string(hash, CC_SHA224_DIGEST_LENGTH);
+}
+
+NSString *
+dwarf_sha256(const char *data, uint32_t length) {
+    unsigned char hash[CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256(data, (CC_LONG)length, hash);
+    return _dwarf_hash_to_string(hash, CC_SHA256_DIGEST_LENGTH);
+}
+
+NSString *
+dwarf_sha384(const char *data, uint32_t length) {
+    unsigned char hash[CC_SHA384_DIGEST_LENGTH];
+    CC_SHA384(data, (CC_LONG)length, hash);
+    return _dwarf_hash_to_string(hash, CC_SHA384_DIGEST_LENGTH);
+}
+
+NSString *
+dwarf_sha512(const char *data, uint32_t length) {
+    unsigned char hash[CC_SHA512_DIGEST_LENGTH];
+    CC_SHA512(data, (CC_LONG)length, hash);
+    return _dwarf_hash_to_string(hash, CC_SHA512_DIGEST_LENGTH);
 }

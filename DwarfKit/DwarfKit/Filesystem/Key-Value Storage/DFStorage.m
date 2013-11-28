@@ -162,10 +162,11 @@
 }
 
 - (NSString *)_pathWithKey:(NSString *)key {
-    if (!key) {
+    if (!key.length) {
         return nil;
     }
-    NSString *hash = dwarf_md5([key UTF8String]);
+    const char *string = [key UTF8String];
+    NSString *hash = dwarf_sha1(string, strlen(string));
     return [_path stringByAppendingPathComponent:hash];
 }
 

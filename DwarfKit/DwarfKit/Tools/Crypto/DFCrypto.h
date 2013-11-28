@@ -13,4 +13,29 @@
 /** Produces 128-bit hash value using MD5 message-digest algorithm.
  @return String containing 128-bit hash value expressed as a 32 digit hexademical number.
  */
-extern NSString *dwarf_md5(const char *data);
+extern NSString *dwarf_md5(const char *data, uint32_t length);
+
+/** Produces 160-bit hash value using SHA-1 algorithm.
+ @return String containing 160-bit hash value expressed as a 40 digit hexademical number.
+ */
+extern NSString *dwarf_sha1(const char *data, uint32_t length);
+
+/** Produces 224-bit hash value using SHA-224 algorithm.
+ @return String containing 224-bit hash value expressed as a 56 digit hexademical number.
+ */
+extern NSString *dwarf_sha224(const char *data, uint32_t length);
+
+/** Produces 256-bit hash value using SHA-256 algorithm.
+ @return String containing 256-bit hash value expressed as a 64 digit hexademical number.
+ */
+extern NSString *dwarf_sha256(const char *data, uint32_t length);
+
+/** Produces 384-bit hash value using SHA-384 algorithm.
+ @return String containing 384-bit hash value expressed as a 96 digit hexademical number.
+ */
+extern NSString *dwarf_sha384(const char *data, uint32_t length);
+
+/** Produces 512-bit hash value using SHA-512 algorithm.
+ @return String containing 512-bit hash value expressed as a 128 digit hexademical number.
+ */
+extern NSString *dwarf_sha512(const char *data, uint32_t length);
