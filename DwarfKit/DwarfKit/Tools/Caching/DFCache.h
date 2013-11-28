@@ -60,6 +60,11 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  */
 - (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *data))completion;
 
+/** Reads data from disk synchronously.
+@param key The unique key.
+*/
+- (NSData *)cachedDataForKey:(NSString *)key;
+ 
 /** Reads object from disk.
  @param key The unique key.
  @param decode Decoding block returning object from data.
@@ -80,13 +85,9 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
                   decode:(DFCacheDecodeBlock)decode
                     cost:(DFCacheCostBlock)cost;
 
-/** Checks if object for key exists in cache.
+/** Checks if object data representation is stored into disk cache.
  */
-- (BOOL)containsObjectForKey:(NSString *)key;
-
-/** Returns object from memory cache.
- */
-- (id)cachedObjectForKey:(NSString *)key;
+- (BOOL)containsDataForKey:(NSString *)key;
 
 #pragma mark - Read (Multiple Keys)
 
@@ -120,7 +121,6 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  */
 - (void)storeData:(NSData *)data forKey:(NSString *)key;
 
-
 /** Stores object into memory cache. Stores data into disk cache.
  @param object The object to store into memory cache.
  @param key The unique key.
@@ -142,15 +142,6 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
              forKey:(NSString *)key
                cost:(NSUInteger)cost
              encode:(DFCacheEncodeBlock)encode;
-
-/*! Stores object into memory cache.
- @param object Object.
- @param key The unique key.
- @param cost The cost with which to associate the object (used by memory cache).
- */
-- (void)storeObject:(id)object
-             forKey:(NSString *)key
-               cost:(NSUInteger)cost;
 
 #pragma mark - Metadata
 
@@ -191,18 +182,6 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 - (void)removeObjectForKey:(NSString *)key;
 - (void)removeAllObjects;
 
-/** Options used be removal methods.
- */
-typedef NS_OPTIONS(NSUInteger, DFCacheRemoveOptions) {
-   DFCacheRemoveFromMemory = (1 << 0),
-   DFCacheRemoveFromDisk = (1 << 1)
-};
-
-/** Removes objects from memory and/or disk cache based on options */
-- (void)removeObjectsForKeys:(NSArray *)keys options:(DFCacheRemoveOptions)options;
-- (void)removeObjectForKey:(NSString *)key options:(DFCacheRemoveOptions)options;
-- (void)removeAllObjects:(DFCacheRemoveOptions)options;
-
 #pragma mark - Maintenance
 
 /** Cleans up disk by removing entries by LRU algorithm.
@@ -222,9 +201,11 @@ typedef NS_OPTIONS(NSUInteger, DFCacheRemoveOptions) {
 
 @interface DFCache (Blocks)
 
+#if TARGET_OS_IPHONE
 @property (nonatomic, readonly) DFCacheDecodeBlock blockUIImageDecode;
 @property (nonatomic, readonly) DFCacheEncodeBlock blockUIImageEncode;
 @property (nonatomic, readonly) DFCacheCostBlock blockUIImageCost;
+#endif
 
 @property (nonatomic, readonly) DFCacheDecodeBlock blockJSONDecode;
 @property (nonatomic, readonly) DFCacheEncodeBlock blockJSONEncode;

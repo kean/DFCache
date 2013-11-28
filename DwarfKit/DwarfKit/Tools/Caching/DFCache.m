@@ -12,7 +12,6 @@
 
 #import "DFCache.h"
 #import "DFCrypto.h"
-#import "DFOptions.h"
 #import "DFObjCExtenstions.h"
 
 #import "dwarf_private.h"
@@ -98,6 +97,17 @@
     });
 }
 
+- (NSData *)cachedDataForKey:(NSString *)key {
+    if (!key) {
+        return nil;
+    }
+    __block NSData *data;
+    dispatch_sync(_ioQueue, ^{
+        data = [self _dataForKey:key];
+    });
+    return data;
+}
+
 - (void)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id))completion {
     if (!completion) {
         return;
@@ -133,7 +143,7 @@
     if (!key || !decode) {
         return nil;
     }
-    id object = [self cachedObjectForKey:key];
+    id object = [_memoryCache objectForKey:key];
     if (!object) {
         __block NSData *data;
         dispatch_sync(_ioQueue, ^{
@@ -155,16 +165,9 @@
     return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 }
 
-- (id)cachedObjectForKey:(NSString *)key {
-    return key ? [_memoryCache objectForKey:key] : nil;
-}
-
-- (BOOL)containsObjectForKey:(NSString *)key {
+- (BOOL)containsDataForKey:(NSString *)key {
     if (!key) {
         return NO;
-    }
-    if ([_memoryCache objectForKey:key]) {
-        return YES;
     }
     return [self _fileExistsForKey:key];
 }
@@ -282,13 +285,6 @@
     });
 }
 
-- (void)storeObject:(id)object forKey:(NSString *)key cost:(NSUInteger)cost {
-    if (!object || !key) {
-        return;
-    }
-    [_memoryCache setObject:object forKey:key cost:cost];
-}
-
 #pragma mark - Metadata
 
 - (NSDictionary *)metadataForKey:(NSString *)key {
@@ -355,63 +351,43 @@
 
 #pragma mark - Remove
 
-- (void)removeObjectsForKeys:(NSArray *)keys options:(DFCacheRemoveOptions)options {
-    if (!keys) {
-        return;
-    }
-    if (DF_OPTIONS_IS_ENABLED(options, DFCacheRemoveFromMemory)) {
-        for (NSString *key in keys) {
-            [_memoryCache removeObjectForKey:key];
-        }
-    }
-    if (DF_OPTIONS_IS_ENABLED(options, DFCacheRemoveFromDisk)) {
-        dispatch_async(_ioQueue, ^{
-            [self _removeObjectsForKeys:keys];
-        });
-    }
+- (void)removeObjectsForKeys:(NSArray *)keys {
+   if (!keys) {
+      return;
+   }
+   for (NSString *key in keys) {
+      [_memoryCache removeObjectForKey:key];
+   }
+   dispatch_async(_ioQueue, ^{
+      [self _removeObjectsForKeys:keys];
+   });
 }
 
 - (void)_removeObjectsForKeys:(NSArray *)keys {
-    if (!keys.count) {
-        return;
-    }
-    for (NSString *key in keys) {
-        [self _removeDataForKey:key];
-        [self _removeMetadataForKey:key];
-    }
-}
-
-- (void)removeObjectsForKeys:(NSArray *)keys {
-    [self removeObjectsForKeys:keys options:(DFCacheRemoveFromDisk | DFCacheRemoveFromMemory)];
-}
-
-- (void)removeObjectForKey:(NSString *)key options:(DFCacheRemoveOptions)options {
-    if (key) {
-        [self removeObjectsForKeys:@[key] options:options];
-    }
+   if (!keys.count) {
+      return;
+   }
+   for (NSString *key in keys) {
+      [self _removeDataForKey:key];
+      [self _removeMetadataForKey:key];
+   }
 }
 
 - (void)removeObjectForKey:(NSString *)key {
-    [self removeObjectForKey:key options:(DFCacheRemoveFromDisk | DFCacheRemoveFromMemory)];
-}
-
-- (void)removeAllObjects:(DFCacheRemoveOptions)options {
-    if (DF_OPTIONS_IS_ENABLED(options, DFCacheRemoveFromMemory)) {
-        [_memoryCache removeAllObjects];
-    }
-    if (DF_OPTIONS_IS_ENABLED(options, DFCacheRemoveFromDisk)) {
-        dispatch_async(_ioQueue, ^{
-            NSFileManager *manager = [NSFileManager defaultManager];
-            [_memorizedMetadata removeAllObjects];
-            [manager removeItemAtPath:_entriesPath error:nil];
-            [manager removeItemAtPath:_metadataPath error:nil];
-            [self _createCacheDirectories];
-        });
-    }
+   if (key) {
+      [self removeObjectsForKeys:@[key]];
+   }
 }
 
 - (void)removeAllObjects {
-    [self removeAllObjects:(DFCacheRemoveFromDisk | DFCacheRemoveFromMemory)];
+   [_memoryCache removeAllObjects];
+   dispatch_async(_ioQueue, ^{
+      NSFileManager *manager = [NSFileManager defaultManager];
+      [_memorizedMetadata removeAllObjects];
+      [manager removeItemAtPath:_entriesPath error:nil];
+      [manager removeItemAtPath:_metadataPath error:nil];
+      [self _createCacheDirectories];
+   });
 }
 
 #pragma mark - Maintenance
@@ -622,6 +598,7 @@
 
 @implementation DFCache (Blocks)
 
+#if TARGET_OS_IPHONE
 - (DFCacheCostBlock)blockUIImageCost {
     return ^NSUInteger(id object){
         UIImage *image = safe_cast(UIImage, object);
@@ -643,6 +620,7 @@
         return [DFImageProcessing decompressedImageWithData:data];
     };
 }
+#endif
 
 - (DFCacheEncodeBlock)blockJSONEncode {
     return ^NSData *(id JSON){
