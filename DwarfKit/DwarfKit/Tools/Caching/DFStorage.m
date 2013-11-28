@@ -18,7 +18,6 @@
 @implementation DFStorage {
     NSString *_rootPath;
     dispatch_queue_t _ioQueue;
-    NSCache *_memorizedHashes;
 }
 
 - (void)dealloc {
@@ -39,14 +38,8 @@
         
         _ioQueue = dispatch_queue_create("_df_storage_io_queue", DISPATCH_QUEUE_SERIAL);
         
-        _memorizedHashes = [NSCache new];
-        _memorizedHashes.countLimit = 150;
-        
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center addObserver:self selector:@selector(applicationWillResignActive:) name:DFApplicationWillResignActiveNotification object:nil];
-#if TARGET_OS_IPHONE
-        [center addObserver:self selector:@selector(applicationDidReceiveMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
-#endif
     }
     return self;
 }
@@ -170,20 +163,11 @@
     }
 }
 
-- (NSString *)_hashWithKey:(NSString *)key {
-    NSString *hash = [_memorizedHashes objectForKey:key];
-    if (!hash) {
-        hash = [DFCrypto MD5FromString:key];
-        [_memorizedHashes setObject:hash forKey:key];
-    }
-    return hash;
-}
-
 - (NSString *)_pathWithKey:(NSString *)key {
     if (!key) {
         return nil;
     }
-    NSString *hash = [self _hashWithKey:key];
+    NSString *hash = [DFCrypto MD5FromString:key];
     return [_rootPath stringByAppendingPathComponent:hash];
 }
 
@@ -295,10 +279,6 @@
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
     [self cleanup];
-}
-
-- (void)applicationDidReceiveMemoryWarning:(NSNotification *)notification {
-    [_memorizedHashes removeAllObjects];
 }
 
 @end
