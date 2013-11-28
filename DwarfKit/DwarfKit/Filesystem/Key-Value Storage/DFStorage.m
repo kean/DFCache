@@ -220,7 +220,7 @@
 }
 
 - (void)cleanup {
-    if (_diskCapacity == 0) {
+    if (_diskCapacity == DFStorageDiskCapacityUnlimited) {
         return;
     }
     dispatch_async(_ioQueue, ^{

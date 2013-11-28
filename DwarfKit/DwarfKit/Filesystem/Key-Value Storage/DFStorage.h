@@ -12,7 +12,7 @@
 
 static const unsigned long long DFStorageDiskCapacityUnlimited = 0;
 
-/** Key-value disk storage with LRU cleanup (when you need it).
+/** Key-value file storage with LRU cleanup (when you need it).
  */
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface DFStorage : NSObject
