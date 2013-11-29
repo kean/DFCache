@@ -10,7 +10,7 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFStorage.h"
+#import "DFDiskCache.h"
 
 typedef NSUInteger (^DFCacheCostBlock)(id object);
 typedef id (^DFCacheDecodeBlock)(NSData *data);
@@ -36,7 +36,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  @param diskStorage Disk storage. Must not be nil.
  @param memoryCache Memory cache. Pass nil to disable memory caching.
  */
-- (id)initWithDiskCache:(DFStorage *)diskCache memoryCache:(NSCache *)memoryCache;
+- (id)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache;
 
 /** Convenience method. Initializes and returns cache with provided name and memory cache.
  @param name Name is used to initialize disk cache.
@@ -55,7 +55,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 /*! Returns disk cache used by DFCache instance.
  */
-@property (nonatomic, readonly) DFStorage *diskCache;
+@property (nonatomic, readonly) DFDiskCache *diskCache;
 
 #pragma mark - Read
  
@@ -125,12 +125,6 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  @return Copy of metadata for key.
  */
 - (NSDictionary *)metadataForKey:(NSString *)key;
-
-/** Reads metadata for provided key. Calls completion block with copy of metadata.
- @param key The unique key.
- @param completion Completion block.
- */
-- (void)metadataForKey:(NSString *)key completion:(void (^)(NSDictionary *metadata))completion;
 
 /** Sets metadata for provided key.
  @param metadata Dictionary with metadata.

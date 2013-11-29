@@ -10,83 +10,32 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-static const unsigned long long DFStorageDiskCapacityUnlimited = 0;
 
-/** Key-value file storage with LRU cleanup (when you need it).
+/** Key-value file storage. 
+ @discussion All methods are synchronous so that it can be used for various different purposes.
  */
-NS_CLASS_AVAILABLE(10_7, 5_0)
+NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface DFStorage : NSObject
 
-/** Initializes and returns cache with provided root folder path.
- @param path Storage root folder path.
+/** Initializes and returns file storage with provided directory path.
+ @param path Storage root directory path.
  */
 - (id)initWithPath:(NSString *)path;
 
-/** Returns storage root folder path.
+/** Returns storage root directory path.
  */
 @property (nonatomic, readonly) NSString *path;
 
-/** Maximum storage capacity. If 0 then disk space is unlimited.
- @discussion Not a strict limit. Disk storage is actually cleaned up each time application resigns active (for iOS) and any time - (void)cleanup gets called.
- */
-@property (nonatomic) unsigned long long diskCapacity;
-
-/** Remaining disk usage after cleanup. The rate must be in the range of 0.0 to 1.0 where 1.0 represents full disk capacity.
- */
-@property (nonatomic) CGFloat cleanupRate;
-
-#pragma mark - Read
-
-/** Reads data from disk.
- @param key The unique key.
- @param completion Completion block.
- */
-- (void)readDataForKey:(NSString *)key completion:(void (^)(NSData *data))completion;
-
-/** Reads data from disk synchronously.
- @param key The unique key.
- */
-- (NSData *)readDataForKey:(NSString *)key;
-
-/** Reads multiple NSData objects for provided keys.
- @param keys Array of unique keys.
- @param completion Completion block.
- */
-- (void)readBatchForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *batch))completion;
-
-/** Returns YES if storage contains data for provided key.
- */
-- (BOOL)containsDataForKey:(NSString *)key;
-
-#pragma mark - Write
-
-/** Writes data into disk storage asyncronously.
- @param data Data to store into disk cache.
- @param key The unique key.
- */
-- (void)writeData:(NSData *)data forKey:(NSString *)key;
-
-/** Writes data into disk storage synchronously.
- @param data Data to store into disk cache.
- @param key The unique key.
- */
-- (void)writeDataSynchronously:(NSData *)data forKey:(NSString *)key;
-
-/** Writes batch of NSData objects into disk cache.
- @param batch Dictionary containing { key : data }.
- @param completion Completion block.
- */
-- (void)writeBatch:(NSDictionary *)batch;
-
-#pragma mark - Remove
-
-/** Deletes data from storage.
- */
-- (void)removeDataForKeys:(NSArray *)keys;
+- (NSData *)dataForKey:(NSString *)key;
+- (void)setData:(NSData *)data forKey:(NSString *)key;
 - (void)removeDataForKey:(NSString *)key;
 - (void)removeAllData;
+- (BOOL)containsDataForKey:(NSString *)key;
 
-#pragma mark - Maintenance
+/** Returns file name for key. File names are generated using SHA-1 digest algorithm.
+ */
+- (NSString *)fileNameForKey:(NSString *)key;
+- (NSString *)filePathForKey:(NSString *)key;
 
 /** Returns the current size of the receiver contents, in bytes.
  */
@@ -96,10 +45,5 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
  @param keys An array of keys that identify the file properties that you want pre-fetched for each item in the storage. For each returned URL, the specified properties are fetched and cached in the NSURL object. For a list of keys you can specify, see Common File System Resource Keys.
  */
 - (NSArray *)contentsWithResourceKeys:(NSArray *)keys;
-
-/** Cleans up disk by removing entries by LRU algorithm.
- @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Calculates target size by multiplying disk capacity and cleanup rate. Files are removed according to LRU algorithm until cache size fits target size.
- */
-- (void)cleanup;
 
 @end

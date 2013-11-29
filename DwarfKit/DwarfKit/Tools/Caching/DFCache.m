@@ -23,11 +23,17 @@
 #pragma mark - DFCache -
 
 @implementation DFCache {
+    dispatch_queue_t _diskQueue;
     DFStorage *_metadataStorage;
     NSCache *_memorizedMetadata;
 }
 
-- (id)initWithDiskCache:(DFStorage *)diskCache memoryCache:(NSCache *)memoryCache {
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    DWARF_DISPATCH_RELEASE(_ioQueue);
+}
+
+- (id)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache {
     if (self = [super init]) {
         NSAssert(diskCache, @"Attemting to initialize DFCache without disk cache");
         _diskCache = diskCache;
@@ -39,6 +45,11 @@
         
         _memorizedMetadata = [NSCache new];
         _memorizedMetadata.countLimit = 50;
+        
+        _diskQueue = dispatch_queue_create("_df_storage_io_queue", DISPATCH_QUEUE_SERIAL);
+        
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center addObserver:self selector:@selector(_applicationWillResignActive:) name:DFApplicationWillResignActiveNotification object:nil];
     }
     return self;
 }
@@ -49,7 +60,7 @@
     }
     NSString *storagePath = [[self _cachesPath] stringByAppendingPathComponent:name];
     
-    DFStorage *storage = [[DFStorage alloc] initWithPath:storagePath];
+    DFDiskCache *storage = [[DFDiskCache alloc] initWithPath:storagePath];
     storage.diskCapacity = 1024 * 1024 * 100; // 100 Mb
     storage.cleanupRate = 0.5;
     return [self initWithDiskCache:storage memoryCache:memoryCache];
@@ -80,19 +91,18 @@
         _dwarf_callback(completion, object);
         return;
     }
-    [_diskCache readDataForKey:key completion:^(NSData *data) {
+    dispatch_async(_diskQueue, ^{
+        NSData *data = [_diskCache dataForKey:key];
         if (!data) {
-            completion(nil);
+            _dwarf_callback(completion, nil);
             return;
         }
         dispatch_async([self _processingQueue], ^{
             id object = decode(data);
-            if (object) {
-                [self _touchObject:object forKey:key cost:cost];
-            }
+            [self _touchObject:object forKey:key cost:cost];
             _dwarf_callback(completion, object);
         });
-    }];
+    });
 }
 
 - (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost {
@@ -101,7 +111,7 @@
     }
     id object = [_memoryCache objectForKey:key];
     if (!object) {
-        NSData *data = [_diskCache readDataForKey:key];
+        NSData *data = [_diskCache dataForKey:key];
         if (data) {
             object = decode(data);
             [self _touchObject:object forKey:key cost:cost];
@@ -141,14 +151,17 @@
     }
     
     // Lookup data for remaining keys into disk storage.
-    [_diskCache readBatchForKeys:remainingKeys completion:^(NSDictionary *batch) {
-        if (!batch.count) {
-            _dwarf_callback(completion, foundObjects);
-            return;
+    dispatch_async(_diskQueue, ^{
+        NSMutableDictionary *foundData = [NSMutableDictionary new];
+        for (NSString *key in remainingKeys) {
+            NSData *data = [_diskCache dataForKey:key];
+            if (data) {
+                foundData[key] = data;
+            }
         }
         dispatch_async([self _processingQueue], ^{
-            for (NSString *key in batch) {
-                NSData *data = batch[key];
+            for (NSString *key in foundData) {
+                NSData *data = foundData[key];
                 id object = decode(data);
                 if (object) {
                     [self _touchObject:foundObjects forKey:key cost:cost];
@@ -157,7 +170,7 @@
             }
             _dwarf_callback(completion, foundObjects);
         });
-    }];
+    });
 }
 
 #pragma mark - Write
@@ -189,10 +202,10 @@
         return;
     }
     if (data) {
-        [_diskCache writeData:data forKey:key];
+        [_diskCache setData:data forKey:key];
     } else {
         dispatch_async([self _processingQueue], ^{
-            [_diskCache writeData:encode(object) forKey:key];
+            [_diskCache setData:encode(object) forKey:key];
         });
     }
 }
@@ -203,37 +216,7 @@
     if (!key) {
         return nil;
     }
-    NSDictionary *metadata = [_memorizedMetadata objectForKey:key];
-    if (!metadata) {
-        NSData *data = [_metadataStorage readDataForKey:key];
-        metadata = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if (metadata) {
-            [_memorizedMetadata setObject:metadata forKey:key];
-        }
-    }
-    return [metadata copy];
-}
-
-- (void)metadataForKey:(NSString *)key completion:(void (^)(NSDictionary *))completion {
-    if (!completion) {
-        return;
-    }
-    if (!key) {
-        _dwarf_callback(completion, nil);
-        return;
-    }
-    NSDictionary *metadata = [_memorizedMetadata objectForKey:key];
-    if (metadata) {
-        _dwarf_callback(completion, metadata);
-        return;
-    }
-    [_metadataStorage readDataForKey:key completion:^(NSData *data) {
-        NSDictionary *metadata = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if (metadata) {
-            [_memorizedMetadata setObject:metadata forKey:key];
-        }
-        completion([metadata copy]);
-    }];
+    return [[self _metadataForKey:key] copy];
 }
 
 - (void)setMetadata:(NSDictionary *)metadata forKey:(NSString *)key {
@@ -242,25 +225,28 @@
     }
     [_memorizedMetadata setObject:metadata forKey:key];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:metadata];
-    [_metadataStorage writeData:data forKey:key];
+    [_metadataStorage setData:data forKey:key];
 }
 
 - (void)setMetadataValues:(NSDictionary *)keyedValues forKey:(NSString *)key {
     if (!keyedValues || !key) {
         return;
     }
-    NSMutableDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:[_memorizedMetadata objectForKey:key]];
-    if (metadata) {
-        [self setMetadata:metadata forKey:key];
-        return;
-    }
-    [_metadataStorage readDataForKey:key completion:^(NSData *data) {
-        NSMutableDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
+    NSMutableDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:[self _metadataForKey:key]];
+    [metadata addEntriesFromDictionary:keyedValues];
+    [self setMetadata:metadata forKey:key];
+}
+
+- (NSDictionary *)_metadataForKey:(NSString *)key {
+    NSDictionary *metadata = [_memorizedMetadata objectForKey:key];
+    if (!metadata) {
+        NSData *data = [_metadataStorage dataForKey:key];
+        metadata = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         if (metadata) {
-            [metadata addEntriesFromDictionary:keyedValues];
-            [self setMetadata:metadata forKey:key];
+            [_memorizedMetadata setObject:metadata forKey:key];
         }
-    }];
+    }
+    return metadata;
 }
 
 - (void)removeMetadataForKey:(NSString *)key {
@@ -281,8 +267,12 @@
         [_memoryCache removeObjectForKey:key];
         [_memorizedMetadata removeObjectForKey:key];
     }
-    [_diskCache removeDataForKeys:keys];
-    [_metadataStorage removeDataForKeys:keys];
+    dispatch_async(_diskQueue, ^{
+        for (NSString *key in keys) {
+            [_diskCache removeDataForKey:key];
+            [_metadataStorage removeDataForKey:key];
+        }
+    });
 }
 
 - (void)removeObjectForKey:(NSString *)key {
@@ -294,8 +284,10 @@
 - (void)removeAllObjects {
     [_memoryCache removeAllObjects];
     [_memorizedMetadata removeAllObjects];
-    [_diskCache removeAllData];
-    [_metadataStorage removeAllData];
+    dispatch_async(_diskQueue, ^{
+        [_diskCache removeAllData];
+        [_metadataStorage removeAllData];
+    });
 }
 
 #pragma mark - Private
@@ -306,6 +298,17 @@
     }
     NSUInteger objectCost = cost ? cost(object) : 0;
     [_memoryCache setObject:object forKey:key cost:objectCost];
+}
+
+-(void)_applicationWillResignActive:(NSNotification *)notification {
+    // Delay cleanup by scheduling in main thread in NSDefaultRunLoopMode.
+    [self performSelector:@selector(_cleanupDisk) withObject:self afterDelay:2.0];
+}
+
+- (void)_cleanupDisk {
+    dispatch_async(_diskQueue, ^{
+        [_diskCache cleanup];
+    });
 }
 
 @end

@@ -137,6 +137,8 @@
 		0C8C160F17D40F9B004B7DAA /* TDFCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C160E17D40F9B004B7DAA /* TDFCacheTests.m */; };
 		0CB5EADD181D7DBF0040CB68 /* DFTaskMultiplexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB5EADC181D7DBF0040CB68 /* DFTaskMultiplexer.m */; };
 		0CB5EADE181D7DBF0040CB68 /* DFTaskMultiplexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB5EADC181D7DBF0040CB68 /* DFTaskMultiplexer.m */; };
+		0CC85B021848809200123D32 /* DFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC85B011848809200123D32 /* DFDiskCache.m */; };
+		0CC85B031848809200123D32 /* DFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC85B011848809200123D32 /* DFDiskCache.m */; };
 		0CED041C17D82B8800AEE503 /* DFMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041B17D82B8800AEE503 /* DFMapping.h */; };
 		0CED041D17D82B8800AEE503 /* DFMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041B17D82B8800AEE503 /* DFMapping.h */; };
 		0CED042017D82C0A00AEE503 /* DFMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041E17D82C0A00AEE503 /* DFMapper.h */; };
@@ -297,6 +299,8 @@
 		0C8C160E17D40F9B004B7DAA /* TDFCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFCacheTests.m; sourceTree = "<group>"; };
 		0CB5EADB181D7DBF0040CB68 /* DFTaskMultiplexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTaskMultiplexer.h; sourceTree = "<group>"; };
 		0CB5EADC181D7DBF0040CB68 /* DFTaskMultiplexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTaskMultiplexer.m; sourceTree = "<group>"; };
+		0CC85B001848809200123D32 /* DFDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFDiskCache.h; sourceTree = "<group>"; };
+		0CC85B011848809200123D32 /* DFDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFDiskCache.m; sourceTree = "<group>"; };
 		0CED041B17D82B8800AEE503 /* DFMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFMapping.h; sourceTree = "<group>"; };
 		0CED041E17D82C0A00AEE503 /* DFMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFMapper.h; sourceTree = "<group>"; };
 		0CED041F17D82C0A00AEE503 /* DFMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFMapper.m; sourceTree = "<group>"; };
@@ -617,6 +621,8 @@
 			children = (
 				0C3713BF17D3FECA00766FD9 /* DFCache.h */,
 				0C3713C017D3FECA00766FD9 /* DFCache.m */,
+				0CC85B001848809200123D32 /* DFDiskCache.h */,
+				0CC85B011848809200123D32 /* DFDiskCache.m */,
 			);
 			path = Caching;
 			sourceTree = "<group>";
@@ -1055,6 +1061,7 @@
 			files = (
 				0C37140017D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
 				0C721DDC18060164003695D0 /* DFReusablePool.m in Sources */,
+				0CC85B021848809200123D32 /* DFDiskCache.m in Sources */,
 				0C37140517D3FECA00766FD9 /* UIImageView+Dwarf.m in Sources */,
 				0C37141117D3FECA00766FD9 /* DFTask.m in Sources */,
 				0C2A95E317FBEF290016CB20 /* DFStream.m in Sources */,
@@ -1117,6 +1124,7 @@
 				0CFCB28A18218B4300589990 /* TDFTasks.m in Sources */,
 				0C0B11621847A183009962D0 /* DFStorage.m in Sources */,
 				0C8C160F17D40F9B004B7DAA /* TDFCacheTests.m in Sources */,
+				0CC85B031848809200123D32 /* DFDiskCache.m in Sources */,
 				0C46819F18280139000C7B6D /* DFImageFetchManager.m in Sources */,
 				0CB5EADE181D7DBF0040CB68 /* DFTaskMultiplexer.m in Sources */,
 				0C721DDD18060164003695D0 /* DFReusablePool.m in Sources */,
