@@ -37,7 +37,12 @@
     if (!key) {
         return nil;
     }
-    return [_fileManager contentsAtPath:[self filePathForKey:key]];
+    NSURL *fileURL = [self fileURLForKey:key];
+    NSData *data = [_fileManager contentsAtPath:fileURL.path];
+    if (data) {
+        [_delegate storage:self didReadFileAtURL:fileURL];
+    }
+    return data;
 }
 
 - (void)setData:(NSData *)data forKey:(NSString *)key {
@@ -66,6 +71,14 @@
         return nil;
     }
     return [_path stringByAppendingPathComponent:[self fileNameForKey:key]];
+}
+
+- (NSURL *)fileURLForKey:(NSString *)key {
+    if (!key.length) {
+        return nil;
+    }
+    NSString *path = [_path stringByAppendingPathComponent:[self fileNameForKey:key]];
+    return [NSURL fileURLWithPath:path];
 }
 
 - (BOOL)containsDataForKey:(NSString *)key {

@@ -12,7 +12,7 @@
 
 #import "DFImageFetchTask.h"
 #import "DFImageProcessing.h"
-#import "DFCache.h"
+#import "DFCache+UIImage.h"
 
 
 @interface DFImageFetchTask() <NSURLConnectionDataDelegate>

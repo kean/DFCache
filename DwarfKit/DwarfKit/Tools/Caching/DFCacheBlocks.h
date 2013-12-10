@@ -10,28 +10,26 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFStorage.h"
+typedef id (^DFCacheDecodeBlock)(NSData *data);
+typedef NSData *(^DFCacheEncodeBlock)(id object);
+typedef NSUInteger (^DFCacheCostBlock)(id object);
 
-/*! DFStorage extension providing LRU cleanup.
- */
-@interface DFDiskCache : DFStorage <DFStorageDelegate>
+#pragma mark - <NSCoding>
 
-/*! Maximum storage capacity. Default value is ULONG_MAX.
- @discussion Not a strict limit. Disk storage is actually cleaned up each time application resigns active (for iOS) and any time - (void)cleanup gets called.
- */
-@property (nonatomic) unsigned long long diskCapacity;
+static const DFCacheEncodeBlock DFCacheEncodeNSCoding = ^NSData *(id<NSCoding> object){
+    return [NSKeyedArchiver archivedDataWithRootObject:object];
+};
 
-/*! Remaining disk usage after cleanup. The rate must be in the range of 0.0 to 1.0 where 1.0 represents full disk capacity.
- */
-@property (nonatomic) CGFloat cleanupRate;
+static const DFCacheDecodeBlock DFCacheDecodeNSCoding = ^id<NSCoding>(NSData *data){
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+};
 
-/*! Cleans up disk storage by removing entries by LRU algorithm.
- @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Calculates target size by multiplying disk capacity and cleanup rate. Files are removed according to LRU algorithm until cache size fits target size.
- */
-- (void)cleanup;
+#pragma mark - JSON
 
-/*! Returns path to caches directory.
- */
-+ (NSString *)cachesDirectoryPath;
+static const DFCacheEncodeBlock DFCacheEncodeJSON = ^NSData *(id JSON){
+    return [NSJSONSerialization dataWithJSONObject:JSON options:kNilOptions error:nil];
+};
 
-@end
+static const DFCacheDecodeBlock DFCacheDecodeJSON = ^id(NSData *data){
+    return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+};

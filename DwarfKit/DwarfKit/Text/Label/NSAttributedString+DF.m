@@ -10,28 +10,35 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFStorage.h"
+#import "DFLabelDefines.h"
+#import "DFTextAttachement.h"
+#import "DFCoreText.h"
+#import "NSAttributedString+DF.h"
 
-/*! DFStorage extension providing LRU cleanup.
- */
-@interface DFDiskCache : DFStorage <DFStorageDelegate>
 
-/*! Maximum storage capacity. Default value is ULONG_MAX.
- @discussion Not a strict limit. Disk storage is actually cleaned up each time application resigns active (for iOS) and any time - (void)cleanup gets called.
- */
-@property (nonatomic) unsigned long long diskCapacity;
+@implementation NSAttributedString (DF)
 
-/*! Remaining disk usage after cleanup. The rate must be in the range of 0.0 to 1.0 where 1.0 represents full disk capacity.
- */
-@property (nonatomic) CGFloat cleanupRate;
+- (CGSize)suggestedSizeWithConstraints:(CGSize)constraints numberOfLines:(NSUInteger)numberOfLines {
+    return [DFCoreText suggestAttributedStringSize:self constraints:constraints numberOfLines:numberOfLines];
+}
 
-/*! Cleans up disk storage by removing entries by LRU algorithm.
- @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Calculates target size by multiplying disk capacity and cleanup rate. Files are removed according to LRU algorithm until cache size fits target size.
- */
-- (void)cleanup;
+- (NSArray *)attachements {
+    NSMutableArray *attachements = [NSMutableArray new];
+    for (NSUInteger i = 0; i < self.length; i++) {
+        DFTextAttachement *attachement = [self attribute:DFTextAttachementAttributeName atIndex:i effectiveRange:NULL];
+        if (attachement) {
+            [attachements addObject:attachement];
+        }
+    }
+    return attachements;
+}
 
-/*! Returns path to caches directory.
- */
-+ (NSString *)cachesDirectoryPath;
+- (BOOL)hasAttachements {
+    if (self.length == 0) {
+        return NO;
+    }
+    NSNumber *value = [self attribute:DFHasTextAttachementsAttributeName atIndex:0 effectiveRange:NULL];
+    return !!value;
+}
 
 @end

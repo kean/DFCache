@@ -11,9 +11,10 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "SDFMenuViewController.h"
-#import "SDFImageFetchingTestViewController.h"
 #import "SDFImageFetchingStressTestViewController.h"
+#import "SDFImageFetchingTestViewController.h"
+#import "SDFLabelTestViewController.h"
+#import "SDFMenuViewController.h"
 
 
 @interface SDFMenuViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -31,15 +32,18 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _sections =
-        @[ @"DFImageFetchManager Tests" ];
+        @[ @"DFImageFetchManager", /* @"DFText" */ ];
         
         _rows =
-        @[ @[@"Collection View Test",
-             @"Stress Test"] ];
+        @[ @[ @"Basic Test",
+              @"Stress Test" ],
+           /* @[ @"DFLabel Tests"] */ ];
         
         _controllers =
         @[ @[ [SDFImageFetchingTestViewController class],
-              [SDFImageFetchingStressTestViewController class] ] ];
+              [SDFImageFetchingStressTestViewController class] ],
+           /* @[ [SDFLabelTestViewController class] ] */
+           ];
     }
     return self;
 }
@@ -67,6 +71,13 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return _sections[section];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if([view isKindOfClass:[UITableViewHeaderFooterView class]]){
+        UITableViewHeaderFooterView *tableViewHeaderFooterView = (UITableViewHeaderFooterView *) view;
+        tableViewHeaderFooterView.textLabel.text = _sections[section];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

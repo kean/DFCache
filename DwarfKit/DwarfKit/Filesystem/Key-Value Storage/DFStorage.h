@@ -10,21 +10,31 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+@class DFStorage;
 
-/** Key-value file storage. 
- @discussion All methods are synchronous so that it can be used for various different purposes.
+@protocol DFStorageDelegate <NSObject>
+
+- (void)storage:(DFStorage *)storage didReadFileAtURL:(NSURL *)fileURL;
+
+@end
+
+
+/*! Key-value file storage.
+ @discussion All methods are synchronous so that DFStorage could be sufficient for various purposes.
  */
 NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface DFStorage : NSObject
 
-/** Initializes and returns file storage with provided directory path.
+/*! Initializes and returns file storage with provided directory path.
  @param path Storage root directory path.
  */
 - (id)initWithPath:(NSString *)path;
 
-/** Returns storage root directory path.
+/*! Returns storage root directory path.
  */
 @property (nonatomic, readonly) NSString *path;
+
+@property (nonatomic, weak) id<DFStorageDelegate> delegate;
 
 - (NSData *)dataForKey:(NSString *)key;
 - (void)setData:(NSData *)data forKey:(NSString *)key;
@@ -32,16 +42,17 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
 - (void)removeAllData;
 - (BOOL)containsDataForKey:(NSString *)key;
 
-/** Returns file name for key. File names are generated using SHA-1 digest algorithm.
+/*! Returns file name for key. File names are generated using SHA-1 digest algorithm.
  */
 - (NSString *)fileNameForKey:(NSString *)key;
 - (NSString *)filePathForKey:(NSString *)key;
+- (NSURL *)fileURLForKey:(NSString *)key;
 
-/** Returns the current size of the receiver contents, in bytes.
+/*! Returns the current size of the receiver contents, in bytes.
  */
 - (unsigned long long)contentsSize;
 
-/** Returns URLs of items contained into storage.
+/*! Returns URLs of items contained into storage.
  @param keys An array of keys that identify the file properties that you want pre-fetched for each item in the storage. For each returned URL, the specified properties are fetched and cached in the NSURL object. For a list of keys you can specify, see Common File System Resource Keys.
  */
 - (NSArray *)contentsWithResourceKeys:(NSArray *)keys;

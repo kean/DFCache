@@ -11,10 +11,12 @@
  */
 
 #import "DFDiskCache.h"
+#import "DFCacheBlocks.h"
 
-typedef NSUInteger (^DFCacheCostBlock)(id object);
-typedef id (^DFCacheDecodeBlock)(NSData *data);
-typedef NSData *(^DFCacheEncodeBlock)(id object);
+/*! File extended attribute name used to store metadata.
+ */
+static NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
+
 
 /* DFCache Features.
  
@@ -26,19 +28,19 @@ typedef NSData *(^DFCacheEncodeBlock)(id object);
 
 #pragma mark - DFCache -
 
-/** Efficient memory and disk cache. 
+/*! Efficient memory and disk cache. 
  @discussion DFCache is not just a convenience interface for DFStorage and NSCache. It also extends DFStorage and NSCache functionality is several ways, like associating metadata with objects.
  */
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface DFCache : NSObject
 
-/** Initializes and returns cache with provided disk storage and memory cache.
+/*! Initializes and returns cache with provided disk storage and memory cache.
  @param diskStorage Disk storage. Must not be nil.
  @param memoryCache Memory cache. Pass nil to disable memory caching.
  */
 - (id)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache;
 
-/** Convenience method. Initializes and returns cache with provided name and memory cache.
+/*! Convenience method. Initializes and returns cache with provided name and memory cache.
  @param name Name is used to initialize disk cache.
  @param memoryCache Memory cache. Pass nil to disable memory caching.
  */
@@ -51,15 +53,23 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 /*! Returns memory cache or nil if cache was initialized without the memory cache.
  */
-@property (nonatomic, readonly) NSCache *memoryCache;
+@property (nonatomic) NSCache *memoryCache;
 
 /*! Returns disk cache used by DFCache instance.
  */
 @property (nonatomic, readonly) DFDiskCache *diskCache;
 
+/*! Internal disk queue used to dispatch blocks operating on disk cache.
+ */
+@property (nonatomic) dispatch_queue_t ioQueue;
+
+/*! Internal processing queue used to dispatch decoding blocks. Etc.
+ */
+@property (nonatomic) dispatch_queue_t processingQueue;
+
 #pragma mark - Read
- 
-/** Reads object from disk.
+
+/*! Reads object from disk.
  @param key The unique key.
  @param decode Decoding block returning object from data.
  @param cost Cost block returning cost for memory cache.
@@ -70,7 +80,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
                       cost:(DFCacheCostBlock)cost
                 completion:(void (^)(id object))completion;
 
-/** Returns object from disk synchorounsly.
+/*! Returns object from disk synchorounsly.
  @param key The unique key.
  @param decode Decoding block returning object from data.
  @param cost Cost block returning cost for memory cache.
@@ -79,116 +89,68 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
                   decode:(DFCacheDecodeBlock)decode
                     cost:(DFCacheCostBlock)cost;
 
-#pragma mark - Read (Multiple Keys)
-
-/** Reads objects for provided keys.
- @param keys Array of unique keys.
- @param decode Decoding block returning object from data.
- @param cost Cost block returning cost for memory cache.
- @param completion Completion block.
- */
-- (void)cachedObjectsForKeys:(NSArray *)keys
-                      decode:(DFCacheDecodeBlock)decode
-                        cost:(DFCacheCostBlock)cost
-                  completion:(void (^)(NSDictionary *objects))completion;
-
 #pragma mark - Write
 
-/** Stores object into memory cache. Stores data into disk cache.
+/*! Stores object into memory cache. Stores data into disk cache.
  @param object The object to store into memory cache.
  @param key The unique key.
  @param cost The cost with which to associate the object (used by memory cache).
  @param data Data to store into disk cache.
- @warning Method doesn's remove metadata associated with provided key.
  */
 - (void)storeObject:(id)object
              forKey:(NSString *)key
                cost:(NSUInteger)cost
                data:(NSData *)data;
 
-/** Stores object into memory cache. Stores data representation provided by the transformation block into disk cache.
+/*! Stores object into memory cache. Stores data representation provided by the transformation block into disk cache.
  @param object The object to store into memory cache.
  @param key The unique key.
  @param cost The cost with which to associate the object (used by memory cache).
  @param encode Encoder block returning object's data representation.
- @warning Method doesn's remove metadata associated with provided key.
  */
 - (void)storeObject:(id)object
              forKey:(NSString *)key
                cost:(NSUInteger)cost
              encode:(DFCacheEncodeBlock)encode;
 
-#pragma mark - Metadata
-
-/** Returns copy of metadata for provided key.
+/*! Stores object into memory cache. Calculate cost using provided block (if block is not nil).
+ @param object The object to store into memory cache.
  @param key The unique key.
- @return Copy of metadata for key.
+ @param cost The cost with which to associate the object (used by memory cache).
  */
-- (NSDictionary *)metadataForKey:(NSString *)key;
-
-/** Sets metadata for provided key.
- @param metadata Dictionary with metadata.
- @param key The unique key.
- */
-- (void)setMetadata:(NSDictionary *)metadata forKey:(NSString *)key;
-
-/** Sets metadata values for providerd keys.
- @param keyedValues Dictionary with metadata.
- @param key The unique key.
- */
-- (void)setMetadataValues:(NSDictionary *)keyedValues forKey:(NSString *)key;
-
-/** Removes metadata for key.
- @param key The unique key.
- */
-- (void)removeMetadataForKey:(NSString *)key;
+- (void)storeObject:(id)object forKey:(NSString *)key cost:(DFCacheCostBlock)cost;
 
 #pragma mark - Remove
 
-/** Removes object from both disk and memory cache.
+/*! Removes object from both disk and memory cache.
  */
 - (void)removeObjectsForKeys:(NSArray *)keys;
 - (void)removeObjectForKey:(NSString *)key;
 - (void)removeAllObjects;
 
-@end
+#pragma mark - Metadata
 
+/*! Returns copy of metadata for provided key.
+ @param key The unique key.
+ @return Copy of metadata for key.
+ */
+- (NSDictionary *)metadataForKey:(NSString *)key;
 
-#pragma mark - DFCache (Blocks) -
+/*! Sets metadata for provided key.
+ @param metadata Dictionary with metadata.
+ @param key The unique key.
+ */
+- (void)setMetadata:(NSDictionary *)metadata forKey:(NSString *)key;
 
-@interface DFCache (Blocks)
+/*! Sets metadata values for providerd keys.
+ @param keyedValues Dictionary with metadata.
+ @param key The unique key.
+ */
+- (void)setMetadataValues:(NSDictionary *)keyedValues forKey:(NSString *)key;
 
-#if TARGET_OS_IPHONE
-@property (nonatomic, readonly) DFCacheEncodeBlock blockUIImageEncode;
-@property (nonatomic, readonly) DFCacheDecodeBlock blockUIImageDecode;
-@property (nonatomic, readonly) DFCacheCostBlock blockUIImageCost;
-#endif
-
-@property (nonatomic, readonly) DFCacheEncodeBlock blockJSONEncode;
-@property (nonatomic, readonly) DFCacheDecodeBlock blockJSONDecode;
-
-@property (nonatomic, readonly) DFCacheEncodeBlock blockNSCodingEncode;
-@property (nonatomic, readonly) DFCacheDecodeBlock blockNSCodingDecode;
-
-@end
-
-
-#pragma mark - DFCache (UIImage) -
-
-#if TARGET_OS_IPHONE
-@interface DFCache (UIImage)
-
-- (void)storeImage:(UIImage *)image imageData:(NSData *)data forKey:(NSString *)key;
-- (void)cachedImageForKey:(NSString *)key completion:(void (^)(UIImage *image))completion;
-
-@end
-#endif
-
-
-#pragma mark - DFCache (Shared) -
-
-@interface DFCache (Shared)
-
-+ (instancetype)imageCache;
+/*! Removes metadata for key.
+ @param key The unique key.
+ */
+- (void)removeMetadataForKey:(NSString *)key;
 
 @end

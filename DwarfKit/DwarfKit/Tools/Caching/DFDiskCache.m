@@ -16,13 +16,19 @@
 
 @implementation DFDiskCache
 
-- (NSData *)dataForKey:(NSString *)key {
-    NSData *data = [super dataForKey:key];
-    
-    NSURL *fileURL = [NSURL fileURLWithPath:[self filePathForKey:key]];
+- (id)initWithPath:(NSString *)path {
+    if (self = [super initWithPath:path]) {
+        [super setDelegate:self];
+    }
+    return self;
+}
+
+- (void)setDelegate:(id<DFStorageDelegate>)delegate {
+    [NSException raise:NSInternalInconsistencyException format:@"Attempting to change DFDiskCache delegate"];
+}
+
+- (void)storage:(DFStorage *)storage didReadFileAtURL:(NSURL *)fileURL {
     [fileURL setResourceValue:[NSDate date] forKey:NSURLAttributeModificationDateKey error:nil];
-    
-    return data;
 }
 
 - (void)cleanup {
@@ -54,6 +60,10 @@
             contentsSize -= [fileSize unsignedLongLongValue];
         }
     }
+}
+
++ (NSString *)cachesDirectoryPath {
+    return NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
 }
 
 @end

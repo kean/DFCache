@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C10F49718560905003DB1F8 /* SDFLabelTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C10F49618560905003DB1F8 /* SDFLabelTestViewController.m */; };
+		0C1E4AF8184933D100FF5C95 /* libDwarfKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1E4AF7184933D100FF5C95 /* libDwarfKit.a */; };
+		0CD0D91F1848C6B8008FF46B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD0D91E1848C6B8008FF46B /* CoreText.framework */; };
 		0CEDE42817D4514200D617F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE42717D4514200D617F7 /* UIKit.framework */; };
 		0CEDE42A17D4514200D617F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE42917D4514200D617F7 /* Foundation.framework */; };
 		0CEDE42C17D4514200D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE42B17D4514200D617F7 /* CoreGraphics.framework */; };
@@ -23,10 +26,13 @@
 		0CEDE47217D4531600D617F7 /* SDFImagesStressTestTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE46B17D4531600D617F7 /* SDFImagesStressTestTableCell.m */; };
 		0CEDE47317D4531600D617F7 /* SDFImageFetchingTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE46E17D4531600D617F7 /* SDFImageFetchingTestViewController.m */; };
 		0CEDE47517D4570D00D617F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE47417D4570D00D617F7 /* QuartzCore.framework */; };
-		0CEDE47B17D4575300D617F7 /* libDwarfKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE47A17D4575200D617F7 /* libDwarfKit.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C10F49518560905003DB1F8 /* SDFLabelTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFLabelTestViewController.h; sourceTree = "<group>"; };
+		0C10F49618560905003DB1F8 /* SDFLabelTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFLabelTestViewController.m; sourceTree = "<group>"; };
+		0C1E4AF7184933D100FF5C95 /* libDwarfKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDwarfKit.a; path = "../../../../Library/Developer/Xcode/DerivedData/DwarfKit-bikvinmohpczzmdqejjmivggqlpd/Build/Products/Debug-iphoneos/libDwarfKit.a"; sourceTree = "<group>"; };
+		0CD0D91E1848C6B8008FF46B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0CEDE42417D4514200D617F7 /* DwarfKit Sample iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DwarfKit Sample iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CEDE42717D4514200D617F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0CEDE42917D4514200D617F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,7 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CEDE47B17D4575300D617F7 /* libDwarfKit.a in Frameworks */,
+				0CD0D91F1848C6B8008FF46B /* CoreText.framework in Frameworks */,
+				0C1E4AF8184933D100FF5C95 /* libDwarfKit.a in Frameworks */,
 				0CEDE47517D4570D00D617F7 /* QuartzCore.framework in Frameworks */,
 				0CEDE42817D4514200D617F7 /* UIKit.framework in Frameworks */,
 				0CEDE42A17D4514200D617F7 /* Foundation.framework in Frameworks */,
@@ -72,6 +79,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C10F494185608EC003DB1F8 /* Label Test */ = {
+			isa = PBXGroup;
+			children = (
+				0C10F49518560905003DB1F8 /* SDFLabelTestViewController.h */,
+				0C10F49618560905003DB1F8 /* SDFLabelTestViewController.m */,
+			);
+			path = "Label Test";
+			sourceTree = "<group>";
+		};
 		0CEDE41B17D4514200D617F7 = {
 			isa = PBXGroup;
 			children = (
@@ -79,7 +95,9 @@
 				0CEDE42617D4514200D617F7 /* Frameworks */,
 				0CEDE42517D4514200D617F7 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		0CEDE42517D4514200D617F7 /* Products */ = {
 			isa = PBXGroup;
@@ -92,6 +110,8 @@
 		0CEDE42617D4514200D617F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0C1E4AF7184933D100FF5C95 /* libDwarfKit.a */,
+				0CD0D91E1848C6B8008FF46B /* CoreText.framework */,
 				0CEDE47A17D4575200D617F7 /* libDwarfKit.a */,
 				0CEDE47417D4570D00D617F7 /* QuartzCore.framework */,
 				0CEDE42717D4514200D617F7 /* UIKit.framework */,
@@ -145,6 +165,7 @@
 			children = (
 				0CEDE46317D4531600D617F7 /* Image Fetching Stress Test */,
 				0CEDE46C17D4531600D617F7 /* Image Fetching Test */,
+				0C10F494185608EC003DB1F8 /* Label Test */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -234,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C10F49718560905003DB1F8 /* SDFLabelTestViewController.m in Sources */,
 				0CEDE43417D4514200D617F7 /* main.m in Sources */,
 				0CEDE43817D4514200D617F7 /* SDFAppDelegate.m in Sources */,
 				0CEDE44117D4514200D617F7 /* SDFMenuViewController.m in Sources */,
@@ -288,7 +310,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "\"../DwarfKit/DwarfKit\"/**";
 			};
 			name = Debug;
 		};
@@ -314,7 +335,6 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "\"../DwarfKit/DwarfKit\"/**";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -325,7 +345,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DwarfKit Sample iOS/DwarfKit Sample iOS-Prefix.pch";
 				INFOPLIST_FILE = "DwarfKit Sample iOS/DwarfKit Sample iOS-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/DwarfKit-bikvinmohpczzmdqejjmivggqlpd/Build/Products/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "../DwarfKit/DwarfKit/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -336,7 +361,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DwarfKit Sample iOS/DwarfKit Sample iOS-Prefix.pch";
 				INFOPLIST_FILE = "DwarfKit Sample iOS/DwarfKit Sample iOS-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/DwarfKit-bikvinmohpczzmdqejjmivggqlpd/Build/Products/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "../DwarfKit/DwarfKit/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -65,6 +65,7 @@
         STAssertTrue([task isCancelled], nil);
         isWaiting = NO;
     }];
+#warning race condition
     [queue addTask:task];
     [task cancel];
     DWARF_TEST_WAIT_WHILE(isWaiting, 3.f);

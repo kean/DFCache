@@ -10,28 +10,20 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFStorage.h"
-
-/*! DFStorage extension providing LRU cleanup.
+/*! Extended attributes extend the basic attributes associated with files and directo-
+ ries in the file system.  They are stored as name:data pairs associated with file
+ system objects (files, directories, symlinks, etc). See setxattr(2).
  */
-@interface DFDiskCache : DFStorage <DFStorageDelegate>
+@interface NSURL (DFExtendedFileAttributes)
 
-/*! Maximum storage capacity. Default value is ULONG_MAX.
- @discussion Not a strict limit. Disk storage is actually cleaned up each time application resigns active (for iOS) and any time - (void)cleanup gets called.
- */
-@property (nonatomic) unsigned long long diskCapacity;
+- (int)setExtendedAttributeValue:(id<NSCoding>)value forKey:(NSString *)key;
+- (id)extendedAttributeValueForKey:(NSString *)key error:(int *)error;
+- (int)removeExtendedAttributeForKey:(NSString *)key;
+- (NSArray *)extendedAttributesList:(int *)error;
 
-/*! Remaining disk usage after cleanup. The rate must be in the range of 0.0 to 1.0 where 1.0 represents full disk capacity.
- */
-@property (nonatomic) CGFloat cleanupRate;
-
-/*! Cleans up disk storage by removing entries by LRU algorithm.
- @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Calculates target size by multiplying disk capacity and cleanup rate. Files are removed according to LRU algorithm until cache size fits target size.
- */
-- (void)cleanup;
-
-/*! Returns path to caches directory.
- */
-+ (NSString *)cachesDirectoryPath;
+- (int)setExtendedAttributeData:(NSData *)data forKey:(NSString *)key options:(int)options;
+- (NSData *)extendedAttributeDataForKey:(NSString *)key error:(int *)error options:(int)options;
+- (int)removeExtendedAttributeForKey:(NSString *)key options:(int)options;
+- (NSArray *)extendedAttributesList:(int *)error options:(int)options;
 
 @end
