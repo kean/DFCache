@@ -9,9 +9,8 @@ DFImageFetchManager
 Image fetching with extreme performance. 
 
 Key features:
- - Performance and scalability. Built entirely on top of GCD. DFImageFetchManager is able to maintain thousands of image requests/request cancellations per second. Even on older devices.
- - JPEG images are decompressed via libjpeg-turbo.
- - Fully customizable cache (you can provide custom cache implementation or even use NSURLCache, cache implementation can be changed for the particular request, etc).
+ - Performance and scalability. Built entirely on top of GCD. `DFImageFetchManager` is able to maintain thousands of image requests/request cancellations per second. Even on older devices.
+ - JPEG images are decompressed via `libjpeg-turbo`.
  - Resources with the same URL are never downloaded twice.
 
 DFCache
@@ -19,11 +18,30 @@ DFCache
  Efficient memory and disk key-value storage.
  
  Key features:
- - General purpose. Store any Objective-C objects. Built-in support for caching UIImage, <NSCoding> and JSON objects.
- - Metadata. Add custom metadata for cached objects.
+ - General purpose. Store any Objective-C objects. Built-in support for caching objects implementing `NSCoding` protocol, JSON and images (`UIImage`).
+ - Metadata. Add custom metadata for cached objects. Metadata is implemented on top of UNIX extended file attributes.
  - LRU cleanup.
- - Performance. Image caching performance is fantastic due to libjpeg-turbo.
- - Thread safety. 
+ - Performance. Fantastic image decoding performance of `libjpeg-turbo` (implemented as a category `DFCache+UIImage`).
+ - Thread safety.
+
+DFStorage
+---------
+General purpose key-value file storage.
+
+NSURL+DFExtendedFileAttributes
+------------------------------
+Objective-c wrapper of UNIX extended file attributes.
+```objective-c
+- (int)setExtendedAttributeValue:(id<NSCoding>)value forKey:(NSString *)key;
+- (id)extendedAttributeValueForKey:(NSString *)key error:(int *)error;
+- (int)removeExtendedAttributeForKey:(NSString *)key;
+- (NSArray *)extendedAttributesList:(int *)error;
+
+- (int)setExtendedAttributeData:(NSData *)data forKey:(NSString *)key options:(int)options;
+- (NSData *)extendedAttributeDataForKey:(NSString *)key error:(int *)error options:(int)options;
+- (int)removeExtendedAttributeForKey:(NSString *)key options:(int)options;
+- (NSArray *)extendedAttributesList:(int *)error options:(int)options;
+```
 
 DFJPEGTurbo
 -----------
