@@ -18,11 +18,11 @@ DFCache
  Efficient memory and disk key-value storage.
  
  Key features:
- - General purpose. Store any Objective-C objects. Built-in support for caching objects implementing `NSCoding` protocol, JSON and images (`UIImage`).
+ - General purpose. Store any Objective-C objects. Built-in support for caching objects conforming to `NSCoding` protocol, JSON and images (`UIImage`).
  - Metadata. Add custom metadata for cached objects. Metadata is implemented on top of UNIX extended file attributes.
  - LRU cleanup.
- - Performance. Fantastic image decoding performance of `libjpeg-turbo` (implemented as a category `DFCache+UIImage`).
- - Thread safety.
+ - Performance and thread safety.
+ - `DFCache+UIImage` - everything you need to cache image using `DFCache`. Fantastic background JPEG decompression performance of `libjpeg-turbo`.
 
 DFStorage
 ---------
