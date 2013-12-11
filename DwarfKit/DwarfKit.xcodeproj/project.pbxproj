@@ -65,11 +65,6 @@
 		0C3713FB17D3FECA00766FD9 /* transupp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139717D3FECA00766FD9 /* transupp.h */; };
 		0C3713FC17D3FECA00766FD9 /* turbojpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139817D3FECA00766FD9 /* turbojpeg.h */; };
 		0C3713FD17D3FECA00766FD9 /* turbojpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139817D3FECA00766FD9 /* turbojpeg.h */; };
-		0C3713FE17D3FECA00766FD9 /* NSMutableArray+Dwarf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139B17D3FECA00766FD9 /* NSMutableArray+Dwarf.h */; };
-		0C3713FF17D3FECA00766FD9 /* NSMutableArray+Dwarf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139B17D3FECA00766FD9 /* NSMutableArray+Dwarf.h */; };
-		0C37140017D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37139C17D3FECA00766FD9 /* NSMutableArray+Dwarf.m */; };
-		0C37140117D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37139C17D3FECA00766FD9 /* NSMutableArray+Dwarf.m */; };
-		0C37140217D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37139C17D3FECA00766FD9 /* NSMutableArray+Dwarf.m */; };
 		0C37140517D3FECA00766FD9 /* UIImageView+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C37139F17D3FECA00766FD9 /* UIImageView+Dwarf.m */; };
 		0C37140D17D3FECA00766FD9 /* DFTask+DFTaskPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713A417D3FECA00766FD9 /* DFTask+DFTaskPrivate.h */; };
 		0C37140E17D3FECA00766FD9 /* DFTask+DFTaskPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713A417D3FECA00766FD9 /* DFTask+DFTaskPrivate.h */; };
@@ -304,8 +299,6 @@
 		0C37139617D3FECA00766FD9 /* tjutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjutil.h; sourceTree = "<group>"; };
 		0C37139717D3FECA00766FD9 /* transupp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transupp.h; sourceTree = "<group>"; };
 		0C37139817D3FECA00766FD9 /* turbojpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turbojpeg.h; sourceTree = "<group>"; };
-		0C37139B17D3FECA00766FD9 /* NSMutableArray+Dwarf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Dwarf.h"; sourceTree = "<group>"; };
-		0C37139C17D3FECA00766FD9 /* NSMutableArray+Dwarf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Dwarf.m"; sourceTree = "<group>"; };
 		0C37139E17D3FECA00766FD9 /* UIImageView+Dwarf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Dwarf.h"; sourceTree = "<group>"; };
 		0C37139F17D3FECA00766FD9 /* UIImageView+Dwarf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Dwarf.m"; sourceTree = "<group>"; };
 		0C3713A017D3FECA00766FD9 /* UIView+Dwarf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Dwarf.h"; sourceTree = "<group>"; };
@@ -612,19 +605,9 @@
 		0C37139917D3FECA00766FD9 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				0C37139A17D3FECA00766FD9 /* FoundationKit */,
 				0C37139D17D3FECA00766FD9 /* UIKit */,
 			);
 			path = Categories;
-			sourceTree = "<group>";
-		};
-		0C37139A17D3FECA00766FD9 /* FoundationKit */ = {
-			isa = PBXGroup;
-			children = (
-				0C37139B17D3FECA00766FD9 /* NSMutableArray+Dwarf.h */,
-				0C37139C17D3FECA00766FD9 /* NSMutableArray+Dwarf.m */,
-			);
-			path = FoundationKit;
 			sourceTree = "<group>";
 		};
 		0C37139D17D3FECA00766FD9 /* UIKit */ = {
@@ -982,7 +965,6 @@
 				0C3713FB17D3FECA00766FD9 /* transupp.h in Headers */,
 				0C6DB1C31855E2B000E662D1 /* DFCache+Extended.h in Headers */,
 				0C3713FD17D3FECA00766FD9 /* turbojpeg.h in Headers */,
-				0C3713FF17D3FECA00766FD9 /* NSMutableArray+Dwarf.h in Headers */,
 				0C37140E17D3FECA00766FD9 /* DFTask+DFTaskPrivate.h in Headers */,
 				0C37141017D3FECA00766FD9 /* DFTask.h in Headers */,
 				0C0B115E1847A183009962D0 /* DFStorage.h in Headers */,
@@ -1032,7 +1014,6 @@
 				0C3713FA17D3FECA00766FD9 /* transupp.h in Headers */,
 				0C6DB1C21855E2B000E662D1 /* DFCache+Extended.h in Headers */,
 				0C3713FC17D3FECA00766FD9 /* turbojpeg.h in Headers */,
-				0C3713FE17D3FECA00766FD9 /* NSMutableArray+Dwarf.h in Headers */,
 				0C37140D17D3FECA00766FD9 /* DFTask+DFTaskPrivate.h in Headers */,
 				0C37140F17D3FECA00766FD9 /* DFTask.h in Headers */,
 				0C0B115D1847A183009962D0 /* DFStorage.h in Headers */,
@@ -1231,7 +1212,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C37140017D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
 				0C721DDC18060164003695D0 /* DFReusablePool.m in Sources */,
 				0C47F7571855FB28008E6D72 /* DFCache+UIImage.m in Sources */,
 				0CC85B021848809200123D32 /* DFDiskCache.m in Sources */,
@@ -1271,7 +1251,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C37140217D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
 				0C37141317D3FECA00766FD9 /* DFTask.m in Sources */,
 				0C37141817D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
 				0C37143E17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
@@ -1288,7 +1267,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C37140117D3FECA00766FD9 /* NSMutableArray+Dwarf.m in Sources */,
 				0C37141217D3FECA00766FD9 /* DFTask.m in Sources */,
 				0C37141717D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
 				0C37143D17D3FECA00766FD9 /* DFBenchmark.m in Sources */,
@@ -1406,6 +1384,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1431,6 +1410,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
