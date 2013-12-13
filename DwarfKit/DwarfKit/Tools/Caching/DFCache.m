@@ -123,7 +123,7 @@
                 cost:(NSUInteger)cost
                 data:(NSData *)data
               encode:(DFCacheEncodeBlock)encode {
-    if (!object || !key) {
+    if (!object || !key.length) {
         return;
     }
     [_memoryCache setObject:object forKey:key cost:cost];
@@ -132,6 +132,15 @@
     }
     dispatch_async(_ioQueue, ^{
         [_diskCache setData:(data ?: encode(object)) forKey:key];
+    });
+}
+
+- (void)storeData:(NSData *)data forKey:(NSString *)key {
+    if (!data || !key.length) {
+        return;
+    }
+    dispatch_async(_ioQueue, ^{
+        [_diskCache setData:data forKey:key];
     });
 }
 
