@@ -20,6 +20,7 @@
 - (id)initWithURL:(NSString *)URL {
     if (self = [super init]) {
         _URL = URL;
+        _runLoopMode = NSRunLoopCommonModes;
     }
     return self;
 }
@@ -45,7 +46,7 @@
 }
 
 - (void)startConnection:(NSURLConnection *)connection {
-    [connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    [connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:self.runLoopMode];
     [connection start];
 }
 

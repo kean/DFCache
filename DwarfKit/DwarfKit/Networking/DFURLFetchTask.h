@@ -16,6 +16,7 @@
 @interface DFURLFetchTask : DFTask <NSURLConnectionDelegate>
 
 @property (nonatomic, readonly) NSString *URL;
+@property (nonatomic) NSString *runLoopMode;
 @property (nonatomic, readonly) NSURLConnection *connection;
 @property (nonatomic, readonly) NSURLResponse *response;
 @property (nonatomic, readonly) NSData *data;
