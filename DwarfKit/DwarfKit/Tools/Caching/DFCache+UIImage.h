@@ -40,5 +40,6 @@ static const DFCacheCostBlock DFCacheCostUIImage = ^NSUInteger(id object){
 
 - (void)storeImage:(UIImage *)image imageData:(NSData *)data forKey:(NSString *)key;
 - (void)cachedImageForKey:(NSString *)key completion:(void (^)(UIImage *image))completion;
+- (UIImage *)cachedImageForKey:(NSString *)key;
 
 @end

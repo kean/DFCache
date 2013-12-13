@@ -39,4 +39,8 @@
     [self cachedObjectForKey:key decode:DFCacheDecodeUIImage cost:DFCacheCostUIImage completion:completion];
 }
 
+- (UIImage *)cachedImageForKey:(NSString *)key {
+    return [self cachedObjectForKey:key decode:DFCacheDecodeUIImage cost:DFCacheCostUIImage];
+}
+
 @end

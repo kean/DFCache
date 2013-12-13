@@ -63,7 +63,7 @@
 
 - (NSString *)fileNameForKey:(NSString *)key {
     const char *string = [key UTF8String];
-    return dwarf_sha1(string, (uint32_t)strlen(string));
+    return dwarf_md5(string, (uint32_t)strlen(string));
 }
 
 - (NSString *)filePathForKey:(NSString *)key {
