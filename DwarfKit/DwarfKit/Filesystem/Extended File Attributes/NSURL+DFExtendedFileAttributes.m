@@ -31,7 +31,7 @@
 
 - (id)extendedAttributeValueForKey:(NSString *)key error:(int *)error {
     NSData *data = [self extendedAttributeDataForKey:key error:error options:0];
-    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    return data ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil;
 }
 
 - (NSData *)extendedAttributeDataForKey:(NSString *)k error:(int *)error options:(int)options {
