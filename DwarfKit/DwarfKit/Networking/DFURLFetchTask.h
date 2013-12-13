@@ -13,7 +13,7 @@
 #import "DFTask.h"
 
 
-@interface DFURLFetchTask : DFTask <NSURLConnectionDelegate>
+@interface DFURLFetchTask : DFTask <NSURLConnectionDataDelegate>
 
 @property (nonatomic, readonly) NSString *URL;
 @property (nonatomic) NSString *runLoopMode;
