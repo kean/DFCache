@@ -19,14 +19,18 @@
     NSUInteger (^_costBlock)(id);
 }
 
-- (id)init {
+- (id)initWithCache:(NSCache *)cache {
     if (self = [super init]) {
         _multiplexer = [DFTaskMultiplexer new];
         _queue = [DFTaskQueue new];
         _queue.maxConcurrentTaskCount = 2;
-        _cache = [NSCache new];
+        _cache = cache;
     }
     return self;
+}
+
+- (id)init {
+    return [self initWithCache:[NSCache new]];
 }
 
 - (void)setCostBlock:(NSUInteger (^)(id))cost {

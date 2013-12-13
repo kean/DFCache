@@ -20,6 +20,8 @@
 @property (nonatomic, readonly) DFTaskQueue *queue;
 @property (nonatomic, readonly) NSCache *cache;
 
+- (id)initWithCache:(NSCache *)cache;
+
 - (DFProcessingTask *)processInput:(id)input
                                key:(NSString *)key
                            handler:(DFTaskHandler *)handler
