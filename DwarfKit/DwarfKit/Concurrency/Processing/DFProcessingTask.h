@@ -22,7 +22,6 @@ typedef id (^DFProcessingBlock)(id input);
 @interface DFProcessingTask : DFTask
 
 @property (nonatomic, readonly) id output;
-@property (nonatomic, readonly) BOOL fromCache;
 @property (nonatomic, readonly) NSString *key;
 @property (nonatomic, weak) id<DFProcessingTaskCaching> cache;
 
@@ -36,6 +35,5 @@ typedef id (^DFProcessingBlock)(id input);
 @protocol DFProcessingTaskCaching <NSObject>
 
 - (void)storeObject:(id)object forKey:(id<NSCopying>)key;
-- (id)cachedObjectForKey:(id<NSCopying>)key;
 
 @end
