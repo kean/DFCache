@@ -109,7 +109,7 @@ static const CGFloat _kTouchGutter = 22;
               NSParagraphStyleAttributeName : _paragraphStyle };
 }
 
-#warning Not all UILabel methods are implemented.
+// TODO: Not all UILabel methods are implemented.
 #pragma mark - UILabel Overrides
 
 - (NSString *)text {
@@ -227,7 +227,7 @@ static const CGFloat _kTouchGutter = 22;
         return;
     }
     [_mutableAttributedString addAttribute:NSForegroundColorAttributeName value:_highlightedTextColor];
-#warning Might not be necessary.
+// TODO: Might not be necessary.
     [self _attributedStringDidChange];
 }
 
@@ -274,7 +274,7 @@ static const CGFloat _kTouchGutter = 22;
     }
 }
 
-#warning Verical text alighment is different from UILabel.
+// TODO: Verical text alighment is different from UILabel.
 - (void)drawTextInRect:(CGRect)rect {
     if (!_mutableAttributedString) {
         return;
@@ -434,7 +434,7 @@ static const CGFloat _kTouchGutter = 22;
 
 - (void)_drawAttributedString:(NSAttributedString *)attributedString rect:(CGRect)rect {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-#warning Might be broken for other line break modes.
+// TODO: Might be broken for other line break modes.
     if (_lineBreakMode != NSLineBreakByTruncatingTail) {
         CTFrameDraw(_frameRef, ctx);
         return;
@@ -572,7 +572,7 @@ static const CGFloat _kTouchGutter = 22;
     }
 }
 
-#warning Broken
+// TODO: Broken
 - (NSTextCheckingResult *)linkAtPoint:(CGPoint)point {
     if (!CGRectContainsPoint(CGRectInset(self.bounds, 0, -_kLinkVerticalMargin), point)) {
         return nil;

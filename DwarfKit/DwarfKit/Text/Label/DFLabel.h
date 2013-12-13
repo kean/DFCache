@@ -25,7 +25,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 
 @property (nonatomic, weak) id<DFLabelDelegate> delegate;
 
-#warning Shadow blut might be broken.
+// TODO: Shadow blur might be broken.
 @property (nonatomic) CGFloat shadowBlur; // Default: 0
 @property (nonatomic) NSString *ellipsesString;
 
