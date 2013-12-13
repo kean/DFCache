@@ -135,15 +135,6 @@
     });
 }
 
-- (void)storeData:(NSData *)data forKey:(NSString *)key {
-    if (!data || !key.length) {
-        return;
-    }
-    dispatch_async(_ioQueue, ^{
-        [_diskCache setData:data forKey:key];
-    });
-}
-
 - (void)storeObject:(id)object forKey:(NSString *)key cost:(DFCacheCostBlock)cost {
     if (!object || !key) {
         return;

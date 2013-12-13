@@ -22,6 +22,18 @@
  */
 - (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *data))completion;
 
+/*! Stores data into disk cache asyncronously.
+ */
+- (void)storeData:(NSData *)data forKey:(NSString *)key;
+
+/*! Reads data for provided keys.
+ @param keys Array of unique keys.
+ @param decode Decoding block returning object from data.
+ @param cost Cost block returning cost for memory cache.
+ @param completion Completion block.
+ */
+- (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *))completion;
+
 /*! Reads objects for provided keys.
  @param keys Array of unique keys.
  @param decode Decoding block returning object from data.

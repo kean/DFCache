@@ -30,6 +30,35 @@
     });
 }
 
+- (void)storeData:(NSData *)data forKey:(NSString *)key {
+    if (!data || !key.length) {
+        return;
+    }
+    dispatch_async(self.ioQueue, ^{
+        [self.diskCache setData:data forKey:key];
+    });
+}
+
+- (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *))completion {
+    if (!completion) {
+        return;
+    }
+    if (!keys.count) {
+        _dwarf_callback(completion, nil);
+        return;
+    }
+    dispatch_async(self.ioQueue, ^{
+        NSMutableDictionary *objects = [NSMutableDictionary new];
+        for (NSString *key in keys) {
+            NSData *data = [self.diskCache dataForKey:key];
+            if (data) {
+                objects[key] = data;
+            }
+        }
+        _dwarf_callback(completion, objects);
+    });
+}
+
 - (void)cachedObjectsForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(NSDictionary *))completion {
     if (!completion) {
         return;

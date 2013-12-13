@@ -113,10 +113,6 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
                cost:(NSUInteger)cost
              encode:(DFCacheEncodeBlock)encode;
 
-/*! Stores data into disk cache asyncronously.
- */
-- (void)storeData:(NSData *)data forKey:(NSString *)key;
-
 /*! Stores object into memory cache. Calculate cost using provided block (if block is not nil).
  @param object The object to store into memory cache.
  @param key The unique key.
