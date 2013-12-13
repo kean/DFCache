@@ -14,7 +14,7 @@
 #import "dwarf_private.h"
 
 
-@implementation DFCache (Extended)
+@implementation DFCache (Extensions)
 
 - (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *))completion {
     if (!completion) {

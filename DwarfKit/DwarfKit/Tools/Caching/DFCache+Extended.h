@@ -14,7 +14,7 @@
 
 /*! Extended DFCache functionality.
  */
-@interface DFCache (Extended)
+@interface DFCache (Extensions)
 
 /** Reads data from disk.
  @param key The unique key.
