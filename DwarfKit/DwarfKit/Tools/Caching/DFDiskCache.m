@@ -28,10 +28,16 @@
 }
 
 - (void)storage:(DFStorage *)storage didReadFileAtURL:(NSURL *)fileURL {
+    if (_capacity == DFDiskCacheCapacityUnlimited) {
+        return;
+    }
     [fileURL setResourceValue:[NSDate date] forKey:NSURLAttributeModificationDateKey error:nil];
 }
 
 - (void)cleanup {
+    if (_capacity == DFDiskCacheCapacityUnlimited) {
+        return;
+    }
     NSArray *resourceKeys = @[NSURLContentModificationDateKey, NSURLFileAllocatedSizeKey];
     NSArray *contents = [self contentsWithResourceKeys:resourceKeys];
     NSMutableDictionary *fileAttributes = [NSMutableDictionary dictionary];

@@ -12,6 +12,8 @@
 
 #import "DFStorage.h"
 
+static const unsigned long long DFDiskCacheCapacityUnlimited = 0;
+
 /*! DFStorage extension providing LRU cleanup.
  */
 @interface DFDiskCache : DFStorage <DFStorageDelegate>
