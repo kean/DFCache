@@ -12,5 +12,4 @@
 
 #import "DFNetworkingConstants.h"
 #import "DFImageFetchManager.h"
-#import "DFImageFetchHandler.h"
 #import "DFImageFetchTask.h"
