@@ -19,7 +19,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _shared = [[DFCache alloc] initWithName:@"image_cache" memoryCache:[NSCache new]];
-        _shared.diskCache.diskCapacity = 1024 * 1024 * 120; // 120 Mb
+        _shared.diskCache.capacity = 1024 * 1024 * 120; // 120 Mb
         _shared.diskCache.cleanupRate = 0.6;
         _shared.memoryCache.totalCostLimit = 1024 * 1024 * 15; // 15 Mb
     });

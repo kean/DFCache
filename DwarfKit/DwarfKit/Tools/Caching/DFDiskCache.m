@@ -44,10 +44,10 @@
             contentsSize += [fileSize unsignedLongLongValue];
         }
     }
-    if (contentsSize < _diskCapacity) {
+    if (contentsSize < _capacity) {
         return;
     }
-    const _dwarf_bytes desiredSize = _diskCapacity * _cleanupRate;
+    const _dwarf_bytes desiredSize = _capacity * _cleanupRate;
     NSArray *sortedFiles = [fileAttributes keysSortedByValueWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(id obj1, id obj2) {
         return [obj1[NSURLContentModificationDateKey] compare:obj2[NSURLContentModificationDateKey]];
     }];

@@ -19,7 +19,7 @@
 /*! Maximum storage capacity. Default value is ULONG_MAX.
  @discussion Not a strict limit. Disk storage is actually cleaned up each time application resigns active (for iOS) and any time - (void)cleanup gets called.
  */
-@property (nonatomic) unsigned long long diskCapacity;
+@property (nonatomic) unsigned long long capacity;
 
 /*! Remaining disk usage after cleanup. The rate must be in the range of 0.0 to 1.0 where 1.0 represents full disk capacity.
  */

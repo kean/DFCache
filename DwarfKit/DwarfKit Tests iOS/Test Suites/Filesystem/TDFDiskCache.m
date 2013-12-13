@@ -30,7 +30,7 @@
 
 - (void)testDiskCleanup {
     unsigned long long length = 400000;
-    _diskCache.diskCapacity = length + 10000;
+    _diskCache.capacity = length + 10000;
     _diskCache.cleanupRate = 1.f; // Only one should remain.
     
     NSArray *keys = @[ @"_key_1", @"_key_2", @"_key_3" ];

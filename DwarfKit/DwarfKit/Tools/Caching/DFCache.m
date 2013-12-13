@@ -46,7 +46,7 @@
     }
     NSString *storagePath = [[DFDiskCache cachesDirectoryPath] stringByAppendingPathComponent:name];
     DFDiskCache *storage = [[DFDiskCache alloc] initWithPath:storagePath];
-    storage.diskCapacity = 1024 * 1024 * 100; // 100 Mb
+    storage.capacity = 1024 * 1024 * 100; // 100 Mb
     storage.cleanupRate = 0.5f;
     return [self initWithDiskCache:storage memoryCache:memoryCache];
 }
