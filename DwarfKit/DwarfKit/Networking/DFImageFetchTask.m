@@ -22,25 +22,22 @@
 
 @implementation DFImageFetchTask
 
-- (NSMutableURLRequest *)requestWithURL:(NSString *)URL {
-    NSMutableURLRequest *request = [super requestWithURL:URL];
-    [request setHTTPShouldHandleCookies:NO];
-    [request setHTTPShouldUsePipelining:YES];
-    return request;
-}
-
-#pragma mark - NSURLConnectionDelegate
-
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @autoreleasepool {
             _image = [DFImageProcessing decompressedImageWithData:self.data];
             if (_image) {
-                [[DFCache imageCache] storeImage:_image imageData:self.data forKey:self.URL];
+                [self handleConnection:connection successWithImage:_image];
+            } else {
+                [self finish];
             }
-            [self finish];
         }
     });
+}
+
+- (void)handleConnection:(NSURLConnection *)connection successWithImage:(UIImage *)image {
+    [[DFCache imageCache] storeImage:_image imageData:self.data forKey:self.URL];
+    [self finish];
 }
 
 @end

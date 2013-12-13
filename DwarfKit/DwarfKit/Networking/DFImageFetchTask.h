@@ -13,12 +13,13 @@
 #import "DFURLFetchTask.h"
 
 
-typedef void (^DFImageFetchCaching)(UIImage *image, NSData *data, NSString *lastModified);
-
-
 @interface DFImageFetchTask : DFURLFetchTask
 
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) NSHTTPURLResponse *response;
+
+#pragma mark - Override
+
+- (void)handleConnection:(NSURLConnection *)connection successWithImage:(UIImage *)image;
 
 @end
