@@ -35,5 +35,6 @@ typedef id (^DFProcessingBlock)(id input);
 @protocol DFProcessingTaskCaching <NSObject>
 
 - (void)storeObject:(id)object forKey:(id<NSCopying>)key;
+- (id)cachedObjectForKey:(id<NSCopying>)key;
 
 @end

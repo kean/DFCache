@@ -29,6 +29,12 @@
 #pragma mark - Task Implementation
 
 - (void)execute {
+    _output = [_cache cachedObjectForKey:_key];
+    if (_output) {
+        [self finish];
+        return;
+    }
+    
     if (_work) {
         _output = _work(_input);
         [_cache storeObject:_output forKey:_key];
