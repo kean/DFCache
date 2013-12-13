@@ -20,7 +20,7 @@
     if (!completion) {
         return;
     }
-    if (!key) {
+    if (!key.length) {
         _dwarf_callback(completion, nil);
         return;
     }
@@ -28,6 +28,17 @@
         NSData *data = [self.diskCache dataForKey:key];
         _dwarf_callback(completion, data);
     });
+}
+
+- (NSData *)cachedDataForKey:(NSString *)key {
+    if (!key.length) {
+        return nil;
+    }
+    __block NSData *data;
+    dispatch_sync(self.ioQueue, ^{
+        data = [self.diskCache dataForKey:key];
+    });
+    return data;
 }
 
 - (void)storeData:(NSData *)data forKey:(NSString *)key {

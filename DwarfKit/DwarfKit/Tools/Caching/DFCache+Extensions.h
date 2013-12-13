@@ -16,11 +16,17 @@
  */
 @interface DFCache (Extensions)
 
-/** Reads data from disk.
+#pragma mark - Data
+
+/*! Reads data from disk.
  @param key The unique key.
  @param completion Completion block.
  */
 - (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *data))completion;
+
+/*! Reads data from disk syncronously.
+ */
+- (NSData *)cachedDataForKey:(NSString *)key;
 
 /*! Stores data into disk cache asyncronously.
  */
@@ -33,6 +39,8 @@
  @param completion Completion block.
  */
 - (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *))completion;
+
+#pragma mark - Objects
 
 /*! Reads objects for provided keys.
  @param keys Array of unique keys.
