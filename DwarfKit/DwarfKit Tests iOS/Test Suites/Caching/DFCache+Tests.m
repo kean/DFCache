@@ -10,8 +10,28 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import "DFCache+Tests.h"
 
-@interface TDFTasks : SenTestCase
+
+@implementation DFCache (Tests)
+
+- (void)storeStringsWithCount:(NSUInteger)count strings:(NSDictionary *__autoreleasing *)s {
+    NSMutableDictionary *strings = [NSMutableDictionary new];
+    for (NSUInteger i = 0; i < count; i++) {
+        NSString *key = [NSString stringWithFormat:@"key_%i", i];
+        NSString *string = [self _randomStringWithLength:(arc4random_uniform(30) + 1)];
+        [self storeObject:string forKey:key cost:0 encode:DFCacheEncodeNSCoding];
+        strings[key] = string;
+    }
+    *s = strings;
+}
+
+- (NSString *)_randomStringWithLength:(NSUInteger)length {
+    char data[length];
+    for (int x = 0; x < length; x++) {
+        data[x] = (char)('A' + arc4random_uniform(26));
+    };
+    return [[NSString alloc] initWithBytes:data length:length encoding:NSUTF8StringEncoding];
+}
 
 @end

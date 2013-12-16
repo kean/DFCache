@@ -18,7 +18,7 @@
 
 #define _DWARF_TEST_RUNLOOP_RUN(timeout) \
     if (timeout < 0.f) { \
-        STFail(@"Timeout"); \
+        XCTFail(@"Timeout"); \
         break;\
     } \
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:_DWARF_TEST_RUNTIME]; \

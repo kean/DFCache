@@ -150,11 +150,9 @@
 		0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
 		0C8C15D017D406DD004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
 		0C8C15D117D40704004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
-		0C8C15E317D40DFC004B7DAA /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37130617D3F93F00766FD9 /* SenTestingKit.framework */; };
 		0C8C15E417D40DFC004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
 		0C8C15E517D40DFC004B7DAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
 		0C8C15EB17D40DFC004B7DAA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C8C15E917D40DFC004B7DAA /* InfoPlist.strings */; };
-		0C8C15F917D40E0C004B7DAA /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37130617D3F93F00766FD9 /* SenTestingKit.framework */; };
 		0C8C15FA17D40E0C004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
 		0C8C160017D40E0C004B7DAA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C8C15FE17D40E0C004B7DAA /* InfoPlist.strings */; };
 		0C8C160317D40E0C004B7DAA /* DwarfKit_Tests_Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C160217D40E0C004B7DAA /* DwarfKit_Tests_Mac.m */; };
@@ -270,7 +268,6 @@
 		0C2A95E117FBEF290016CB20 /* DFStreamChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStreamChain.h; sourceTree = "<group>"; };
 		0C2A95E217FBEF290016CB20 /* DFStreamChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFStreamChain.m; sourceTree = "<group>"; };
 		0C3712F717D3F93F00766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		0C37130617D3F93F00766FD9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0C37132717D3F9C700766FD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		0C37132817D3F9C700766FD9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0C37132917D3F9C700766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -345,7 +342,7 @@
 		0C721DDB18060164003695D0 /* DFReusablePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFReusablePool.m; sourceTree = "<group>"; };
 		0C8C15CD17D406B4004B7DAA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0C8C15CF17D406DD004B7DAA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		0C8C15E217D40DFC004B7DAA /* DwarfKit Tests iOS.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DwarfKit Tests iOS.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C8C15E217D40DFC004B7DAA /* DwarfKit Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DwarfKit Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C8C15E817D40DFC004B7DAA /* DwarfKit Tests iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DwarfKit Tests iOS-Info.plist"; sourceTree = "<group>"; };
 		0C8C15EA17D40DFC004B7DAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0C8C15EF17D40DFC004B7DAA /* DwarfKit Tests iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Tests iOS-Prefix.pch"; sourceTree = "<group>"; };
@@ -437,7 +434,6 @@
 				0CBB6EAB184936F800DBE4DE /* CoreText.framework in Frameworks */,
 				0CEDE41117D44E7900D617F7 /* CoreGraphics.framework in Frameworks */,
 				0CFC5CBC17D42367001C2951 /* libDwarfKit.a in Frameworks */,
-				0C8C15E317D40DFC004B7DAA /* SenTestingKit.framework in Frameworks */,
 				0C8C15E417D40DFC004B7DAA /* UIKit.framework in Frameworks */,
 				0C8C15E517D40DFC004B7DAA /* Foundation.framework in Frameworks */,
 			);
@@ -447,7 +443,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C8C15F917D40E0C004B7DAA /* SenTestingKit.framework in Frameworks */,
 				0C8C15FA17D40E0C004B7DAA /* Cocoa.framework in Frameworks */,
 				0CEDE41217D44E8000D617F7 /* CoreGraphics.framework in Frameworks */,
 			);
@@ -516,7 +511,7 @@
 				0C37135617D3FC2500766FD9 /* libDwarfKit.a */,
 				0C37136617D3FC3300766FD9 /* libDwarfKit-Mac.a */,
 				0C37137517D3FC3C00766FD9 /* DwarfKit.dylib */,
-				0C8C15E217D40DFC004B7DAA /* DwarfKit Tests iOS.octest */,
+				0C8C15E217D40DFC004B7DAA /* DwarfKit Tests iOS.xctest */,
 				0C8C15F817D40E0C004B7DAA /* DwarfKit Tests Mac.octest */,
 			);
 			name = Products;
@@ -530,7 +525,6 @@
 				0CFC5CBD17D42393001C2951 /* QuartzCore.framework */,
 				0C8C15CF17D406DD004B7DAA /* Cocoa.framework */,
 				0C3712F717D3F93F00766FD9 /* Foundation.framework */,
-				0C37130617D3F93F00766FD9 /* SenTestingKit.framework */,
 				0C8C15CD17D406B4004B7DAA /* UIKit.framework */,
 				0C37132617D3F9C700766FD9 /* Other Frameworks */,
 			);
@@ -1105,8 +1099,8 @@
 			);
 			name = "DwarfKit Tests iOS";
 			productName = "DwarfKit Tests iOS";
-			productReference = 0C8C15E217D40DFC004B7DAA /* DwarfKit Tests iOS.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 0C8C15E217D40DFC004B7DAA /* DwarfKit Tests iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0C8C15F717D40E0C004B7DAA /* DwarfKit Tests Mac */ = {
 			isa = PBXNativeTarget;
@@ -1550,15 +1544,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\\\"$(SDKROOT)/Developer/Library/Frameworks\\\"",
+					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DwarfKit Tests iOS/DwarfKit Tests iOS-Prefix.pch";
 				INFOPLIST_FILE = "DwarfKit Tests iOS/DwarfKit Tests iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -1566,15 +1560,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\\\"$(SDKROOT)/Developer/Library/Frameworks\\\"",
+					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DwarfKit Tests iOS/DwarfKit Tests iOS-Prefix.pch";
 				INFOPLIST_FILE = "DwarfKit Tests iOS/DwarfKit Tests iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

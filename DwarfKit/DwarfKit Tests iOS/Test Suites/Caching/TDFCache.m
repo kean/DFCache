@@ -10,11 +10,16 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFCache+Extended.h"
+#import "DFCache+Tests.h"
 #import "DFCache+UIImage.h"
 #import "DFCache.h"
 #import "DFTesting.h"
-#import "TDFCache.h"
+#import <XCTest/XCTest.h>
+
+
+@interface TDFCache : XCTestCase
+
+@end
 
 
 @implementation TDFCache {
@@ -31,7 +36,6 @@
     _index++;
 }
 
-
 - (void)tearDown {
     [super tearDown];
     
@@ -42,12 +46,12 @@
 - (void)testInitialization {
     NSString *name = @"test_name";
     DFCache *cache = [[DFCache alloc] initWithName:name];
-    STAssertNotNil(cache.memoryCache, NULL);
-    STAssertNotNil(cache.diskCache, NULL);
-    STAssertTrue([cache.memoryCache.name isEqualToString:name], NULL);
+    XCTAssertNotNil(cache.memoryCache);
+    XCTAssertNotNil(cache.diskCache);
+    XCTAssertTrue([cache.memoryCache.name isEqualToString:name]);
     
-    STAssertThrows([[DFCache alloc] initWithName:@""], NULL);
-    STAssertThrows([[DFCache alloc] initWithName:nil], NULL);
+    XCTAssertThrows([[DFCache alloc] initWithName:@""]);
+    XCTAssertThrows([[DFCache alloc] initWithName:nil]);
 }
 
 - (void)testWriteWithTransform {
@@ -58,7 +62,7 @@
         return UIImageJPEGRepresentation(object, 1.0);
     }];
     
-    STAssertNotNil([_cache.memoryCache objectForKey:key], NULL);
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
     
     __block BOOL isWaiting = YES;
@@ -79,7 +83,7 @@
     
     [_cache storeObject:value forKey:key cost:0.f data:data];
     
-    STAssertNotNil([_cache.memoryCache objectForKey:key], NULL);
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
     
     __block BOOL isWaiting = YES;
@@ -87,7 +91,7 @@
         return [UIImage imageWithData:data];
     } cost:nil completion:^(UIImage *object) {
         [self _assertImage:value isEqualImage:object];
-        STAssertNotNil(object, nil);
+        XCTAssertNotNil(object);
         isWaiting = NO;
     }];
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
@@ -99,14 +103,14 @@
     
     [_cache storeObject:value forKey:key cost:0.f encode:nil];
     
-    STAssertNotNil([_cache.memoryCache objectForKey:key], NULL);
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
     
     __block BOOL isWaiting = YES;
     [_cache cachedObjectForKey:key decode:^id(NSData *data) {
         return [NSKeyedUnarchiver unarchiveObjectWithData:data];
     } cost:nil completion:^(id object) {
-        STAssertNil(object, nil);
+        XCTAssertNil(object);
         isWaiting = NO;
     }];
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
@@ -118,7 +122,7 @@
     
     [_cache storeImage:value imageData:nil forKey:key];
     
-    STAssertNotNil([_cache.memoryCache objectForKey:key], NULL);
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     
     __block BOOL isWaiting = YES;
     [_cache cachedImageForKey:key completion:^(UIImage *image) {
@@ -136,7 +140,7 @@
 
     __block BOOL isWaiting = YES;
     [_cache cachedObjectForKey:key decode:DFCacheDecodeJSON cost:nil completion:^(id object) {
-        STAssertTrue([JSON[@"key"] isEqualToString:object[@"key"]], NULL);
+        XCTAssertTrue([JSON[@"key"] isEqualToString:object[@"key"]]);
         isWaiting = NO;
     }];
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
@@ -146,9 +150,8 @@
 
 - (void)testRemovalForSingleKey {
     NSDictionary *objects;
-    NSArray *keys;
-    
-    [self _storeStringsInCache:_cache objects:&objects keys:&keys];
+    [_cache storeStringsWithCount:5 strings:&objects];
+    NSArray *keys = [objects allKeys];
     
     NSString *removeKey = keys[2];
     
@@ -165,8 +168,8 @@
 
 - (void)testRemovalForMultipleKeys {
     NSDictionary *objects;
-    NSArray *keys;
-    [self _storeStringsInCache:_cache objects:&objects keys:&keys];
+    [_cache storeStringsWithCount:5 strings:&objects];
+    NSArray *keys = [objects allKeys];
     
     NSArray *removeKeys = @[ keys[0], keys[2], keys[3] ];
     NSArray *remainingKeys = @[ keys[1], keys[4] ];
@@ -181,14 +184,13 @@
 
 - (void)testRemoveAllObjects {
     NSDictionary *objects;
-    NSArray *keys;
-    [self _storeStringsInCache:_cache objects:&objects keys:&keys];
+    [_cache storeStringsWithCount:5 strings:&objects];
     
     [_cache removeAllObjects];
     
     // Assertions
     // ==========
-    [self _assertDoesntContainObjectsForKeys:keys objects:objects];
+    [self _assertDoesntContainObjectsForKeys:[objects allKeys] objects:objects];
 }
 
 #pragma mark - Metadata Tests
@@ -208,8 +210,8 @@
     // 1.1. Read metadata right after storing object.
     // ==============================================
     NSDictionary *metadata = [_cache metadataForKey:key];
-    STAssertNotNil(metadata, nil);
-    STAssertTrue([metadata[metaKey] isEqualToString:metaValue], nil);
+    XCTAssertNotNil(metadata);
+    XCTAssertTrue([metadata[metaKey] isEqualToString:metaValue]);
 
     // 1.2. Update metadata.
     // =====================
@@ -218,78 +220,8 @@
     [_cache setMetadataValues:@{ metaKey : customValueMod } forKey:key];
 
     metadata = [_cache metadataForKey:key];
-    STAssertNotNil(metadata, nil);
-    STAssertTrue([metadata[metaKey] isEqualToString:customValueMod], nil);
-}
-
-#pragma mark - Extended Category
-
-- (void)testCachedObjectsForKeys {
-    NSDictionary *strings;
-    NSArray *keys;
-    [self _storeStringsInCache:_cache objects:&strings keys:&keys];
-    
-    __block BOOL isWaiting = YES;
-    [_cache cachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(NSDictionary *objects) {
-        for (NSString *key in keys) {
-            STAssertTrue([objects[key] isEqualToString:strings[key]], NULL);
-        }
-        isWaiting = NO;
-    }];
-    
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
-}
-
-- (void)testCachedObjectsForKeysFromDisk {
-    NSDictionary *strings;
-    NSArray *keys;
-    _cache.memoryCache = nil;
-    
-    [self _storeStringsInCache:_cache objects:&strings keys:&keys];
-    
-    __block BOOL isWaiting = YES;
-    [_cache cachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(NSDictionary *objects) {
-        for (NSString *key in keys) {
-            STAssertTrue([objects[key] isEqualToString:strings[key]], NULL);
-        }
-        isWaiting = NO;
-    }];
-    
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
-}
-
-- (void)testCachedObjectForAnyKey {
-    NSDictionary *strings;
-    NSArray *keys;
-    [self _storeStringsInCache:_cache objects:&strings keys:&keys];
-    [_cache removeObjectForKey:keys[0]];
-    
-    __block BOOL isWaiting = YES;
-    [_cache cachedObjectForAnyKey:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(id object, NSString *key) {
-        STAssertTrue([key isEqualToString:keys[1]], NULL);
-        STAssertTrue([object isEqualToString:strings[keys[1]]], NULL);
-        isWaiting = NO;
-    }];
-
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
-}
-
-- (void)testCachedObjectForAnyKeyFromDisk {
-    NSDictionary *strings;
-    NSArray *keys;
-     _cache.memoryCache = nil;
-    
-    [self _storeStringsInCache:_cache objects:&strings keys:&keys];
-    [_cache removeObjectForKey:keys[0]];
-    
-    __block BOOL isWaiting = YES;
-    [_cache cachedObjectForAnyKey:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(id object, NSString *key) {
-        STAssertTrue([key isEqualToString:keys[1]], NULL);
-        STAssertTrue([object isEqualToString:strings[keys[1]]], NULL);
-        isWaiting = NO;
-    }];
-    
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    XCTAssertNotNil(metadata);
+    XCTAssertTrue([metadata[metaKey] isEqualToString:customValueMod]);
 }
 
 #pragma mark - Helpers
@@ -302,43 +234,26 @@
 
 
 - (void)_assertImage:(UIImage *)img1 isEqualImage:(UIImage *)img2 {
-    STAssertNotNil(img1, nil);
-    STAssertNotNil(img2, nil);
-    STAssertTrue(img1.size.width * img1.scale ==
-                 img2.size.width * img2.scale, nil);
-    STAssertTrue(img1.size.height * img1.scale ==
-                 img2.size.height * img2.scale, nil);
-}
-
-- (void)_storeStringsInCache:(DFCache *)cache objects:(NSDictionary **)objects keys:(NSArray **)keys {
-    *objects =
-    @{
-      @"key1" : @"jf-230fj9efje9rjdsofp",
-      @"key2" : @"20jfsoedfjsfew",
-      @"key3" : @"0-2jkfewjfewope2k3p",
-      @"key4" : @"fk20fk2ojk2eop23",
-      @"key5" : @"dk2-021k20ek1 120 k0-1k0"
-      };
-    
-    *keys = @[ @"key1", @"key2", @"key3", @"key4", @"key5" ];
-    
-    for (NSString *key in (*keys)) {
-        [_cache storeObject:(*objects)[key] forKey:key cost:0 encode:DFCacheEncodeNSCoding];
-    }
+    XCTAssertNotNil(img1);
+    XCTAssertNotNil(img2);
+    XCTAssertTrue(img1.size.width * img1.scale ==
+                 img2.size.width * img2.scale);
+    XCTAssertTrue(img1.size.height * img1.scale ==
+                 img2.size.height * img2.scale);
 }
 
 - (void)_assertContainsObjectsForKeys:(NSArray *)keys objects:(NSDictionary *)objects {
     for (NSString *key in keys) {
         {
             NSString *object = [_cache.memoryCache objectForKey:key];;
-            STAssertNotNil(object, @"mem failure");
-            STAssertEqualObjects(objects[key], object, @"mem failure");
+            XCTAssertNotNil(object, @"Memory cache: no object for key %@", key);
+            XCTAssertEqualObjects(objects[key], object);
         }
         
         {
             id object = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:nil];
-            STAssertNotNil(object, @"disk failure");
-            STAssertEqualObjects(objects[key], object, @"disk failure");
+            XCTAssertNotNil(object, @"Disk cache: no object for key %@", key);
+            XCTAssertEqualObjects(objects[key], object);
         }
     }
 }
@@ -347,12 +262,12 @@
     for (NSString *key in keys) {
         {
             NSString *object = [_cache.memoryCache objectForKey:key];
-            STAssertNil(object, @"mem failure");
+            XCTAssertNil(object, @"Memory cache: contains object for key %@", key);
         }
         
         {
             id object = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:nil];
-            STAssertNil(object, @"disk failure");
+            XCTAssertNil(object, @"Disk cache: contains object for key %@", key);
         }
     }
 }

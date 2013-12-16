@@ -13,7 +13,12 @@
 #import "DFTaskMultiplexer.h"
 #import "DFTaskQueue.h"
 #import "DFTesting.h"
-#import "TDFTasks.h"
+#import <XCTest/XCTest.h>
+
+
+@interface TDFTasks : XCTestCase
+
+@end
 
 
 @implementation TDFTasks
@@ -26,7 +31,7 @@
     }];
     __block BOOL isWaiting = YES;
     [task setCompletion:^(DFTask *task) {
-        STAssertTrue(isWorkDone, nil);
+        XCTAssertTrue(isWorkDone);
         isWaiting = NO;
     }];
     [queue addTask:task];
@@ -38,9 +43,9 @@
     DFTaskWithBlock *task = [[DFTaskWithBlock alloc] initWithBlock:nil];
     __block BOOL isWaiting = YES;
     [task setCompletion:^(DFTask *task) {
-        STAssertTrue([task isExecuting], nil);
-        STAssertTrue([task isFinished], nil);
-        STAssertFalse([task isCancelled], nil);
+        XCTAssertTrue([task isExecuting]);
+        XCTAssertTrue([task isFinished]);
+        XCTAssertFalse([task isCancelled]);
         isWaiting = NO;
     }];
     [queue addTask:task];
@@ -59,14 +64,14 @@
     }];
     __block BOOL isWaiting = YES;
     [task setCompletion:^(DFTask *task) {
-        STAssertFalse(isWorkDone, nil);
-        STAssertTrue([task isFinished], nil);
-        STAssertTrue([task isExecuting], nil);
-        STAssertTrue([task isCancelled], nil);
+        XCTAssertFalse(isWorkDone);
+        XCTAssertTrue([task isFinished]);
+        XCTAssertTrue([task isExecuting]);
+        XCTAssertTrue([task isCancelled]);
         isWaiting = NO;
     }];
-#warning race condition
     [queue addTask:task];
+#warning race condition, task may finish executing before cacnel is called
     [task cancel];
     DWARF_TEST_WAIT_WHILE(isWaiting, 3.f);
 }
@@ -80,11 +85,11 @@
         isFirstTaskRun = YES;
         isWaiting = NO;
         DFTask *dependency = [task.dependencies firstObject];
-        STAssertTrue([dependency isFinished], nil);
-        STAssertTrue(dependency.priority == 15, nil); // Check "result" of task 2.
+        XCTAssertTrue([dependency isFinished]);
+        XCTAssertTrue(dependency.priority == 15); // Check "result" of task 2.
     }];
     DFTaskWithBlock *task2 = [[DFTaskWithBlock alloc] initWithBlock:^(DFTask *task) {
-        STAssertFalse(isFirstTaskRun, nil);
+        XCTAssertFalse(isFirstTaskRun);
         task.priority = 15;
         sleep(0.25);
     }];
@@ -105,11 +110,11 @@
         isFirstTaskRun = YES;
         isWaiting = NO;
         DFTask *dependency = [task.dependencies firstObject];
-        STAssertTrue([dependency isFinished], nil);
-        STAssertTrue(dependency.priority == 15, nil); // Check "result" of task 2.
+        XCTAssertTrue([dependency isFinished]);
+        XCTAssertTrue(dependency.priority == 15); // Check "result" of task 2.
     }];
     DFTaskWithBlock *task2 = [[DFTaskWithBlock alloc] initWithBlock:^(DFTask *task) {
-        STAssertFalse(isFirstTaskRun, nil);
+        XCTAssertFalse(isFirstTaskRun);
         task.priority = 15;
         sleep(0.25);
     }];

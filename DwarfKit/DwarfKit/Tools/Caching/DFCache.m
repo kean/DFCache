@@ -45,7 +45,7 @@
         [NSException raise:NSInvalidArgumentException format:@"Attemting to initialize DFCache without a name"];
     }
     NSString *storagePath = [[DFDiskCache cachesDirectoryPath] stringByAppendingPathComponent:name];
-    DFDiskCache *storage = [[DFDiskCache alloc] initWithPath:storagePath];
+    DFDiskCache *storage = [[DFDiskCache alloc] initWithPath:storagePath error:nil];
     storage.capacity = 1024 * 1024 * 100; // 100 Mb
     storage.cleanupRate = 0.5f;
     return [self initWithDiskCache:storage memoryCache:memoryCache];
@@ -91,14 +91,17 @@
     if (!key || !decode) {
         return nil;
     }
-    id object = [_memoryCache objectForKey:key];
-    if (!object) {
+    __block id object = [_memoryCache objectForKey:key];
+    if (object) {
+        return object;
+    }
+    dispatch_sync(_ioQueue, ^{
         NSData *data = [_diskCache dataForKey:key];
         if (data) {
             object = decode(data);
             [self storeObject:object forKey:key cost:cost];
         }
-    }
+    });
     return object;
 }
 

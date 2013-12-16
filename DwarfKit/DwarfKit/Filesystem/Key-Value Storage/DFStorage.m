@@ -19,15 +19,15 @@
     NSFileManager *_fileManager;
 }
 
-- (id)initWithPath:(NSString *)path {
+- (id)initWithPath:(NSString *)path error:(NSError *__autoreleasing *)error {
     if (self = [super init]) {
         if (!path.length) {
-            [NSException raise:@"DFCache" format:@"Attempting to initialize cache without root folder path"];
+            [NSException raise:NSInvalidArgumentException format:@"Attempting to initialize storage without directory path"];
         }
         _fileManager = [NSFileManager defaultManager];
         _path = path;
         if (![_fileManager fileExistsAtPath:_path]) {
-            [_fileManager createDirectoryAtPath:_path withIntermediateDirectories:YES attributes:nil error:NULL];
+            [_fileManager createDirectoryAtPath:_path withIntermediateDirectories:YES attributes:nil error:error];
         }
     }
     return self;
@@ -67,14 +67,14 @@
 }
 
 - (NSString *)filePathForKey:(NSString *)key {
-    if (!key.length) {
+    if (!key) {
         return nil;
     }
     return [_path stringByAppendingPathComponent:[self fileNameForKey:key]];
 }
 
 - (NSURL *)fileURLForKey:(NSString *)key {
-    if (!key.length) {
+    if (!key) {
         return nil;
     }
     NSString *path = [_path stringByAppendingPathComponent:[self fileNameForKey:key]];
@@ -89,14 +89,14 @@
 }
 
 - (_dwarf_bytes)contentsSize {
-    _dwarf_bytes contentsSize = 0;
+    _dwarf_bytes size = 0;
     NSArray *contents = [self contentsWithResourceKeys:@[NSURLFileAllocatedSizeKey]];
     for (NSURL *fileURL in contents) {
         NSNumber *fileSize;
         [fileURL getResourceValue:&fileSize forKey:NSURLFileAllocatedSizeKey error:NULL];
-        contentsSize += [fileSize unsignedLongLongValue];
+        size += [fileSize unsignedLongLongValue];
     }
-    return contentsSize;
+    return size;
 }
 
 - (NSArray *)contentsWithResourceKeys:(NSArray *)keys {

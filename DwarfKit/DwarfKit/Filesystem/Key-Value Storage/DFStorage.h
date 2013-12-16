@@ -20,17 +20,17 @@
 
 
 /*! Key-value file storage.
- @discussion All methods are synchronous so that DFStorage could be sufficient for various purposes.
  */
 NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface DFStorage : NSObject
 
-/*! Initializes and returns file storage with provided directory path.
- @param path Storage root directory path.
+/*! Initializes and returns storage with provided directory path.
+ @param path Storage directory path.
+ @param error A pointer to an error object. Might be nil.
  */
-- (id)initWithPath:(NSString *)path;
+- (id)initWithPath:(NSString *)path error:(NSError *__autoreleasing *)error;
 
-/*! Returns storage root directory path.
+/*! Returns storage directory path.
  */
 @property (nonatomic, readonly) NSString *path;
 

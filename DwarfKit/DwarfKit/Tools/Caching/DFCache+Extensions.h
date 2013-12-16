@@ -16,7 +16,7 @@
  */
 @interface DFCache (Extensions)
 
-#pragma mark - Data
+#pragma mark - NSData
 
 /*! Reads data from disk.
  @param key The unique key.
@@ -38,7 +38,7 @@
  @param cost Cost block returning cost for memory cache.
  @param completion Completion block.
  */
-- (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *))completion;
+- (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *data))completion;
 
 #pragma mark - Objects
 

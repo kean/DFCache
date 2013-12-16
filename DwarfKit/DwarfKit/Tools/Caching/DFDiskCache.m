@@ -16,8 +16,8 @@
 
 @implementation DFDiskCache
 
-- (id)initWithPath:(NSString *)path {
-    if (self = [super initWithPath:path]) {
+- (id)initWithPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    if (self = [super initWithPath:path error:error]) {
         [super setDelegate:self];
     }
     return self;

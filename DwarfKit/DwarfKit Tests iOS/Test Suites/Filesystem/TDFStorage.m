@@ -10,9 +10,14 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "TDFStorage.h"
 #import "DFStorage.h"
 #import "DFDiskCache.h"
+#import <XCTest/XCTest.h>
+
+
+@interface TDFStorage : XCTestCase
+
+@end
 
 
 @implementation TDFStorage {
@@ -21,7 +26,7 @@
 
 - (void)setUp {
     NSString *path = [[DFDiskCache cachesDirectoryPath] stringByAppendingPathComponent:@"_tests_"];
-    _storage = [[DFStorage alloc] initWithPath:path];
+    _storage = [[DFStorage alloc] initWithPath:path error:nil];
 }
 
 - (void)tearDown {
@@ -32,9 +37,9 @@
     NSData *data = [self _tempData];
     NSString *key = @"_key";
     
-    STAssertNil([_storage dataForKey:key], NULL);
+    XCTAssertNil([_storage dataForKey:key]);
     [_storage setData:data forKey:key];
-    STAssertNotNil([_storage dataForKey:key], NULL);
+    XCTAssertNotNil([_storage dataForKey:key]);
 
 }
 
@@ -42,41 +47,41 @@
     NSData *data = [self _tempData];
     NSString *key = @"_key";
     
-    STAssertNil([_storage dataForKey:key], NULL);
+    XCTAssertNil([_storage dataForKey:key]);
     [_storage setData:data forKey:key];
-    STAssertNotNil([_storage dataForKey:key], NULL);
+    XCTAssertNotNil([_storage dataForKey:key]);
     [_storage removeDataForKey:key];
-    STAssertNil([_storage dataForKey:key], NULL);
+    XCTAssertNil([_storage dataForKey:key]);
 }
 
 - (void)testRemoveAll {
     NSData *data = [self _tempData];
     NSString *key = @"_key";
     [_storage setData:data forKey:key];
-    STAssertNotNil([_storage dataForKey:key], NULL);
+    XCTAssertNotNil([_storage dataForKey:key]);
     
     NSData *data2 = [self _tempData];
     NSString *key2 = @"_key2";
     [_storage setData:data2 forKey:key2];
-    STAssertNotNil([_storage dataForKey:key2], NULL);
+    XCTAssertNotNil([_storage dataForKey:key2]);
     
     [_storage removeAllData];
-    STAssertNil([_storage dataForKey:key], NULL);
-    STAssertNil([_storage dataForKey:key], NULL);
+    XCTAssertNil([_storage dataForKey:key]);
+    XCTAssertNil([_storage dataForKey:key]);
     
     // Test that storage still works after cleanup.
-    STAssertNil([_storage dataForKey:key], NULL);
+    XCTAssertNil([_storage dataForKey:key]);
     [_storage setData:data forKey:key];
-    STAssertNotNil([_storage dataForKey:key], NULL);
+    XCTAssertNotNil([_storage dataForKey:key]);
 }
 
 - (void)testContains {
     NSData *data = [self _tempData];
     NSString *key = @"_key";
     
-    STAssertFalse([_storage containsDataForKey:key], NULL);
+    XCTAssertFalse([_storage containsDataForKey:key]);
     [_storage setData:data forKey:key];
-    STAssertTrue([_storage containsDataForKey:key], NULL);
+    XCTAssertTrue([_storage containsDataForKey:key]);
 }
 
 - (void)testPaths {
@@ -88,31 +93,31 @@
     NSString *path_02 = [_storage filePathForKey:key];
     NSURL *fileURL = [_storage fileURLForKey:key];
     
-    STAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:path_01], NULL);
-    STAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:path_02], NULL);
-    STAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:fileURL.path], NULL);
+    XCTAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:path_01]);
+    XCTAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:path_02]);
+    XCTAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:fileURL.path]);
     [_storage setData:data forKey:key];
-    STAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:path_01], NULL);
-    STAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:path_02], NULL);
-    STAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:fileURL.path], NULL);
+    XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:path_01]);
+    XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:path_02]);
+    XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:fileURL.path]);
 }
 
 - (void)testContents {
     NSData *data = [self _tempData];
     NSString *key = @"_key";
     [_storage setData:data forKey:key];
-    STAssertNotNil([_storage dataForKey:key], NULL);
+    XCTAssertNotNil([_storage dataForKey:key]);
     
     NSData *data2 = [self _tempData];
     NSString *key2 = @"_key2";
     [_storage setData:data2 forKey:key2];
-    STAssertNotNil([_storage dataForKey:key2], NULL);
+    XCTAssertNotNil([_storage dataForKey:key2]);
     
     NSArray *contents = [_storage contentsWithResourceKeys:nil];
-    STAssertTrue(contents.count == 2, NULL);
+    XCTAssertTrue(contents.count == 2);
     for (NSURL *fileURL in contents) {
-        STAssertTrue([fileURL.path rangeOfString:[_storage fileNameForKey:key]].location != NSNotFound ||
-                     [fileURL.path rangeOfString:[_storage fileNameForKey:key2]].location != NSNotFound, NULL);
+        XCTAssertTrue([fileURL.path rangeOfString:[_storage fileNameForKey:key]].location != NSNotFound ||
+                     [fileURL.path rangeOfString:[_storage fileNameForKey:key2]].location != NSNotFound);
     }
 }
 
