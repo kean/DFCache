@@ -11,7 +11,6 @@
  */
 
 #import "DFCache+Tests.h"
-#import "DFCache+UIImage.h"
 #import "DFCache.h"
 #import "DFTesting.h"
 #import <XCTest/XCTest.h>
@@ -54,84 +53,56 @@
     XCTAssertThrows([[DFCache alloc] initWithName:nil]);
 }
 
+#pragma mark - Write (custom encoders/decoders)
+
 - (void)testWriteWithTransform {
-    UIImage *value = [self _testImage];
+    NSString *string = @"value1";
     NSString *key = @"key1";
     
-    [_cache storeObject:value forKey:key cost:0.f encode:^NSData *(id object) {
-        return UIImageJPEGRepresentation(object, 1.0);
+    [_cache storeObject:string forKey:key cost:0.f encode:^NSData *(id object) {
+        return [((NSString *)object) dataUsingEncoding:NSUTF8StringEncoding];
     }];
     
     XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
     
-    __block BOOL isWaiting = YES;
-    [_cache cachedObjectForKey:key decode:^id(NSData *data) {
-        return [UIImage imageWithData:data];
-    } cost:nil completion:^(id object) {
-        [self _assertImage:value isEqualImage:object];
-        isWaiting = NO;
-    }];
-
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:^id(NSData *data) {
+        return [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+    } cost:nil];
+    XCTAssertEqualObjects(string, cachedString);
 }
 
 - (void)testWriteWithData {
-    UIImage *value = [self _testImage];
+    NSString *string = @"value1";
     NSString *key = @"key1";
-    NSData *data = UIImageJPEGRepresentation(value, 1.0);
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
     
-    [_cache storeObject:value forKey:key cost:0.f data:data];
+    [_cache storeObject:string forKey:key cost:0.f data:data];
     
     XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
     
-    __block BOOL isWaiting = YES;
-    [_cache cachedObjectForKey:key decode:^id(NSData *data) {
-        return [UIImage imageWithData:data];
-    } cost:nil completion:^(UIImage *object) {
-        [self _assertImage:value isEqualImage:object];
-        XCTAssertNotNil(object);
-        isWaiting = NO;
-    }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:^id(NSData *data) {
+        return [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+    } cost:nil];
+    XCTAssertEqualObjects(string, cachedString);
 }
 
 - (void)testWriteNoTransformNoData {
-    NSString *value = @"test_string";
+    NSString *string = @"test_string";
     NSString *key = @"key3";
     
-    [_cache storeObject:value forKey:key cost:0.f encode:nil];
+    [_cache storeObject:string forKey:key cost:0.f encode:nil];
     
     XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
     
-    __block BOOL isWaiting = YES;
-    [_cache cachedObjectForKey:key decode:^id(NSData *data) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    } cost:nil completion:^(id object) {
-        XCTAssertNil(object);
-        isWaiting = NO;
-    }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:0];
+    XCTAssertNil(cachedString);
 }
 
-- (void)testWriteImageCaching {
-    UIImage *value = [self _testImage];
-    NSString *key = @"key2";
-    
-    [_cache storeImage:value imageData:nil forKey:key];
-    
-    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
-    
-    __block BOOL isWaiting = YES;
-    [_cache cachedImageForKey:key completion:^(UIImage *image) {
-        [self _assertImage:value isEqualImage:image];
-        isWaiting = NO;
-    }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
-}
-
+#pragma mark - Write (predifined encoders/decoders)
+ 
 - (void)testWriteJSON {
     NSDictionary *JSON = @{ @"key" : @"value" };
     NSString *key = @"key3";
@@ -144,6 +115,19 @@
         isWaiting = NO;
     }];
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+}
+
+- (void)testWriteNSCoding {
+    NSString *string = @"test_string";
+    NSString *key = @"key3";
+    
+    [_cache storeObject:string forKey:key cost:0.f encode:DFCacheEncodeNSCoding];
+    
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:0];
+    XCTAssertEqualObjects(string, cachedString);
 }
 
 #pragma mark - Removal
@@ -220,20 +204,9 @@
 
 #pragma mark - Helpers
 
-- (UIImage *)_testImage {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString *path = [bundle pathForResource:@"image" ofType:@"jpeg"];
-    return [UIImage imageWithContentsOfFile:path];
-}
-
-
-- (void)_assertImage:(UIImage *)img1 isEqualImage:(UIImage *)img2 {
-    XCTAssertNotNil(img1);
-    XCTAssertNotNil(img2);
-    XCTAssertTrue(img1.size.width * img1.scale ==
-                 img2.size.width * img2.scale);
-    XCTAssertTrue(img1.size.height * img1.scale ==
-                 img2.size.height * img2.scale);
+- (NSData *)_testDataWithSize:(unsigned long long)size {
+    int *buffer = malloc(size);
+    return [NSData dataWithBytesNoCopy:buffer length:size];
 }
 
 - (void)_assertContainsObjectsForKeys:(NSArray *)keys objects:(NSDictionary *)objects {

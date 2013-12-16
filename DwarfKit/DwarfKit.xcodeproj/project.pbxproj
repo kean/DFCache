@@ -23,6 +23,7 @@
 		0C2A95E617FBEF290016CB20 /* DFStreamChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E217FBEF290016CB20 /* DFStreamChain.m */; };
 		0C2BDD9B185F016600595DE6 /* DFCache+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BDD99185F016600595DE6 /* DFCache+Tests.m */; };
 		0C2BDD9C185F016600595DE6 /* TDFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BDD9A185F016600595DE6 /* TDFCache+Extensions.m */; };
+		0C2BDD9E185F082200595DE6 /* TDFCache+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BDD9D185F082200595DE6 /* TDFCache+UIImage.m */; };
 		0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
 		0C3713D117D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
 		0C3713D217D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
@@ -272,6 +273,7 @@
 		0C2BDD98185F016600595DE6 /* DFCache+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache+Tests.h"; sourceTree = "<group>"; };
 		0C2BDD99185F016600595DE6 /* DFCache+Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DFCache+Tests.m"; sourceTree = "<group>"; };
 		0C2BDD9A185F016600595DE6 /* TDFCache+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TDFCache+Extensions.m"; sourceTree = "<group>"; };
+		0C2BDD9D185F082200595DE6 /* TDFCache+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TDFCache+UIImage.m"; sourceTree = "<group>"; };
 		0C3712F717D3F93F00766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0C37132717D3F9C700766FD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		0C37132817D3F9C700766FD9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -833,6 +835,7 @@
 				0C2BDD98185F016600595DE6 /* DFCache+Tests.h */,
 				0C2BDD99185F016600595DE6 /* DFCache+Tests.m */,
 				0C2BDD9A185F016600595DE6 /* TDFCache+Extensions.m */,
+				0C2BDD9D185F082200595DE6 /* TDFCache+UIImage.m */,
 				0C8C160E17D40F9B004B7DAA /* TDFCache.m */,
 			);
 			path = Caching;
@@ -1298,6 +1301,7 @@
 				0CFCB2851820503600589990 /* DFURLFetchTask.m in Sources */,
 				0C091D911806B981000CCB11 /* DFProcessingTask.m in Sources */,
 				0CD0D9131848C6AC008FF46B /* DFCoreText.m in Sources */,
+				0C2BDD9E185F082200595DE6 /* TDFCache+UIImage.m in Sources */,
 				0C2BDD9B185F016600595DE6 /* DFCache+Tests.m in Sources */,
 				0CD0D91B1848C6AC008FF46B /* NSMutableAttributedString+DF.m in Sources */,
 				0CD0D9151848C6AC008FF46B /* DFLabel.m in Sources */,
