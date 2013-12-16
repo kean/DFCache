@@ -21,6 +21,8 @@
 		0C2A95E417FBEF290016CB20 /* DFStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E017FBEF290016CB20 /* DFStream.m */; };
 		0C2A95E517FBEF290016CB20 /* DFStreamChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E217FBEF290016CB20 /* DFStreamChain.m */; };
 		0C2A95E617FBEF290016CB20 /* DFStreamChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A95E217FBEF290016CB20 /* DFStreamChain.m */; };
+		0C2BDD9B185F016600595DE6 /* DFCache+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BDD99185F016600595DE6 /* DFCache+Tests.m */; };
+		0C2BDD9C185F016600595DE6 /* TDFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BDD9A185F016600595DE6 /* TDFCache+Extensions.m */; };
 		0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
 		0C3713D117D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
 		0C3713D217D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
@@ -267,6 +269,9 @@
 		0C2A95E017FBEF290016CB20 /* DFStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFStream.m; sourceTree = "<group>"; };
 		0C2A95E117FBEF290016CB20 /* DFStreamChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStreamChain.h; sourceTree = "<group>"; };
 		0C2A95E217FBEF290016CB20 /* DFStreamChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFStreamChain.m; sourceTree = "<group>"; };
+		0C2BDD98185F016600595DE6 /* DFCache+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache+Tests.h"; sourceTree = "<group>"; };
+		0C2BDD99185F016600595DE6 /* DFCache+Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DFCache+Tests.m"; sourceTree = "<group>"; };
+		0C2BDD9A185F016600595DE6 /* TDFCache+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TDFCache+Extensions.m"; sourceTree = "<group>"; };
 		0C3712F717D3F93F00766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0C37132717D3F9C700766FD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		0C37132817D3F9C700766FD9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -331,7 +336,6 @@
 		0C46819D18280139000C7B6D /* DFImageFetchTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageFetchTask.m; sourceTree = "<group>"; };
 		0C47F7551855FB28008E6D72 /* DFCache+UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache+UIImage.h"; sourceTree = "<group>"; };
 		0C47F7561855FB28008E6D72 /* DFCache+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DFCache+UIImage.m"; sourceTree = "<group>"; };
-		0C5B96BC184F3CAE00A97156 /* TDFExtendedFileAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFExtendedFileAttributes.h; sourceTree = "<group>"; };
 		0C5B96BD184F3CAE00A97156 /* TDFExtendedFileAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFExtendedFileAttributes.m; sourceTree = "<group>"; };
 		0C6402C6184B27EE009D856C /* NSURL+DFExtendedFileAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+DFExtendedFileAttributes.h"; sourceTree = "<group>"; };
 		0C6402C7184B27EE009D856C /* NSURL+DFExtendedFileAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DFExtendedFileAttributes.m"; sourceTree = "<group>"; };
@@ -353,11 +357,8 @@
 		0C8C160217D40E0C004B7DAA /* DwarfKit_Tests_Mac.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DwarfKit_Tests_Mac.m; sourceTree = "<group>"; };
 		0C8C160417D40E0C004B7DAA /* DwarfKit Tests Mac-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Tests Mac-Prefix.pch"; sourceTree = "<group>"; };
 		0C8C160917D40EB4004B7DAA /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpeg; sourceTree = "<group>"; };
-		0C8C160D17D40F9B004B7DAA /* TDFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFCache.h; sourceTree = "<group>"; };
 		0C8C160E17D40F9B004B7DAA /* TDFCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFCache.m; sourceTree = "<group>"; };
-		0C99A1811855BB73005BBCA1 /* TDFStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFStorage.h; sourceTree = "<group>"; };
 		0C99A1821855BB73005BBCA1 /* TDFStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFStorage.m; sourceTree = "<group>"; };
-		0C99A1851855C784005BBCA1 /* TDFDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFDiskCache.h; sourceTree = "<group>"; };
 		0C99A1861855C784005BBCA1 /* TDFDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFDiskCache.m; sourceTree = "<group>"; };
 		0CB5EADB181D7DBF0040CB68 /* DFTaskMultiplexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTaskMultiplexer.h; sourceTree = "<group>"; };
 		0CB5EADC181D7DBF0040CB68 /* DFTaskMultiplexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTaskMultiplexer.m; sourceTree = "<group>"; };
@@ -388,7 +389,6 @@
 		0CFC5CBD17D42393001C2951 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0CFCB2821820503600589990 /* DFURLFetchTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFURLFetchTask.h; sourceTree = "<group>"; };
 		0CFCB2831820503600589990 /* DFURLFetchTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFURLFetchTask.m; sourceTree = "<group>"; };
-		0CFCB28718218B4300589990 /* TDFTasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFTasks.h; sourceTree = "<group>"; };
 		0CFCB28818218B4300589990 /* TDFTasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFTasks.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -744,11 +744,8 @@
 		0C5B96BB184F3C9600A97156 /* Filesystem */ = {
 			isa = PBXGroup;
 			children = (
-				0C5B96BC184F3CAE00A97156 /* TDFExtendedFileAttributes.h */,
 				0C5B96BD184F3CAE00A97156 /* TDFExtendedFileAttributes.m */,
-				0C99A1811855BB73005BBCA1 /* TDFStorage.h */,
 				0C99A1821855BB73005BBCA1 /* TDFStorage.m */,
-				0C99A1851855C784005BBCA1 /* TDFDiskCache.h */,
 				0C99A1861855C784005BBCA1 /* TDFDiskCache.m */,
 			);
 			path = Filesystem;
@@ -833,7 +830,9 @@
 		0C8C160C17D40F00004B7DAA /* Caching */ = {
 			isa = PBXGroup;
 			children = (
-				0C8C160D17D40F9B004B7DAA /* TDFCache.h */,
+				0C2BDD98185F016600595DE6 /* DFCache+Tests.h */,
+				0C2BDD99185F016600595DE6 /* DFCache+Tests.m */,
+				0C2BDD9A185F016600595DE6 /* TDFCache+Extensions.m */,
 				0C8C160E17D40F9B004B7DAA /* TDFCache.m */,
 			);
 			path = Caching;
@@ -922,7 +921,6 @@
 		0CFCB28618218B3800589990 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
-				0CFCB28718218B4300589990 /* TDFTasks.h */,
 				0CFCB28818218B4300589990 /* TDFTasks.m */,
 			);
 			path = Tasks;
@@ -1289,6 +1287,7 @@
 				0CD0D9191848C6AC008FF46B /* NSAttributedString+DF.m in Sources */,
 				0C5B96C3184F3CAE00A97156 /* TDFExtendedFileAttributes.m in Sources */,
 				0C6402CD184B27EE009D856C /* NSURL+DFExtendedFileAttributes.m in Sources */,
+				0C2BDD9C185F016600595DE6 /* TDFCache+Extensions.m in Sources */,
 				0C721DDD18060164003695D0 /* DFReusablePool.m in Sources */,
 				0C4681A118280139000C7B6D /* DFImageFetchTask.m in Sources */,
 				0C2A95E417FBEF290016CB20 /* DFStream.m in Sources */,
@@ -1299,6 +1298,7 @@
 				0CFCB2851820503600589990 /* DFURLFetchTask.m in Sources */,
 				0C091D911806B981000CCB11 /* DFProcessingTask.m in Sources */,
 				0CD0D9131848C6AC008FF46B /* DFCoreText.m in Sources */,
+				0C2BDD9B185F016600595DE6 /* DFCache+Tests.m in Sources */,
 				0CD0D91B1848C6AC008FF46B /* NSMutableAttributedString+DF.m in Sources */,
 				0CD0D9151848C6AC008FF46B /* DFLabel.m in Sources */,
 				0C091D891806B8AA000CCB11 /* DFProcessingCenter.m in Sources */,
@@ -1544,8 +1544,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"\\\"$(SDKROOT)/Developer/Library/Frameworks\\\"",
-					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1560,8 +1560,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"\\\"$(SDKROOT)/Developer/Library/Frameworks\\\"",
-					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

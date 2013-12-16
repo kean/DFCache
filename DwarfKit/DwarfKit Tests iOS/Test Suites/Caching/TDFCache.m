@@ -160,8 +160,6 @@
     
     [_cache removeObjectForKey:removeKey];
     
-    // Assertions
-    // ==========
     [self _assertDoesntContainObjectsForKeys:@[removeKey] objects:objects];
     [self _assertContainsObjectsForKeys:remainingKeys objects:objects];
 }
@@ -176,8 +174,6 @@
     
     [_cache removeObjectsForKeys:removeKeys];
     
-    // Assertions
-    // ==========
     [self _assertContainsObjectsForKeys:remainingKeys objects:objects];
     [self _assertDoesntContainObjectsForKeys:removeKeys objects:objects];
 }
@@ -188,8 +184,6 @@
     
     [_cache removeAllObjects];
     
-    // Assertions
-    // ==========
     [self _assertDoesntContainObjectsForKeys:[objects allKeys] objects:objects];
 }
 
