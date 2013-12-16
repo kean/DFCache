@@ -60,7 +60,10 @@
             [task finish];
             return;
         }
-        isWorkDone = YES;
+        // We don't want task to finish executing before 'cancel' gets called.
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            isWorkDone = YES;
+        });
     }];
     __block BOOL isWaiting = YES;
     [task setCompletion:^(DFTask *task) {
@@ -71,7 +74,6 @@
         isWaiting = NO;
     }];
     [queue addTask:task];
-#warning race condition, task may finish executing before cacnel is called
     [task cancel];
     DWARF_TEST_WAIT_WHILE(isWaiting, 3.f);
 }

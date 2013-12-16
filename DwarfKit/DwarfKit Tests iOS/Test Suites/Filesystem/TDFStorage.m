@@ -11,6 +11,7 @@
  */
 
 #import "DFStorage.h"
+#import "DFDiskCache.h"
 #import <XCTest/XCTest.h>
 
 
@@ -24,41 +25,22 @@
 }
 
 - (void)setUp {
-    NSString *path = [self _defaultStoragePath];
+    NSString *path = [[DFDiskCache cachesDirectoryPath] stringByAppendingPathComponent:@"_tests_"];
     _storage = [[DFStorage alloc] initWithPath:path error:nil];
-}
-
-- (NSString *)_defaultStoragePath {
-    NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
-    return [cachePath stringByAppendingPathComponent:@"storage-tests"];
 }
 
 - (void)tearDown {
     [_storage removeAllData];
 }
 
-- (void)testInitialization {
-    NSString *path = [self _defaultStoragePath];
-    
-    DFStorage *storage01 = [[DFStorage alloc] initWithPath:path error:nil];
-    XCTAssertEqual(path, storage01.path);
-    
-    XCTAssertThrows([[DFStorage alloc] initWithPath:nil error:nil]);
-    XCTAssertThrows([[DFStorage alloc] initWithPath:@"" error:nil]);
-    
-    NSError *error;
-    DFStorage *storage03 = [[DFStorage alloc] initWithPath:@"broken_path" error:&error];
-    XCTAssertNil(storage03);
-    XCTAssertNotNil(error);
-}
-
-- (void)testWriteRead {
+- (void)testBasicFunctionality {
     NSData *data = [self _tempData];
     NSString *key = @"_key";
     
     XCTAssertNil([_storage dataForKey:key]);
     [_storage setData:data forKey:key];
     XCTAssertNotNil([_storage dataForKey:key]);
+
 }
 
 - (void)testRemove {
@@ -93,7 +75,7 @@
     XCTAssertNotNil([_storage dataForKey:key]);
 }
 
-- (void)testContainsData {
+- (void)testContains {
     NSData *data = [self _tempData];
     NSString *key = @"_key";
     
@@ -120,7 +102,7 @@
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:fileURL.path]);
 }
 
-- (void)testContentsWithResourceKeys {
+- (void)testContents {
     NSData *data = [self _tempData];
     NSString *key = @"_key";
     [_storage setData:data forKey:key];

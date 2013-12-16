@@ -74,7 +74,6 @@ handle_error:
 }
 
 - (NSArray *)extendedAttributesList:(int *)error options:(int)options {
-    
     const char *path = self.path.fileSystemRepresentation;
     char *buffer;
     ssize_t size = listxattr(path, NULL, SIZE_T_MAX, options);

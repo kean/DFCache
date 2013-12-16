@@ -173,6 +173,16 @@
 		0CC85B031848809200123D32 /* DFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC85B011848809200123D32 /* DFDiskCache.m */; };
 		0CC85B071848C3DA00123D32 /* DFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC85B061848C3DA00123D32 /* DFImageView.m */; };
 		0CC85B081848C3DA00123D32 /* DFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC85B061848C3DA00123D32 /* DFImageView.m */; };
+		0CD0D9121848C6AC008FF46B /* DFCoreText.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0D9061848C6AC008FF46B /* DFCoreText.m */; };
+		0CD0D9131848C6AC008FF46B /* DFCoreText.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0D9061848C6AC008FF46B /* DFCoreText.m */; };
+		0CD0D9141848C6AC008FF46B /* DFLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0D9091848C6AC008FF46B /* DFLabel.m */; };
+		0CD0D9151848C6AC008FF46B /* DFLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0D9091848C6AC008FF46B /* DFLabel.m */; };
+		0CD0D9161848C6AC008FF46B /* DFTextAttachement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0D90D1848C6AC008FF46B /* DFTextAttachement.m */; };
+		0CD0D9171848C6AC008FF46B /* DFTextAttachement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0D90D1848C6AC008FF46B /* DFTextAttachement.m */; };
+		0CD0D9181848C6AC008FF46B /* NSAttributedString+DF.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0D90F1848C6AC008FF46B /* NSAttributedString+DF.m */; };
+		0CD0D9191848C6AC008FF46B /* NSAttributedString+DF.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0D90F1848C6AC008FF46B /* NSAttributedString+DF.m */; };
+		0CD0D91A1848C6AC008FF46B /* NSMutableAttributedString+DF.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0D9111848C6AC008FF46B /* NSMutableAttributedString+DF.m */; };
+		0CD0D91B1848C6AC008FF46B /* NSMutableAttributedString+DF.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0D9111848C6AC008FF46B /* NSMutableAttributedString+DF.m */; };
 		0CD0D91D1848C6B2008FF46B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD0D91C1848C6B2008FF46B /* CoreText.framework */; };
 		0CED041C17D82B8800AEE503 /* DFMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041B17D82B8800AEE503 /* DFMapping.h */; };
 		0CED041D17D82B8800AEE503 /* DFMapping.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CED041B17D82B8800AEE503 /* DFMapping.h */; };
@@ -358,6 +368,18 @@
 		0CC85B011848809200123D32 /* DFDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFDiskCache.m; sourceTree = "<group>"; };
 		0CC85B051848C3DA00123D32 /* DFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageView.h; sourceTree = "<group>"; };
 		0CC85B061848C3DA00123D32 /* DFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageView.m; sourceTree = "<group>"; };
+		0CD0D9051848C6AC008FF46B /* DFCoreText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCoreText.h; sourceTree = "<group>"; };
+		0CD0D9061848C6AC008FF46B /* DFCoreText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCoreText.m; sourceTree = "<group>"; };
+		0CD0D9081848C6AC008FF46B /* DFLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFLabel.h; sourceTree = "<group>"; };
+		0CD0D9091848C6AC008FF46B /* DFLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFLabel.m; sourceTree = "<group>"; };
+		0CD0D90A1848C6AC008FF46B /* DFLabelDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFLabelDefines.h; sourceTree = "<group>"; };
+		0CD0D90B1848C6AC008FF46B /* DFLabelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFLabelDelegate.h; sourceTree = "<group>"; };
+		0CD0D90C1848C6AC008FF46B /* DFTextAttachement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTextAttachement.h; sourceTree = "<group>"; };
+		0CD0D90D1848C6AC008FF46B /* DFTextAttachement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTextAttachement.m; sourceTree = "<group>"; };
+		0CD0D90E1848C6AC008FF46B /* NSAttributedString+DF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+DF.h"; sourceTree = "<group>"; };
+		0CD0D90F1848C6AC008FF46B /* NSAttributedString+DF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+DF.m"; sourceTree = "<group>"; };
+		0CD0D9101848C6AC008FF46B /* NSMutableAttributedString+DF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+DF.h"; sourceTree = "<group>"; };
+		0CD0D9111848C6AC008FF46B /* NSMutableAttributedString+DF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+DF.m"; sourceTree = "<group>"; };
 		0CD0D91C1848C6B2008FF46B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0CED041B17D82B8800AEE503 /* DFMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFMapping.h; sourceTree = "<group>"; };
 		0CED041E17D82C0A00AEE503 /* DFMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFMapper.h; sourceTree = "<group>"; };
@@ -531,6 +553,7 @@
 				0CED041917D8161100AEE503 /* MVC */,
 				0C3713AF17D3FECA00766FD9 /* Networking */,
 				0C0B11591847A154009962D0 /* Filesystem */,
+				0CC85B091848C3F100123D32 /* Text */,
 				0C3713BA17D3FECA00766FD9 /* Tools */,
 				0C3713CE17D3FECA00766FD9 /* Views */,
 				0CEDE41717D4503C00D617F7 /* Private */,
@@ -825,6 +848,41 @@
 				0CC85B061848C3DA00123D32 /* DFImageView.m */,
 			);
 			path = "Image View";
+			sourceTree = "<group>";
+		};
+		0CC85B091848C3F100123D32 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				0CD0D9041848C6AC008FF46B /* Core Text */,
+				0CD0D9071848C6AC008FF46B /* Label */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
+		0CD0D9041848C6AC008FF46B /* Core Text */ = {
+			isa = PBXGroup;
+			children = (
+				0CD0D9051848C6AC008FF46B /* DFCoreText.h */,
+				0CD0D9061848C6AC008FF46B /* DFCoreText.m */,
+			);
+			path = "Core Text";
+			sourceTree = "<group>";
+		};
+		0CD0D9071848C6AC008FF46B /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				0CD0D9081848C6AC008FF46B /* DFLabel.h */,
+				0CD0D9091848C6AC008FF46B /* DFLabel.m */,
+				0CD0D90B1848C6AC008FF46B /* DFLabelDelegate.h */,
+				0CD0D90A1848C6AC008FF46B /* DFLabelDefines.h */,
+				0CD0D90C1848C6AC008FF46B /* DFTextAttachement.h */,
+				0CD0D90D1848C6AC008FF46B /* DFTextAttachement.m */,
+				0CD0D90E1848C6AC008FF46B /* NSAttributedString+DF.h */,
+				0CD0D90F1848C6AC008FF46B /* NSAttributedString+DF.m */,
+				0CD0D9101848C6AC008FF46B /* NSMutableAttributedString+DF.h */,
+				0CD0D9111848C6AC008FF46B /* NSMutableAttributedString+DF.m */,
+			);
+			path = Label;
 			sourceTree = "<group>";
 		};
 		0CED041917D8161100AEE503 /* MVC */ = {
@@ -1152,12 +1210,15 @@
 				0C721DDC18060164003695D0 /* DFReusablePool.m in Sources */,
 				0C47F7571855FB28008E6D72 /* DFCache+UIImage.m in Sources */,
 				0CC85B021848809200123D32 /* DFDiskCache.m in Sources */,
+				0CD0D9141848C6AC008FF46B /* DFLabel.m in Sources */,
+				0CD0D9121848C6AC008FF46B /* DFCoreText.m in Sources */,
 				0C37140517D3FECA00766FD9 /* UIImageView+Dwarf.m in Sources */,
 				0C37141117D3FECA00766FD9 /* DFTask.m in Sources */,
 				0C6DB1C41855E2B000E662D1 /* DFCache+Extensions.m in Sources */,
 				0C2A95E317FBEF290016CB20 /* DFStream.m in Sources */,
 				0C37141617D3FECA00766FD9 /* DFTaskQueue.m in Sources */,
 				0C37141B17D3FECA00766FD9 /* DFButton.m in Sources */,
+				0CD0D91A1848C6AC008FF46B /* NSMutableAttributedString+DF.m in Sources */,
 				0C37142017D3FECA00766FD9 /* DFButtonLayout.m in Sources */,
 				0CB5EADD181D7DBF0040CB68 /* DFTaskMultiplexer.m in Sources */,
 				0CC85B071848C3DA00123D32 /* DFImageView.m in Sources */,
@@ -1172,9 +1233,11 @@
 				0C4681A018280139000C7B6D /* DFImageFetchTask.m in Sources */,
 				0C37145117D3FECA00766FD9 /* DFImageProcessing.m in Sources */,
 				0C37145617D3FECA00766FD9 /* DFJPEGTurbo.m in Sources */,
+				0CD0D9161848C6AC008FF46B /* DFTextAttachement.m in Sources */,
 				0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */,
 				0CFCB2841820503600589990 /* DFURLFetchTask.m in Sources */,
 				0CED042217D82C0A00AEE503 /* DFMapper.m in Sources */,
+				0CD0D9181848C6AC008FF46B /* NSAttributedString+DF.m in Sources */,
 				0C091D881806B8AA000CCB11 /* DFProcessingCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1222,7 +1285,9 @@
 				0C8C160F17D40F9B004B7DAA /* TDFCache.m in Sources */,
 				0CC85B031848809200123D32 /* DFDiskCache.m in Sources */,
 				0C46819F18280139000C7B6D /* DFImageFetchManager.m in Sources */,
+				0CD0D9171848C6AC008FF46B /* DFTextAttachement.m in Sources */,
 				0CB5EADE181D7DBF0040CB68 /* DFTaskMultiplexer.m in Sources */,
+				0CD0D9191848C6AC008FF46B /* NSAttributedString+DF.m in Sources */,
 				0C5B96C3184F3CAE00A97156 /* TDFExtendedFileAttributes.m in Sources */,
 				0C6402CD184B27EE009D856C /* NSURL+DFExtendedFileAttributes.m in Sources */,
 				0C2BDD9C185F016600595DE6 /* TDFCache+Extensions.m in Sources */,
@@ -1235,8 +1300,11 @@
 				0CC85B081848C3DA00123D32 /* DFImageView.m in Sources */,
 				0CFCB2851820503600589990 /* DFURLFetchTask.m in Sources */,
 				0C091D911806B981000CCB11 /* DFProcessingTask.m in Sources */,
+				0CD0D9131848C6AC008FF46B /* DFCoreText.m in Sources */,
 				0C2BDD9E185F082200595DE6 /* TDFCache+UIImage.m in Sources */,
 				0C2BDD9B185F016600595DE6 /* DFCache+Tests.m in Sources */,
+				0CD0D91B1848C6AC008FF46B /* NSMutableAttributedString+DF.m in Sources */,
+				0CD0D9151848C6AC008FF46B /* DFLabel.m in Sources */,
 				0C091D891806B8AA000CCB11 /* DFProcessingCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

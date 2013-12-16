@@ -12,6 +12,7 @@
 
 #import "DFCrypto.h"
 #import "DFStorage.h"
+#import "dwarf_private.h"
 
 
 @implementation DFStorage {
@@ -27,9 +28,6 @@
         _path = path;
         if (![_fileManager fileExistsAtPath:_path]) {
             [_fileManager createDirectoryAtPath:_path withIntermediateDirectories:YES attributes:nil error:error];
-            if (error && *error) {
-                return nil;
-            }
         }
     }
     return self;
@@ -60,7 +58,7 @@
 
 - (void)removeAllData {
     [_fileManager removeItemAtPath:_path error:nil];
-    [_fileManager createDirectoryAtPath:_path withIntermediateDirectories:YES attributes:nil error:nil];
+    [_fileManager createDirectoryAtPath:_path withIntermediateDirectories:YES attributes:nil error:NULL];
 }
 
 - (NSString *)fileNameForKey:(NSString *)key {
@@ -79,7 +77,8 @@
     if (!key) {
         return nil;
     }
-    return [NSURL fileURLWithPath:[self filePathForKey:key]];
+    NSString *path = [_path stringByAppendingPathComponent:[self fileNameForKey:key]];
+    return [NSURL fileURLWithPath:path];
 }
 
 - (BOOL)containsDataForKey:(NSString *)key {
@@ -89,12 +88,12 @@
     return [_fileManager fileExistsAtPath:[self filePathForKey:key]];
 }
 
-- (unsigned long long)contentsSize {
-    unsigned long long size = 0;
+- (_dwarf_bytes)contentsSize {
+    _dwarf_bytes size = 0;
     NSArray *contents = [self contentsWithResourceKeys:@[NSURLFileAllocatedSizeKey]];
     for (NSURL *fileURL in contents) {
         NSNumber *fileSize;
-        [fileURL getResourceValue:&fileSize forKey:NSURLFileAllocatedSizeKey error:nil];
+        [fileURL getResourceValue:&fileSize forKey:NSURLFileAllocatedSizeKey error:NULL];
         size += [fileSize unsignedLongLongValue];
     }
     return size;
@@ -102,7 +101,7 @@
 
 - (NSArray *)contentsWithResourceKeys:(NSArray *)keys {
     NSURL *rootURL = [NSURL fileURLWithPath:_path isDirectory:YES];
-    return [_fileManager contentsOfDirectoryAtURL:rootURL includingPropertiesForKeys:keys options:NSDirectoryEnumerationSkipsHiddenFiles error:nil];
+    return [_fileManager contentsOfDirectoryAtURL:rootURL includingPropertiesForKeys:keys options:NSDirectoryEnumerationSkipsHiddenFiles error:NULL];
 }
 
 @end
