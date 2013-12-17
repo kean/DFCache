@@ -112,7 +112,9 @@ handle_error:
             name_start = ptr + 1;
         }
     }
-    free(buffer);
+    if (freeWhenDone) {
+        free(buffer);
+    }
     return names;
 }
 
