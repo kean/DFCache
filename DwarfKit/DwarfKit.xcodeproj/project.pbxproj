@@ -85,8 +85,6 @@
 		0C37141E17D3FECA00766FD9 /* DFButtonLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713AC17D3FECA00766FD9 /* DFButtonLayout.h */; };
 		0C37141F17D3FECA00766FD9 /* DFButtonLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713AC17D3FECA00766FD9 /* DFButtonLayout.h */; };
 		0C37142017D3FECA00766FD9 /* DFButtonLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713AD17D3FECA00766FD9 /* DFButtonLayout.m */; };
-		0C37142717D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */; };
-		0C37142817D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */; };
 		0C37143A17D3FECA00766FD9 /* DFBenchmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713BC17D3FECA00766FD9 /* DFBenchmark.h */; };
 		0C37143B17D3FECA00766FD9 /* DFBenchmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713BC17D3FECA00766FD9 /* DFBenchmark.h */; };
 		0C37143C17D3FECA00766FD9 /* DFBenchmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713BD17D3FECA00766FD9 /* DFBenchmark.m */; };
@@ -112,7 +110,6 @@
 		0C37145617D3FECA00766FD9 /* DFJPEGTurbo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713CB17D3FECA00766FD9 /* DFJPEGTurbo.m */; };
 		0C37145917D3FECA00766FD9 /* DFTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713CD17D3FECA00766FD9 /* DFTesting.h */; };
 		0C37145A17D3FECA00766FD9 /* DFTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713CD17D3FECA00766FD9 /* DFTesting.h */; };
-		0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */; };
 		0C46819E18280139000C7B6D /* DFImageFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C46819B18280139000C7B6D /* DFImageFetchManager.m */; };
 		0C46819F18280139000C7B6D /* DFImageFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C46819B18280139000C7B6D /* DFImageFetchManager.m */; };
 		0C4681A018280139000C7B6D /* DFImageFetchTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C46819D18280139000C7B6D /* DFImageFetchTask.m */; };
@@ -145,7 +142,6 @@
 		0C7B9B58184935F100014C96 /* DFProcessingCenter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C091D861806B8AA000CCB11 /* DFProcessingCenter.h */; };
 		0C7B9B59184935F300014C96 /* DFProcessingTask.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C091D8E1806B981000CCB11 /* DFProcessingTask.h */; };
 		0C7B9B5A184935F900014C96 /* DFNetworking.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C3713B017D3FECA00766FD9 /* DFNetworking.h */; };
-		0C7B9B5B184935FB00014C96 /* DFNetworkingConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */; };
 		0C7B9B5C184935FD00014C96 /* DFURLFetchTask.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CFCB2821820503600589990 /* DFURLFetchTask.h */; };
 		0C7B9B5D184935FF00014C96 /* DFImageFetchManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46819A18280139000C7B6D /* DFImageFetchManager.h */; };
 		0C7B9B5E1849360100014C96 /* DFImageFetchTask.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46819C18280139000C7B6D /* DFImageFetchTask.h */; };
@@ -233,7 +229,6 @@
 			dstSubfolderSpec = 16;
 			files = (
 				0C7B9B5A184935F900014C96 /* DFNetworking.h in CopyFiles */,
-				0C7B9B5B184935FB00014C96 /* DFNetworkingConstants.h in CopyFiles */,
 				0C7B9B5C184935FD00014C96 /* DFURLFetchTask.h in CopyFiles */,
 				0C7B9B5D184935FF00014C96 /* DFImageFetchManager.h in CopyFiles */,
 				0C7B9B5E1849360100014C96 /* DFImageFetchTask.h in CopyFiles */,
@@ -295,8 +290,6 @@
 		0C37139817D3FECA00766FD9 /* turbojpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turbojpeg.h; sourceTree = "<group>"; };
 		0C37139E17D3FECA00766FD9 /* UIImageView+Dwarf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Dwarf.h"; sourceTree = "<group>"; };
 		0C37139F17D3FECA00766FD9 /* UIImageView+Dwarf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Dwarf.m"; sourceTree = "<group>"; };
-		0C3713A017D3FECA00766FD9 /* UIView+Dwarf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Dwarf.h"; sourceTree = "<group>"; };
-		0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Dwarf.m"; sourceTree = "<group>"; };
 		0C3713A417D3FECA00766FD9 /* DFTask+DFTaskPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFTask+DFTaskPrivate.h"; sourceTree = "<group>"; };
 		0C3713A517D3FECA00766FD9 /* DFTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTask.h; sourceTree = "<group>"; };
 		0C3713A617D3FECA00766FD9 /* DFTask.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = DFTask.m; sourceTree = "<group>"; tabWidth = 4; };
@@ -307,7 +300,6 @@
 		0C3713AC17D3FECA00766FD9 /* DFButtonLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFButtonLayout.h; sourceTree = "<group>"; };
 		0C3713AD17D3FECA00766FD9 /* DFButtonLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFButtonLayout.m; sourceTree = "<group>"; };
 		0C3713B017D3FECA00766FD9 /* DFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNetworking.h; sourceTree = "<group>"; };
-		0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNetworkingConstants.h; sourceTree = "<group>"; };
 		0C3713BC17D3FECA00766FD9 /* DFBenchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFBenchmark.h; sourceTree = "<group>"; };
 		0C3713BD17D3FECA00766FD9 /* DFBenchmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFBenchmark.m; sourceTree = "<group>"; };
 		0C3713BF17D3FECA00766FD9 /* DFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCache.h; sourceTree = "<group>"; };
@@ -588,8 +580,6 @@
 			children = (
 				0C37139E17D3FECA00766FD9 /* UIImageView+Dwarf.h */,
 				0C37139F17D3FECA00766FD9 /* UIImageView+Dwarf.m */,
-				0C3713A017D3FECA00766FD9 /* UIView+Dwarf.h */,
-				0C3713A117D3FECA00766FD9 /* UIView+Dwarf.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -632,7 +622,6 @@
 			isa = PBXGroup;
 			children = (
 				0C3713B017D3FECA00766FD9 /* DFNetworking.h */,
-				0C3713B117D3FECA00766FD9 /* DFNetworkingConstants.h */,
 				0CFCB2821820503600589990 /* DFURLFetchTask.h */,
 				0CFCB2831820503600589990 /* DFURLFetchTask.m */,
 				0C46819A18280139000C7B6D /* DFImageFetchManager.h */,
@@ -907,7 +896,6 @@
 				0C0B115E1847A183009962D0 /* DFStorage.h in Headers */,
 				0C37141517D3FECA00766FD9 /* DFTaskQueue.h in Headers */,
 				0C37141F17D3FECA00766FD9 /* DFButtonLayout.h in Headers */,
-				0C37142817D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */,
 				0C37143B17D3FECA00766FD9 /* DFBenchmark.h in Headers */,
 				0C37144017D3FECA00766FD9 /* DFCache.h in Headers */,
 				0C37144517D3FECA00766FD9 /* DFCrypto.h in Headers */,
@@ -956,7 +944,6 @@
 				0C0B115D1847A183009962D0 /* DFStorage.h in Headers */,
 				0C37141417D3FECA00766FD9 /* DFTaskQueue.h in Headers */,
 				0C37141E17D3FECA00766FD9 /* DFButtonLayout.h in Headers */,
-				0C37142717D3FECA00766FD9 /* DFNetworkingConstants.h in Headers */,
 				0C37143A17D3FECA00766FD9 /* DFBenchmark.h in Headers */,
 				0C37143F17D3FECA00766FD9 /* DFCache.h in Headers */,
 				0C37144417D3FECA00766FD9 /* DFCrypto.h in Headers */,
@@ -1172,7 +1159,6 @@
 				0C4681A018280139000C7B6D /* DFImageFetchTask.m in Sources */,
 				0C37145117D3FECA00766FD9 /* DFImageProcessing.m in Sources */,
 				0C37145617D3FECA00766FD9 /* DFJPEGTurbo.m in Sources */,
-				0C37146817D4007E00766FD9 /* UIView+Dwarf.m in Sources */,
 				0CFCB2841820503600589990 /* DFURLFetchTask.m in Sources */,
 				0CED042217D82C0A00AEE503 /* DFMapper.m in Sources */,
 				0C091D881806B8AA000CCB11 /* DFProcessingCenter.m in Sources */,
