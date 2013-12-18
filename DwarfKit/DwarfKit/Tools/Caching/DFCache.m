@@ -36,6 +36,8 @@
         _processingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_applicationWillResignActive:) name:DFApplicationWillResignActiveNotification object:nil];
+        
+        [self _cleanupDisk];
     }
     return self;
 }
