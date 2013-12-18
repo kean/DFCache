@@ -13,7 +13,6 @@
 #import "DFCache+UIImage.h"
 #import "DFImageFetchManager.h"
 #import "DFImageView.h"
-#import "UIImageView+Dwarf.h"
 
 
 @implementation DFImageView {
@@ -68,6 +67,18 @@
        [[DFImageFetchManager shared] cancelFetchingWithURL:_imageURL handler:_handler];
       _handler = nil;
    }
+}
+
+- (void)setImage:(UIImage *)image animated:(BOOL)animated {
+    self.image = image;
+    if (animated) {
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        animation.keyPath = @"opacity";
+        animation.fromValue = @0.f;
+        animation.toValue = @1.f;
+        animation.duration = 0.1f;
+        [self.layer addAnimation:animation forKey:@"opacity"];
+    }
 }
 
 @end
