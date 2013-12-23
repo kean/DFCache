@@ -97,10 +97,10 @@ _dwarf_benchmark_loop(uint32_t count, void (^block)(void)) {
 
 void
 _dwarf_print_benchmark(uint64_t ns, uint32_t count) {
-    NSLog(@"Benchmark execution: %lld ns, %.2f ms, %.4f sec.", ns, ns / 1e6, ns / 1e9);
-    
-    if (count > 1) {
+    if (count == 1) {
+        NSLog(@"benchmark [%lld ns, %.2f ms, %.4f s]", ns, ns / 1e6, ns / 1e9);
+    } else {
         uint64_t full_time = ns * count;
-        NSLog(@"Benchmark execution (%i iterations): %lld ns, %.2f ms, %.4f sec.", count, full_time, full_time / 1e6, full_time / 1e9);
+        NSLog(@"benchmark [average: %lld ns, %.2f ms, %.4f s] [%i iterations: %lld ns, %.2f ms, %.4f s] ", ns, ns / 1e6, ns / 1e9, count, full_time, full_time / 1e6, full_time / 1e9);
     }
 }

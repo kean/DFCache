@@ -111,7 +111,7 @@ static NSString *_DFQueueDidHandleFinishedTaskNotification = @"_df_queue_did_han
     }
 }
 
-#pragma mark - Task Cancellation
+#pragma mark - Cancellation
 
 - (void)cancelAllTasks {
     for (DFTask *task in _tasks) {

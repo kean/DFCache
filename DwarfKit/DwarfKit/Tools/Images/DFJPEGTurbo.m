@@ -123,6 +123,7 @@ static inline tjscalingfactor DFScalingFactor(int width, int height, CGSize desi
     
     int result = tjDecompressHeader2(decoder, jpegBuf, jpegSize, &width, &height, &jpegSubsamp);
     if (result < 0) {
+        tjDestroy(decoder);
         return nil;
     }
     

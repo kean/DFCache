@@ -17,24 +17,64 @@
 
 @implementation DFImageProcessing
 
-#pragma mark - Image Decoding
+#pragma mark - Scaling
+
++ (UIImage *)imageWithImage:(UIImage *)image aspectFitSize:(CGSize)boundsSize {
+    CGSize pixelSize = DFPixelSizeFromSize(boundsSize);
+    return [self imageWithImage:image aspectFitPixelSize:pixelSize];
+}
+
++ (UIImage *)imageWithImage:(UIImage *)image aspectFillSize:(CGSize)boundsSize {
+    CGSize pixelSize = DFPixelSizeFromSize(boundsSize);
+    return [self imageWithImage:image aspectFillPixelSize:pixelSize];
+}
+
++ (UIImage *)imageWithImage:(UIImage *)image aspectFitPixelSize:(CGSize)boundsSize {
+    CGSize imageSize = DFImageBitmapPixelSize(image);
+    CGFloat scale = DFAspectFitScale(imageSize, boundsSize);
+    if (scale < 1.0) {
+        CGSize scaledSize = DFSizeScaled(imageSize, scale);
+        CGSize pointSize = DFSizeFromPixelSize(scaledSize);
+        return [self imageWithImage:image scaledToSize:pointSize];
+    }
+    return image;
+}
+
++ (UIImage *)imageWithImage:(UIImage *)image aspectFillPixelSize:(CGSize)boundsSize {
+    CGSize imageSize = DFImageBitmapPixelSize(image);
+    CGFloat scale = DFAspectFillScale(imageSize, boundsSize);
+    if (scale < 1.0) {
+        CGSize scaledSize = DFSizeScaled(imageSize, scale);
+        CGSize pointSize = DFSizeFromPixelSize(scaledSize);
+        return [self imageWithImage:image scaledToSize:pointSize];
+    }
+    return image;
+}
+
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)boundsSize {
+    CGSize roundedSize = CGSizeMake(floorf(boundsSize.width), floorf(boundsSize.height));
+    UIGraphicsBeginImageContextWithOptions(roundedSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, roundedSize.width, roundedSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+#pragma mark - Decompression
 
 + (UIImage *)decompressedImageWithData:(NSData *)data orientation:(UIImageOrientation)orientation {
-   if (data == nil) {
+   if (!data) {
       return nil;
    }
-   
    UIImage *image = [DFJPEGTurbo jpegImageWithData:data orientation:orientation];
-   if (image != nil) {
+   if (image) {
       return image;
    }
-   
-   // Fallback (not jpeg)
+   // Fallback to native methods (not jpeg)
    image = [UIImage imageWithData:data];
    if (image) {
       return [UIImage imageWithCGImage:image.CGImage scale:[UIScreen mainScreen].scale orientation:image.imageOrientation];
    }
-   
    return nil;
 }
 

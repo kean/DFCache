@@ -136,7 +136,6 @@
 		0C7B9B57184935EC00014C96 /* DFTask+DFTaskPrivate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C3713A417D3FECA00766FD9 /* DFTask+DFTaskPrivate.h */; };
 		0C7B9B58184935F100014C96 /* DFProcessingCenter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C091D861806B8AA000CCB11 /* DFProcessingCenter.h */; };
 		0C7B9B59184935F300014C96 /* DFProcessingTask.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C091D8E1806B981000CCB11 /* DFProcessingTask.h */; };
-		0C7B9B5A184935F900014C96 /* DFNetworking.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C3713B017D3FECA00766FD9 /* DFNetworking.h */; };
 		0C7B9B5C184935FD00014C96 /* DFURLFetchTask.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CFCB2821820503600589990 /* DFURLFetchTask.h */; };
 		0C7B9B5D184935FF00014C96 /* DFImageFetchManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46819A18280139000C7B6D /* DFImageFetchManager.h */; };
 		0C7B9B5E1849360100014C96 /* DFImageFetchTask.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46819C18280139000C7B6D /* DFImageFetchTask.h */; };
@@ -223,7 +222,6 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				0C7B9B5A184935F900014C96 /* DFNetworking.h in CopyFiles */,
 				0C7B9B5C184935FD00014C96 /* DFURLFetchTask.h in CopyFiles */,
 				0C7B9B5D184935FF00014C96 /* DFImageFetchManager.h in CopyFiles */,
 				0C7B9B5E1849360100014C96 /* DFImageFetchTask.h in CopyFiles */,
@@ -288,7 +286,6 @@
 		0C3713A617D3FECA00766FD9 /* DFTask.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = DFTask.m; sourceTree = "<group>"; tabWidth = 4; };
 		0C3713A717D3FECA00766FD9 /* DFTaskQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTaskQueue.h; sourceTree = "<group>"; };
 		0C3713A817D3FECA00766FD9 /* DFTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFTaskQueue.m; sourceTree = "<group>"; };
-		0C3713B017D3FECA00766FD9 /* DFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNetworking.h; sourceTree = "<group>"; };
 		0C3713BC17D3FECA00766FD9 /* DFBenchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFBenchmark.h; sourceTree = "<group>"; };
 		0C3713BD17D3FECA00766FD9 /* DFBenchmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFBenchmark.m; sourceTree = "<group>"; };
 		0C3713BF17D3FECA00766FD9 /* DFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCache.h; sourceTree = "<group>"; };
@@ -580,7 +577,6 @@
 		0C3713AF17D3FECA00766FD9 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				0C3713B017D3FECA00766FD9 /* DFNetworking.h */,
 				0CFCB2821820503600589990 /* DFURLFetchTask.h */,
 				0CFCB2831820503600589990 /* DFURLFetchTask.m */,
 				0C46819A18280139000C7B6D /* DFImageFetchManager.h */,

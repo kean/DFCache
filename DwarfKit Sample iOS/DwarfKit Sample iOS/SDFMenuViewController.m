@@ -11,6 +11,8 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#import "SDFBenchmarkImageDecompression.h"
+#import "SDFBenchmarkTasks.h"
 #import "SDFImageFetchingStressTestViewController.h"
 #import "SDFImageFetchingTestViewController.h"
 #import "SDFMenuViewController.h"
@@ -19,6 +21,11 @@
 @interface SDFMenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @end
+
+
+static NSString *const _kSectionBenchmark = @"Benchmark";
+static NSString *const _kRunBenchmarkTasks = @"DFTask, DFTaskQueue";
+static NSString *const _kRunBenchmarkImages = @"libjpeg-turbo";
 
 
 @implementation SDFMenuViewController {
@@ -31,17 +38,18 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _sections =
-        @[ @"DFImageFetchManager", /* @"DFText" */ ];
+        @[ @"DFImageFetchManager", _kSectionBenchmark ];
         
         _rows =
         @[ @[ @"Basic Test",
               @"Stress Test" ],
-           /* @[ @"DFLabel Tests"] */ ];
+           @[ _kRunBenchmarkTasks,
+              _kRunBenchmarkImages] ];
         
         _controllers =
         @[ @[ [SDFImageFetchingTestViewController class],
               [SDFImageFetchingStressTestViewController class] ],
-           /* @[ [SDFLabelTestViewController class] ] */
+           @[ [NSNull null] ]
            ];
     }
     return self;
@@ -90,6 +98,25 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *section = _sections[indexPath.section];
+    if ([section isEqualToString:_kSectionBenchmark]) {
+        id<SDFBenchmark> benchmark;
+        NSString *name = _rows[indexPath.section][indexPath.row];
+        if ([name isEqualToString:_kRunBenchmarkTasks]) {
+            benchmark = [SDFBenchmarkTasks new];
+        } else if ([name isEqualToString:_kRunBenchmarkImages]) {
+            benchmark = [SDFBenchmarkImageDecompression new];
+        }
+        [benchmark run];
+        
+        UIAlertView *alert = [UIAlertView new];
+        alert.message = @"Benchmark completed";
+        [alert addButtonWithTitle:@"Ok"];
+        [alert show];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }
+    
     Class controllerClass = _controllers[indexPath.section][indexPath.row];
     UIViewController *controller = [controllerClass new];
     [self.navigationController pushViewController:controller animated:YES];
