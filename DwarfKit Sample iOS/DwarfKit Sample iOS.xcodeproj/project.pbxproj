@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C10F49718560905003DB1F8 /* SDFLabelTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C10F49618560905003DB1F8 /* SDFLabelTestViewController.m */; };
 		0C1E4AF8184933D100FF5C95 /* libDwarfKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1E4AF7184933D100FF5C95 /* libDwarfKit.a */; };
 		0CD0D91F1848C6B8008FF46B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD0D91E1848C6B8008FF46B /* CoreText.framework */; };
 		0CEDE42817D4514200D617F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE42717D4514200D617F7 /* UIKit.framework */; };
@@ -29,8 +28,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C10F49518560905003DB1F8 /* SDFLabelTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFLabelTestViewController.h; sourceTree = "<group>"; };
-		0C10F49618560905003DB1F8 /* SDFLabelTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFLabelTestViewController.m; sourceTree = "<group>"; };
 		0C1E4AF7184933D100FF5C95 /* libDwarfKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDwarfKit.a; path = "../../../../Library/Developer/Xcode/DerivedData/DwarfKit-bikvinmohpczzmdqejjmivggqlpd/Build/Products/Debug-iphoneos/libDwarfKit.a"; sourceTree = "<group>"; };
 		0CD0D91E1848C6B8008FF46B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0CEDE42417D4514200D617F7 /* DwarfKit Sample iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DwarfKit Sample iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,15 +76,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C10F494185608EC003DB1F8 /* Label Test */ = {
-			isa = PBXGroup;
-			children = (
-				0C10F49518560905003DB1F8 /* SDFLabelTestViewController.h */,
-				0C10F49618560905003DB1F8 /* SDFLabelTestViewController.m */,
-			);
-			path = "Label Test";
-			sourceTree = "<group>";
-		};
 		0CEDE41B17D4514200D617F7 = {
 			isa = PBXGroup;
 			children = (
@@ -165,7 +153,6 @@
 			children = (
 				0CEDE46317D4531600D617F7 /* Image Fetching Stress Test */,
 				0CEDE46C17D4531600D617F7 /* Image Fetching Test */,
-				0C10F494185608EC003DB1F8 /* Label Test */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -255,7 +242,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C10F49718560905003DB1F8 /* SDFLabelTestViewController.m in Sources */,
 				0CEDE43417D4514200D617F7 /* main.m in Sources */,
 				0CEDE43817D4514200D617F7 /* SDFAppDelegate.m in Sources */,
 				0CEDE44117D4514200D617F7 /* SDFMenuViewController.m in Sources */,

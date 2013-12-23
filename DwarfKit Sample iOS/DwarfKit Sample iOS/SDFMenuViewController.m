@@ -13,7 +13,6 @@
 
 #import "SDFImageFetchingStressTestViewController.h"
 #import "SDFImageFetchingTestViewController.h"
-#import "SDFLabelTestViewController.h"
 #import "SDFMenuViewController.h"
 
 
