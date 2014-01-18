@@ -13,9 +13,9 @@
 #import <Foundation/Foundation.h>
 
 
-@interface DFSFlickrRecentPhotos : NSObject
+@interface SDFFlickrRecentPhotos : NSObject
 
-@property (nonatomic, strong) NSArray *photos;
+@property (nonatomic) NSArray *photos;
 @property (nonatomic) BOOL isLoaded;
 
 - (void)loadPhotosWithPageCount:(NSUInteger)pageCount completion:(void (^)(void))completion;

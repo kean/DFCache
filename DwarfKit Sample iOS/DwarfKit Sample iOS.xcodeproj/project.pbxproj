@@ -23,8 +23,8 @@
 		0CEDE43C17D4514200D617F7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CEDE43B17D4514200D617F7 /* Default@2x.png */; };
 		0CEDE43E17D4514200D617F7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CEDE43D17D4514200D617F7 /* Default-568h@2x.png */; };
 		0CEDE44117D4514200D617F7 /* SDFMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE44017D4514200D617F7 /* SDFMenuViewController.m */; };
-		0CEDE44F17D4522400D617F7 /* DFSFlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE44C17D4522400D617F7 /* DFSFlickrPhoto.m */; };
-		0CEDE45017D4522400D617F7 /* DFSFlickrRecentPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE44E17D4522400D617F7 /* DFSFlickrRecentPhotos.m */; };
+		0CEDE44F17D4522400D617F7 /* SDFFlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE44C17D4522400D617F7 /* SDFFlickrPhoto.m */; };
+		0CEDE45017D4522400D617F7 /* SDFFlickrRecentPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE44E17D4522400D617F7 /* SDFFlickrRecentPhotos.m */; };
 		0CEDE47117D4531600D617F7 /* SDFImageFetchingStressTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE46917D4531600D617F7 /* SDFImageFetchingStressTestViewController.m */; };
 		0CEDE47217D4531600D617F7 /* SDFImagesStressTestTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE46B17D4531600D617F7 /* SDFImagesStressTestTableCell.m */; };
 		0CEDE47317D4531600D617F7 /* SDFImageFetchingTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEDE46E17D4531600D617F7 /* SDFImageFetchingTestViewController.m */; };
@@ -57,10 +57,10 @@
 		0CEDE43D17D4514200D617F7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0CEDE43F17D4514200D617F7 /* SDFMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDFMenuViewController.h; sourceTree = "<group>"; };
 		0CEDE44017D4514200D617F7 /* SDFMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDFMenuViewController.m; sourceTree = "<group>"; };
-		0CEDE44B17D4522400D617F7 /* DFSFlickrPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFSFlickrPhoto.h; sourceTree = "<group>"; };
-		0CEDE44C17D4522400D617F7 /* DFSFlickrPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFSFlickrPhoto.m; sourceTree = "<group>"; };
-		0CEDE44D17D4522400D617F7 /* DFSFlickrRecentPhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFSFlickrRecentPhotos.h; sourceTree = "<group>"; };
-		0CEDE44E17D4522400D617F7 /* DFSFlickrRecentPhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFSFlickrRecentPhotos.m; sourceTree = "<group>"; };
+		0CEDE44B17D4522400D617F7 /* SDFFlickrPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFFlickrPhoto.h; sourceTree = "<group>"; };
+		0CEDE44C17D4522400D617F7 /* SDFFlickrPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFFlickrPhoto.m; sourceTree = "<group>"; };
+		0CEDE44D17D4522400D617F7 /* SDFFlickrRecentPhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFFlickrRecentPhotos.h; sourceTree = "<group>"; };
+		0CEDE44E17D4522400D617F7 /* SDFFlickrRecentPhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFFlickrRecentPhotos.m; sourceTree = "<group>"; };
 		0CEDE46817D4531600D617F7 /* SDFImageFetchingStressTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFImageFetchingStressTestViewController.h; sourceTree = "<group>"; };
 		0CEDE46917D4531600D617F7 /* SDFImageFetchingStressTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFImageFetchingStressTestViewController.m; sourceTree = "<group>"; };
 		0CEDE46A17D4531600D617F7 /* SDFImagesStressTestTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFImagesStressTestTableCell.h; sourceTree = "<group>"; };
@@ -184,10 +184,10 @@
 		0CEDE44A17D4521500D617F7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0CEDE44B17D4522400D617F7 /* DFSFlickrPhoto.h */,
-				0CEDE44C17D4522400D617F7 /* DFSFlickrPhoto.m */,
-				0CEDE44D17D4522400D617F7 /* DFSFlickrRecentPhotos.h */,
-				0CEDE44E17D4522400D617F7 /* DFSFlickrRecentPhotos.m */,
+				0CEDE44B17D4522400D617F7 /* SDFFlickrPhoto.h */,
+				0CEDE44C17D4522400D617F7 /* SDFFlickrPhoto.m */,
+				0CEDE44D17D4522400D617F7 /* SDFFlickrRecentPhotos.h */,
+				0CEDE44E17D4522400D617F7 /* SDFFlickrRecentPhotos.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -292,8 +292,8 @@
 				0C586D9E18682580000E3A08 /* SDFBenchmarkTasks.m in Sources */,
 				0CEDE44117D4514200D617F7 /* SDFMenuViewController.m in Sources */,
 				0C586DA51868349F000E3A08 /* SDWebImageDecoder.m in Sources */,
-				0CEDE44F17D4522400D617F7 /* DFSFlickrPhoto.m in Sources */,
-				0CEDE45017D4522400D617F7 /* DFSFlickrRecentPhotos.m in Sources */,
+				0CEDE44F17D4522400D617F7 /* SDFFlickrPhoto.m in Sources */,
+				0CEDE45017D4522400D617F7 /* SDFFlickrRecentPhotos.m in Sources */,
 				0CEDE47117D4531600D617F7 /* SDFImageFetchingStressTestViewController.m in Sources */,
 				0CEDE47217D4531600D617F7 /* SDFImagesStressTestTableCell.m in Sources */,
 				0CEDE47317D4531600D617F7 /* SDFImageFetchingTestViewController.m in Sources */,

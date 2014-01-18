@@ -12,8 +12,8 @@
 
 #import "DFImageFetchManager.h"
 #import "DFImageView.h"
-#import "DFSFlickrPhoto.h"
-#import "DFSFlickrRecentPhotos.h"
+#import "SDFFlickrPhoto.h"
+#import "SDFFlickrRecentPhotos.h"
 #import "SDFImageFetchingStressTestViewController.h"
 #import "SDFImagesStressTestTableCell.h"
 
@@ -27,12 +27,12 @@
     UIActivityIndicatorView *_activityIndicatorView;
     UITableView *_tableView;
     CADisplayLink *_displayLink;
-    DFSFlickrRecentPhotos *_recentPhotos;
+    SDFFlickrRecentPhotos *_recentPhotos;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        _recentPhotos = [DFSFlickrRecentPhotos new];
+        _recentPhotos = [SDFFlickrRecentPhotos new];
         self.title = @"Stress Test";
     }
     return self;
@@ -92,7 +92,7 @@
     }
     
     for (NSUInteger i = 0; i < 16; i++) {
-        DFSFlickrPhoto *photo = [self _photoAtRow:indexPath.row offset:i];
+        SDFFlickrPhoto *photo = [self _photoAtRow:indexPath.row offset:i];
         DFImageView *imageView = [cell.imageViews objectAtIndex:i];
         imageView.image = nil;
         [imageView setImageWithURL:photo.photoURLSmall];
@@ -105,7 +105,7 @@
     return 20.f;
 }
 
-- (DFSFlickrPhoto *)_photoAtRow:(NSUInteger)row offset:(NSUInteger)offset {
+- (SDFFlickrPhoto *)_photoAtRow:(NSUInteger)row offset:(NSUInteger)offset {
     NSUInteger index = offset + row * 16;
     return [_recentPhotos.photos objectAtIndex:index];
 }

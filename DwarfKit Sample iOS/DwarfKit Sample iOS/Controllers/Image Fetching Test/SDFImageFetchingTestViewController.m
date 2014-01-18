@@ -11,8 +11,8 @@
  */
 
 #import "SDFImageFetchingTestViewController.h"
-#import "DFSFlickrPhoto.h"
-#import "DFSFlickrRecentPhotos.h"
+#import "SDFFlickrPhoto.h"
+#import "SDFFlickrRecentPhotos.h"
 #import "DFImageView.h"
 #import "DFImageFetchManager.h"
 
@@ -87,7 +87,7 @@ static NSString *_kCellReusableIdentifier = @"reuse_id";
 
 - (void)loadFlickrPhotos {
     [_activityIndicatorView startAnimating];
-    DFSFlickrRecentPhotos *recentPhotos = [DFSFlickrRecentPhotos new];
+    SDFFlickrRecentPhotos *recentPhotos = [SDFFlickrRecentPhotos new];
     [recentPhotos loadPhotosWithPageCount:1 completion:^{
         _photos = recentPhotos.photos;
         [_activityIndicatorView stopAnimating];
@@ -115,7 +115,7 @@ static NSString *_kCellReusableIdentifier = @"reuse_id";
     }
     
     [imageView setImage:nil];
-    DFSFlickrPhoto *photo = _photos[indexPath.row];
+    SDFFlickrPhoto *photo = _photos[indexPath.row];
     [imageView setImageWithURL:photo.photoURL];
     
     return cell;

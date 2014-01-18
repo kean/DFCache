@@ -10,11 +10,11 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFSFlickrRecentPhotos.h"
-#import "DFSFlickrPhoto.h"
+#import "SDFFlickrRecentPhotos.h"
+#import "SDFFlickrPhoto.h"
 
 
-@implementation DFSFlickrRecentPhotos {
+@implementation SDFFlickrRecentPhotos {
     NSMutableArray *_photos;
 }
 
@@ -55,7 +55,7 @@
                 if (!parseError) {
                     NSArray *responsePhotos = [JSON valueForKeyPath:@"photos.photo"];
                     for (id photoJSON in responsePhotos) {
-                        DFSFlickrPhoto *photo = [[DFSFlickrPhoto alloc] initWithJSON:photoJSON];
+                        SDFFlickrPhoto *photo = [[SDFFlickrPhoto alloc] initWithJSON:photoJSON];
                         [photos addObject:photo];
                     }
                     if (completion) {

@@ -12,19 +12,19 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DFSFlickrPhoto : NSObject
+@interface SDFFlickrPhoto : NSObject
 
-@property (nonatomic, strong) NSString *farm;
-@property (nonatomic, strong) NSString *itemid;
-@property (nonatomic, strong) NSString *isfamily;
-@property (nonatomic, strong) NSString *isfriend;
-@property (nonatomic, strong) NSString *ispublic;
-@property (nonatomic, strong) NSString *owner;
-@property (nonatomic, strong) NSString *secret;
-@property (nonatomic, strong) NSString *server;
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *photoURL;
-@property (nonatomic, strong) NSString *photoURLSmall;
+@property (nonatomic) NSString *farm;
+@property (nonatomic) NSString *itemid;
+@property (nonatomic) NSString *isfamily;
+@property (nonatomic) NSString *isfriend;
+@property (nonatomic) NSString *ispublic;
+@property (nonatomic) NSString *owner;
+@property (nonatomic) NSString *secret;
+@property (nonatomic) NSString *server;
+@property (nonatomic) NSString *title;
+@property (nonatomic) NSString *photoURL;
+@property (nonatomic) NSString *photoURLSmall;
 
 - (id)initWithJSON:(NSDictionary *)JSON;
 
