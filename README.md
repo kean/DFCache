@@ -11,7 +11,7 @@ Image fetching with extreme performance.
 Key features:
  - Performance and scalability. Built entirely on top of GCD. `DFImageFetchManager` is able to maintain thousands of image requests/request cancellations per second. Even on older devices.
  - JPEG images are decompressed via `libjpeg-turbo`.
- - Resources with the same URL are never downloaded twice.
+ - Resources with the same URL are never downloaded simultaneously.
 
 DFCache
 -------
@@ -65,14 +65,14 @@ DFMapping
 Simple concept that helps to construct tables and collection views with dynamic cells.
 DFBenchmark
 -----------
-Benchmark your code in terms of nanoseconds. Based on Apple's libdispatch benchmark implementation. Functions declared in mach_time.h are used to measure time (time is measured in processor cicles). Substracts the time benchmark implementation takes (for-loop, etc). Easy to use C API.
+Benchmark your code in terms of nanoseconds. Based on Apple's libdispatch benchmark implementation. Functions declared in mach_time.h are used to measure time (time is measured in processor cycles). Substracts the time benchmark implementation takes (for-loop, etc). Easy to use C API.
 ```c
 uint64_t dwarf_benchmark(BOOL verbose, void (^block)(void));
 uint64_t dwarf_benchmark_loop(uint32_t count, BOOL verbose, void (^block)(void));
 ```
 DFCrypto
 --------
-Convenience functions producing hash values using common digest algorithms. All functions return hash values expressed as NSString representing hexademical number. For example, `dwarf_md5` produces 128-bit hash value and returns NSString with 32 digit hexademical number.
+Convenience functions producing hash values using common digest algorithms. All functions return hash values expressed as NSString representing hexadecimal number. For example, `dwarf_md5` produces 128-bit hash value and returns NSString with 32 digit hexadecimal number.
 ```c
 extern NSString *dwarf_md5(const char *data, uint32_t length);
 extern NSString *dwarf_sha1(const char *data, uint32_t length);
@@ -101,7 +101,7 @@ NSDictionary *JSON = safe_cast(NSDictionary, response);
 ```
 DFReusablePool
 --------------
-Supports object reuse. Helps to avoid unnecessery memory allocations.
+Simplifies objects reuse to avoid unnecessary memory allocations.
 Installation
 ------------
 1. If you are going to use DwarfKit categories: In your project go to Target / Build Settings, search for "Other Linker Flags" and add '-ObjC'.
