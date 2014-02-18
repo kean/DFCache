@@ -13,6 +13,7 @@
 #import "DFImageFetchTask.h"
 #import "DFImageProcessing.h"
 #import "DFCache+UIImage.h"
+#import "DFBenchmark.h"
 
 
 @interface DFImageFetchTask() <NSURLConnectionDataDelegate>

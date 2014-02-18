@@ -11,7 +11,6 @@
  */
 
 #import "DFBenchmark.h"
-#import "dwarf_private.h"
 #import <mach/mach_time.h>
 
 
@@ -33,7 +32,7 @@ static void
 _dwarf_benchmark_env_init() {
     // Get mach timebase info
     mach_timebase_info_data_t timebase_info;
-    DWARF_UNUSED kern_return_t kern = mach_timebase_info(&timebase_info);
+    __attribute__((unused)) kern_return_t kern = mach_timebase_info(&timebase_info);
     NSCAssert(kern == 0, @"_dwarf_benchmark_env_init: mach_timebase_info failed");
     
     _dwarf_benchmark_env env = {

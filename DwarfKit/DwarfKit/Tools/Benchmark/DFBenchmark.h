@@ -12,18 +12,19 @@
 
 #import <Foundation/Foundation.h>
 
-
-/*! Executes block once. Can be used directly in your code while debugging.
+/*! Returns the average number of nanoseconds a given block takes to execute.
+ @param verbose Enables console output if YES.
+ @param block The block to execute.
  */
 extern
 uint64_t
 dwarf_benchmark(BOOL verbose, void (^block)(void));
 
-/*! Returns number of nanoseconds code wrapped in block takes to execute.
- @param count Number of iterations to run.
- @param verbose Prints benchmark results if YES.
- @param block Actual work wrapped inside the block.
- @discussion Uses mach_time.h functions to calculate the most accurate result (time is measured in processor cicles). Substracts the time for-loop loop and time wrapper-block execution takes (benchmark implementation).
+/*! Returns the average number of nanoseconds a given block takes to execute.
+ @param count The number of times to execute the given block.
+ @param verbose Enables console output if YES.
+ @param block The block to execute.
+ @discussion Uses mach_time.h functions to get the most accurate result (time is measured in terms of processor cycles). Substracts the time that for-loop execution takes.
  */
 extern
 uint64_t
