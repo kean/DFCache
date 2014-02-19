@@ -9,36 +9,30 @@
  
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+#import "NSTimer+Blocks.h"
+#import <objc/runtime.h>
 
-#import "DFImageFetchTask.h"
-#import "DFImageProcessing.h"
-#import "DFCache+UIImage.h"
-#import "DFBenchmark.h"
+@implementation NSTimer (Blocks)
 
+static char _blockToken;
 
-@interface DFImageFetchTask() <NSURLConnectionDataDelegate>
-
-@end
-
-
-@implementation DFImageFetchTask
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @autoreleasepool {
-            _image = [DFImageProcessing decompressedImageWithData:self.data];
-            if (_image) {
-                [self handleConnection:connection successWithImage:_image];
-            } else {
-                [self finish];
-            }
-        }
-    });
++ (id)scheduledTimerWithTimeInterval:(NSTimeInterval)timeInterval block:(void (^)())block userInfo:(id)userInfo repeats:(BOOL)repeats {
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:timeInterval target:self selector:@selector(_timerDidFire:) userInfo:userInfo repeats:repeats];
+    objc_setAssociatedObject(timer, &_blockToken, block, OBJC_ASSOCIATION_COPY);
+    return timer;
 }
 
-- (void)handleConnection:(NSURLConnection *)connection successWithImage:(UIImage *)image {
-    [[DFCache imageCache] storeImage:_image imageData:self.data forKey:self.URL];
-    [self finish];
++ (id)timerWithTimeInterval:(NSTimeInterval)timeInterval block:(void (^)())block userInfo:(id)userInfo repeats:(BOOL)repeats {
+    NSTimer *timer = [NSTimer timerWithTimeInterval:timeInterval target:self selector:@selector(_timerDidFire:) userInfo:userInfo repeats:repeats];
+    objc_setAssociatedObject(timer, &_blockToken, block, OBJC_ASSOCIATION_COPY);
+    return timer;
+}
+
++ (void)_timerDidFire:(NSTimer *)timer {
+    void (^block)() = objc_getAssociatedObject(timer, &_blockToken);
+    if (block) {
+        block();
+    }
 }
 
 @end

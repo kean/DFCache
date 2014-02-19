@@ -10,58 +10,9 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFStream.h"
+@interface NSTimer (Blocks)
 
-@implementation DFStream {
-    BOOL _isPolling;
-    BOOL _isEnded;
-}
-
-- (BOOL)poll {
-    if ([self isPolling] || [self isEnded]) {
-        return NO;
-    }
-    _isPolling = YES;
-    [_dataProvider poll:self];
-    [_delegate streamDidStartPolling:self];
-    return YES;
-}
-
-- (BOOL)isPolling {
-    return _isPolling;
-}
-
-- (BOOL)isEnded {
-    return _isEnded;
-}
-
-- (void)cancel {
-    _isPolling = NO;
-    [_dataProvider cancel:self];
-    [_delegate streamDidCancel:self];
-}
-
-- (void)reset {
-    _isEnded = NO;
-    [self cancel];
-}
-
-- (void)processPolledData:(id)data isEnd:(BOOL)isEnd userInfo:(id)userInfo {
-    _isPolling = NO;
-    _isEnded = isEnd;
-    [_delegate stream:self didRecieveData:data userInfo:userInfo];
-    if (isEnd) {
-        [_delegate streamDidEnd:self];
-    }
-}
-
-- (void)processPollError:(NSError *)error isEnd:(BOOL)isEnd userInfo:(id)userInfo {
-    _isPolling = NO;
-    _isEnded = isEnd;
-    [_delegate stream:self didFailWithError:error userInfo:userInfo];
-    if (isEnd) {
-        [_delegate streamDidEnd:self];
-    }
-}
++ (id)scheduledTimerWithTimeInterval:(NSTimeInterval)timeInterval block:(void (^)())block userInfo:(id)userInfo repeats:(BOOL)repeats;
++ (id)timerWithTimeInterval:(NSTimeInterval)timeInterval block:(void (^)())block userInfo:(id)userInfo repeats:(BOOL)repeats;
 
 @end

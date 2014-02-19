@@ -10,11 +10,27 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/*! Provides a way to match the cell class with the entity. DFMapper provides default <DFMapping> implementation based on class-class scheme.
- */
+#import <XCTest/XCTest.h>
+#import "DFURLRequestConstruction.h"
 
-@protocol DFMapping <NSObject>
 
-- (Class)cellClassForItem:(id)item atIndexPath:(NSIndexPath *)indexPath;
+@interface TDFURLRequestConstruction : XCTestCase
+
+@end
+
+@implementation TDFURLRequestConstruction
+
+- (void)testPercentEscapingRFC3986ReservedCharacters {
+    NSString *characters = @"!*'();:@&=+$,/?#[]";
+    XCTAssert([@"%21%2A%27%28%29%3B%3A%40%26%3D%2B%24%2C%2F%3F%23%5B%5D" isEqualToString:DFURLPercentEscapedString(characters)]);
+}
+
+- (void)testConstructingQueryStringWithoutNonLegalCharacters {
+    NSDictionary *parameters = @{ @"key1" : @"value1",
+                                  @"key2" : @(1) };
+    NSString *query = DFURLQueryStringFromParameters(parameters, kNilOptions);
+    XCTAssertTrue([query isEqualToString:@"key1=value1&key2=1"] ||
+                  [query isEqualToString:@"key2=1&key1=value1"]);
+}
 
 @end

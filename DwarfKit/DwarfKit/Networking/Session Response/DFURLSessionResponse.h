@@ -10,17 +10,31 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFMapping.h"
+@interface DFURLSessionResponse : NSObject
 
-/*! <DFMapping> implementation based on simple class-class scheme.
- */
-NS_CLASS_AVAILABLE(10_7, 2_0)
-@interface DFMapper : NSObject <DFMapping>
+@property (nonatomic, readonly) id object;
+@property (nonatomic, readonly) NSURLResponse *response;
+@property (nonatomic, readonly) NSData *data;
+@property (nonatomic, readonly) NSDictionary *userInfo;
 
-/*! Initializes mapper with mapping scheme.
- @param scheme
- @(cell class) : @(item class) scheme.
- */
-- (id)initWithScheme:(NSDictionary *)scheme;
+- (id)initWithObject:(id)object response:(NSURLResponse *)response data:(NSData *)data userInfo:(NSDictionary *)userInfo;
+- (id)initWithObject:(id)object response:(NSURLResponse *)response data:(NSData *)data;
+
+@end
+
+
+@interface DFURLSessionResponse (HTTP)
+
+@property (nonatomic, readonly) NSHTTPURLResponse *HTTPResponse;
+
+@end
+
+
+@interface DFURLSessionResponse (DataRepresentation)
+
+- (NSStringEncoding)textEncoding;
+- (NSString *)stringRepresentation;
+- (NSString *)JSONRepresentation;
+- (NSString *)JSONRepresentationWithError:(NSError *__autoreleasing *)error;
 
 @end

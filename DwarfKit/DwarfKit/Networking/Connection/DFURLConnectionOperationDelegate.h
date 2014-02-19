@@ -10,45 +10,18 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-@class DFStream;
+@class DFURLConnectionOperation;
 
+typedef struct {
+    unsigned long long bytes;
+    unsigned long long totalBytes;
+    unsigned long long totalExpectedBytes;
+} DFURLProgress;
 
-@protocol DFStream <NSObject>
+@protocol DFURLConnectionOperationDelegate <NSObject>
 
-- (BOOL)poll;
-- (void)cancel;
-- (void)reset;
-- (BOOL)isEnded;
-- (BOOL)isPolling;
-
-@end
-
-
-@protocol DFStreamDelegate <NSObject>
-
-- (void)streamDidStartPolling:(id<DFStream>)stream;
-- (void)stream:(id<DFStream>)stream didRecieveData:(id)data userInfo:(id)userInfo;
-- (void)stream:(id<DFStream>)stream didFailWithError:(NSError *)error userInfo:(id)userInfo;
-- (void)streamDidCancel:(id<DFStream>)stream;
-- (void)streamDidEnd:(id<DFStream>)stream;
-
-@end
-
-
-@protocol DFStreamDataProvider <NSObject>
-
-- (void)poll:(DFStream *)stream;
-- (void)cancel:(DFStream *)stream;
-
-@end
-
-
-@interface DFStream : NSObject <DFStream>
-
-@property (nonatomic, weak) id<DFStreamDelegate> delegate;
-@property (nonatomic, weak) id<DFStreamDataProvider> dataProvider;
-
-- (void)processPolledData:(id)data isEnd:(BOOL)isEnd userInfo:(id)userInfo;
-- (void)processPollError:(NSError *)error isEnd:(BOOL)isEnd userInfo:(id)userInfo;
+- (void)connectionOperationDidFinish:(DFURLConnectionOperation *)operation;
+- (void)connectionOperation:(DFURLConnectionOperation *)operation didFailWithError:(NSError *)error;
+- (void)connectionOperation:(DFURLConnectionOperation *)operation didUpdateProgress:(DFURLProgress)progress;
 
 @end

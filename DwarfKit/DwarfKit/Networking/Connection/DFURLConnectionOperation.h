@@ -10,27 +10,33 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFMapper.h"
+#import "DFURLConnectionOperationDelegate.h"
+#import "DFURLSessionRequest.h"
 
-@implementation DFMapper {
-    NSDictionary *_scheme;
-}
 
-- (id)initWithScheme:(NSDictionary *)scheme {
-    if (self = [super init]) {
-        _scheme = scheme;
-    }
-    return self;
-}
+extern NSString *const DFURLConnectionDidStartNotification;
+extern NSString *const DFURLConnectionDidStopNotification;
 
-- (Class)cellClassForItem:(id)item atIndexPath:(NSIndexPath *)indexPath {
-    NSAssert(item, @"%@ failure: entity must not be nil", NSStringFromSelector(_cmd));
-    NSString *entityClassString = NSStringFromClass([item class]);
-    NSString *cellClassString = _scheme[entityClassString];
-    NSAssert(cellClassString, @"%@ failure: failed to resolve cell class for %@ entity", NSStringFromSelector(_cmd), entityClassString);
-    Class cellClass = NSClassFromString(cellClassString);
-    NSAssert(cellClass, @"%@ failure: no loaded class with name %@", NSStringFromSelector(_cmd), cellClassString);
-    return cellClass;
-}
+
+@interface DFURLConnectionOperation : NSOperation <NSURLConnectionDataDelegate, NSLocking>
+
+@property (nonatomic, weak) id<DFURLConnectionOperationDelegate> delegate;
+@property (nonatomic, readonly) id<DFURLSessionRequest> request;
+@property (nonatomic, readonly) NSURLResponse *response;
+@property (nonatomic, readonly) NSURLConnection *connection;
+@property (nonatomic, readonly) NSData *responseData;
+@property (nonatomic, readonly) NSError *error;
+@property (nonatomic) BOOL cachingEnabled;
+@property (nonatomic) NSSet *runLoopModes;
+
+- (id)initWithSessionRequest:(id<DFURLSessionRequest>)request;
+- (id)initWithRequest:(NSURLRequest *)request;
+
+@end
+
+
+@interface DFURLConnectionOperation (HTTP)
+
+@property (nonatomic, readonly) NSHTTPURLResponse *HTTPResponse;
 
 @end

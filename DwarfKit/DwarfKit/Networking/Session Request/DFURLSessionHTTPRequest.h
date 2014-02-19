@@ -1,6 +1,3 @@
-//
-//  DFPagerChain.m
-//  DwarfKit
 /*
  The MIT License (MIT)
  
@@ -13,64 +10,17 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFStreamChain.h"
+#import "DFURLSessionRequest.h"
+#import "DFURLRequestConstructor.h"
 
 
-@implementation DFStreamChain {
-    NSMutableArray *_streams;
-}
+@interface DFURLSessionHTTPRequest : NSObject <DFURLSessionRequest>
 
-- (id)init {
-    if (self = [super init]) {
-        _streams = [NSMutableArray new];
-    }
-    return self;
-}
+@property (nonatomic) DFURLHTTPRequestConstructor *constructor;
 
-- (id)initWithStream:(id<DFStream>)stream {
-    if (self = [super init]) {
-        [_streams addObject:stream];
-    }
-    return self;
-}
-
-- (void)addStream:(id<DFStream>)stream {
-    [_streams addObject:stream];
-}
-
-- (BOOL)isEnded {
-    for (id<DFStream> stream in _streams) {
-        if (![stream isEnded]) {
-            return NO;
-        }
-    }
-    return YES;
-}
-
-- (BOOL)isPolling {
-    for (id<DFStream> stream in _streams) {
-        if ([stream isPolling]) {
-            return YES;
-        }
-    }
-    return NO;
-}
-
-- (BOOL)poll {
-    for (id<DFStream> stream in _streams) {
-        if ([stream poll]) {
-            return YES;
-        }
-    }
-    return NO;
-}
-
-- (void)reset {
-    [_streams makeObjectsPerformSelector:@selector(reset)];
-}
-
-- (void)cancel {
-    [_streams makeObjectsPerformSelector:@selector(cancel)];
-}
+- (id)initWithRequest:(NSURLRequest *)request;
+- (id)initWithRequest:(NSURLRequest *)request parameters:(id)parameters;
+- (id)initWithHTTPMethod:(NSString *)method baseURL:(NSString *)baseURL path:(NSString *)path parameters:(id)parameters;
+- (id)initWithHTTPMethod:(NSString *)method path:(NSString *)path parameters:(id)parameters;
 
 @end

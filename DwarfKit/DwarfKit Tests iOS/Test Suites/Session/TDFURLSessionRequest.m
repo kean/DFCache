@@ -10,26 +10,23 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "SDFAppDelegate.h"
-#import "SDFMenuViewController.h"
-#import "DFURLNetworkActivityIndicatorManager.h"
+#import <XCTest/XCTest.h>
+#import "DFURLSessionHTTPRequest.h"
 
+@interface TDFURLSessionRequest : XCTestCase
 
-@implementation SDFAppDelegate
+@end
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+@implementation TDFURLSessionRequest
+
+- (void)testQueryString {
+    NSString *URL = @"http://example.com/path";
+    NSDictionary *parameters = @{ @"method" : @"user.info" };
+    DFURLSessionHTTPRequest *request = [[DFURLSessionHTTPRequest alloc] initWithHTTPMethod:@"GET" path:URL parameters:parameters];
     
-    SDFMenuViewController *menuViewController = [SDFMenuViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
-    navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    self.window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-    
-    [[DFURLNetworkActivityIndicatorManager shared] setEnabled:YES];
-    
-    return YES;
+    request.serializer = [DFURLHTTPRequestSerializer serializer];
+    NSURLRequest *r = [request currentRequest];
+    XCTAssert([[[r URL] absoluteString] isEqualToString:@"http://example.com/path?method=user.info"]);
 }
 
 @end

@@ -10,26 +10,14 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "SDFAppDelegate.h"
-#import "SDFMenuViewController.h"
-#import "DFURLNetworkActivityIndicatorManager.h"
+#import "DFURLResponseDeserializing.h"
+
+typedef BOOL (^DFURLResponseValidationBlock)(NSURLResponse *response, DFURLSessionTask *task, NSError *__autoreleasing *error);
+typedef id (^DFURLResponseDeserializingBlock)(NSURLResponse *response, NSData *data, DFURLSessionTask *task, NSError *__autoreleasing *error);
 
 
-@implementation SDFAppDelegate
+@interface DFURLResponseDeserializer : NSObject <DFURLResponseDeserializing>
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    SDFMenuViewController *menuViewController = [SDFMenuViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
-    navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    self.window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-    
-    [[DFURLNetworkActivityIndicatorManager shared] setEnabled:YES];
-    
-    return YES;
-}
+- (id)initWithValidation:(DFURLResponseValidationBlock)validation deserialization:(DFURLResponseDeserializingBlock)deserialization;
 
 @end

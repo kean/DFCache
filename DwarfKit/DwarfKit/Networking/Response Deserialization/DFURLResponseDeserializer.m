@@ -10,21 +10,35 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFTask.h"
+#import "DFImageProcessing.h"
+#import "DFURLResponseDeserializer.h"
+#import "DFURLSessionTask.h"
 
+@implementation DFURLResponseDeserializer {
+   DFURLResponseValidationBlock _validation;
+   DFURLResponseDeserializingBlock _deserialization;
+}
 
-@interface DFURLFetchTask : DFTask <NSURLConnectionDataDelegate>
+- (id)initWithValidation:(DFURLResponseValidationBlock)validation deserialization:(DFURLResponseDeserializingBlock)deserialization {
+   if (self = [super init]) {
+      _validation = [validation copy];
+      _deserialization = [deserialization copy];
+   }
+   return self;
+}
 
-@property (nonatomic, readonly) NSString *URL;
-@property (nonatomic) NSString *runLoopMode;
-@property (nonatomic, readonly) NSURLConnection *connection;
-@property (nonatomic, readonly) NSURLResponse *response;
-@property (nonatomic, readonly) NSData *data;
-@property (nonatomic, readonly) NSError *error;
+- (BOOL)isValidResponse:(NSURLResponse *)response task:(DFURLSessionTask *)task error:(NSError *__autoreleasing *)error {
+   if (_validation) {
+      return _validation(response, task, error);
+   }
+   return YES;
+}
 
-- (id)initWithURL:(NSString *)URL;
-
-- (NSMutableURLRequest *)requestWithURL:(NSString *)URL;
-- (void)startConnection:(NSURLConnection *)connection;
+- (id)objectFromResponse:(NSURLResponse *)response data:(NSData *)data task:(DFURLSessionTask *)task error:(NSError *__autoreleasing *)error {
+   if (_deserialization) {
+      return _deserialization(response, data, task, error);
+   }
+   return nil;
+}
 
 @end

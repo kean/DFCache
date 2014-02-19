@@ -10,26 +10,31 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "SDFAppDelegate.h"
-#import "SDFMenuViewController.h"
-#import "DFURLNetworkActivityIndicatorManager.h"
+#import <XCTest/XCTest.h>
+#import "DFURLDelay.h"
+#import "DFURLSessionTaskConfiguration.h"
 
+@interface TDFURLDelay : XCTestCase
 
-@implementation SDFAppDelegate
+@end
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+@implementation TDFURLDelay
+
+- (void)testDefaultDelay {
+    DFURLDelayConfiguration *conf = [DFURLDelayConfiguration new];
+    XCTAssertTrue(conf.initialDelay == 2.f);
+    XCTAssertTrue(conf.maximumDelay == 256.f);
+    XCTAssertTrue(conf.delayIncreaseRate == 2.f);
+    XCTAssertTrue(conf.delayIncrement != nil);
     
-    SDFMenuViewController *menuViewController = [SDFMenuViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
-    navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    self.window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-    
-    [[DFURLNetworkActivityIndicatorManager shared] setEnabled:YES];
-    
-    return YES;
+    DFURLDelay *delay = [[DFURLDelay alloc] initWithConfiguration:conf];
+    XCTAssertTrue(delay.currentDelay == conf.initialDelay);
+    for (NSUInteger i = 1; i < 8; i++) {
+        XCTAssertTrue(delay.currentDelay == 2.f * powf(conf.delayIncreaseRate, i));
+    }
+    for (NSUInteger i = 1; i < 8; i++) {
+        XCTAssertTrue(delay.currentDelay == conf.maximumDelay);
+    }
 }
 
 @end

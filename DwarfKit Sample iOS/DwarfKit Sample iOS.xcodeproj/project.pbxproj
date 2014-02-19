@@ -12,6 +12,7 @@
 		0C586DA118683419000E3A08 /* SDFBenchmarkImageDecompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C586DA018683419000E3A08 /* SDFBenchmarkImageDecompression.m */; };
 		0C586DA51868349F000E3A08 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C586DA41868349F000E3A08 /* SDWebImageDecoder.m */; };
 		0C586DA81868365D000E3A08 /* sample-01.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C586DA71868365D000E3A08 /* sample-01.jpeg */; };
+		0CA8E05018993374002D0A8A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA8E04F18993374002D0A8A /* SystemConfiguration.framework */; };
 		0CD0D91F1848C6B8008FF46B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD0D91E1848C6B8008FF46B /* CoreText.framework */; };
 		0CEDE42817D4514200D617F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE42717D4514200D617F7 /* UIKit.framework */; };
 		0CEDE42A17D4514200D617F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE42917D4514200D617F7 /* Foundation.framework */; };
@@ -41,6 +42,7 @@
 		0C586DA31868349F000E3A08 /* SDWebImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDecoder.h; sourceTree = "<group>"; };
 		0C586DA41868349F000E3A08 /* SDWebImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDecoder.m; sourceTree = "<group>"; };
 		0C586DA71868365D000E3A08 /* sample-01.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sample-01.jpeg"; sourceTree = "<group>"; };
+		0CA8E04F18993374002D0A8A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0CD0D91E1848C6B8008FF46B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0CEDE42417D4514200D617F7 /* DwarfKit Sample iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DwarfKit Sample iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CEDE42717D4514200D617F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -76,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CA8E05018993374002D0A8A /* SystemConfiguration.framework in Frameworks */,
 				0CD0D91F1848C6B8008FF46B /* CoreText.framework in Frameworks */,
 				0C1E4AF8184933D100FF5C95 /* libDwarfKit.a in Frameworks */,
 				0CEDE47517D4570D00D617F7 /* QuartzCore.framework in Frameworks */,
@@ -140,6 +143,7 @@
 		0CEDE42617D4514200D617F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0CA8E04F18993374002D0A8A /* SystemConfiguration.framework */,
 				0C1E4AF7184933D100FF5C95 /* libDwarfKit.a */,
 				0CD0D91E1848C6B8008FF46B /* CoreText.framework */,
 				0CEDE47A17D4575200D617F7 /* libDwarfKit.a */,

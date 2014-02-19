@@ -10,12 +10,34 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFStream.h"
+typedef NS_OPTIONS(NSUInteger, DFURLQueryConstructionOptions) {
+   DFURLQueryConstructionSortedKeys = 1 << 0,
+};
+
+extern NSString *DFURLQueryStringFromParameters(NSDictionary *parameters, DFURLQueryConstructionOptions options);
+
+extern NSString *DFURLPercentEscapedString(NSString *string);
+
+static NSString *kDFURLReservedCharacters_RFC3986 = @"!*'();:@&=+$,/?#[]";
+
+extern NSString *DFURLJSONStringFromObject(id object);
 
 
-@interface DFStreamChain : NSObject <DFStream>
+@protocol DFURLRequestConstructing <NSObject>
 
-- (id)initWithStream:(id<DFStream>)stream;
-- (void)addStream:(id<DFStream>)stream;
+- (NSURLRequest *)requestWithRequest:(NSURLRequest *)request parameters:(NSDictionary *)parameters error:(NSError *__autoreleasing *)error;
+
+@end
+
+
+@interface DFURLHTTPRequestConstructor : NSObject <DFURLRequestConstructing, NSCopying>
+
+@property (nonatomic) NSMutableDictionary *HTTPHeaders;
+
+/*! By default "GET", "HEAD", "DELETE" will put parameters into URL query string. Other HTTP methods will put paremeters into HTTP body.
+ */
+@property (nonatomic) NSMutableSet *HTTPMethodsEncodingParametersInURI;
+
+@property (nonatomic) DFURLQueryConstructionOptions queryOptions;
 
 @end

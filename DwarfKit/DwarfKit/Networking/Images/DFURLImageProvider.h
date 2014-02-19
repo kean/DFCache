@@ -10,26 +10,20 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "SDFAppDelegate.h"
-#import "SDFMenuViewController.h"
-#import "DFURLNetworkActivityIndicatorManager.h"
+#import "DFURLSession.h"
+#import "DFCache.h"
 
+@interface DFURLImageProvider : NSObject
 
-@implementation SDFAppDelegate
+@property (nonatomic, readonly) DFURLSession *session;
+@property (nonatomic, readonly) DFCache *cache;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    SDFMenuViewController *menuViewController = [SDFMenuViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
-    navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    self.window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-    
-    [[DFURLNetworkActivityIndicatorManager shared] setEnabled:YES];
-    
-    return YES;
-}
++ (instancetype)shared;
+
+- (UIImage *)memoryCachedImageWithURL:(NSString *)URL;
+- (void)cachedImageWithURL:(NSString *)URL completion:(void (^)(UIImage *image))completion;
+- (void)imageWithURL:(NSString *)URL handler:(id)handler completion:(void (^)(UIImage *image, NSError *error, DFURLSessionTask *task))completion;
+- (void)cancelImageRequestWithURL:(NSString *)URL handler:(id)handler;
+
 
 @end

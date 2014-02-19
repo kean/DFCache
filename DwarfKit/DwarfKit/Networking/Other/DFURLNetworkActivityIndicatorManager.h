@@ -10,26 +10,13 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "SDFAppDelegate.h"
-#import "SDFMenuViewController.h"
-#import "DFURLNetworkActivityIndicatorManager.h"
+/*! Manages UIApplication network activity indicator. You should enable the shared instance of `DFURLNetworkActivityIndicatorManager` when your application finishes launching.
+ */
+@interface DFURLNetworkActivityIndicatorManager : NSObject
 
++ (instancetype)shared;
 
-@implementation SDFAppDelegate
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    SDFMenuViewController *menuViewController = [SDFMenuViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
-    navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    self.window.rootViewController = navigationController;
-    
-    [self.window makeKeyAndVisible];
-    
-    [[DFURLNetworkActivityIndicatorManager shared] setEnabled:YES];
-    
-    return YES;
-}
+@property (nonatomic, getter = isEnabled) BOOL enabled;
+@property (nonatomic, readonly) BOOL isIndicatorVisible;
 
 @end
