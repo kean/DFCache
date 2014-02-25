@@ -29,7 +29,7 @@
 - (id)init {
     if (self = [super init]) {
         DFURLSessionTaskConfiguration *conf = [DFURLSessionTaskConfiguration new];
-        conf.deserializer = [[DFURLResponseDeserializer alloc] initWithValidation:nil deserialization:^id(NSURLResponse *response, NSData *data, DFURLSessionTask *task, NSError *__autoreleasing *error) {
+        conf.deserializer = [[DFURLResponseDeserializer alloc] initWithValidation:nil deserialization:^id(NSURLResponse *response, NSData *data, NSError *__autoreleasing *error) {
             return [DFImageProcessing decompressedImageWithData:data];
         }];
         conf.cancelsWhenZeroHandlers = YES;

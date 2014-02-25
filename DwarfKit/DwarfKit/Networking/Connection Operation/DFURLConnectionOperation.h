@@ -11,7 +11,9 @@
  */
 
 #import "DFURLConnectionOperationDelegate.h"
+#import "DFURLResponseDeserializing.h"
 #import "DFURLSessionRequest.h"
+#import "DFURLSessionResponse.h"
 
 
 extern NSString *const DFURLConnectionDidStartNotification;
@@ -21,13 +23,13 @@ extern NSString *const DFURLConnectionDidStopNotification;
 @interface DFURLConnectionOperation : NSOperation <NSURLConnectionDataDelegate, NSLocking>
 
 @property (nonatomic, weak) id<DFURLConnectionOperationDelegate> delegate;
-@property (nonatomic, readonly) id<DFURLSessionRequest> request;
-@property (nonatomic, readonly) NSURLResponse *response;
-@property (nonatomic, readonly) NSURLConnection *connection;
-@property (nonatomic, readonly) NSData *responseData;
-@property (nonatomic, readonly) NSError *error;
+@property (nonatomic) id<DFURLResponseDeserializing> deserializer;
 @property (nonatomic) BOOL cachingEnabled;
 @property (nonatomic) NSSet *runLoopModes;
+
+@property (nonatomic, readonly) id<DFURLSessionRequest> request;
+@property (nonatomic, readonly) DFURLSessionResponse *response;
+@property (nonatomic, readonly) NSError *error;
 
 - (id)initWithSessionRequest:(id<DFURLSessionRequest>)request;
 - (id)initWithRequest:(NSURLRequest *)request;

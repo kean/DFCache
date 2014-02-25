@@ -182,32 +182,13 @@ NSString *const DFURLSessionTaskDidFailAttemptNotification = @"DFURLSessionTaskD
         self.state = DFURLSessionTaskStateFailed;
         return;
     }
+    _connectionOperation.deserializer = _conf.deserializer;
     _connectionOperation.cachingEnabled = _conf.cachingEnabled;
     _connectionOperation.delegate = self;
 }
 
 - (void)connectionOperationDidFinish:(DFURLConnectionOperation *)operation {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @autoreleasepool {
-            [self _connectionOperationDidFinish:operation];
-        }
-    });
-}
-
-- (void)_connectionOperationDidFinish:(DFURLConnectionOperation *)operation {
-    NSError *error;
-    if (![_conf.deserializer isValidResponse:operation.response task:self error:&error]) {
-        _error = error;
-        [self _fail];
-        return;
-    }
-    id object = [_conf.deserializer objectFromResponse:operation.response data:operation.responseData task:self error:&error];
-    _error = error;
-    if (!object) {
-        [self _fail];
-        return;
-    }
-    _response = [[DFURLSessionResponse alloc] initWithObject:object response:operation.response data:operation.responseData];
+    _response = operation.response;
     self.state = DFURLSessionTaskStateSucceed;
 }
 

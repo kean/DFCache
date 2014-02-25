@@ -12,6 +12,7 @@
 
 #import <XCTest/XCTest.h>
 #import "DFURLSessionHTTPRequest.h"
+#import "DFURLRequestConstructor.h"
 
 @interface TDFURLSessionRequest : XCTestCase
 
@@ -23,8 +24,7 @@
     NSString *URL = @"http://example.com/path";
     NSDictionary *parameters = @{ @"method" : @"user.info" };
     DFURLSessionHTTPRequest *request = [[DFURLSessionHTTPRequest alloc] initWithHTTPMethod:@"GET" path:URL parameters:parameters];
-    
-    request.serializer = [DFURLHTTPRequestSerializer serializer];
+    request.constructor = [DFURLHTTPRequestConstructor new];
     NSURLRequest *r = [request currentRequest];
     XCTAssert([[[r URL] absoluteString] isEqualToString:@"http://example.com/path?method=user.info"]);
 }

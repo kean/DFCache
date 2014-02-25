@@ -27,16 +27,16 @@
    return self;
 }
 
-- (BOOL)isValidResponse:(NSURLResponse *)response task:(DFURLSessionTask *)task error:(NSError *__autoreleasing *)error {
+- (BOOL)isValidResponse:(NSURLResponse *)response error:(NSError *__autoreleasing *)error {
    if (_validation) {
-      return _validation(response, task, error);
+      return _validation(response,error);
    }
    return YES;
 }
 
-- (id)objectFromResponse:(NSURLResponse *)response data:(NSData *)data task:(DFURLSessionTask *)task error:(NSError *__autoreleasing *)error {
+- (id)objectFromResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *__autoreleasing *)error {
    if (_deserialization) {
-      return _deserialization(response, data, task, error);
+      return _deserialization(response, data, error);
    }
    return nil;
 }

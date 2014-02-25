@@ -11,7 +11,7 @@
  */
 
 #import <XCTest/XCTest.h>
-#import "DFURLRequestConstruction.h"
+#import "DFURLRequestConstructor.h"
 
 
 @interface TDFURLRequestConstruction : XCTestCase

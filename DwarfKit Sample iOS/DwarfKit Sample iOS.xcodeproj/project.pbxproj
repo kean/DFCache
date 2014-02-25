@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0C1E4AF8184933D100FF5C95 /* libDwarfKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C1E4AF7184933D100FF5C95 /* libDwarfKit.a */; };
-		0C586D9E18682580000E3A08 /* SDFBenchmarkTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C586D9D18682580000E3A08 /* SDFBenchmarkTasks.m */; };
 		0C586DA118683419000E3A08 /* SDFBenchmarkImageDecompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C586DA018683419000E3A08 /* SDFBenchmarkImageDecompression.m */; };
 		0C586DA51868349F000E3A08 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C586DA41868349F000E3A08 /* SDWebImageDecoder.m */; };
 		0C586DA81868365D000E3A08 /* sample-01.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0C586DA71868365D000E3A08 /* sample-01.jpeg */; };
@@ -35,8 +34,6 @@
 /* Begin PBXFileReference section */
 		0C1E4AF7184933D100FF5C95 /* libDwarfKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDwarfKit.a; path = "../../../../Library/Developer/Xcode/DerivedData/DwarfKit-bikvinmohpczzmdqejjmivggqlpd/Build/Products/Debug-iphoneos/libDwarfKit.a"; sourceTree = "<group>"; };
 		0C586D9918682405000E3A08 /* SDFBenchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFBenchmark.h; sourceTree = "<group>"; };
-		0C586D9C18682580000E3A08 /* SDFBenchmarkTasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFBenchmarkTasks.h; sourceTree = "<group>"; };
-		0C586D9D18682580000E3A08 /* SDFBenchmarkTasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFBenchmarkTasks.m; sourceTree = "<group>"; };
 		0C586D9F18683419000E3A08 /* SDFBenchmarkImageDecompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFBenchmarkImageDecompression.h; sourceTree = "<group>"; };
 		0C586DA018683419000E3A08 /* SDFBenchmarkImageDecompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFBenchmarkImageDecompression.m; sourceTree = "<group>"; };
 		0C586DA31868349F000E3A08 /* SDWebImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDecoder.h; sourceTree = "<group>"; };
@@ -96,8 +93,6 @@
 			children = (
 				0C586DA21868349F000E3A08 /* Third Party */,
 				0C586D9918682405000E3A08 /* SDFBenchmark.h */,
-				0C586D9C18682580000E3A08 /* SDFBenchmarkTasks.h */,
-				0C586D9D18682580000E3A08 /* SDFBenchmarkTasks.m */,
 				0C586D9F18683419000E3A08 /* SDFBenchmarkImageDecompression.h */,
 				0C586DA018683419000E3A08 /* SDFBenchmarkImageDecompression.m */,
 			);
@@ -293,7 +288,6 @@
 			files = (
 				0CEDE43417D4514200D617F7 /* main.m in Sources */,
 				0CEDE43817D4514200D617F7 /* SDFAppDelegate.m in Sources */,
-				0C586D9E18682580000E3A08 /* SDFBenchmarkTasks.m in Sources */,
 				0CEDE44117D4514200D617F7 /* SDFMenuViewController.m in Sources */,
 				0C586DA51868349F000E3A08 /* SDWebImageDecoder.m in Sources */,
 				0CEDE44F17D4522400D617F7 /* SDFFlickrPhoto.m in Sources */,

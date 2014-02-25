@@ -54,6 +54,8 @@ NSString *const DFURLConnectionDidStopNotification = @"DFURLConnectionDidStopNot
 
 @implementation DFURLConnectionOperation {
     NSURLRequest *_nativeRequest;
+    NSURLResponse *_nativeResponse;
+    NSURLConnection *_connection;
     NSMutableData *_responseData;
     NSRecursiveLock *_lock;
 }
@@ -122,7 +124,7 @@ NSString *const DFURLConnectionDidStopNotification = @"DFURLConnectionDidStopNot
 #pragma mark - <NSURLConnectionDelegate>
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    _response = response;
+    _nativeResponse = response;
     _responseData = [NSMutableData data];
 }
 
@@ -131,36 +133,9 @@ NSString *const DFURLConnectionDidStopNotification = @"DFURLConnectionDidStopNot
     DFURLProgress progress = {
         .bytes = data.length,
         .totalBytes = _responseData.length,
-        .totalExpectedBytes = _response.expectedContentLength
+        .totalExpectedBytes = _nativeResponse.expectedContentLength
     };
     [_delegate connectionOperation:self didUpdateProgress:progress];
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse {
-    return _cachingEnabled ? cachedResponse : nil;
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    [self lock];
-    self.executing = NO;
-    self.finished = YES;
-    if (!self.isCancelled) {
-        [_delegate connectionOperationDidFinish:self];
-    }
-    [self _postNotificationWithName:DFURLConnectionDidStopNotification];
-    [self unlock];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [self lock];
-    _error = error;
-    self.executing = NO;
-    self.finished = YES;
-    if (!self.isCancelled) {
-        [_delegate connectionOperation:self didFailWithError:error];
-    }
-    [self _postNotificationWithName:DFURLConnectionDidStopNotification];
-    [self unlock];
 }
 
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
@@ -170,6 +145,54 @@ NSString *const DFURLConnectionDidStopNotification = @"DFURLConnectionDidStopNot
         .totalExpectedBytes = totalBytesExpectedToWrite
     };
     [_delegate connectionOperation:self didUpdateProgress:progress];
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse {
+    return _cachingEnabled ? cachedResponse : nil;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @autoreleasepool {
+            [self _deserializerResponseData:_responseData];
+        }
+    });
+    [self _postNotificationWithName:DFURLConnectionDidStopNotification];
+}
+
+- (void)_deserializerResponseData:(NSData *)data {
+    NSError *error;
+    if (![_deserializer isValidResponse:_nativeResponse error:&error]) {
+        _error = error;
+        [self _finish];
+        return;
+    }
+    id object = [_deserializer objectFromResponse:_nativeResponse data:_responseData error:&error];
+    _error = error;
+    _response = [[DFURLSessionResponse alloc] initWithObject:object response:_nativeResponse data:_responseData];
+    [self _finish];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    _error = error;
+    [self _postNotificationWithName:DFURLConnectionDidStopNotification];
+    [self _finish];
+}
+
+- (void)_finish {
+    [self lock];
+    self.executing = NO;
+    self.finished = YES;
+    if (!self.isCancelled) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (_error || !_response.object) {
+                [_delegate connectionOperation:self didFailWithError:_error];
+            } else {
+                [_delegate connectionOperationDidFinish:self];
+            }
+        });
+    }
+    [self unlock];
 }
 
 #pragma mark - KVO

@@ -12,8 +12,8 @@
 
 #import "DFURLResponseDeserializing.h"
 
-typedef BOOL (^DFURLResponseValidationBlock)(NSURLResponse *response, DFURLSessionTask *task, NSError *__autoreleasing *error);
-typedef id (^DFURLResponseDeserializingBlock)(NSURLResponse *response, NSData *data, DFURLSessionTask *task, NSError *__autoreleasing *error);
+typedef BOOL (^DFURLResponseValidationBlock)(NSURLResponse *response, NSError *__autoreleasing *error);
+typedef id (^DFURLResponseDeserializingBlock)(NSURLResponse *response, NSData *data, NSError *__autoreleasing *error);
 
 
 @interface DFURLResponseDeserializer : NSObject <DFURLResponseDeserializing>

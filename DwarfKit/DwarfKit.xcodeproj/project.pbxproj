@@ -217,7 +217,6 @@
 		0CFC5CBF17D423A1001C2951 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFC5CBD17D42393001C2951 /* QuartzCore.framework */; };
 		0CFC5CC017D423A4001C2951 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFC5CBD17D42393001C2951 /* QuartzCore.framework */; };
 		0CFC5CC117D423A6001C2951 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFC5CBD17D42393001C2951 /* QuartzCore.framework */; };
-		0CFCB28A18218B4300589990 /* TDFTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFCB28818218B4300589990 /* TDFTasks.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -378,7 +377,6 @@
 		0CFA33EF17D4734900AE6EEF /* DwarfKit iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DwarfKit iOS-Prefix.pch"; sourceTree = "<group>"; };
 		0CFA33F017D4734900AE6EEF /* DwarfKit Mac-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DwarfKit Mac-Prefix.pch"; sourceTree = "<group>"; };
 		0CFC5CBD17D42393001C2951 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		0CFCB28818218B4300589990 /* TDFTasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFTasks.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -722,7 +720,6 @@
 			children = (
 				0CB9995E1897EBF400BA205B /* Session */,
 				0C5B96BB184F3C9600A97156 /* Filesystem */,
-				0CFCB28618218B3800589990 /* Tasks */,
 				0C8C160C17D40F00004B7DAA /* Caching */,
 			);
 			path = "Test Suites";
@@ -899,14 +896,6 @@
 				0CFA33F017D4734900AE6EEF /* DwarfKit Mac-Prefix.pch */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0CFCB28618218B3800589990 /* Tasks */ = {
-			isa = PBXGroup;
-			children = (
-				0CFCB28818218B4300589990 /* TDFTasks.m */,
-			);
-			path = Tasks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1291,7 +1280,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CFCB28A18218B4300589990 /* TDFTasks.m in Sources */,
 				0C99A1831855BB73005BBCA1 /* TDFStorage.m in Sources */,
 				0C8C160F17D40F9B004B7DAA /* TDFCache.m in Sources */,
 				0C5B96C3184F3CAE00A97156 /* TDFExtendedFileAttributes.m in Sources */,

@@ -12,7 +12,6 @@
  */
 
 #import "SDFBenchmarkImageDecompression.h"
-#import "SDFBenchmarkTasks.h"
 #import "SDFImageFetchingStressTestViewController.h"
 #import "SDFImageFetchingTestViewController.h"
 #import "SDFMenuViewController.h"
@@ -24,7 +23,6 @@
 
 
 static NSString *const _kSectionBenchmark = @"Benchmark";
-static NSString *const _kRunBenchmarkTasks = @"DFTask, DFTaskQueue";
 static NSString *const _kRunBenchmarkImages = @"libjpeg-turbo";
 
 
@@ -43,8 +41,7 @@ static NSString *const _kRunBenchmarkImages = @"libjpeg-turbo";
         _rows =
         @[ @[ @"Basic Test",
               @"Stress Test" ],
-           @[ _kRunBenchmarkTasks,
-              _kRunBenchmarkImages] ];
+           @[ _kRunBenchmarkImages] ];
         
         _controllers =
         @[ @[ [SDFImageFetchingTestViewController class],
@@ -102,9 +99,7 @@ static NSString *const _kRunBenchmarkImages = @"libjpeg-turbo";
     if ([section isEqualToString:_kSectionBenchmark]) {
         id<SDFBenchmark> benchmark;
         NSString *name = _rows[indexPath.section][indexPath.row];
-        if ([name isEqualToString:_kRunBenchmarkTasks]) {
-            benchmark = [SDFBenchmarkTasks new];
-        } else if ([name isEqualToString:_kRunBenchmarkImages]) {
+        if ([name isEqualToString:_kRunBenchmarkImages]) {
             benchmark = [SDFBenchmarkImageDecompression new];
         }
         [benchmark run];
