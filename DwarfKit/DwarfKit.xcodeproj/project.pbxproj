@@ -127,6 +127,11 @@
 		0CA8A82C18BCDD3900477B2E /* DFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA8A82618BCDD3900477B2E /* DFURLConnectionOperation.m */; };
 		0CA8A82D18BCDD3900477B2E /* DFURLConnectionOperationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA8A82718BCDD3900477B2E /* DFURLConnectionOperationDelegate.h */; };
 		0CA8A82E18BCDD3900477B2E /* DFURLConnectionOperationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA8A82718BCDD3900477B2E /* DFURLConnectionOperationDelegate.h */; };
+		0CA8A83118BCE6F000477B2E /* DFURLReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA8A82F18BCE6F000477B2E /* DFURLReachabilityManager.h */; };
+		0CA8A83218BCE6F000477B2E /* DFURLReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA8A82F18BCE6F000477B2E /* DFURLReachabilityManager.h */; };
+		0CA8A83318BCE6F000477B2E /* DFURLReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA8A83018BCE6F000477B2E /* DFURLReachabilityManager.m */; };
+		0CA8A83418BCE6F000477B2E /* DFURLReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA8A83018BCE6F000477B2E /* DFURLReachabilityManager.m */; };
+		0CA8A83518BCE6F000477B2E /* DFURLReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA8A83018BCE6F000477B2E /* DFURLReachabilityManager.m */; };
 		0CA8E04B18993342002D0A8A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA8E04A18993342002D0A8A /* SystemConfiguration.framework */; };
 		0CA8E04D1899335D002D0A8A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA8E04C1899335D002D0A8A /* SystemConfiguration.framework */; };
 		0CA8E04E18993363002D0A8A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA8E04C1899335D002D0A8A /* SystemConfiguration.framework */; };
@@ -197,11 +202,6 @@
 		0CDC3D4818A3761800D55281 /* DFURLSessionTaskConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC3D0318A3761800D55281 /* DFURLSessionTaskConfiguration.m */; };
 		0CDC3D4918A3761800D55281 /* DFURLSessionTaskConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC3D0318A3761800D55281 /* DFURLSessionTaskConfiguration.m */; };
 		0CDC3D4A18A3761800D55281 /* DFURLSessionTaskConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC3D0318A3761800D55281 /* DFURLSessionTaskConfiguration.m */; };
-		0CDC3D4B18A3761800D55281 /* DFURLReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDC3D0518A3761800D55281 /* DFURLReachabilityManager.h */; };
-		0CDC3D4C18A3761800D55281 /* DFURLReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDC3D0518A3761800D55281 /* DFURLReachabilityManager.h */; };
-		0CDC3D4D18A3761800D55281 /* DFURLReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC3D0618A3761800D55281 /* DFURLReachabilityManager.m */; };
-		0CDC3D4E18A3761800D55281 /* DFURLReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC3D0618A3761800D55281 /* DFURLReachabilityManager.m */; };
-		0CDC3D4F18A3761800D55281 /* DFURLReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC3D0618A3761800D55281 /* DFURLReachabilityManager.m */; };
 		0CEDE40E17D44DDA00D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
 		0CEDE40F17D44DE100D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
 		0CEDE41017D44DE400D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
@@ -337,6 +337,8 @@
 		0CA8A82518BCDD3900477B2E /* DFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFURLConnectionOperation.h; sourceTree = "<group>"; };
 		0CA8A82618BCDD3900477B2E /* DFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFURLConnectionOperation.m; sourceTree = "<group>"; };
 		0CA8A82718BCDD3900477B2E /* DFURLConnectionOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFURLConnectionOperationDelegate.h; sourceTree = "<group>"; };
+		0CA8A82F18BCE6F000477B2E /* DFURLReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFURLReachabilityManager.h; sourceTree = "<group>"; };
+		0CA8A83018BCE6F000477B2E /* DFURLReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFURLReachabilityManager.m; sourceTree = "<group>"; };
 		0CA8E04A18993342002D0A8A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0CA8E04C1899335D002D0A8A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		0CB9995F1897EC0200BA205B /* TDFURLDelay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFURLDelay.m; sourceTree = "<group>"; };
@@ -370,8 +372,6 @@
 		0CDC3D0118A3761800D55281 /* DFURLSessionTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFURLSessionTask.m; sourceTree = "<group>"; };
 		0CDC3D0218A3761800D55281 /* DFURLSessionTaskConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFURLSessionTaskConfiguration.h; sourceTree = "<group>"; };
 		0CDC3D0318A3761800D55281 /* DFURLSessionTaskConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFURLSessionTaskConfiguration.m; sourceTree = "<group>"; };
-		0CDC3D0518A3761800D55281 /* DFURLReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFURLReachabilityManager.h; sourceTree = "<group>"; };
-		0CDC3D0618A3761800D55281 /* DFURLReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFURLReachabilityManager.m; sourceTree = "<group>"; };
 		0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0CEDE41817D4506800D617F7 /* dwarf_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dwarf_private.h; sourceTree = "<group>"; };
 		0CFA33EF17D4734900AE6EEF /* DwarfKit iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DwarfKit iOS-Prefix.pch"; sourceTree = "<group>"; };
@@ -772,14 +772,13 @@
 				0CDC3CDE18A3761800D55281 /* Categories */,
 				0CA8A82418BCDD3900477B2E /* Connection Operation */,
 				0CDC3CE518A3761800D55281 /* Images */,
-				0CDC3CE818A3761800D55281 /* Other */,
 				0CDC3CEB18A3761800D55281 /* Request Construction */,
 				0CDC3CEE18A3761800D55281 /* Response Deserialization */,
 				0CDC3CF218A3761800D55281 /* Session */,
 				0CDC3CF618A3761800D55281 /* Session Request */,
 				0CDC3CFA18A3761800D55281 /* Session Response */,
 				0CDC3CFD18A3761800D55281 /* Session Task */,
-				0CDC3D0418A3761800D55281 /* Third Party */,
+				0CDC3CE818A3761800D55281 /* Other */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -805,6 +804,8 @@
 		0CDC3CE818A3761800D55281 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				0CA8A82F18BCE6F000477B2E /* DFURLReachabilityManager.h */,
+				0CA8A83018BCE6F000477B2E /* DFURLReachabilityManager.m */,
 				0CDC3CE918A3761800D55281 /* DFURLNetworkActivityIndicatorManager.h */,
 				0CDC3CEA18A3761800D55281 /* DFURLNetworkActivityIndicatorManager.m */,
 			);
@@ -823,9 +824,9 @@
 		0CDC3CEE18A3761800D55281 /* Response Deserialization */ = {
 			isa = PBXGroup;
 			children = (
+				0CDC3CF118A3761800D55281 /* DFURLResponseDeserializing.h */,
 				0CDC3CEF18A3761800D55281 /* DFURLResponseDeserializer.h */,
 				0CDC3CF018A3761800D55281 /* DFURLResponseDeserializer.m */,
-				0CDC3CF118A3761800D55281 /* DFURLResponseDeserializing.h */,
 			);
 			path = "Response Deserialization";
 			sourceTree = "<group>";
@@ -870,15 +871,6 @@
 				0CDC3D0318A3761800D55281 /* DFURLSessionTaskConfiguration.m */,
 			);
 			path = "Session Task";
-			sourceTree = "<group>";
-		};
-		0CDC3D0418A3761800D55281 /* Third Party */ = {
-			isa = PBXGroup;
-			children = (
-				0CDC3D0518A3761800D55281 /* DFURLReachabilityManager.h */,
-				0CDC3D0618A3761800D55281 /* DFURLReachabilityManager.m */,
-			);
-			path = "Third Party";
 			sourceTree = "<group>";
 		};
 		0CEDE41717D4503C00D617F7 /* Private */ = {
@@ -946,10 +938,10 @@
 				0C37144517D3FECA00766FD9 /* DFCrypto.h in Headers */,
 				0CDC3D3D18A3761800D55281 /* DFURLDelay.h in Headers */,
 				0C37144A17D3FECA00766FD9 /* DFObjCExtenstions.h in Headers */,
+				0CA8A83218BCE6F000477B2E /* DFURLReachabilityManager.h in Headers */,
 				0CDC3D1918A3761800D55281 /* DFURLNetworkActivityIndicatorManager.h in Headers */,
 				0CDC3D0818A3761800D55281 /* NSTimer+Blocks.h in Headers */,
 				0C37144C17D3FECA00766FD9 /* DFOptions.h in Headers */,
-				0CDC3D4C18A3761800D55281 /* DFURLReachabilityManager.h in Headers */,
 				0C37144E17D3FECA00766FD9 /* DFImageFunctions.h in Headers */,
 				0CA8A82918BCDD3900477B2E /* DFURLConnectionOperation.h in Headers */,
 				0C37145A17D3FECA00766FD9 /* DFTesting.h in Headers */,
@@ -1005,10 +997,10 @@
 				0C37144417D3FECA00766FD9 /* DFCrypto.h in Headers */,
 				0CDC3D3C18A3761800D55281 /* DFURLDelay.h in Headers */,
 				0C37144917D3FECA00766FD9 /* DFObjCExtenstions.h in Headers */,
+				0CA8A83118BCE6F000477B2E /* DFURLReachabilityManager.h in Headers */,
 				0CDC3D1818A3761800D55281 /* DFURLNetworkActivityIndicatorManager.h in Headers */,
 				0CDC3D0718A3761800D55281 /* NSTimer+Blocks.h in Headers */,
 				0C37144B17D3FECA00766FD9 /* DFOptions.h in Headers */,
-				0CDC3D4B18A3761800D55281 /* DFURLReachabilityManager.h in Headers */,
 				0C37144D17D3FECA00766FD9 /* DFImageFunctions.h in Headers */,
 				0CA8A82818BCDD3900477B2E /* DFURLConnectionOperation.h in Headers */,
 				0C37145917D3FECA00766FD9 /* DFTesting.h in Headers */,
@@ -1196,7 +1188,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CDC3D4D18A3761800D55281 /* DFURLReachabilityManager.m in Sources */,
 				0CDC3D1A18A3761800D55281 /* DFURLNetworkActivityIndicatorManager.m in Sources */,
 				0C721DDC18060164003695D0 /* DFReusablePool.m in Sources */,
 				0CDC3D2B18A3761800D55281 /* DFURLSession.m in Sources */,
@@ -1217,6 +1208,7 @@
 				0C0B115F1847A183009962D0 /* DFStorage.m in Sources */,
 				0CDC3D0918A3761800D55281 /* NSTimer+Blocks.m in Sources */,
 				0C37144617D3FECA00766FD9 /* DFCrypto.m in Sources */,
+				0CA8A83318BCE6F000477B2E /* DFURLReachabilityManager.m in Sources */,
 				0CDC3D2418A3761800D55281 /* DFURLResponseDeserializer.m in Sources */,
 				0C37145117D3FECA00766FD9 /* DFImageProcessing.m in Sources */,
 				0C37145617D3FECA00766FD9 /* DFJPEGTurbo.m in Sources */,
@@ -1240,10 +1232,10 @@
 				0C6402CC184B27EE009D856C /* NSURL+DFExtendedFileAttributes.m in Sources */,
 				0C0B11611847A183009962D0 /* DFStorage.m in Sources */,
 				0C6DB1C61855E2B000E662D1 /* DFCache+Extensions.m in Sources */,
-				0CDC3D4F18A3761800D55281 /* DFURLReachabilityManager.m in Sources */,
 				0CDC3D4A18A3761800D55281 /* DFURLSessionTaskConfiguration.m in Sources */,
 				0CDC3D3B18A3761800D55281 /* DFURLSessionResponse.m in Sources */,
 				0CDC3D4518A3761800D55281 /* DFURLSessionTask.m in Sources */,
+				0CA8A83518BCE6F000477B2E /* DFURLReachabilityManager.m in Sources */,
 				0CDC3D0B18A3761800D55281 /* NSTimer+Blocks.m in Sources */,
 				0CA8A82C18BCDD3900477B2E /* DFURLConnectionOperation.m in Sources */,
 				0C37144817D3FECA00766FD9 /* DFCrypto.m in Sources */,
@@ -1266,10 +1258,10 @@
 				0C6402CB184B27EE009D856C /* NSURL+DFExtendedFileAttributes.m in Sources */,
 				0C0B11601847A183009962D0 /* DFStorage.m in Sources */,
 				0C6DB1C51855E2B000E662D1 /* DFCache+Extensions.m in Sources */,
-				0CDC3D4E18A3761800D55281 /* DFURLReachabilityManager.m in Sources */,
 				0CDC3D4918A3761800D55281 /* DFURLSessionTaskConfiguration.m in Sources */,
 				0CDC3D3A18A3761800D55281 /* DFURLSessionResponse.m in Sources */,
 				0CDC3D4418A3761800D55281 /* DFURLSessionTask.m in Sources */,
+				0CA8A83418BCE6F000477B2E /* DFURLReachabilityManager.m in Sources */,
 				0CDC3D0A18A3761800D55281 /* NSTimer+Blocks.m in Sources */,
 				0CA8A82B18BCDD3900477B2E /* DFURLConnectionOperation.m in Sources */,
 				0C37144717D3FECA00766FD9 /* DFCrypto.m in Sources */,

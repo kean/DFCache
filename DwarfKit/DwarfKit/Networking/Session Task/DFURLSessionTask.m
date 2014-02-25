@@ -263,8 +263,8 @@ NSString *const DFURLSessionTaskDidFailAttemptNotification = @"DFURLSessionTaskD
 }
 
 - (void)_networkReachabilityDidChange:(NSNotification *)notification {
-    DFURLNetworkReachabilityStatus status = [notification.userInfo[DFURLReachabilityNotificationStatusItem] integerValue];
-    if (status != DFURLNetworkReachabilityStatusNotReachable &&
+    DFURLReachabilityStatus status = [notification.userInfo[DFURLReachabilityStatusKey] integerValue];
+    if (status != DFURLReachabilityStatusNotReachable &&
         _state == DFURLSessionTaskStateWaiting) {
         self.state = DFURLSessionTaskStateRunning;
     }

@@ -21,7 +21,7 @@
 }
 
 + (void)initialize {
-    [[DFURLReachabilityManager sharedManager] startMonitoring];
+    [[DFURLReachabilityManager shared] startMonitoring];
 }
 
 - (id)initWithQueue:(NSOperationQueue *)queue taskConfiguration:(DFURLSessionTaskConfiguration *)taskConfiguration requestConstructor:(id<DFURLRequestConstructing>)requestConstructor {
