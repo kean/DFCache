@@ -31,7 +31,7 @@ NSString *DFURLQueryStringFromParameters(NSDictionary *parameters, DFURLQueryCon
    if (options & DFURLQueryConstructionSortedKeys) {
       keys = [keys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
    }
-   for (NSString *key in parameters) {
+   for (NSString *key in keys) {
       if (![key isKindOfClass:[NSString class]]) {
          [NSException raise:NSInvalidArgumentException format:@"Attempting to construct query from non-string key, %@", key];
       }

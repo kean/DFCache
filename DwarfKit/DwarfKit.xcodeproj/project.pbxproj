@@ -16,49 +16,6 @@
 		0C2BDD9C185F016600595DE6 /* TDFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BDD9A185F016600595DE6 /* TDFCache+Extensions.m */; };
 		0C2BDD9E185F082200595DE6 /* TDFCache+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BDD9D185F082200595DE6 /* TDFCache+UIImage.m */; };
 		0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
-		0C3713D117D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
-		0C3713D217D3FECA00766FD9 /* bmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138317D3FECA00766FD9 /* bmp.h */; };
-		0C3713D317D3FECA00766FD9 /* cderror.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138417D3FECA00766FD9 /* cderror.h */; };
-		0C3713D417D3FECA00766FD9 /* cderror.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138417D3FECA00766FD9 /* cderror.h */; };
-		0C3713D517D3FECA00766FD9 /* cdjpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138517D3FECA00766FD9 /* cdjpeg.h */; };
-		0C3713D617D3FECA00766FD9 /* cdjpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138517D3FECA00766FD9 /* cdjpeg.h */; };
-		0C3713D717D3FECA00766FD9 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138617D3FECA00766FD9 /* config.h */; };
-		0C3713D817D3FECA00766FD9 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138617D3FECA00766FD9 /* config.h */; };
-		0C3713D917D3FECA00766FD9 /* jchuff.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138717D3FECA00766FD9 /* jchuff.h */; };
-		0C3713DA17D3FECA00766FD9 /* jchuff.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138717D3FECA00766FD9 /* jchuff.h */; };
-		0C3713DB17D3FECA00766FD9 /* jconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138817D3FECA00766FD9 /* jconfig.h */; };
-		0C3713DC17D3FECA00766FD9 /* jconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138817D3FECA00766FD9 /* jconfig.h */; };
-		0C3713DD17D3FECA00766FD9 /* jdct.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138917D3FECA00766FD9 /* jdct.h */; };
-		0C3713DE17D3FECA00766FD9 /* jdct.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138917D3FECA00766FD9 /* jdct.h */; };
-		0C3713DF17D3FECA00766FD9 /* jdhuff.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138A17D3FECA00766FD9 /* jdhuff.h */; };
-		0C3713E017D3FECA00766FD9 /* jdhuff.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138A17D3FECA00766FD9 /* jdhuff.h */; };
-		0C3713E117D3FECA00766FD9 /* jerror.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138B17D3FECA00766FD9 /* jerror.h */; };
-		0C3713E217D3FECA00766FD9 /* jerror.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138B17D3FECA00766FD9 /* jerror.h */; };
-		0C3713E317D3FECA00766FD9 /* jinclude.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138C17D3FECA00766FD9 /* jinclude.h */; };
-		0C3713E417D3FECA00766FD9 /* jinclude.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138C17D3FECA00766FD9 /* jinclude.h */; };
-		0C3713E517D3FECA00766FD9 /* jmemsys.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138D17D3FECA00766FD9 /* jmemsys.h */; };
-		0C3713E617D3FECA00766FD9 /* jmemsys.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138D17D3FECA00766FD9 /* jmemsys.h */; };
-		0C3713E717D3FECA00766FD9 /* jmorecfg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138E17D3FECA00766FD9 /* jmorecfg.h */; };
-		0C3713E817D3FECA00766FD9 /* jmorecfg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138E17D3FECA00766FD9 /* jmorecfg.h */; };
-		0C3713E917D3FECA00766FD9 /* jpegcomp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138F17D3FECA00766FD9 /* jpegcomp.h */; };
-		0C3713EA17D3FECA00766FD9 /* jpegcomp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37138F17D3FECA00766FD9 /* jpegcomp.h */; };
-		0C3713EB17D3FECA00766FD9 /* jpegint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139017D3FECA00766FD9 /* jpegint.h */; };
-		0C3713EC17D3FECA00766FD9 /* jpegint.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139017D3FECA00766FD9 /* jpegint.h */; };
-		0C3713ED17D3FECA00766FD9 /* jpeglib.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139117D3FECA00766FD9 /* jpeglib.h */; };
-		0C3713EE17D3FECA00766FD9 /* jpeglib.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139117D3FECA00766FD9 /* jpeglib.h */; };
-		0C3713EF17D3FECA00766FD9 /* jsimd.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139217D3FECA00766FD9 /* jsimd.h */; };
-		0C3713F017D3FECA00766FD9 /* jsimd.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139217D3FECA00766FD9 /* jsimd.h */; };
-		0C3713F117D3FECA00766FD9 /* jsimddct.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139317D3FECA00766FD9 /* jsimddct.h */; };
-		0C3713F217D3FECA00766FD9 /* jsimddct.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139317D3FECA00766FD9 /* jsimddct.h */; };
-		0C3713F317D3FECA00766FD9 /* jversion.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139417D3FECA00766FD9 /* jversion.h */; };
-		0C3713F417D3FECA00766FD9 /* jversion.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139417D3FECA00766FD9 /* jversion.h */; };
-		0C3713F517D3FECA00766FD9 /* libturbojpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37139517D3FECA00766FD9 /* libturbojpeg.a */; };
-		0C3713F817D3FECA00766FD9 /* tjutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139617D3FECA00766FD9 /* tjutil.h */; };
-		0C3713F917D3FECA00766FD9 /* tjutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139617D3FECA00766FD9 /* tjutil.h */; };
-		0C3713FA17D3FECA00766FD9 /* transupp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139717D3FECA00766FD9 /* transupp.h */; };
-		0C3713FB17D3FECA00766FD9 /* transupp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139717D3FECA00766FD9 /* transupp.h */; };
-		0C3713FC17D3FECA00766FD9 /* turbojpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139817D3FECA00766FD9 /* turbojpeg.h */; };
-		0C3713FD17D3FECA00766FD9 /* turbojpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37139817D3FECA00766FD9 /* turbojpeg.h */; };
 		0C37143A17D3FECA00766FD9 /* DFBenchmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713BC17D3FECA00766FD9 /* DFBenchmark.h */; };
 		0C37143B17D3FECA00766FD9 /* DFBenchmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713BC17D3FECA00766FD9 /* DFBenchmark.h */; };
 		0C37143C17D3FECA00766FD9 /* DFBenchmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713BD17D3FECA00766FD9 /* DFBenchmark.m */; };
@@ -81,7 +38,6 @@
 		0C37144D17D3FECA00766FD9 /* DFImageFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713C717D3FECA00766FD9 /* DFImageFunctions.h */; };
 		0C37144E17D3FECA00766FD9 /* DFImageFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713C717D3FECA00766FD9 /* DFImageFunctions.h */; };
 		0C37145117D3FECA00766FD9 /* DFImageProcessing.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713C917D3FECA00766FD9 /* DFImageProcessing.m */; };
-		0C37145617D3FECA00766FD9 /* DFJPEGTurbo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3713CB17D3FECA00766FD9 /* DFJPEGTurbo.m */; };
 		0C37145917D3FECA00766FD9 /* DFTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713CD17D3FECA00766FD9 /* DFTesting.h */; };
 		0C37145A17D3FECA00766FD9 /* DFTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C3713CD17D3FECA00766FD9 /* DFTesting.h */; };
 		0C449F7E189CE825007B18E6 /* TDFURLSessionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C449F7D189CE825007B18E6 /* TDFURLSessionRequest.m */; };
@@ -270,28 +226,6 @@
 		0C37135617D3FC2500766FD9 /* libDwarfKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDwarfKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37136617D3FC3300766FD9 /* libDwarfKit-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libDwarfKit-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37137517D3FC3C00766FD9 /* DwarfKit.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = DwarfKit.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C37138317D3FECA00766FD9 /* bmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bmp.h; sourceTree = "<group>"; };
-		0C37138417D3FECA00766FD9 /* cderror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cderror.h; sourceTree = "<group>"; };
-		0C37138517D3FECA00766FD9 /* cdjpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdjpeg.h; sourceTree = "<group>"; };
-		0C37138617D3FECA00766FD9 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		0C37138717D3FECA00766FD9 /* jchuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jchuff.h; sourceTree = "<group>"; };
-		0C37138817D3FECA00766FD9 /* jconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jconfig.h; sourceTree = "<group>"; };
-		0C37138917D3FECA00766FD9 /* jdct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jdct.h; sourceTree = "<group>"; };
-		0C37138A17D3FECA00766FD9 /* jdhuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jdhuff.h; sourceTree = "<group>"; };
-		0C37138B17D3FECA00766FD9 /* jerror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jerror.h; sourceTree = "<group>"; };
-		0C37138C17D3FECA00766FD9 /* jinclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jinclude.h; sourceTree = "<group>"; };
-		0C37138D17D3FECA00766FD9 /* jmemsys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jmemsys.h; sourceTree = "<group>"; };
-		0C37138E17D3FECA00766FD9 /* jmorecfg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jmorecfg.h; sourceTree = "<group>"; };
-		0C37138F17D3FECA00766FD9 /* jpegcomp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jpegcomp.h; sourceTree = "<group>"; };
-		0C37139017D3FECA00766FD9 /* jpegint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jpegint.h; sourceTree = "<group>"; };
-		0C37139117D3FECA00766FD9 /* jpeglib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jpeglib.h; sourceTree = "<group>"; };
-		0C37139217D3FECA00766FD9 /* jsimd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jsimd.h; sourceTree = "<group>"; };
-		0C37139317D3FECA00766FD9 /* jsimddct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jsimddct.h; sourceTree = "<group>"; };
-		0C37139417D3FECA00766FD9 /* jversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jversion.h; sourceTree = "<group>"; };
-		0C37139517D3FECA00766FD9 /* libturbojpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libturbojpeg.a; sourceTree = "<group>"; };
-		0C37139617D3FECA00766FD9 /* tjutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjutil.h; sourceTree = "<group>"; };
-		0C37139717D3FECA00766FD9 /* transupp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transupp.h; sourceTree = "<group>"; };
-		0C37139817D3FECA00766FD9 /* turbojpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turbojpeg.h; sourceTree = "<group>"; };
 		0C3713BC17D3FECA00766FD9 /* DFBenchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFBenchmark.h; sourceTree = "<group>"; };
 		0C3713BD17D3FECA00766FD9 /* DFBenchmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFBenchmark.m; sourceTree = "<group>"; };
 		0C3713BF17D3FECA00766FD9 /* DFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCache.h; sourceTree = "<group>"; };
@@ -303,8 +237,6 @@
 		0C3713C717D3FECA00766FD9 /* DFImageFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageFunctions.h; sourceTree = "<group>"; };
 		0C3713C817D3FECA00766FD9 /* DFImageProcessing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFImageProcessing.h; sourceTree = "<group>"; };
 		0C3713C917D3FECA00766FD9 /* DFImageProcessing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFImageProcessing.m; sourceTree = "<group>"; };
-		0C3713CA17D3FECA00766FD9 /* DFJPEGTurbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFJPEGTurbo.h; sourceTree = "<group>"; };
-		0C3713CB17D3FECA00766FD9 /* DFJPEGTurbo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFJPEGTurbo.m; sourceTree = "<group>"; };
 		0C3713CD17D3FECA00766FD9 /* DFTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTesting.h; sourceTree = "<group>"; };
 		0C449F7D189CE825007B18E6 /* TDFURLSessionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFURLSessionRequest.m; sourceTree = "<group>"; };
 		0C47F7551855FB28008E6D72 /* DFCache+UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache+UIImage.h"; sourceTree = "<group>"; };
@@ -390,7 +322,6 @@
 				0CFC5CBF17D423A1001C2951 /* QuartzCore.framework in Frameworks */,
 				0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */,
 				0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */,
-				0C3713F517D3FECA00766FD9 /* libturbojpeg.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,50 +447,12 @@
 			isa = PBXGroup;
 			children = (
 				0CDC3CDD18A3761800D55281 /* Networking */,
-				0C37138117D3FECA00766FD9 /* 3rd Party */,
 				0C0B11591847A154009962D0 /* Filesystem */,
 				0C3713BA17D3FECA00766FD9 /* Tools */,
 				0C3713CE17D3FECA00766FD9 /* Views */,
 				0CEDE41717D4503C00D617F7 /* Private */,
 			);
 			path = DwarfKit;
-			sourceTree = "<group>";
-		};
-		0C37138117D3FECA00766FD9 /* 3rd Party */ = {
-			isa = PBXGroup;
-			children = (
-				0C37138217D3FECA00766FD9 /* libturbojpeg */,
-			);
-			path = "3rd Party";
-			sourceTree = "<group>";
-		};
-		0C37138217D3FECA00766FD9 /* libturbojpeg */ = {
-			isa = PBXGroup;
-			children = (
-				0C37138317D3FECA00766FD9 /* bmp.h */,
-				0C37138417D3FECA00766FD9 /* cderror.h */,
-				0C37138517D3FECA00766FD9 /* cdjpeg.h */,
-				0C37138617D3FECA00766FD9 /* config.h */,
-				0C37138717D3FECA00766FD9 /* jchuff.h */,
-				0C37138817D3FECA00766FD9 /* jconfig.h */,
-				0C37138917D3FECA00766FD9 /* jdct.h */,
-				0C37138A17D3FECA00766FD9 /* jdhuff.h */,
-				0C37138B17D3FECA00766FD9 /* jerror.h */,
-				0C37138C17D3FECA00766FD9 /* jinclude.h */,
-				0C37138D17D3FECA00766FD9 /* jmemsys.h */,
-				0C37138E17D3FECA00766FD9 /* jmorecfg.h */,
-				0C37138F17D3FECA00766FD9 /* jpegcomp.h */,
-				0C37139017D3FECA00766FD9 /* jpegint.h */,
-				0C37139117D3FECA00766FD9 /* jpeglib.h */,
-				0C37139217D3FECA00766FD9 /* jsimd.h */,
-				0C37139317D3FECA00766FD9 /* jsimddct.h */,
-				0C37139417D3FECA00766FD9 /* jversion.h */,
-				0C37139517D3FECA00766FD9 /* libturbojpeg.a */,
-				0C37139617D3FECA00766FD9 /* tjutil.h */,
-				0C37139717D3FECA00766FD9 /* transupp.h */,
-				0C37139817D3FECA00766FD9 /* turbojpeg.h */,
-			);
-			path = libturbojpeg;
 			sourceTree = "<group>";
 		};
 		0C3713BA17D3FECA00766FD9 /* Tools */ = {
@@ -617,8 +510,6 @@
 				0C3713C717D3FECA00766FD9 /* DFImageFunctions.h */,
 				0C3713C817D3FECA00766FD9 /* DFImageProcessing.h */,
 				0C3713C917D3FECA00766FD9 /* DFImageProcessing.m */,
-				0C3713CA17D3FECA00766FD9 /* DFJPEGTurbo.h */,
-				0C3713CB17D3FECA00766FD9 /* DFJPEGTurbo.m */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -898,39 +789,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C6402C9184B27EE009D856C /* NSURL+DFExtendedFileAttributes.h in Headers */,
-				0C3713D217D3FECA00766FD9 /* bmp.h in Headers */,
-				0C3713D417D3FECA00766FD9 /* cderror.h in Headers */,
 				0CDC3D1E18A3761800D55281 /* DFURLRequestConstructor.h in Headers */,
-				0C3713D617D3FECA00766FD9 /* cdjpeg.h in Headers */,
-				0C3713D817D3FECA00766FD9 /* config.h in Headers */,
-				0C3713DA17D3FECA00766FD9 /* jchuff.h in Headers */,
-				0C3713DC17D3FECA00766FD9 /* jconfig.h in Headers */,
 				0CDC3D2818A3761800D55281 /* DFURLResponseDeserializing.h in Headers */,
-				0C3713DE17D3FECA00766FD9 /* jdct.h in Headers */,
-				0C3713E017D3FECA00766FD9 /* jdhuff.h in Headers */,
 				0CDC3D4218A3761800D55281 /* DFURLSessionTask.h in Headers */,
-				0C3713E217D3FECA00766FD9 /* jerror.h in Headers */,
-				0C3713E417D3FECA00766FD9 /* jinclude.h in Headers */,
-				0C3713E617D3FECA00766FD9 /* jmemsys.h in Headers */,
 				0CDC3D2318A3761800D55281 /* DFURLResponseDeserializer.h in Headers */,
-				0C3713E817D3FECA00766FD9 /* jmorecfg.h in Headers */,
-				0C3713EA17D3FECA00766FD9 /* jpegcomp.h in Headers */,
 				0CDC3D1418A3761800D55281 /* DFURLImageProvider.h in Headers */,
-				0C3713EC17D3FECA00766FD9 /* jpegint.h in Headers */,
-				0C3713EE17D3FECA00766FD9 /* jpeglib.h in Headers */,
 				0CA8A82E18BCDD3900477B2E /* DFURLConnectionOperationDelegate.h in Headers */,
-				0C3713F017D3FECA00766FD9 /* jsimd.h in Headers */,
 				0C6DB1BF1855DCB100E662D1 /* DFCacheBlocks.h in Headers */,
 				0CDC3D2F18A3761800D55281 /* DFURLSessionProtocol.h in Headers */,
-				0C3713F217D3FECA00766FD9 /* jsimddct.h in Headers */,
 				0CDC3D3618A3761800D55281 /* DFURLSessionRequest.h in Headers */,
 				0CDC3D3818A3761800D55281 /* DFURLSessionResponse.h in Headers */,
 				0CDC3D4718A3761800D55281 /* DFURLSessionTaskConfiguration.h in Headers */,
-				0C3713F417D3FECA00766FD9 /* jversion.h in Headers */,
-				0C3713F917D3FECA00766FD9 /* tjutil.h in Headers */,
-				0C3713FB17D3FECA00766FD9 /* transupp.h in Headers */,
 				0C6DB1C31855E2B000E662D1 /* DFCache+Extensions.h in Headers */,
-				0C3713FD17D3FECA00766FD9 /* turbojpeg.h in Headers */,
 				0C0B115E1847A183009962D0 /* DFStorage.h in Headers */,
 				0C37143B17D3FECA00766FD9 /* DFBenchmark.h in Headers */,
 				0C37144017D3FECA00766FD9 /* DFCache.h in Headers */,
@@ -957,39 +827,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C6402C8184B27EE009D856C /* NSURL+DFExtendedFileAttributes.h in Headers */,
-				0C3713D117D3FECA00766FD9 /* bmp.h in Headers */,
-				0C3713D317D3FECA00766FD9 /* cderror.h in Headers */,
 				0CDC3D1D18A3761800D55281 /* DFURLRequestConstructor.h in Headers */,
-				0C3713D517D3FECA00766FD9 /* cdjpeg.h in Headers */,
-				0C3713D717D3FECA00766FD9 /* config.h in Headers */,
-				0C3713D917D3FECA00766FD9 /* jchuff.h in Headers */,
-				0C3713DB17D3FECA00766FD9 /* jconfig.h in Headers */,
 				0CDC3D2718A3761800D55281 /* DFURLResponseDeserializing.h in Headers */,
-				0C3713DD17D3FECA00766FD9 /* jdct.h in Headers */,
-				0C3713DF17D3FECA00766FD9 /* jdhuff.h in Headers */,
 				0CDC3D4118A3761800D55281 /* DFURLSessionTask.h in Headers */,
-				0C3713E117D3FECA00766FD9 /* jerror.h in Headers */,
-				0C3713E317D3FECA00766FD9 /* jinclude.h in Headers */,
-				0C3713E517D3FECA00766FD9 /* jmemsys.h in Headers */,
 				0CDC3D2218A3761800D55281 /* DFURLResponseDeserializer.h in Headers */,
-				0C3713E717D3FECA00766FD9 /* jmorecfg.h in Headers */,
-				0C3713E917D3FECA00766FD9 /* jpegcomp.h in Headers */,
 				0CDC3D1318A3761800D55281 /* DFURLImageProvider.h in Headers */,
-				0C3713EB17D3FECA00766FD9 /* jpegint.h in Headers */,
-				0C3713ED17D3FECA00766FD9 /* jpeglib.h in Headers */,
 				0CA8A82D18BCDD3900477B2E /* DFURLConnectionOperationDelegate.h in Headers */,
-				0C3713EF17D3FECA00766FD9 /* jsimd.h in Headers */,
 				0C6DB1BE1855DCB100E662D1 /* DFCacheBlocks.h in Headers */,
 				0CDC3D2E18A3761800D55281 /* DFURLSessionProtocol.h in Headers */,
-				0C3713F117D3FECA00766FD9 /* jsimddct.h in Headers */,
 				0CDC3D3518A3761800D55281 /* DFURLSessionRequest.h in Headers */,
 				0CDC3D3718A3761800D55281 /* DFURLSessionResponse.h in Headers */,
 				0CDC3D4618A3761800D55281 /* DFURLSessionTaskConfiguration.h in Headers */,
-				0C3713F317D3FECA00766FD9 /* jversion.h in Headers */,
-				0C3713F817D3FECA00766FD9 /* tjutil.h in Headers */,
-				0C3713FA17D3FECA00766FD9 /* transupp.h in Headers */,
 				0C6DB1C21855E2B000E662D1 /* DFCache+Extensions.h in Headers */,
-				0C3713FC17D3FECA00766FD9 /* turbojpeg.h in Headers */,
 				0C0B115D1847A183009962D0 /* DFStorage.h in Headers */,
 				0C37143A17D3FECA00766FD9 /* DFBenchmark.h in Headers */,
 				0C37143F17D3FECA00766FD9 /* DFCache.h in Headers */,
@@ -1211,7 +1060,6 @@
 				0CA8A83318BCE6F000477B2E /* DFURLReachabilityManager.m in Sources */,
 				0CDC3D2418A3761800D55281 /* DFURLResponseDeserializer.m in Sources */,
 				0C37145117D3FECA00766FD9 /* DFImageProcessing.m in Sources */,
-				0C37145617D3FECA00766FD9 /* DFJPEGTurbo.m in Sources */,
 				0CDC3D4818A3761800D55281 /* DFURLSessionTaskConfiguration.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

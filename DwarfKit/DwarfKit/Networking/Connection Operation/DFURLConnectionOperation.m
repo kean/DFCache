@@ -162,7 +162,7 @@ NSString *const DFURLConnectionDidStopNotification = @"DFURLConnectionDidStopNot
 
 - (void)_deserializerResponseData:(NSData *)data {
     NSError *error;
-    if ([self __isValidResponse:_nativeResponse error:&error]) {
+    if (![self __isValidResponse:_nativeResponse error:&error]) {
         _error = error;
         [self __finish];
         return;
