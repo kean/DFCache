@@ -102,7 +102,7 @@ NSString *const DFURLConnectionDidStopNotification = @"DFURLConnectionDidStopNot
         [_connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:mode];
     }
     [_connection start];
-    [self _postNotificationWithName:DFURLConnectionDidStartNotification];
+    [self __postNotificationWithName:DFURLConnectionDidStartNotification];
     [self unlock];
 }
 
@@ -113,7 +113,7 @@ NSString *const DFURLConnectionDidStopNotification = @"DFURLConnectionDidStopNot
     }
     [super cancel];
     [_connection cancel];
-    [self _postNotificationWithName:DFURLConnectionDidStopNotification];
+    [self __postNotificationWithName:DFURLConnectionDidStopNotification];
     if (self.isExecuting) {
         self.executing = NO;
         self.finished = YES;
@@ -157,29 +157,36 @@ NSString *const DFURLConnectionDidStopNotification = @"DFURLConnectionDidStopNot
             [self _deserializerResponseData:_responseData];
         }
     });
-    [self _postNotificationWithName:DFURLConnectionDidStopNotification];
+    [self __postNotificationWithName:DFURLConnectionDidStopNotification];
 }
 
 - (void)_deserializerResponseData:(NSData *)data {
     NSError *error;
-    if (![_deserializer isValidResponse:_nativeResponse error:&error]) {
+    if ([self __isValidResponse:_nativeResponse error:&error]) {
         _error = error;
-        [self _finish];
+        [self __finish];
         return;
     }
     id object = [_deserializer objectFromResponse:_nativeResponse data:_responseData error:&error];
     _error = error;
     _response = [[DFURLSessionResponse alloc] initWithObject:object response:_nativeResponse data:_responseData];
-    [self _finish];
+    [self __finish];
+}
+
+- (BOOL)__isValidResponse:(NSURLResponse *)response error:(NSError **)error {
+    if ([_deserializer respondsToSelector:@selector(isValidResponse:error:)]) {
+        return [_deserializer isValidResponse:response error:error];
+    }
+    return YES;
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     _error = error;
-    [self _postNotificationWithName:DFURLConnectionDidStopNotification];
-    [self _finish];
+    [self __postNotificationWithName:DFURLConnectionDidStopNotification];
+    [self __finish];
 }
 
-- (void)_finish {
+- (void)__finish {
     [self lock];
     self.executing = NO;
     self.finished = YES;
@@ -211,7 +218,7 @@ NSString *const DFURLConnectionDidStopNotification = @"DFURLConnectionDidStopNot
 
 #pragma mark - Notifications
 
-- (void)_postNotificationWithName:(NSString *)name {
+- (void)__postNotificationWithName:(NSString *)name {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:name object:self];
     });

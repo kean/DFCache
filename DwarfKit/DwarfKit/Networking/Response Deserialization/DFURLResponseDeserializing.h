@@ -13,6 +13,8 @@
 @protocol DFURLResponseDeserializing <NSObject>
 
 - (id)objectFromResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *__autoreleasing *)error;
+
+@optional
 - (BOOL)isValidResponse:(NSURLResponse *)response error:(NSError *__autoreleasing *)error;
 
 @end
