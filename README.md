@@ -42,27 +42,6 @@ Objective-c wrapper of UNIX extended file attributes.
 - (int)removeExtendedAttributeForKey:(NSString *)key options:(int)options;
 - (NSArray *)extendedAttributesList:(int *)error options:(int)options;
 ```
-
-DFJPEGTurbo
------------
-Objective-C [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) wrapper (JPEG image codec that uses SIMD instructions (MMX, SSE2, NEON) to accelerate baseline JPEG compression and decompression on x86, x86-64, and ARM systems).
-
-Key features:
-- JPEG decompression with optional scaling
-
-```objective-c
-+ (UIImage *)jpegImageWithData:(NSData *)data;
-+ (UIImage *)jpegImageWithData:(NSData *)data
-                   orientation:(UIImageOrientation)orientation;
-+ (UIImage *)jpegImageWithData:(NSData *)data
-                   orientation:(UIImageOrientation)orientation
-                   desiredSize:(CGSize)desiredSize
-                       scaling:(DFJPEGTurboScaling)scaling
-                      rounding:(DFJPEGTurboRounding)rounding;
-```
-DFMapping
----------
-Simple concept that helps to construct tables and collection views with dynamic cells.
 DFBenchmark
 -----------
 Benchmark your code in terms of nanoseconds. Based on Apple's libdispatch benchmark implementation. Functions declared in mach_time.h are used to measure time (time is measured in processor cycles). Substracts the time benchmark implementation takes (for-loop, etc). Easy to use C API.
