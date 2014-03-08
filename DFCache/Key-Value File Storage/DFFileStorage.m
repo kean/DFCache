@@ -11,9 +11,9 @@
  */
 
 #import "DFCachePrivate.h"
-#import "DFStorage.h"
+#import "DFFileStorage.h"
 
-@implementation DFStorage {
+@implementation DFFileStorage {
     NSFileManager *_fileManager;
 }
 
@@ -32,31 +32,24 @@
 }
 
 - (NSData *)dataForKey:(NSString *)key {
-    if (!key) {
-        return nil;
-    }
-    NSURL *fileURL = [self fileURLForKey:key];
-    NSData *data = [_fileManager contentsAtPath:fileURL.path];
-    if (data) {
-        [_delegate storage:self didReadFileAtURL:fileURL];
-    }
-    return data;
+    return key ? [_fileManager contentsAtPath:[self filePathForKey:key]] : nil;
 }
 
 - (void)setData:(NSData *)data forKey:(NSString *)key {
-    if (!data || !key) {
-        return;
+    if (data && key) {
+        [_fileManager createFileAtPath:[self filePathForKey:key] contents:data attributes:nil];
     }
-    [_fileManager createFileAtPath:[self filePathForKey:key] contents:data attributes:nil];
 }
 
 - (void)removeDataForKey:(NSString *)key {
-    [_fileManager removeItemAtPath:[self filePathForKey:key] error:nil];
+    if (key) {
+        [_fileManager removeItemAtPath:[self filePathForKey:key] error:nil];
+    }
 }
 
 - (void)removeAllData {
     [_fileManager removeItemAtPath:_path error:nil];
-    [_fileManager createDirectoryAtPath:_path withIntermediateDirectories:YES attributes:nil error:NULL];
+    [_fileManager createDirectoryAtPath:_path withIntermediateDirectories:YES attributes:nil error:nil];
 }
 
 - (NSString *)fileNameForKey:(NSString *)key {
@@ -65,25 +58,15 @@
 }
 
 - (NSString *)filePathForKey:(NSString *)key {
-    if (!key) {
-        return nil;
-    }
-    return [_path stringByAppendingPathComponent:[self fileNameForKey:key]];
+    return key ? [_path stringByAppendingPathComponent:[self fileNameForKey:key]] : nil;
 }
 
 - (NSURL *)fileURLForKey:(NSString *)key {
-    if (!key) {
-        return nil;
-    }
-    NSString *path = [_path stringByAppendingPathComponent:[self fileNameForKey:key]];
-    return [NSURL fileURLWithPath:path];
+    return key ? [NSURL fileURLWithPath:[self filePathForKey:key]] : nil;
 }
 
 - (BOOL)containsDataForKey:(NSString *)key {
-    if (!key) {
-        return NO;
-    }
-    return [_fileManager fileExistsAtPath:[self filePathForKey:key]];
+    return key ? [_fileManager fileExistsAtPath:[self filePathForKey:key]] : NO;
 }
 
 - (_dwarf_cache_bytes)contentsSize {

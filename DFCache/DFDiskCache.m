@@ -15,22 +15,12 @@
 
 @implementation DFDiskCache
 
-- (id)initWithPath:(NSString *)path error:(NSError *__autoreleasing *)error {
-    if (self = [super initWithPath:path error:error]) {
-        [super setDelegate:self];
+- (NSData *)dataForKey:(NSString *)key {
+    NSData *data = [super dataForKey:key];
+    if (_capacity != DFDiskCacheCapacityUnlimited && data) {
+        [[self fileURLForKey:key] setResourceValue:[NSDate date] forKey:NSURLAttributeModificationDateKey error:nil];
     }
-    return self;
-}
-
-- (void)setDelegate:(id<DFStorageDelegate>)delegate {
-    [NSException raise:NSInternalInconsistencyException format:@"Attempting to change DFDiskCache delegate"];
-}
-
-- (void)storage:(DFStorage *)storage didReadFileAtURL:(NSURL *)fileURL {
-    if (_capacity == DFDiskCacheCapacityUnlimited) {
-        return;
-    }
-    [fileURL setResourceValue:[NSDate date] forKey:NSURLAttributeModificationDateKey error:nil];
+    return data;
 }
 
 - (void)cleanup {

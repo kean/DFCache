@@ -14,6 +14,8 @@
 #import "DFCachePrivate.h"
 #import "NSURL+DFExtendedFileAttributes.h"
 
+NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
+
 @implementation DFCache
 
 - (void)dealloc {

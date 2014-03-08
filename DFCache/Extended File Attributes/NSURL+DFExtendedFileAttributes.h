@@ -10,9 +10,7 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/*! Extended attributes extend the basic attributes associated with files and directo-
- ries in the file system.  They are stored as name:data pairs associated with file
- system objects (files, directories, symlinks, etc). See setxattr(2).
+/*! Extended attributes extend the basic attributes associated with files and directories in the file system.  They are stored as name:data pairs associated with file system objects (files, directories, symlinks, etc). See setxattr(2).
  */
 @interface NSURL (DFExtendedFileAttributes)
 

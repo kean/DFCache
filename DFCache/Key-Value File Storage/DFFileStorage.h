@@ -10,23 +10,14 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-@class DFStorage;
-
-@protocol DFStorageDelegate <NSObject>
-
-- (void)storage:(DFStorage *)storage didReadFileAtURL:(NSURL *)fileURL;
-
-@end
-
-
 /*! Key-value file storage.
  */
 NS_CLASS_AVAILABLE(10_6, 4_0)
-@interface DFStorage : NSObject
+@interface DFFileStorage : NSObject
 
-/*! Initializes and returns storage with provided directory path.
+/*! Initializes and returns storage with directory path.
  @param path Storage directory path.
- @param error A pointer to an error object. Might be nil.
+ @param error A pointer to an error object. If an error occurs while creating storage directory, the pointer is set to the file system error (see NSFileManager). You may specify nil for this parameter if you do not want the error information.
  */
 - (id)initWithPath:(NSString *)path error:(NSError *__autoreleasing *)error;
 
@@ -34,18 +25,36 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
  */
 @property (nonatomic, readonly) NSString *path;
 
-@property (nonatomic, weak) id<DFStorageDelegate> delegate;
-
+/*! Returns the contents of the file for the given key.
+ */
 - (NSData *)dataForKey:(NSString *)key;
+
+/*! Creates a file with the specified content for the given key.
+ */
 - (void)setData:(NSData *)data forKey:(NSString *)key;
+
+/*! Removes the file for the given key.
+ */
 - (void)removeDataForKey:(NSString *)key;
+
+/*! Removes all files.
+ */
 - (void)removeAllData;
+
+/*! Returns a boolean value that indicates whether a file exists for the given key.
+ */
 - (BOOL)containsDataForKey:(NSString *)key;
 
-/*! Returns file name for key. File names are generated using SHA-1 digest algorithm.
+/*! Returns file name for the given key.
  */
 - (NSString *)fileNameForKey:(NSString *)key;
+
+/*! Returns file path for the given key.
+ */
 - (NSString *)filePathForKey:(NSString *)key;
+
+/* Returns file URL for the given key.
+ */
 - (NSURL *)fileURLForKey:(NSString *)key;
 
 /*! Returns the current size of the receiver contents, in bytes.

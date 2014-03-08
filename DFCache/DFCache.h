@@ -13,23 +13,19 @@
 #import "DFDiskCache.h"
 #import "DFCacheBlocks.h"
 
-/*! File extended attribute name used to store metadata.
+/*! File extended attribute name (see NSURL+DFExtendedFileAttributes) used to store metadata.
  */
-static NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
-
+extern NSString *const DFCacheAttributeMetadataKey;
 
 /* DFCache Features.
  
- - General purpose. Store any Objective-C objects. Built-in support for caching UIImage, <NSCoding> and JSON objects.
- - Metadata. Add custom metadata for any key.
- - LRU cleanup. Read more in - (void)cleanupDisk discussion.
- - Performance. Image caching performance is fantastic due to libjpeg-turbo which is used under the hood.
+ - Encoding/decoding is implemented using blocks. Store any kind of Objective-C objects or manipulate data directly (see DFDiskCache : DFFileStorage).
+ - Custom metadata implemented on top on UNIX extended file attributes.
+ - LRU cleanup (see DFDiskCache -(void)cleanupDisk).
  */
 
-#pragma mark - DFCache -
-
-/*! Efficient memory and disk cache. 
- @discussion DFCache is not just a convenience interface for DFStorage and NSCache. It also extends DFStorage and NSCache functionality is several ways, like associating metadata with objects.
+/*! Efficient memory and disk cache.
+ @discussion DFCache is built on top of NSCache and DFFileStorage (DFDiskCache) DFCache is not just a convenience interface for DFFileStorage and NSCache. It also extends DFFileStorage and NSCache functionality is several ways, like associating metadata with objects.
  */
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface DFCache : NSObject
