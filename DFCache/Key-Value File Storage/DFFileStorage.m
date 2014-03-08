@@ -74,7 +74,7 @@
     NSArray *contents = [self contentsWithResourceKeys:@[NSURLFileAllocatedSizeKey]];
     for (NSURL *fileURL in contents) {
         NSNumber *fileSize;
-        [fileURL getResourceValue:&fileSize forKey:NSURLFileAllocatedSizeKey error:NULL];
+        [fileURL getResourceValue:&fileSize forKey:NSURLFileAllocatedSizeKey error:nil];
         size += [fileSize unsignedLongLongValue];
     }
     return size;
@@ -82,7 +82,7 @@
 
 - (NSArray *)contentsWithResourceKeys:(NSArray *)keys {
     NSURL *rootURL = [NSURL fileURLWithPath:_path isDirectory:YES];
-    return [_fileManager contentsOfDirectoryAtURL:rootURL includingPropertiesForKeys:keys options:NSDirectoryEnumerationSkipsHiddenFiles error:NULL];
+    return [_fileManager contentsOfDirectoryAtURL:rootURL includingPropertiesForKeys:keys options:NSDirectoryEnumerationSkipsHiddenFiles error:nil];
 }
 
 @end

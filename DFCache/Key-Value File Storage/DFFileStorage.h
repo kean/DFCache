@@ -11,6 +11,7 @@
  */
 
 /*! Key-value file storage.
+ @discussion File storage doesn't limit your access to the underlying storage directory.
  */
 NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface DFFileStorage : NSObject

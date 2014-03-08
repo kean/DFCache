@@ -28,7 +28,7 @@
     
     static NSUInteger _index = 0;
     
-    NSString *cacheName = [NSString stringWithFormat:@"_dt_extenstions_testcase_%i", _index];
+    NSString *cacheName = [NSString stringWithFormat:@"_dt_extenstions_testcase_%lu", (unsigned long)_index];
     _cache = [[DFCache alloc] initWithName:cacheName];
     _index++;
 }

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:DwarfKit.xcodeproj">
+      location = "self:DFCache.xcodeproj">
    </FileRef>
 </Workspace>
