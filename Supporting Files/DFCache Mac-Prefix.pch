@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'DFCache Mac Dynamic' target in the 'DFCache Mac Dynamic' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4CFCCB5A-5770-4301-B7F0-0CB778D03D36</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DFCache</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1EC6848F-0D9B-4BE8-832E-29D32584AE05</key>
+		<string>https://github.com/kean/DFCache.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DFCache.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1EC6848F-0D9B-4BE8-832E-29D32584AE05</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/kean/DFCache.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1EC6848F-0D9B-4BE8-832E-29D32584AE05</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1EC6848F-0D9B-4BE8-832E-29D32584AE05</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DFCache</string>
+		</dict>
+	</array>
+</dict>
+</plist>

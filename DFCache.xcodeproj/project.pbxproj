@@ -1,0 +1,1042 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C3706C318CA408F003E20C4 /* DFCachePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37064F18CA408F003E20C4 /* DFCachePrivate.h */; };
+		0C3706C418CA408F003E20C4 /* DFCachePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37064F18CA408F003E20C4 /* DFCachePrivate.h */; };
+		0C37072618CA40B8003E20C4 /* DFCache Tests Mac-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C37072018CA40B8003E20C4 /* DFCache Tests Mac-Info.plist */; };
+		0C37072818CA40B8003E20C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C37072418CA40B8003E20C4 /* InfoPlist.strings */; };
+		0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
+		0C449F7F189CEC11007B18E6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA8E04A18993342002D0A8A /* SystemConfiguration.framework */; };
+		0C7D47AE18CB1FA50078C765 /* DFCachePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */; };
+		0C7D47AF18CB1FA50078C765 /* DFCachePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */; };
+		0C7D47B018CB1FA50078C765 /* DFCachePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */; };
+		0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
+		0C8C15D017D406DD004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
+		0C8C15D117D40704004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
+		0C8C15E417D40DFC004B7DAA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CD17D406B4004B7DAA /* UIKit.framework */; };
+		0C8C15E517D40DFC004B7DAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
+		0C8C15FA17D40E0C004B7DAA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C8C15CF17D406DD004B7DAA /* Cocoa.framework */; };
+		0CA8E04B18993342002D0A8A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA8E04A18993342002D0A8A /* SystemConfiguration.framework */; };
+		0CA8E04D1899335D002D0A8A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA8E04C1899335D002D0A8A /* SystemConfiguration.framework */; };
+		0CA8E04E18993363002D0A8A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA8E04C1899335D002D0A8A /* SystemConfiguration.framework */; };
+		0CB95DFA18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; };
+		0CB95DFB18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; };
+		0CB95DFC18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */; };
+		0CB95DFD18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */; };
+		0CB95DFE18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */; };
+		0CB95DFF18CB17AD00169472 /* DFStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF818CB17AD00169472 /* DFStorage.h */; };
+		0CB95E0018CB17AD00169472 /* DFStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF818CB17AD00169472 /* DFStorage.h */; };
+		0CB95E0118CB17AD00169472 /* DFStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF918CB17AD00169472 /* DFStorage.m */; };
+		0CB95E0218CB17AD00169472 /* DFStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF918CB17AD00169472 /* DFStorage.m */; };
+		0CB95E0318CB17AD00169472 /* DFStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF918CB17AD00169472 /* DFStorage.m */; };
+		0CB95E0B18CB181000169472 /* DFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0418CB181000169472 /* DFCache.h */; };
+		0CB95E0C18CB181000169472 /* DFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0418CB181000169472 /* DFCache.h */; };
+		0CB95E0D18CB181000169472 /* DFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0518CB181000169472 /* DFCache.m */; };
+		0CB95E0E18CB181000169472 /* DFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0518CB181000169472 /* DFCache.m */; };
+		0CB95E0F18CB181000169472 /* DFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0518CB181000169472 /* DFCache.m */; };
+		0CB95E1018CB181000169472 /* DFCache+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0618CB181000169472 /* DFCache+Extensions.h */; };
+		0CB95E1118CB181000169472 /* DFCache+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0618CB181000169472 /* DFCache+Extensions.h */; };
+		0CB95E1218CB181000169472 /* DFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0718CB181000169472 /* DFCache+Extensions.m */; };
+		0CB95E1318CB181000169472 /* DFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0718CB181000169472 /* DFCache+Extensions.m */; };
+		0CB95E1418CB181000169472 /* DFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0718CB181000169472 /* DFCache+Extensions.m */; };
+		0CB95E1518CB181000169472 /* DFCacheBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0818CB181000169472 /* DFCacheBlocks.h */; };
+		0CB95E1618CB181000169472 /* DFCacheBlocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0818CB181000169472 /* DFCacheBlocks.h */; };
+		0CB95E1718CB181000169472 /* DFDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0918CB181000169472 /* DFDiskCache.h */; };
+		0CB95E1818CB181000169472 /* DFDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0918CB181000169472 /* DFDiskCache.h */; };
+		0CB95E1918CB181000169472 /* DFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0A18CB181000169472 /* DFDiskCache.m */; };
+		0CB95E1A18CB181000169472 /* DFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0A18CB181000169472 /* DFDiskCache.m */; };
+		0CB95E1B18CB181000169472 /* DFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0A18CB181000169472 /* DFDiskCache.m */; };
+		0CB95E2E18CB186D00169472 /* DFCache Tests iOS-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CB95E1D18CB186D00169472 /* DFCache Tests iOS-Info.plist */; };
+		0CB95E2F18CB186D00169472 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CB95E1F18CB186D00169472 /* InfoPlist.strings */; };
+		0CB95E3018CB186D00169472 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CB95E1F18CB186D00169472 /* InfoPlist.strings */; };
+		0CB95E3118CB186D00169472 /* DFCache+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2518CB186D00169472 /* DFCache+Tests.m */; };
+		0CB95E3218CB186D00169472 /* DFCache+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2518CB186D00169472 /* DFCache+Tests.m */; };
+		0CB95E3318CB186D00169472 /* TDFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2618CB186D00169472 /* TDFCache+Extensions.m */; };
+		0CB95E3418CB186D00169472 /* TDFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2618CB186D00169472 /* TDFCache+Extensions.m */; };
+		0CB95E3518CB186D00169472 /* TDFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2718CB186D00169472 /* TDFCache.m */; };
+		0CB95E3618CB186D00169472 /* TDFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2718CB186D00169472 /* TDFCache.m */; };
+		0CB95E3718CB186D00169472 /* TDFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2918CB186D00169472 /* TDFDiskCache.m */; };
+		0CB95E3818CB186D00169472 /* TDFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2918CB186D00169472 /* TDFDiskCache.m */; };
+		0CB95E3918CB186D00169472 /* TDFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2A18CB186D00169472 /* TDFExtendedFileAttributes.m */; };
+		0CB95E3A18CB186D00169472 /* TDFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2A18CB186D00169472 /* TDFExtendedFileAttributes.m */; };
+		0CB95E3B18CB186D00169472 /* TDFStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2B18CB186D00169472 /* TDFStorage.m */; };
+		0CB95E3C18CB186D00169472 /* TDFStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E2B18CB186D00169472 /* TDFStorage.m */; };
+		0CBB6EAB184936F800DBE4DE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD0D91C1848C6B2008FF46B /* CoreText.framework */; };
+		0CBB6EAC1849370F00DBE4DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFC5CBD17D42393001C2951 /* QuartzCore.framework */; };
+		0CD0D91D1848C6B2008FF46B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD0D91C1848C6B2008FF46B /* CoreText.framework */; };
+		0CEDE40E17D44DDA00D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
+		0CEDE40F17D44DE100D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
+		0CEDE41017D44DE400D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
+		0CEDE41117D44E7900D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
+		0CEDE41217D44E8000D617F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */; };
+		0CFA33F117D4734900AE6EEF /* DFCache iOS-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CFA33EF17D4734900AE6EEF /* DFCache iOS-Prefix.pch */; };
+		0CFA33F217D4734900AE6EEF /* DFCache iOS-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CFA33EF17D4734900AE6EEF /* DFCache iOS-Prefix.pch */; };
+		0CFA33F317D4734900AE6EEF /* DFCache Mac-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CFA33F017D4734900AE6EEF /* DFCache Mac-Prefix.pch */; };
+		0CFA33F417D4734900AE6EEF /* DFCache Mac-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CFA33F017D4734900AE6EEF /* DFCache Mac-Prefix.pch */; };
+		0CFC5CBC17D42367001C2951 /* libDFCache.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37135617D3FC2500766FD9 /* libDFCache.a */; };
+		0CFC5CBF17D423A1001C2951 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFC5CBD17D42393001C2951 /* QuartzCore.framework */; };
+		0CFC5CC017D423A4001C2951 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFC5CBD17D42393001C2951 /* QuartzCore.framework */; };
+		0CFC5CC117D423A6001C2951 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFC5CBD17D42393001C2951 /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0CFC5CB617D42118001C2951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C3712EC17D3F93F00766FD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C37135517D3FC2500766FD9;
+			remoteInfo = "DwarfKit iOS";
+		};
+		0CFC5CB817D4211C001C2951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C3712EC17D3F93F00766FD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C37137417D3FC3C00766FD9;
+			remoteInfo = "DwarfKit Mac Dynamic";
+		};
+		0CFC5CBA17D4211C001C2951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C3712EC17D3F93F00766FD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C37136517D3FC3300766FD9;
+			remoteInfo = "DwarfKit Mac Static";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0C37135417D3FC2500766FD9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0C37064F18CA408F003E20C4 /* DFCachePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCachePrivate.h; sourceTree = "<group>"; };
+		0C37072018CA40B8003E20C4 /* DFCache Tests Mac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DFCache Tests Mac-Info.plist"; sourceTree = "<group>"; };
+		0C37072118CA40B8003E20C4 /* DFCache Tests Mac-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache Tests Mac-Prefix.pch"; sourceTree = "<group>"; };
+		0C37072518CA40B8003E20C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0C3712F717D3F93F00766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0C37132717D3F9C700766FD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		0C37132817D3F9C700766FD9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0C37132917D3F9C700766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0C37135617D3FC2500766FD9 /* libDFCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDFCache.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C37136617D3FC3300766FD9 /* libDFCache-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libDFCache-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C37137517D3FC3C00766FD9 /* DFCache.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = DFCache.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCachePrivate.m; sourceTree = "<group>"; };
+		0C7D47B218CB20470078C765 /* DFTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTesting.h; sourceTree = "<group>"; };
+		0C8C15CD17D406B4004B7DAA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0C8C15CF17D406DD004B7DAA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		0C8C15E217D40DFC004B7DAA /* DFCache Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DFCache Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C8C15F817D40E0C004B7DAA /* DFCache Tests Mac.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DFCache Tests Mac.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CA8E04A18993342002D0A8A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0CA8E04C1899335D002D0A8A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+DFExtendedFileAttributes.h"; sourceTree = "<group>"; };
+		0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DFExtendedFileAttributes.m"; sourceTree = "<group>"; };
+		0CB95DF818CB17AD00169472 /* DFStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFStorage.h; sourceTree = "<group>"; };
+		0CB95DF918CB17AD00169472 /* DFStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFStorage.m; sourceTree = "<group>"; };
+		0CB95E0418CB181000169472 /* DFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCache.h; sourceTree = "<group>"; };
+		0CB95E0518CB181000169472 /* DFCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCache.m; sourceTree = "<group>"; };
+		0CB95E0618CB181000169472 /* DFCache+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache+Extensions.h"; sourceTree = "<group>"; };
+		0CB95E0718CB181000169472 /* DFCache+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DFCache+Extensions.m"; sourceTree = "<group>"; };
+		0CB95E0818CB181000169472 /* DFCacheBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCacheBlocks.h; sourceTree = "<group>"; };
+		0CB95E0918CB181000169472 /* DFDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFDiskCache.h; sourceTree = "<group>"; };
+		0CB95E0A18CB181000169472 /* DFDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFDiskCache.m; sourceTree = "<group>"; };
+		0CB95E1D18CB186D00169472 /* DFCache Tests iOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DFCache Tests iOS-Info.plist"; sourceTree = "<group>"; };
+		0CB95E1E18CB186D00169472 /* DFCache Tests iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache Tests iOS-Prefix.pch"; sourceTree = "<group>"; };
+		0CB95E2018CB186D00169472 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0CB95E2418CB186D00169472 /* DFCache+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache+Tests.h"; sourceTree = "<group>"; };
+		0CB95E2518CB186D00169472 /* DFCache+Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DFCache+Tests.m"; sourceTree = "<group>"; };
+		0CB95E2618CB186D00169472 /* TDFCache+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TDFCache+Extensions.m"; sourceTree = "<group>"; };
+		0CB95E2718CB186D00169472 /* TDFCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFCache.m; sourceTree = "<group>"; };
+		0CB95E2918CB186D00169472 /* TDFDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFDiskCache.m; sourceTree = "<group>"; };
+		0CB95E2A18CB186D00169472 /* TDFExtendedFileAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFExtendedFileAttributes.m; sourceTree = "<group>"; };
+		0CB95E2B18CB186D00169472 /* TDFStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFStorage.m; sourceTree = "<group>"; };
+		0CD0D91C1848C6B2008FF46B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0CFA33EF17D4734900AE6EEF /* DFCache iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache iOS-Prefix.pch"; sourceTree = "<group>"; };
+		0CFA33F017D4734900AE6EEF /* DFCache Mac-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache Mac-Prefix.pch"; sourceTree = "<group>"; };
+		0CFC5CBD17D42393001C2951 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0C37135317D3FC2500766FD9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CA8E04B18993342002D0A8A /* SystemConfiguration.framework in Frameworks */,
+				0CD0D91D1848C6B2008FF46B /* CoreText.framework in Frameworks */,
+				0CEDE40E17D44DDA00D617F7 /* CoreGraphics.framework in Frameworks */,
+				0CFC5CBF17D423A1001C2951 /* QuartzCore.framework in Frameworks */,
+				0C8C15CE17D406B4004B7DAA /* UIKit.framework in Frameworks */,
+				0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C37136317D3FC3300766FD9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CA8E04E18993363002D0A8A /* SystemConfiguration.framework in Frameworks */,
+				0C8C15D117D40704004B7DAA /* Cocoa.framework in Frameworks */,
+				0CFC5CC117D423A6001C2951 /* QuartzCore.framework in Frameworks */,
+				0CEDE41017D44DE400D617F7 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C37137217D3FC3C00766FD9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CA8E04D1899335D002D0A8A /* SystemConfiguration.framework in Frameworks */,
+				0C8C15D017D406DD004B7DAA /* Cocoa.framework in Frameworks */,
+				0CFC5CC017D423A4001C2951 /* QuartzCore.framework in Frameworks */,
+				0CEDE40F17D44DE100D617F7 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C8C15DE17D40DFC004B7DAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C449F7F189CEC11007B18E6 /* SystemConfiguration.framework in Frameworks */,
+				0CBB6EAC1849370F00DBE4DE /* QuartzCore.framework in Frameworks */,
+				0CBB6EAB184936F800DBE4DE /* CoreText.framework in Frameworks */,
+				0CEDE41117D44E7900D617F7 /* CoreGraphics.framework in Frameworks */,
+				0CFC5CBC17D42367001C2951 /* libDFCache.a in Frameworks */,
+				0C8C15E417D40DFC004B7DAA /* UIKit.framework in Frameworks */,
+				0C8C15E517D40DFC004B7DAA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C8C15F417D40E0C004B7DAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C8C15FA17D40E0C004B7DAA /* Cocoa.framework in Frameworks */,
+				0CEDE41217D44E8000D617F7 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C37061D18CA408F003E20C4 /* DFCache */ = {
+			isa = PBXGroup;
+			children = (
+				0CB95E0418CB181000169472 /* DFCache.h */,
+				0CB95E0518CB181000169472 /* DFCache.m */,
+				0CB95E0618CB181000169472 /* DFCache+Extensions.h */,
+				0CB95E0718CB181000169472 /* DFCache+Extensions.m */,
+				0CB95E0818CB181000169472 /* DFCacheBlocks.h */,
+				0CB95E0918CB181000169472 /* DFDiskCache.h */,
+				0CB95E0A18CB181000169472 /* DFDiskCache.m */,
+				0CB95DF418CB17AD00169472 /* Extended File Attributes */,
+				0CB95DF718CB17AD00169472 /* Key-Value Storage */,
+				0C37064E18CA408F003E20C4 /* Private */,
+			);
+			path = DFCache;
+			sourceTree = "<group>";
+		};
+		0C37064E18CA408F003E20C4 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				0C37064F18CA408F003E20C4 /* DFCachePrivate.h */,
+				0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		0C37071F18CA40B8003E20C4 /* DFCache Tests Mac */ = {
+			isa = PBXGroup;
+			children = (
+				0C37072018CA40B8003E20C4 /* DFCache Tests Mac-Info.plist */,
+				0C37072118CA40B8003E20C4 /* DFCache Tests Mac-Prefix.pch */,
+				0C37072418CA40B8003E20C4 /* InfoPlist.strings */,
+			);
+			path = "DFCache Tests Mac";
+			sourceTree = "<group>";
+		};
+		0C3712EB17D3F93F00766FD9 = {
+			isa = PBXGroup;
+			children = (
+				0C37061D18CA408F003E20C4 /* DFCache */,
+				0C7D47B118CB20470078C765 /* DFCache Tests */,
+				0CB95E1C18CB186D00169472 /* DFCache Tests iOS */,
+				0C37071F18CA40B8003E20C4 /* DFCache Tests Mac */,
+				0C3712F617D3F93F00766FD9 /* Frameworks */,
+				0CFA33EE17D4734900AE6EEF /* Supporting Files */,
+				0C3712F517D3F93F00766FD9 /* Products */,
+			);
+			indentWidth = 4;
+			sourceTree = "<group>";
+			tabWidth = 4;
+		};
+		0C3712F517D3F93F00766FD9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0C37135617D3FC2500766FD9 /* libDFCache.a */,
+				0C37136617D3FC3300766FD9 /* libDFCache-Mac.a */,
+				0C37137517D3FC3C00766FD9 /* DFCache.dylib */,
+				0C8C15E217D40DFC004B7DAA /* DFCache Tests iOS.xctest */,
+				0C8C15F817D40E0C004B7DAA /* DFCache Tests Mac.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0C3712F617D3F93F00766FD9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CA8E04C1899335D002D0A8A /* SystemConfiguration.framework */,
+				0CA8E04A18993342002D0A8A /* SystemConfiguration.framework */,
+				0CD0D91C1848C6B2008FF46B /* CoreText.framework */,
+				0CEDE40D17D44DDA00D617F7 /* CoreGraphics.framework */,
+				0CFC5CBD17D42393001C2951 /* QuartzCore.framework */,
+				0C8C15CF17D406DD004B7DAA /* Cocoa.framework */,
+				0C3712F717D3F93F00766FD9 /* Foundation.framework */,
+				0C8C15CD17D406B4004B7DAA /* UIKit.framework */,
+				0C37132617D3F9C700766FD9 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0C37132617D3F9C700766FD9 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C37132717D3F9C700766FD9 /* AppKit.framework */,
+				0C37132817D3F9C700766FD9 /* CoreData.framework */,
+				0C37132917D3F9C700766FD9 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		0C7D47B118CB20470078C765 /* DFCache Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0C7D47B218CB20470078C765 /* DFTesting.h */,
+			);
+			path = "DFCache Tests";
+			sourceTree = "<group>";
+		};
+		0CB95DF418CB17AD00169472 /* Extended File Attributes */ = {
+			isa = PBXGroup;
+			children = (
+				0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */,
+				0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */,
+			);
+			path = "Extended File Attributes";
+			sourceTree = "<group>";
+		};
+		0CB95DF718CB17AD00169472 /* Key-Value Storage */ = {
+			isa = PBXGroup;
+			children = (
+				0CB95DF818CB17AD00169472 /* DFStorage.h */,
+				0CB95DF918CB17AD00169472 /* DFStorage.m */,
+			);
+			path = "Key-Value Storage";
+			sourceTree = "<group>";
+		};
+		0CB95E1C18CB186D00169472 /* DFCache Tests iOS */ = {
+			isa = PBXGroup;
+			children = (
+				0CB95E1D18CB186D00169472 /* DFCache Tests iOS-Info.plist */,
+				0CB95E1E18CB186D00169472 /* DFCache Tests iOS-Prefix.pch */,
+				0CB95E1F18CB186D00169472 /* InfoPlist.strings */,
+				0CB95E2118CB186D00169472 /* Resources */,
+				0CB95E2218CB186D00169472 /* Test Suites */,
+			);
+			path = "DFCache Tests iOS";
+			sourceTree = "<group>";
+		};
+		0CB95E2118CB186D00169472 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0CB95E2218CB186D00169472 /* Test Suites */ = {
+			isa = PBXGroup;
+			children = (
+				0CB95E2318CB186D00169472 /* Caching */,
+				0CB95E2818CB186D00169472 /* Filesystem */,
+			);
+			path = "Test Suites";
+			sourceTree = "<group>";
+		};
+		0CB95E2318CB186D00169472 /* Caching */ = {
+			isa = PBXGroup;
+			children = (
+				0CB95E2418CB186D00169472 /* DFCache+Tests.h */,
+				0CB95E2518CB186D00169472 /* DFCache+Tests.m */,
+				0CB95E2618CB186D00169472 /* TDFCache+Extensions.m */,
+				0CB95E2718CB186D00169472 /* TDFCache.m */,
+			);
+			path = Caching;
+			sourceTree = "<group>";
+		};
+		0CB95E2818CB186D00169472 /* Filesystem */ = {
+			isa = PBXGroup;
+			children = (
+				0CB95E2918CB186D00169472 /* TDFDiskCache.m */,
+				0CB95E2A18CB186D00169472 /* TDFExtendedFileAttributes.m */,
+				0CB95E2B18CB186D00169472 /* TDFStorage.m */,
+			);
+			path = Filesystem;
+			sourceTree = "<group>";
+		};
+		0CFA33EE17D4734900AE6EEF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0CFA33EF17D4734900AE6EEF /* DFCache iOS-Prefix.pch */,
+				0CFA33F017D4734900AE6EEF /* DFCache Mac-Prefix.pch */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0C37136417D3FC3300766FD9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB95E1818CB181000169472 /* DFDiskCache.h in Headers */,
+				0C3706C418CA408F003E20C4 /* DFCachePrivate.h in Headers */,
+				0CB95E1118CB181000169472 /* DFCache+Extensions.h in Headers */,
+				0CB95E0018CB17AD00169472 /* DFStorage.h in Headers */,
+				0CFA33F217D4734900AE6EEF /* DFCache iOS-Prefix.pch in Headers */,
+				0CB95E0C18CB181000169472 /* DFCache.h in Headers */,
+				0CB95DFB18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */,
+				0CFA33F417D4734900AE6EEF /* DFCache Mac-Prefix.pch in Headers */,
+				0CB95E1618CB181000169472 /* DFCacheBlocks.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C37137317D3FC3C00766FD9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB95E1718CB181000169472 /* DFDiskCache.h in Headers */,
+				0C3706C318CA408F003E20C4 /* DFCachePrivate.h in Headers */,
+				0CB95E1018CB181000169472 /* DFCache+Extensions.h in Headers */,
+				0CB95DFF18CB17AD00169472 /* DFStorage.h in Headers */,
+				0CFA33F117D4734900AE6EEF /* DFCache iOS-Prefix.pch in Headers */,
+				0CB95E0B18CB181000169472 /* DFCache.h in Headers */,
+				0CB95DFA18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */,
+				0CFA33F317D4734900AE6EEF /* DFCache Mac-Prefix.pch in Headers */,
+				0CB95E1518CB181000169472 /* DFCacheBlocks.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0C37135517D3FC2500766FD9 /* DFCache iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C37135F17D3FC2500766FD9 /* Build configuration list for PBXNativeTarget "DFCache iOS" */;
+			buildPhases = (
+				0C37135217D3FC2500766FD9 /* Sources */,
+				0C37135317D3FC2500766FD9 /* Frameworks */,
+				0C37135417D3FC2500766FD9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DFCache iOS";
+			productName = "DwarfKit iOS";
+			productReference = 0C37135617D3FC2500766FD9 /* libDFCache.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		0C37136517D3FC3300766FD9 /* DFCache Mac Static */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C37136E17D3FC3300766FD9 /* Build configuration list for PBXNativeTarget "DFCache Mac Static" */;
+			buildPhases = (
+				0C37136217D3FC3300766FD9 /* Sources */,
+				0C37136317D3FC3300766FD9 /* Frameworks */,
+				0C37136417D3FC3300766FD9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DFCache Mac Static";
+			productName = "DwarfKit Mac Static";
+			productReference = 0C37136617D3FC3300766FD9 /* libDFCache-Mac.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		0C37137417D3FC3C00766FD9 /* DFCache Mac Dynamic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C37137D17D3FC3D00766FD9 /* Build configuration list for PBXNativeTarget "DFCache Mac Dynamic" */;
+			buildPhases = (
+				0C37137117D3FC3C00766FD9 /* Sources */,
+				0C37137217D3FC3C00766FD9 /* Frameworks */,
+				0C37137317D3FC3C00766FD9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DFCache Mac Dynamic";
+			productName = "DwarfKit Mac Dynamic";
+			productReference = 0C37137517D3FC3C00766FD9 /* DFCache.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		0C8C15E117D40DFC004B7DAA /* DFCache Tests iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C8C15F017D40DFC004B7DAA /* Build configuration list for PBXNativeTarget "DFCache Tests iOS" */;
+			buildPhases = (
+				0C8C15DD17D40DFC004B7DAA /* Sources */,
+				0C8C15DE17D40DFC004B7DAA /* Frameworks */,
+				0C8C15DF17D40DFC004B7DAA /* Resources */,
+				0C8C15E017D40DFC004B7DAA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0CFC5CB717D42118001C2951 /* PBXTargetDependency */,
+			);
+			name = "DFCache Tests iOS";
+			productName = "DwarfKit Tests iOS";
+			productReference = 0C8C15E217D40DFC004B7DAA /* DFCache Tests iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0C8C15F717D40E0C004B7DAA /* DFCache Tests Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C8C160517D40E0C004B7DAA /* Build configuration list for PBXNativeTarget "DFCache Tests Mac" */;
+			buildPhases = (
+				0C8C15F317D40E0C004B7DAA /* Sources */,
+				0C8C15F417D40E0C004B7DAA /* Frameworks */,
+				0C8C15F517D40E0C004B7DAA /* Resources */,
+				0C8C15F617D40E0C004B7DAA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0CFC5CB917D4211C001C2951 /* PBXTargetDependency */,
+				0CFC5CBB17D4211C001C2951 /* PBXTargetDependency */,
+			);
+			name = "DFCache Tests Mac";
+			productName = "DwarfKit Tests Mac";
+			productReference = 0C8C15F817D40E0C004B7DAA /* DFCache Tests Mac.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0C3712EC17D3F93F00766FD9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = com.github.kean;
+			};
+			buildConfigurationList = 0C3712EF17D3F93F00766FD9 /* Build configuration list for PBXProject "DFCache" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0C3712EB17D3F93F00766FD9;
+			productRefGroup = 0C3712F517D3F93F00766FD9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0C37135517D3FC2500766FD9 /* DFCache iOS */,
+				0C37137417D3FC3C00766FD9 /* DFCache Mac Dynamic */,
+				0C37136517D3FC3300766FD9 /* DFCache Mac Static */,
+				0C8C15E117D40DFC004B7DAA /* DFCache Tests iOS */,
+				0C8C15F717D40E0C004B7DAA /* DFCache Tests Mac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0C8C15DF17D40DFC004B7DAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB95E2F18CB186D00169472 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C8C15F517D40E0C004B7DAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C37072618CA40B8003E20C4 /* DFCache Tests Mac-Info.plist in Resources */,
+				0CB95E3018CB186D00169472 /* InfoPlist.strings in Resources */,
+				0C37072818CA40B8003E20C4 /* InfoPlist.strings in Resources */,
+				0CB95E2E18CB186D00169472 /* DFCache Tests iOS-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C8C15E017D40DFC004B7DAA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		0C8C15F617D40E0C004B7DAA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0C37135217D3FC2500766FD9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB95E0118CB17AD00169472 /* DFStorage.m in Sources */,
+				0CB95E1218CB181000169472 /* DFCache+Extensions.m in Sources */,
+				0CB95E0D18CB181000169472 /* DFCache.m in Sources */,
+				0CB95DFC18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */,
+				0C7D47AE18CB1FA50078C765 /* DFCachePrivate.m in Sources */,
+				0CB95E1918CB181000169472 /* DFDiskCache.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C37136217D3FC3300766FD9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB95E0318CB17AD00169472 /* DFStorage.m in Sources */,
+				0CB95E1418CB181000169472 /* DFCache+Extensions.m in Sources */,
+				0CB95E0F18CB181000169472 /* DFCache.m in Sources */,
+				0CB95DFE18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */,
+				0C7D47B018CB1FA50078C765 /* DFCachePrivate.m in Sources */,
+				0CB95E1B18CB181000169472 /* DFDiskCache.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C37137117D3FC3C00766FD9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB95E0218CB17AD00169472 /* DFStorage.m in Sources */,
+				0CB95E1318CB181000169472 /* DFCache+Extensions.m in Sources */,
+				0CB95E0E18CB181000169472 /* DFCache.m in Sources */,
+				0CB95DFD18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */,
+				0C7D47AF18CB1FA50078C765 /* DFCachePrivate.m in Sources */,
+				0CB95E1A18CB181000169472 /* DFDiskCache.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C8C15DD17D40DFC004B7DAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB95E3B18CB186D00169472 /* TDFStorage.m in Sources */,
+				0CB95E3718CB186D00169472 /* TDFDiskCache.m in Sources */,
+				0CB95E3318CB186D00169472 /* TDFCache+Extensions.m in Sources */,
+				0CB95E3518CB186D00169472 /* TDFCache.m in Sources */,
+				0CB95E3118CB186D00169472 /* DFCache+Tests.m in Sources */,
+				0CB95E3918CB186D00169472 /* TDFExtendedFileAttributes.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0C8C15F317D40E0C004B7DAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB95E3618CB186D00169472 /* TDFCache.m in Sources */,
+				0CB95E3218CB186D00169472 /* DFCache+Tests.m in Sources */,
+				0CB95E3C18CB186D00169472 /* TDFStorage.m in Sources */,
+				0CB95E3A18CB186D00169472 /* TDFExtendedFileAttributes.m in Sources */,
+				0CB95E3818CB186D00169472 /* TDFDiskCache.m in Sources */,
+				0CB95E3418CB186D00169472 /* TDFCache+Extensions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0CFC5CB717D42118001C2951 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C37135517D3FC2500766FD9 /* DFCache iOS */;
+			targetProxy = 0CFC5CB617D42118001C2951 /* PBXContainerItemProxy */;
+		};
+		0CFC5CB917D4211C001C2951 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C37137417D3FC3C00766FD9 /* DFCache Mac Dynamic */;
+			targetProxy = 0CFC5CB817D4211C001C2951 /* PBXContainerItemProxy */;
+		};
+		0CFC5CBB17D4211C001C2951 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C37136517D3FC3300766FD9 /* DFCache Mac Static */;
+			targetProxy = 0CFC5CBA17D4211C001C2951 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0C37072418CA40B8003E20C4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0C37072518CA40B8003E20C4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0CB95E1F18CB186D00169472 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0CB95E2018CB186D00169472 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0C37131717D3F93F00766FD9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Debug;
+		};
+		0C37131817D3F93F00766FD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Release;
+		};
+		0C37136017D3FC2500766FD9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/DFCache_iOS.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Supporting Files/DFCache iOS-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DwarfKit/3rd Party/libturbojpeg\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = DFCache;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0C37136117D3FC2500766FD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/DFCache_iOS.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Supporting Files/DFCache iOS-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DwarfKit/3rd Party/libturbojpeg\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = DFCache;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		0C37136F17D3FC3300766FD9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Supporting Files/DwarfKit Mac-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DwarfKit/3rd Party/libturbojpeg\"",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "DFCache-Mac";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		0C37137017D3FC3300766FD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Supporting Files/DwarfKit Mac-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DwarfKit/3rd Party/libturbojpeg\"",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "DFCache-Mac";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		0C37137E17D3FC3D00766FD9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Supporting Files/DFCache Mac-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = DFCache;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		0C37137F17D3FC3D00766FD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Supporting Files/DFCache Mac-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = DFCache;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		0C8C15F117D40DFC004B7DAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DFCache Tests iOS/DFCache Tests iOS-Prefix.pch";
+				INFOPLIST_FILE = "DFCache Tests iOS/DFCache Tests iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
+				PRODUCT_NAME = "DFCache Tests iOS";
+			};
+			name = Debug;
+		};
+		0C8C15F217D40DFC004B7DAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DFCache Tests iOS/DFCache Tests iOS-Prefix.pch";
+				INFOPLIST_FILE = "DFCache Tests iOS/DFCache Tests iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
+				PRODUCT_NAME = "DFCache Tests iOS";
+			};
+			name = Release;
+		};
+		0C8C160617D40E0C004B7DAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DwarfKit Tests Mac/DFCache Tests Mac-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "DwarfKit Tests Mac/DFCache Tests Mac-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "DFCache Tests Mac";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0C8C160717D40E0C004B7DAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DwarfKit Tests Mac/DFCache Tests Mac-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "DwarfKit Tests Mac/DFCache Tests Mac-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "DFCache Tests Mac";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0C3712EF17D3F93F00766FD9 /* Build configuration list for PBXProject "DFCache" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C37131717D3F93F00766FD9 /* Debug */,
+				0C37131817D3F93F00766FD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C37135F17D3FC2500766FD9 /* Build configuration list for PBXNativeTarget "DFCache iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C37136017D3FC2500766FD9 /* Debug */,
+				0C37136117D3FC2500766FD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C37136E17D3FC3300766FD9 /* Build configuration list for PBXNativeTarget "DFCache Mac Static" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C37136F17D3FC3300766FD9 /* Debug */,
+				0C37137017D3FC3300766FD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C37137D17D3FC3D00766FD9 /* Build configuration list for PBXNativeTarget "DFCache Mac Dynamic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C37137E17D3FC3D00766FD9 /* Debug */,
+				0C37137F17D3FC3D00766FD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C8C15F017D40DFC004B7DAA /* Build configuration list for PBXNativeTarget "DFCache Tests iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C8C15F117D40DFC004B7DAA /* Debug */,
+				0C8C15F217D40DFC004B7DAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C8C160517D40E0C004B7DAA /* Build configuration list for PBXNativeTarget "DFCache Tests Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C8C160617D40E0C004B7DAA /* Debug */,
+				0C8C160717D40E0C004B7DAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0C3712EC17D3F93F00766FD9 /* Project object */;
+}
