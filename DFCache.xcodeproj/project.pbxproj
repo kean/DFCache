@@ -256,9 +256,6 @@
 			children = (
 				0C37061D18CA408F003E20C4 /* DFCache */,
 				0C7D47B118CB20470078C765 /* DFCache Tests */,
-				0CB95E1C18CB186D00169472 /* DFCache Tests iOS */,
-				0CFAA7ED18CC7006004C56CC /* DFCache Tests OS X Static */,
-				0CFAA80318CC704E004C56CC /* DFCache Tests OS X Dynamic */,
 				0C3712F617D3F93F00766FD9 /* Frameworks */,
 				0CFA33EE17D4734900AE6EEF /* Supporting Files */,
 				0C3712F517D3F93F00766FD9 /* Products */,
@@ -309,7 +306,10 @@
 				0CDB852618CB44B6005DAA43 /* DFCache+Tests.h */,
 				0CDB852718CB44B6005DAA43 /* DFCache+Tests.m */,
 				0C7D47B218CB20470078C765 /* DFTesting.h */,
-				0CDB852518CB4485005DAA43 /* Test Suites */,
+				0CDB852518CB4485005DAA43 /* Shared */,
+				0CB95E1C18CB186D00169472 /* DFCache Tests iOS */,
+				0CFAA7ED18CC7006004C56CC /* DFCache Tests OS X Static */,
+				0CFAA80318CC704E004C56CC /* DFCache Tests OS X Dynamic */,
 			);
 			path = "DFCache Tests";
 			sourceTree = "<group>";
@@ -331,7 +331,7 @@
 				0CB95E1F18CB186D00169472 /* InfoPlist.strings */,
 			);
 			path = "DFCache Tests iOS";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		0CCCFECF18CB2D4B009AE6DB /* Key-Value File Storage */ = {
 			isa = PBXGroup;
@@ -342,7 +342,7 @@
 			path = "Key-Value File Storage";
 			sourceTree = "<group>";
 		};
-		0CDB852518CB4485005DAA43 /* Test Suites */ = {
+		0CDB852518CB4485005DAA43 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
 				0CDB852A18CB44D9005DAA43 /* TDFCache.m */,
@@ -351,6 +351,7 @@
 				0CDB853118CB451D005DAA43 /* TDFExtendedFileAttributes.m */,
 				0CDB853218CB451D005DAA43 /* TDFFileStorage.m */,
 			);
+			name = Shared;
 			path = "Test Suites";
 			sourceTree = "<group>";
 		};
@@ -369,7 +370,7 @@
 				0CFAA7EE18CC7006004C56CC /* Supporting Files */,
 			);
 			path = "DFCache Tests OS X Static";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		0CFAA7EE18CC7006004C56CC /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -387,7 +388,7 @@
 				0CFAA80418CC704E004C56CC /* Supporting Files */,
 			);
 			path = "DFCache Tests OS X Dynamic";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		0CFAA80418CC704E004C56CC /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -1160,6 +1161,7 @@
 				0CFAA7FA18CC7007004C56CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0CFAA80E18CC704E004C56CC /* Build configuration list for PBXNativeTarget "DFCache Tests OS X Dynamic" */ = {
 			isa = XCConfigurationList;
@@ -1168,6 +1170,7 @@
 				0CFAA81018CC704E004C56CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
