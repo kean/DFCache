@@ -12,7 +12,9 @@
 
 #import "DFCache.h"
 
-@interface DFCache (Extensions)
+/* Set of methods extending DFCache functionality by providing direct asynchronous access to data and allowing you to retrieve cached objects in batches.
+*/
+@interface DFCache (DFExtensions)
 
 #pragma mark - Direct Data Manipulations
 

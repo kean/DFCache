@@ -339,7 +339,8 @@
 				0CB95E1E18CB186D00169472 /* DFCache Tests iOS-Prefix.pch */,
 				0CB95E1F18CB186D00169472 /* InfoPlist.strings */,
 			);
-			path = "DFCache Tests iOS";
+			name = "DFCache Tests iOS";
+			path = "DFCache Tests/DFCache Tests iOS";
 			sourceTree = SOURCE_ROOT;
 		};
 		0CCCFECF18CB2D4B009AE6DB /* Key-Value File Storage */ = {
@@ -377,7 +378,8 @@
 			children = (
 				0CFAA7EE18CC7006004C56CC /* Supporting Files */,
 			);
-			path = "DFCache Tests OS X Static";
+			name = "DFCache Tests OS X Static";
+			path = "DFCache Tests/DFCache Tests OS X Static";
 			sourceTree = SOURCE_ROOT;
 		};
 		0CFAA7EE18CC7006004C56CC /* Supporting Files */ = {
@@ -395,7 +397,8 @@
 			children = (
 				0CFAA80418CC704E004C56CC /* Supporting Files */,
 			);
-			path = "DFCache Tests OS X Dynamic";
+			name = "DFCache Tests OS X Dynamic";
+			path = "DFCache Tests/DFCache Tests OS X Dynamic";
 			sourceTree = SOURCE_ROOT;
 		};
 		0CFAA80418CC704E004C56CC /* Supporting Files */ = {
@@ -948,7 +951,7 @@
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DFCache Tests iOS/DFCache Tests iOS-Prefix.pch";
+				GCC_PREFIX_HEADER = "DFCache Tests/DFCache Tests iOS/DFCache Tests iOS-Prefix.pch";
 				INFOPLIST_FILE = "DFCache Tests iOS/DFCache Tests iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
@@ -970,7 +973,7 @@
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DFCache Tests iOS/DFCache Tests iOS-Prefix.pch";
+				GCC_PREFIX_HEADER = "DFCache Tests/DFCache Tests iOS/DFCache Tests iOS-Prefix.pch";
 				INFOPLIST_FILE = "DFCache Tests iOS/DFCache Tests iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
