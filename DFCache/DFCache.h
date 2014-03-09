@@ -143,13 +143,13 @@ extern NSString *const DFCacheAttributeMetadataKey;
  */
 - (NSDictionary *)metadataForKey:(NSString *)key;
 
-/*! Sets metadata for provided key.
+/*! Sets metadata for provided key. Method will have no effect if there is no entry under the given key.
  @param metadata Dictionary with metadata.
  @param key The unique key.
  */
 - (void)setMetadata:(NSDictionary *)metadata forKey:(NSString *)key;
 
-/*! Sets metadata values for providerd keys.
+/*! Sets metadata values for providerd keys. Method will have no effect if there is no entry under the given key.
  @param keyedValues Dictionary with metadata.
  @param key The unique key.
  */
