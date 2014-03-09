@@ -306,7 +306,7 @@
 				0CDB852618CB44B6005DAA43 /* DFCache+Tests.h */,
 				0CDB852718CB44B6005DAA43 /* DFCache+Tests.m */,
 				0C7D47B218CB20470078C765 /* DFTesting.h */,
-				0CDB852518CB4485005DAA43 /* Shared */,
+				0CDB852518CB4485005DAA43 /* Test Suites */,
 				0CB95E1C18CB186D00169472 /* DFCache Tests iOS */,
 				0CFAA7ED18CC7006004C56CC /* DFCache Tests OS X Static */,
 				0CFAA80318CC704E004C56CC /* DFCache Tests OS X Dynamic */,
@@ -342,7 +342,7 @@
 			path = "Key-Value File Storage";
 			sourceTree = "<group>";
 		};
-		0CDB852518CB4485005DAA43 /* Shared */ = {
+		0CDB852518CB4485005DAA43 /* Test Suites */ = {
 			isa = PBXGroup;
 			children = (
 				0CDB852A18CB44D9005DAA43 /* TDFCache.m */,
@@ -351,7 +351,6 @@
 				0CDB853118CB451D005DAA43 /* TDFExtendedFileAttributes.m */,
 				0CDB853218CB451D005DAA43 /* TDFFileStorage.m */,
 			);
-			name = Shared;
 			path = "Test Suites";
 			sourceTree = "<group>";
 		};
