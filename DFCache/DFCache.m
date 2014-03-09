@@ -150,7 +150,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
         return;
     }
     dispatch_async(_ioQueue, ^{
-        [_diskCache setData:(data ?: encode(object)) forKey:key];
+        [_diskCache setData:(data ? data : encode(object)) forKey:key];
     });
 }
 

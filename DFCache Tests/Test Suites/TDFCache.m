@@ -152,7 +152,7 @@
     
     [_cache removeObjectForKey:removeKey];
     
-    [self _assertDoesntContainObjectsForKeys:@[removeKey] objects:objects];
+    [self _assertDoesntContainObjectsForKeys:@[removeKey]];
     [self _assertContainsObjectsForKeys:remainingKeys objects:objects];
 }
 
@@ -167,7 +167,7 @@
     [_cache removeObjectsForKeys:removeKeys];
     
     [self _assertContainsObjectsForKeys:remainingKeys objects:objects];
-    [self _assertDoesntContainObjectsForKeys:removeKeys objects:objects];
+    [self _assertDoesntContainObjectsForKeys:removeKeys];
 }
 
 - (void)testRemoveAllObjects {
@@ -176,7 +176,7 @@
     
     [_cache removeAllObjects];
     
-    [self _assertDoesntContainObjectsForKeys:[objects allKeys] objects:objects];
+    [self _assertDoesntContainObjectsForKeys:[objects allKeys]];
 }
 
 #pragma mark - Metadata Tests
@@ -220,12 +220,6 @@
 - (void)_assertContainsObjectsForKeys:(NSArray *)keys objects:(NSDictionary *)objects {
     for (NSString *key in keys) {
         {
-            NSString *object = [_cache.memoryCache objectForKey:key];;
-            XCTAssertNotNil(object, @"Memory cache: no object for key %@", key);
-            XCTAssertEqualObjects(objects[key], object);
-        }
-        
-        {
             id object = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:nil];
             XCTAssertNotNil(object, @"Disk cache: no object for key %@", key);
             XCTAssertEqualObjects(objects[key], object);
@@ -233,7 +227,7 @@
     }
 }
 
-- (void)_assertDoesntContainObjectsForKeys:(NSArray *)keys objects:(NSDictionary *)objects {
+- (void)_assertDoesntContainObjectsForKeys:(NSArray *)keys {
     for (NSString *key in keys) {
         {
             NSString *object = [_cache.memoryCache objectForKey:key];

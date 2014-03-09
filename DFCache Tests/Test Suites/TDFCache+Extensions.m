@@ -198,7 +198,7 @@
     }
 }
 
-- (void)_assertDoesntContainObjectsForKeys:(NSArray *)keys objects:(NSDictionary *)objects {
+- (void)_assertDoesntContainObjectsForKeys:(NSArray *)keys {
     for (NSString *key in keys) {
         {
             NSString *object = [_cache.memoryCache objectForKey:key];
