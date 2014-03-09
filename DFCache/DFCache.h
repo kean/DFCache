@@ -48,7 +48,7 @@ extern NSString *const DFCacheAttributeMetadataKey;
 
 /*! Returns memory cache or nil if cache was initialized without the memory cache.
  */
-@property (nonatomic) NSCache *memoryCache;
+@property (nonatomic, readonly) NSCache *memoryCache;
 
 /*! Returns disk cache used by DFCache instance.
  */
