@@ -14,12 +14,12 @@
 
 static const unsigned long long DFDiskCacheCapacityUnlimited = 0;
 
-/*! DFFileStorage extension providing LRU cleanup.
+/*! Disk cache extends file storage functionality by providing LRU (least recently used) cleanup. Cleanup doesn't get called automatically.
  */
 @interface DFDiskCache : DFFileStorage
 
-/*! Maximum storage capacity. Default value is ULONG_MAX.
- @discussion Not a strict limit. Disk storage is actually cleaned up each time application resigns active (for iOS) and any time - (void)cleanup gets called.
+/*! Maximum disk cache capacity. Default value is DFDiskCacheCapacityUnlimited.
+ @discussion Not a strict limit. Disk storage is actually cleaned up only when cleanup method gets called.
  */
 @property (nonatomic) unsigned long long capacity;
 
@@ -27,8 +27,8 @@ static const unsigned long long DFDiskCacheCapacityUnlimited = 0;
  */
 @property (nonatomic) CGFloat cleanupRate;
 
-/*! Cleans up disk storage by removing entries by LRU algorithm.
- @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Calculates target size by multiplying disk capacity and cleanup rate. Files are removed according to LRU algorithm until cache size fits target size.
+/*! Cleans up disk cache by discarding the least recently used items.
+ @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Target size is calculated by multiplying disk capacity and cleanup rate.
  */
 - (void)cleanup;
 

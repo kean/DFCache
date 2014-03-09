@@ -16,7 +16,7 @@
  */
 @interface DFCache (Extensions)
 
-#pragma mark - NSData
+#pragma mark - Data Access
 
 /*! Reads data from disk.
  @param key The unique key.

@@ -86,10 +86,10 @@
     NSData *data = [self _tempData];
     NSString *key = @"_key";
     
-    NSString *filename = [_storage fileNameForKey:key];
+    NSString *filename = [_storage filenameForKey:key];
     NSString *path_01 = [[_storage path] stringByAppendingPathComponent:filename];
-    NSString *path_02 = [_storage filePathForKey:key];
-    NSURL *fileURL = [_storage fileURLForKey:key];
+    NSString *path_02 = [_storage pathForKey:key];
+    NSURL *fileURL = [_storage URLForKey:key];
     
     XCTAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:path_01]);
     XCTAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:path_02]);
@@ -114,8 +114,8 @@
     NSArray *contents = [_storage contentsWithResourceKeys:nil];
     XCTAssertTrue(contents.count == 2);
     for (NSURL *fileURL in contents) {
-        XCTAssertTrue([fileURL.path rangeOfString:[_storage fileNameForKey:key]].location != NSNotFound ||
-                     [fileURL.path rangeOfString:[_storage fileNameForKey:key2]].location != NSNotFound);
+        XCTAssertTrue([fileURL.path rangeOfString:[_storage filenameForKey:key]].location != NSNotFound ||
+                     [fileURL.path rangeOfString:[_storage filenameForKey:key2]].location != NSNotFound);
     }
 }
 

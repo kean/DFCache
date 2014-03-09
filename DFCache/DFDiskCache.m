@@ -18,7 +18,7 @@
 - (NSData *)dataForKey:(NSString *)key {
     NSData *data = [super dataForKey:key];
     if (_capacity != DFDiskCacheCapacityUnlimited && data) {
-        [[self fileURLForKey:key] setResourceValue:[NSDate date] forKey:NSURLAttributeModificationDateKey error:nil];
+        [[self URLForKey:key] setResourceValue:[NSDate date] forKey:NSURLAttributeModificationDateKey error:nil];
     }
     return data;
 }

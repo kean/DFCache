@@ -183,7 +183,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
     }
     __block NSDictionary *metadata;
     dispatch_sync(_ioQueue, ^{
-        NSURL *fileURL = [self.diskCache fileURLForKey:key];
+        NSURL *fileURL = [self.diskCache URLForKey:key];
         metadata = [fileURL extendedAttributeValueForKey:DFCacheAttributeMetadataKey error:nil];
     });
     return metadata;
@@ -194,7 +194,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
         return;
     }
     dispatch_async(_ioQueue, ^{
-        NSURL *fileURL = [self.diskCache fileURLForKey:key];
+        NSURL *fileURL = [self.diskCache URLForKey:key];
         [fileURL setExtendedAttributeValue:metadata forKey:DFCacheAttributeMetadataKey];
     });
 }
@@ -204,7 +204,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
         return;
     }
     dispatch_async(_ioQueue, ^{
-        NSURL *fileURL = [self.diskCache fileURLForKey:key];
+        NSURL *fileURL = [self.diskCache URLForKey:key];
         NSDictionary *metadata = [fileURL extendedAttributeValueForKey:DFCacheAttributeMetadataKey error:nil];
         NSMutableDictionary *mutableMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
         [mutableMetadata addEntriesFromDictionary:keyedValues];
@@ -217,7 +217,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
         return;
     }
     dispatch_async(_ioQueue, ^{
-        NSURL *fileURL = [self.diskCache fileURLForKey:key];
+        NSURL *fileURL = [self.diskCache URLForKey:key];
         [fileURL removeExtendedAttributeForKey:DFCacheAttributeMetadataKey];
     });
 }

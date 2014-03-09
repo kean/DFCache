@@ -19,15 +19,14 @@ extern NSString *const DFCacheAttributeMetadataKey;
 
 /* DFCache Features.
  
- - Encoding/decoding is implemented using blocks. Store any kind of Objective-C objects or manipulate data directly (see DFDiskCache : DFFileStorage).
+ - Encoding/decoding is implemented using blocks. Store any kind of Objective-C objects or manipulate data directly (see DFDiskCache, DFFileStorage).
  - Custom metadata implemented on top on UNIX extended file attributes.
- - LRU cleanup (see DFDiskCache -(void)cleanupDisk).
+ - LRU cleanup (discard least recently used items first).
  */
 
 /*! Efficient memory and disk cache.
- @discussion DFCache is built on top of NSCache and DFFileStorage (DFDiskCache) DFCache is not just a convenience interface for DFFileStorage and NSCache. It also extends DFFileStorage and NSCache functionality is several ways, like associating metadata with objects.
+ @discussion DFCache is built on top of NSCache and DFDiskCache (DFFileStorage). DFCache is not just a convenient interface for DFDiskCache and NSCache. It also extends DFDiskCache and NSCache functionality is several ways, like associating metadata with objects.
  */
-NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface DFCache : NSObject
 
 /*! Initializes and returns cache with provided disk storage and memory cache.

@@ -13,10 +13,9 @@
 /*! Key-value file storage.
  @discussion File storage doesn't limit your access to the underlying storage directory.
  */
-NS_CLASS_AVAILABLE(10_6, 4_0)
 @interface DFFileStorage : NSObject
 
-/*! Initializes and returns storage with directory path.
+/*! Initializes and returns storage with the given directory path.
  @param path Storage directory path.
  @param error A pointer to an error object. If an error occurs while creating storage directory, the pointer is set to the file system error (see NSFileManager). You may specify nil for this parameter if you do not want the error information.
  */
@@ -38,7 +37,7 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
  */
 - (void)removeDataForKey:(NSString *)key;
 
-/*! Removes all files.
+/*! Removes all storage contents.
  */
 - (void)removeAllData;
 
@@ -48,15 +47,15 @@ NS_CLASS_AVAILABLE(10_6, 4_0)
 
 /*! Returns file name for the given key.
  */
-- (NSString *)fileNameForKey:(NSString *)key;
+- (NSString *)filenameForKey:(NSString *)key;
 
 /*! Returns file path for the given key.
  */
-- (NSString *)filePathForKey:(NSString *)key;
+- (NSString *)pathForKey:(NSString *)key;
 
 /* Returns file URL for the given key.
  */
-- (NSURL *)fileURLForKey:(NSString *)key;
+- (NSURL *)URLForKey:(NSString *)key;
 
 /*! Returns the current size of the receiver contents, in bytes.
  */
