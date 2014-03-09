@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'DFCache Tests Mac' target in the 'DFCache Tests Mac' project
-//
-
-#ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-#endif
