@@ -33,7 +33,7 @@
     if (!key.length) {
         return nil;
     }
-    __block NSData *data;
+    NSData *__block data;
     dispatch_sync(self.ioQueue, ^{
         data = [self.diskCache dataForKey:key];
     });

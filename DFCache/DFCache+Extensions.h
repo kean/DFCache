@@ -12,11 +12,9 @@
 
 #import "DFCache.h"
 
-/*! Extended DFCache functionality.
- */
 @interface DFCache (Extensions)
 
-#pragma mark - Data Access
+#pragma mark - Direct Data Manipulations
 
 /*! Reads data from disk.
  @param key The unique key.
@@ -40,7 +38,7 @@
  */
 - (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *data))completion;
 
-#pragma mark - Objects
+#pragma mark - Batch Read
 
 /*! Reads objects for provided keys.
  @param keys Array of unique keys.

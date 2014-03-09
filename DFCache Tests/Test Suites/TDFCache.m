@@ -107,7 +107,7 @@
     
     [_cache storeObject:JSON forKey:key cost:0.f encode:DFCacheEncodeJSON];
 
-    __block BOOL isWaiting = YES;
+    BOOL __block isWaiting = YES;
     [_cache cachedObjectForKey:key decode:DFCacheDecodeJSON cost:nil completion:^(id object) {
         XCTAssertTrue([JSON[@"key"] isEqualToString:object[@"key"]]);
         isWaiting = NO;

@@ -12,14 +12,19 @@
 
 #import "DFCache.h"
 #import "DFCachePrivate.h"
+#import "DFCacheTimer.h"
 #import "NSURL+DFExtendedFileAttributes.h"
 
 NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
 
-@implementation DFCache
+@implementation DFCache {
+    BOOL _cleanupTimerEnabled;
+    NSTimeInterval _cleanupTimeInterval;
+    DFCacheTimer *__weak _cleanupTimer;
+}
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_cleanupTimer invalidate];
 }
 
 - (id)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache {
@@ -33,9 +38,10 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
         _ioQueue = dispatch_queue_create("_df_storage_io_queue", DISPATCH_QUEUE_SERIAL);
         _processingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_applicationWillResignActive:) name:DFCacheApplicationWillResignActiveNotification object:nil];
-        
-        [self _cleanupDisk];
+        _cleanupTimeInterval = 60.f;
+        _cleanupTimerEnabled = YES;
+        [self _rescheduleCleanupTimer];
+        [self cleanupDiskCache];
     }
     return self;
 }
@@ -91,7 +97,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
     if (!key || !decode) {
         return nil;
     }
-    __block id object = [_memoryCache objectForKey:key];
+    id __block object = [_memoryCache objectForKey:key];
     if (object) {
         return object;
     }
@@ -181,7 +187,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
     if (!key) {
         return nil;
     }
-    __block NSDictionary *metadata;
+    NSDictionary *__block metadata;
     dispatch_sync(_ioQueue, ^{
         NSURL *fileURL = [self.diskCache URLForKey:key];
         metadata = [fileURL extendedAttributeValueForKey:DFCacheAttributeMetadataKey error:nil];
@@ -222,14 +228,34 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
     });
 }
 
-#pragma mark - Private
+#pragma mark - Cleanup
 
-- (void)_applicationWillResignActive:(NSNotification *)notification {
-    // Delay cleanup by scheduling in main thread in NSDefaultRunLoopMode.
-    [self performSelector:@selector(_cleanupDisk) withObject:self afterDelay:2.0];
+- (void)setCleanupTimerInterval:(NSTimeInterval)timeInterval {
+    if (_cleanupTimeInterval != timeInterval) {
+        _cleanupTimeInterval = timeInterval;
+        [self _rescheduleCleanupTimer];
+    }
 }
 
-- (void)_cleanupDisk {
+- (void)setCleanupTimerEnabled:(BOOL)enabled {
+    if (_cleanupTimerEnabled != enabled) {
+        _cleanupTimerEnabled = enabled;
+        [self _rescheduleCleanupTimer];
+    }
+}
+
+- (void)_rescheduleCleanupTimer {
+    [_cleanupTimer invalidate];
+    if (!_cleanupTimerEnabled) {
+        return;
+    }
+    DFCache *__weak weakSelf = self;
+    _cleanupTimer = [DFCacheTimer scheduledTimerWithTimeInterval:_cleanupTimeInterval block:^{
+        [weakSelf cleanupDiskCache];
+    } userInfo:nil repeats:YES];
+}
+
+- (void)cleanupDiskCache {
     dispatch_async(_ioQueue, ^{
         [_diskCache cleanup];
     });

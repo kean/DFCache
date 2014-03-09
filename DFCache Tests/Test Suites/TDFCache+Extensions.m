@@ -26,11 +26,7 @@
 - (void)setUp {
     [super setUp];
     
-    static NSUInteger _index = 0;
-    
-    NSString *cacheName = [NSString stringWithFormat:@"_dt_extenstions_testcase_%lu", (unsigned long)_index];
-    _cache = [[DFCache alloc] initWithName:cacheName];
-    _index++;
+    _cache = [[DFCache alloc] initWithName:[self _generateCacheName]];
 }
 
 - (void)tearDown {
@@ -48,7 +44,7 @@
     
     [_cache storeObject:object forKey:key cost:0 encode:DFCacheEncodeNSCoding];
     
-    __block BOOL isWaiting = YES;
+    BOOL __block isWaiting = YES;
     [_cache cachedDataForKey:key completion:^(NSData *data) {
         XCTAssertEqualObjects(object, DFCacheDecodeNSCoding(data));
         isWaiting = NO;
@@ -81,7 +77,7 @@
     [_cache storeStringsWithCount:5 strings:&strings];
     NSArray *keys = [strings allKeys];
     
-    __block BOOL isWaiting = YES;
+    BOOL __block isWaiting = YES;
     [_cache cachedDataForKeys:keys completion:^(NSDictionary *data) {
         for (NSString *key in keys) {
             XCTAssertNotNil(data[key]);
@@ -99,7 +95,7 @@
     [_cache storeStringsWithCount:5 strings:&strings];
     NSArray *keys = [strings allKeys];
     
-    __block BOOL isWaiting = YES;
+    BOOL __block isWaiting = YES;
     [_cache cachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(NSDictionary *objects) {
         for (NSString *key in keys) {
             XCTAssertTrue([objects[key] isEqualToString:strings[key]]);
@@ -113,12 +109,13 @@
 - (void)testCachedObjectsForKeysFromDisk {
     NSDictionary *strings;
     NSArray *keys;
-    _cache.memoryCache = nil;
+    
+    _cache = [[DFCache alloc] initWithName:[self _generateCacheName] memoryCache:nil];
     
     [_cache storeStringsWithCount:5 strings:&strings];
     keys = [strings allKeys];
     
-    __block BOOL isWaiting = YES;
+    BOOL __block isWaiting = YES;
     [_cache cachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(NSDictionary *objects) {
         for (NSString *key in keys) {
             XCTAssertTrue([objects[key] isEqualToString:strings[key]]);
@@ -136,7 +133,7 @@
     
     [_cache removeObjectForKey:keys[0]];
     
-    __block BOOL isWaiting = YES;
+    BOOL __block isWaiting = YES;
     [_cache cachedObjectForAnyKey:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(id object, NSString *key) {
         XCTAssertTrue([key isEqualToString:keys[1]]);
         XCTAssertTrue([object isEqualToString:strings[keys[1]]]);
@@ -149,14 +146,15 @@
 - (void)testCachedObjectForAnyKeyFromDisk {
     NSDictionary *strings;
     NSArray *keys;
-    _cache.memoryCache = nil;
+    
+    _cache = [[DFCache alloc] initWithName:[self _generateCacheName] memoryCache:nil];
     
     [_cache storeStringsWithCount:5 strings:&strings];
     keys = [strings allKeys];
 
     [_cache removeObjectForKey:keys[0]];
     
-    __block BOOL isWaiting = YES;
+    BOOL __block isWaiting = YES;
     [_cache cachedObjectForAnyKey:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(id object, NSString *key) {
         XCTAssertTrue([key isEqualToString:keys[1]]);
         XCTAssertTrue([object isEqualToString:strings[keys[1]]]);
@@ -167,6 +165,12 @@
 }
 
 #pragma mark - Helpers
+
+- (NSString *)_generateCacheName {
+    static NSUInteger index = 0;
+    index++;
+    return [NSString stringWithFormat:@"_df_test_cache_%i", index];
+}
 
 - (void)_assertContainsObjectsForKeys:(NSArray *)keys objects:(NSDictionary *)objects {
     for (NSString *key in keys) {

@@ -23,7 +23,7 @@ static const unsigned long long DFDiskCacheCapacityUnlimited = 0;
  */
 @property (nonatomic) unsigned long long capacity;
 
-/*! Remaining disk usage after cleanup. The rate must be in the range of 0.0 to 1.0 where 1.0 represents full disk capacity.
+/*! Remaining disk usage after cleanup. The rate must be in the range of 0.0 to 1.0 where 1.0 represents full disk capacity. Default and recommended value is 0.5.
  */
 @property (nonatomic) CGFloat cleanupRate;
 

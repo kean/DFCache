@@ -15,6 +15,14 @@
 
 @implementation DFDiskCache
 
+- (id)initWithPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+    if (self = [super initWithPath:path error:error]) {
+        _capacity = DFDiskCacheCapacityUnlimited;
+        _cleanupRate = 0.5f;
+    }
+    return self;
+}
+
 - (NSData *)dataForKey:(NSString *)key {
     NSData *data = [super dataForKey:key];
     if (_capacity != DFDiskCacheCapacityUnlimited && data) {

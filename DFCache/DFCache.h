@@ -13,24 +13,26 @@
 #import "DFDiskCache.h"
 #import "DFCacheBlocks.h"
 
-/*! File extended attribute name (see NSURL+DFExtendedFileAttributes) used to store metadata.
+/*! Extended attribute name used to store metadata (see NSURL+DFExtendedFileAttributes).
  */
 extern NSString *const DFCacheAttributeMetadataKey;
 
-/* DFCache Features.
- 
- - Encoding/decoding is implemented using blocks. Store any kind of Objective-C objects or manipulate data directly (see DFDiskCache, DFFileStorage).
- - Custom metadata implemented on top on UNIX extended file attributes.
+/* DFCache key features:
+ - Asynchronous composite in-memory and on-disk cache.
+ - Encoding, decoding and cost calculation implemented using blocks. Store any kind of Objective-C objects or manipulate data directly (see DFFileStorage).
  - LRU cleanup (discard least recently used items first).
+ - Custom metadata implemented on top on UNIX extended file attributes.
+ - Thoroughly tested. Written for and used heavily in the iOS application with more than half a million active users.
+ - Concise and extensible API.
  */
 
-/*! Efficient memory and disk cache.
- @discussion DFCache is built on top of NSCache and DFDiskCache (DFFileStorage). DFCache is not just a convenient interface for DFDiskCache and NSCache. It also extends DFDiskCache and NSCache functionality is several ways, like associating metadata with objects.
+/*! Asynchronous composite in-memory and on-disk cache. 
+ @discussion Uses NSCache for in-memory caching and DFDiskCache for on-disk caching. Extends DFDiskCache functionality by providing API for associating custom metadata with cache entries.
  */
 @interface DFCache : NSObject
 
-/*! Initializes and returns cache with provided disk storage and memory cache.
- @param diskStorage Disk storage. Must not be nil.
+/*! Initializes and returns cache with provided disk and memory cache.
+ @param diskCache Disk cache. Must not be nil.
  @param memoryCache Memory cache. Pass nil to disable memory caching.
  */
 - (id)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache;
@@ -147,5 +149,19 @@ extern NSString *const DFCacheAttributeMetadataKey;
  @param key The unique key.
  */
 - (void)removeMetadataForKey:(NSString *)key;
+
+#pragma mark - Cleanup
+
+/*! Sets cleanup time interval and schedules cleanup timer with the given timer interal if the cleanup timer is enabled. Default value is 60 seconds.
+ */
+- (void)setCleanupTimerInterval:(NSTimeInterval)timeInterval;
+
+/*! Enables or disables cleanup timer. Cleanup timer is enabled by default.
+ */
+- (void)setCleanupTimerEnabled:(BOOL)enabled;
+
+/*! Cleanup disk cache asynchronously.
+ */
+- (void)cleanupDiskCache;
 
 @end

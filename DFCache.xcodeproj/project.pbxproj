@@ -14,6 +14,11 @@
 		0C7D47AF18CB1FA50078C765 /* DFCachePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */; };
 		0C7D47B018CB1FA50078C765 /* DFCachePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */; };
 		0C8C15E517D40DFC004B7DAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
+		0C94792118CCE4D4008E8938 /* DFCacheTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C94791F18CCE4D4008E8938 /* DFCacheTimer.h */; };
+		0C94792218CCE4D4008E8938 /* DFCacheTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C94791F18CCE4D4008E8938 /* DFCacheTimer.h */; };
+		0C94792318CCE4D4008E8938 /* DFCacheTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94792018CCE4D4008E8938 /* DFCacheTimer.m */; };
+		0C94792418CCE4D4008E8938 /* DFCacheTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94792018CCE4D4008E8938 /* DFCacheTimer.m */; };
+		0C94792518CCE4D4008E8938 /* DFCacheTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94792018CCE4D4008E8938 /* DFCacheTimer.m */; };
 		0CB95DFA18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95DFB18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95DFC18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */; };
@@ -127,6 +132,8 @@
 		0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCachePrivate.m; sourceTree = "<group>"; };
 		0C7D47B218CB20470078C765 /* DFTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTesting.h; sourceTree = "<group>"; };
 		0C8C15E217D40DFC004B7DAA /* DFCache Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DFCache Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C94791F18CCE4D4008E8938 /* DFCacheTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCacheTimer.h; sourceTree = "<group>"; };
+		0C94792018CCE4D4008E8938 /* DFCacheTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCacheTimer.m; sourceTree = "<group>"; };
 		0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+DFExtendedFileAttributes.h"; sourceTree = "<group>"; };
 		0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DFExtendedFileAttributes.m"; sourceTree = "<group>"; };
 		0CB95E0418CB181000169472 /* DFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCache.h; sourceTree = "<group>"; };
@@ -247,6 +254,8 @@
 			children = (
 				0C37064F18CA408F003E20C4 /* DFCachePrivate.h */,
 				0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */,
+				0C94791F18CCE4D4008E8938 /* DFCacheTimer.h */,
+				0C94792018CCE4D4008E8938 /* DFCacheTimer.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -412,6 +421,7 @@
 				0CB95E1818CB181000169472 /* DFDiskCache.h in Headers */,
 				0CCCFED318CB2D4B009AE6DB /* DFFileStorage.h in Headers */,
 				0CB95DFB18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */,
+				0C94792118CCE4D4008E8938 /* DFCacheTimer.h in Headers */,
 				0C3706C418CA408F003E20C4 /* DFCachePrivate.h in Headers */,
 				0CFA33F417D4734900AE6EEF /* DFCache OS X-Prefix.pch in Headers */,
 			);
@@ -427,6 +437,7 @@
 				0CB95E1718CB181000169472 /* DFDiskCache.h in Headers */,
 				0CCCFED218CB2D4B009AE6DB /* DFFileStorage.h in Headers */,
 				0CB95DFA18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */,
+				0C94792218CCE4D4008E8938 /* DFCacheTimer.h in Headers */,
 				0C3706C318CA408F003E20C4 /* DFCachePrivate.h in Headers */,
 				0CFA33F317D4734900AE6EEF /* DFCache OS X-Prefix.pch in Headers */,
 			);
@@ -632,6 +643,7 @@
 				0CCCFED418CB2D4B009AE6DB /* DFFileStorage.m in Sources */,
 				0CB95E0D18CB181000169472 /* DFCache.m in Sources */,
 				0CB95DFC18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */,
+				0C94792318CCE4D4008E8938 /* DFCacheTimer.m in Sources */,
 				0C7D47AE18CB1FA50078C765 /* DFCachePrivate.m in Sources */,
 				0CB95E1918CB181000169472 /* DFDiskCache.m in Sources */,
 			);
@@ -645,6 +657,7 @@
 				0CB95E1418CB181000169472 /* DFCache+Extensions.m in Sources */,
 				0CCCFED618CB2D4B009AE6DB /* DFFileStorage.m in Sources */,
 				0CB95DFE18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */,
+				0C94792418CCE4D4008E8938 /* DFCacheTimer.m in Sources */,
 				0C7D47B018CB1FA50078C765 /* DFCachePrivate.m in Sources */,
 				0CB95E1B18CB181000169472 /* DFDiskCache.m in Sources */,
 			);
@@ -658,6 +671,7 @@
 				0CCCFED518CB2D4B009AE6DB /* DFFileStorage.m in Sources */,
 				0CB95E0E18CB181000169472 /* DFCache.m in Sources */,
 				0CB95DFD18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */,
+				0C94792518CCE4D4008E8938 /* DFCacheTimer.m in Sources */,
 				0C7D47AF18CB1FA50078C765 /* DFCachePrivate.m in Sources */,
 				0CB95E1A18CB181000169472 /* DFDiskCache.m in Sources */,
 			);
