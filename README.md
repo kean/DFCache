@@ -34,11 +34,14 @@ DFCache *cache = [[DFCache alloc] initWithName:@"sample_cache"];
 NSData *data = ...; // Original JSON data.
 id JSON = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
 [cache storeObject:JSON forKey:key cost:0 data:data];
+
+// Retreive object be decoding it using built-in DFCacheDecodeJSON block.
 [cache cachedObjectForKey:key decode:DFCacheDecodeJSON cost:nil completion:^(id object) {
     // All cache disk IO operations are executed on the serial dispath queue
     // which guarantees that the object is going to be on disk.
     NSLog(@"Did retreive value %@ for key %@", object, key);
 }];
+
 [cache removeObjectForKey:key];
 ```
 
