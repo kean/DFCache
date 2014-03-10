@@ -90,11 +90,6 @@ platform :ios, '6.0'
 pod "DFCache", "~> 1.0"
 ```
 
-### Building static (iOS or OS X) or dynamic (OS X) library
-The other way to install `DFCache` is to build a static or dynamic library. `DFCache` Xcode project has everything you need to do that. Just select the required scheme and archive the product.
-
-Be aware that if you want to use iOS static library on both the device and the simulator you need to build a 'fat' library. Xcode doesn't have an option to build iOS static library for both ARM (device) and i386 (simulator) architectures.  Fortunately, there are [other ways](https://www.google.com/search?q=build+ios+static+library+for+both+device+and+simulator) to do that.
-
 # Contacts
 [Alexander Grebenyuk](https://github.com/kean)
 
