@@ -4,8 +4,7 @@ Pod::Spec.new do |s|
     s.license = 'MIT'
     s.homepage = 'https://github.com/kean/DFCache'
     s.authors = 'Alexander Grebenyuk'
-    s.summary = 'Composite cache with LRU cleaup. User metadata on top of UNIX extended file attributes.'
-
+    s.summary = 'Composite cache with LRU cleanup and user metadata on top of UNIX extended file attributes. Thoroughly tested and used heavily in the iOS app with more than half a million active users.'
     s.ios.deployment_target = '6.0'
     s.osx.deployment_target = '10.7'
     s.requires_arc = true
