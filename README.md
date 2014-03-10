@@ -26,7 +26,7 @@ Current version is 1.1.0.
 
 # DFCache and Images
 
-It's a common fact that UIImage does not expose any API to force jpeg data decompression before actual rendering. One way to deal with this is to use [`DFJPEGTurbo`](https://github.com/kean/DFJPEGTurbo) which is an Objective-C [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) wrapper (JPEG image codec that uses SIMD instructions (MMX, SSE2, NEON) to accelerate baseline JPEG compression and decompression on x86, x86-64, and ARM systems).
+It's a common fact that UIImage does not expose any API to force jpeg data decompression before actual rendering. One way to deal with it is to use [`DFJPEGTurbo`](https://github.com/kean/DFJPEGTurbo) which is an Objective-C [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) wrapper (JPEG image codec that uses SIMD instructions (MMX, SSE2, NEON) to accelerate baseline JPEG compression and decompression on x86, x86-64, and ARM systems).
 
 Current `DFCache` version doesn't include built-in blocks to decode images, however it's trivial to add them by installing [`DFJPEGTurbo`](https://github.com/kean/DFJPEGTurbo) which is also available via Cocoapods. This approach is currently used in production and it proved to be faster than any others.
 
