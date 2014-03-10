@@ -28,7 +28,7 @@ Current version is 1.1.0.
 
 ### DFCache
 
-#### Storing, retreiving and removing JSON
+#### Store, retreive and remove JSON
 ```objective-c
 DFCache *cache = [[DFCache alloc] initWithName:@"sample_cache"];
 NSData *data = ...; // Original JSON data.
@@ -42,7 +42,7 @@ id JSON = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error
 [cache removeObjectForKey:key];
 ```
 
-#### Settings and reading metadata
+#### Set and read metadata
 ```objective-c
 DFCache *cache = [[DFCache alloc] initWithName:@"sample_cache"];
 NSDictionary *object = @{ @"key" : @"value" }
@@ -53,14 +53,14 @@ NSDictionary *metadata = [cache metadataForKey:key];
 
 ### DFFileStorage
 
-#### Writing and reading data
+#### Write and read data
 ```objective-c
 DFFileStorage *storage = [[DFFileStorage alloc] initWithPath:path error:nil];
 [storage setData:data forKey:@"key"];
 [storage dataForKey:@"key"];
 ```
 
-#### Contents
+#### Enumerate contents
 ```objective-c
 DFFileStorage *storage = [[DFFileStorage alloc] initWithPath:path error:nil];
 NSArray *resourceKeys = @[ NSURLContentModificationDateKey, NSURLFileAllocatedSizeKey ];
@@ -72,7 +72,7 @@ for (NSURL *fileURL in contents) {
 
 ### NSURL (DFExtendedFileAttributes)
 
-#### Writing and reading extended file attribute.
+#### Set and read extended file attribute.
 ```objective-c
 NSURL *fileURL = [NSURL fileURLWithPath:path];
 [fileURL setExtendedAttributeValue:@"value" forKey:@"attr_key"];
