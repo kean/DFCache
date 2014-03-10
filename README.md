@@ -24,7 +24,7 @@ Current version is 1.1.0.
 |[`DFDiskCache`](https://github.com/kean/DFCache/blob/master/DFCache/DFDiskCache.h)|Disk cache extends file storage functionality by providing LRU (least recently used) cleanup.|
 |[`NSURL (DFExtendedFileAttributes)`](https://github.com/kean/DFCache/blob/master/DFCache/Extended%20File%20Attributes/NSURL%2BDFExtendedFileAttributes.h)|Objective-c wrapper of UNIX extended file attributes. Extended attributes extend the basic attributes associated with files and directories in the file system. They are stored as name:data pairs associated with file system objects (files, directories, symlinks, etc). See setxattr(2).|
 
-# DFCache and Images
+# DFCache and JPEG Decompression
 
 It's a common fact that UIImage does not expose any API to force jpeg data decompression before actual rendering. One way to deal with it is to use [`DFJPEGTurbo`](https://github.com/kean/DFJPEGTurbo) which is an Objective-C [libjpeg-turbo](http://libjpeg-turbo.virtualgl.org) wrapper (JPEG image codec that uses SIMD instructions (MMX, SSE2, NEON) to accelerate baseline JPEG compression and decompression on x86, x86-64, and ARM systems).
 
