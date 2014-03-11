@@ -15,8 +15,8 @@
 		0C7D47B018CB1FA50078C765 /* DFCachePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */; };
 		0C85802E18CF125800D71F3E /* DFCacheImageDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C85802C18CF125800D71F3E /* DFCacheImageDecoder.h */; };
 		0C85803118CF125800D71F3E /* DFCacheImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C85802D18CF125800D71F3E /* DFCacheImageDecoder.m */; };
-		0C85803618CF14B800D71F3E /* DFCache+DFUIImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C85803418CF14B800D71F3E /* DFCache+DFUIImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C85803718CF14B800D71F3E /* DFCache+DFUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C85803518CF14B800D71F3E /* DFCache+DFUIImage.m */; };
+		0C85803618CF14B800D71F3E /* DFCache+DFImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C85803418CF14B800D71F3E /* DFCache+DFImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C85803718CF14B800D71F3E /* DFCache+DFImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C85803518CF14B800D71F3E /* DFCache+DFImage.m */; };
 		0C85803918CF172D00D71F3E /* TDFCache+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C85803818CF172D00D71F3E /* TDFCache+UIImage.m */; };
 		0C85803D18CF17F900D71F3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C85803C18CF17F900D71F3E /* CoreGraphics.framework */; };
 		0C8C15E517D40DFC004B7DAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
@@ -136,8 +136,8 @@
 		0C7D47B218CB20470078C765 /* DFTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTesting.h; sourceTree = "<group>"; };
 		0C85802C18CF125800D71F3E /* DFCacheImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCacheImageDecoder.h; sourceTree = "<group>"; };
 		0C85802D18CF125800D71F3E /* DFCacheImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCacheImageDecoder.m; sourceTree = "<group>"; };
-		0C85803418CF14B800D71F3E /* DFCache+DFUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache+DFUIImage.h"; sourceTree = "<group>"; };
-		0C85803518CF14B800D71F3E /* DFCache+DFUIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DFCache+DFUIImage.m"; sourceTree = "<group>"; };
+		0C85803418CF14B800D71F3E /* DFCache+DFImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache+DFImage.h"; sourceTree = "<group>"; };
+		0C85803518CF14B800D71F3E /* DFCache+DFImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DFCache+DFImage.m"; sourceTree = "<group>"; };
 		0C85803818CF172D00D71F3E /* TDFCache+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TDFCache+UIImage.m"; sourceTree = "<group>"; };
 		0C85803A18CF17DF00D71F3E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0C85803C18CF17F900D71F3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -251,8 +251,8 @@
 				0CB95E0818CB181000169472 /* DFCacheBlocks.h */,
 				0CB95E0618CB181000169472 /* DFCache+DFExtensions.h */,
 				0CB95E0718CB181000169472 /* DFCache+DFExtensions.m */,
-				0C85803418CF14B800D71F3E /* DFCache+DFUIImage.h */,
-				0C85803518CF14B800D71F3E /* DFCache+DFUIImage.m */,
+				0C85803418CF14B800D71F3E /* DFCache+DFImage.h */,
+				0C85803518CF14B800D71F3E /* DFCache+DFImage.m */,
 				0CB95E0918CB181000169472 /* DFDiskCache.h */,
 				0CB95E0A18CB181000169472 /* DFDiskCache.m */,
 				0CCCFECF18CB2D4B009AE6DB /* Key-Value File Storage */,
@@ -479,7 +479,7 @@
 				0CCF5DCC18CD0CC700823676 /* DFCache.h in Headers */,
 				0CCF5DCD18CD0CC700823676 /* DFCacheBlocks.h in Headers */,
 				0CCF5DCE18CD0CC700823676 /* DFCache+DFExtensions.h in Headers */,
-				0C85803618CF14B800D71F3E /* DFCache+DFUIImage.h in Headers */,
+				0C85803618CF14B800D71F3E /* DFCache+DFImage.h in Headers */,
 				0CCF5DCF18CD0CC700823676 /* DFDiskCache.h in Headers */,
 				0CCF5DD018CD0CC700823676 /* DFFileStorage.h in Headers */,
 				0CCF5DD118CD0CC700823676 /* NSURL+DFExtendedFileAttributes.h in Headers */,
@@ -691,7 +691,7 @@
 			files = (
 				0CB95E1218CB181000169472 /* DFCache+DFExtensions.m in Sources */,
 				0CCCFED418CB2D4B009AE6DB /* DFFileStorage.m in Sources */,
-				0C85803718CF14B800D71F3E /* DFCache+DFUIImage.m in Sources */,
+				0C85803718CF14B800D71F3E /* DFCache+DFImage.m in Sources */,
 				0CB95E0D18CB181000169472 /* DFCache.m in Sources */,
 				0CB95DFC18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */,
 				0C94792318CCE4D4008E8938 /* DFCacheTimer.m in Sources */,

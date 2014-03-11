@@ -20,9 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DFCache+DFUIImage.h"
+#import "DFCache+DFImage.h"
 
-@implementation DFCache (DFUIImage)
+@implementation DFCache (DFImage)
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
 
 - (void)storeImage:(UIImage *)image imageData:(NSData *)data forKey:(NSString *)key {
     NSUInteger cost = DFCacheCostUIImage(image);
@@ -40,5 +42,7 @@
 - (UIImage *)cachedImageForKey:(NSString *)key {
     return [self cachedObjectForKey:key decode:DFCacheDecodeUIImage cost:DFCacheCostUIImage];
 }
+
+#endif
 
 @end

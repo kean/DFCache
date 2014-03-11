@@ -24,6 +24,8 @@
 #import "DFCacheBlocks.h"
 #import "DFCacheImageDecoder.h"
 
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+
 static const DFCacheEncodeBlock DFCacheEncodeUIImage = ^NSData *(UIImage *image){
     return UIImageJPEGRepresentation(image, 1.0);
 };
@@ -41,8 +43,11 @@ static const DFCacheCostBlock DFCacheCostUIImage = ^NSUInteger(id object){
     return CGImageGetWidth(image.CGImage) * CGImageGetHeight(image.CGImage) * 4;
 };
 
+#endif
 
-@interface DFCache (DFUIImage)
+@interface DFCache (DFImage)
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
 
 /*! Stores image into memory cache. Stores image data into disk cache. If image data is nil DFCacheEncodeUIImage block is used.
  */
@@ -55,5 +60,7 @@ static const DFCacheCostBlock DFCacheCostUIImage = ^NSUInteger(id object){
 /*! Retreives object from disk synchronously using DFCacheDecodeUIImage and DFCacheCostUIImage.
  */
 - (UIImage *)cachedImageForKey:(NSString *)key;
+
+#endif
 
 @end

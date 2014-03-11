@@ -20,7 +20,7 @@ Current version is 1.2.0.
 |Class|Description|
 |---------|---------|
 |[DFCache](https://github.com/kean/DFCache/blob/master/DFCache/DFCache.h)|Asynchronous composite in-memory and on-disk cache. Uses `NSCache` for in-memory caching and `DFDiskCache` for on-disk caching. Extends `DFDiskCache` functionality by providing API for associating custom metadata with cache entries.|
-|[DFCache (DFUIImage)](https://github.com/kean/DFCache/blob/master/DFCache/DFCache%2BDFUIImage.h)|First class UIImage support, including background image decompression.|
+|[DFCache (DFImage)](https://github.com/kean/DFCache/blob/master/DFCache/DFCache%2BDFUIImage.h)|First class UIImage support, including background image decompression.|
 |[DFCache (DFExtensions)](https://github.com/kean/DFCache/blob/master/DFCache/DFCache%2BDFExtensions.h)|Set of methods that extend `DFCache` functionality by providing direct asynchronous access to data and allowing you to retrieve cached objects in batches.|
 |[DFFileStorage](https://github.com/kean/DFCache/blob/master/DFCache/Key-Value%20File%20Storage/DFFileStorage.h)|Key-value file storage.|
 |[DFDiskCache](https://github.com/kean/DFCache/blob/master/DFCache/DFDiskCache.h)|Disk cache extends file storage functionality by providing LRU (least recently used) cleanup.|

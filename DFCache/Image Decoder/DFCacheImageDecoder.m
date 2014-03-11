@@ -21,8 +21,11 @@
 // THE SOFTWARE.
 
 #import "DFCacheImageDecoder.h"
+#import <CoreGraphics/CoreGraphics.h>
 
 @implementation DFCacheImageDecoder
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
 
 /*! Implementation from SDWebImage package.
  (c) Olivier Poitrey <rs@dailymotion.com>
@@ -86,5 +89,7 @@
     CGImageRelease(decompressedImageRef);
     return decompressedImage;
 }
+
+#endif
 
 @end
