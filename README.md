@@ -13,9 +13,6 @@ DFCache is an iOS and OS X library that implements composite in-memory and on-di
 ### Requirements
 - iOS 6.0 or OS X 10.7
 
-### Current Version
-Current version is 1.2.0.
-
 # Classes
 |Class|Description|
 |---------|---------|
