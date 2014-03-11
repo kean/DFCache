@@ -41,7 +41,7 @@
 
 #pragma mark - UIImage
 
-- (void)testReadAsync {
+- (void)testWriteWithoutDataAndReadAsync {
     UIImage *image = [self _testImage];
     NSString *key = @"key";
     
@@ -54,7 +54,7 @@
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
 }
 
-- (void)testReadSync {
+- (void)testWriteWithDataAndReadSync {
     UIImage *image = [self _testImage];
     NSData *data = UIImagePNGRepresentation(image);
     NSString *key = @"key";

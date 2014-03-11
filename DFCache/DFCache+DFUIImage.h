@@ -44,10 +44,16 @@ static const DFCacheCostBlock DFCacheCostUIImage = ^NSUInteger(id object){
 
 @interface DFCache (DFUIImage)
 
-+ (instancetype)imageCache;
-
+/*! Stores image into memory cache. Stores image data into disk cache. If image data is nil DFCacheEncodeUIImage block is used.
+ */
 - (void)storeImage:(UIImage *)image imageData:(NSData *)data forKey:(NSString *)key;
+
+/*! Retreives object from disk asynchronously using DFCacheDecodeUIImage and DFCacheCostUIImage.
+ */
 - (void)cachedImageForKey:(NSString *)key completion:(void (^)(UIImage *image))completion;
+
+/*! Retreives object from disk synchronously using DFCacheDecodeUIImage and DFCacheCostUIImage.
+ */
 - (UIImage *)cachedImageForKey:(NSString *)key;
 
 @end

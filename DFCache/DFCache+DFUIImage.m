@@ -24,18 +24,6 @@
 
 @implementation DFCache (DFUIImage)
 
-+ (instancetype)imageCache {
-    static DFCache *shared = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        shared = [[DFCache alloc] initWithName:@"_dwarf_image_cache" memoryCache:[NSCache new]];
-        shared.diskCache.capacity = 1024 * 1024 * 120; // 120 Mb
-        shared.diskCache.cleanupRate = 0.6f;
-        shared.memoryCache.totalCostLimit = 1024 * 1024 * 15; // 15 Mb
-    });
-    return shared;
-}
-
 - (void)storeImage:(UIImage *)image imageData:(NSData *)data forKey:(NSString *)key {
     NSUInteger cost = DFCacheCostUIImage(image);
     if (data) {
