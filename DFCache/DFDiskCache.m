@@ -33,19 +33,11 @@
     return self;
 }
 
-- (NSData *)dataForKey:(NSString *)key {
-    NSData *data = [super dataForKey:key];
-    if (_capacity != DFDiskCacheCapacityUnlimited && data) {
-        [[self URLForKey:key] setResourceValue:[NSDate date] forKey:NSURLAttributeModificationDateKey error:nil];
-    }
-    return data;
-}
-
 - (void)cleanup {
     if (_capacity == DFDiskCacheCapacityUnlimited) {
         return;
     }
-    NSArray *resourceKeys = @[NSURLContentModificationDateKey, NSURLFileAllocatedSizeKey];
+    NSArray *resourceKeys = @[NSURLContentAccessDateKey, NSURLFileAllocatedSizeKey];
     NSArray *contents = [self contentsWithResourceKeys:resourceKeys];
     NSMutableDictionary *fileAttributes = [NSMutableDictionary dictionary];
     _dwarf_cache_bytes contentsSize = 0;
@@ -62,7 +54,7 @@
     }
     const _dwarf_cache_bytes desiredSize = _capacity * _cleanupRate;
     NSArray *sortedFiles = [fileAttributes keysSortedByValueWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [obj1[NSURLContentModificationDateKey] compare:obj2[NSURLContentModificationDateKey]];
+        return [obj1[NSURLContentAccessDateKey] compare:obj2[NSURLContentAccessDateKey]];
     }];
     for (NSURL *fileURL in sortedFiles) {
         if (contentsSize < desiredSize) {

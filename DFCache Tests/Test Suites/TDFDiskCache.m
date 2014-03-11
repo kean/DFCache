@@ -46,17 +46,17 @@
     _diskCache.capacity = length + 10000;
     _diskCache.cleanupRate = 1.f; // Only one should remain.
     
-    NSArray *keys = @[ @"_key_1", @"_key_2", @"_key_3" ];
+    NSArray *keys = @[ @"_key_1", @"_key_2", @"_key_3", @"_key_4", @"_key_5" ];
     
-    NSData *data0 = [self _dataWithLength:length];
-    [_diskCache setData:data0 forKey:keys[0]];
+    for (NSString *key in keys) {
+        NSData *data = [self _dataWithLength:length];
+        [_diskCache setData:data forKey:key];
+    }
     
-    NSData *data1 = [self _dataWithLength:length];
-    [_diskCache setData:data1 forKey:keys[1]];
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.1f]];
     
-    NSData *data2 = [self _dataWithLength:length];
-    [_diskCache setData:data2 forKey:keys[2]];
-
+    [_diskCache dataForKey:keys[1]];
+    
     [_diskCache cleanup];
     
     NSUInteger remainingDataCount = 0;
@@ -66,6 +66,7 @@
         }
     }
     XCTAssertTrue(remainingDataCount == 1);
+    XCTAssertTrue([_diskCache containsDataForKey:keys[1]]);
 }
 
 #pragma mark - Helpers 
