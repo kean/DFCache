@@ -6,6 +6,7 @@ DFCache is an iOS and OS X library that implements composite in-memory and on-di
  - Encoding, decoding and cost calculation implemented using blocks. Store any kind of Objective-C objects or manipulate data directly (see `DFFileStorage`).
  - LRU cleanup (discards least recently used items first).
  - Custom metadata implemented on top on UNIX extended file attributes.
+ - First class UIImage support, including background image decompression.
  - Thoroughly tested. Written for and used heavily in the iOS application with more than half a million active users.
  - Concise and extensible API.
 
@@ -13,16 +14,17 @@ DFCache is an iOS and OS X library that implements composite in-memory and on-di
 - iOS 6.0 or OS X 10.7
 
 ### Current Version
-Current version is 1.1.0.
+Current version is 1.2.0.
 
 # Classes
 |Class|Description|
 |---------|---------|
-|[`DFCache`](https://github.com/kean/DFCache/blob/master/DFCache/DFCache.h)|Asynchronous composite in-memory and on-disk cache. Uses `NSCache` for in-memory caching and `DFDiskCache` for on-disk caching. Extends `DFDiskCache` functionality by providing API for associating custom metadata with cache entries.|
-|[`DFCache (DFExtensions)`](https://github.com/kean/DFCache/blob/master/DFCache/DFCache%2BDFExtensions.h)|Set of methods that extend `DFCache` functionality by providing direct asynchronous access to data and allowing you to retrieve cached objects in batches.|
-|[`DFFileStorage`](https://github.com/kean/DFCache/blob/master/DFCache/Key-Value%20File%20Storage/DFFileStorage.h)|Key-value file storage.|
-|[`DFDiskCache`](https://github.com/kean/DFCache/blob/master/DFCache/DFDiskCache.h)|Disk cache extends file storage functionality by providing LRU (least recently used) cleanup.|
-|[`NSURL (DFExtendedFileAttributes)`](https://github.com/kean/DFCache/blob/master/DFCache/Extended%20File%20Attributes/NSURL%2BDFExtendedFileAttributes.h)|Objective-c wrapper of UNIX extended file attributes. Extended attributes extend the basic attributes associated with files and directories in the file system. They are stored as name:data pairs associated with file system objects (files, directories, symlinks, etc). See setxattr(2).|
+|[DFCache](https://github.com/kean/DFCache/blob/master/DFCache/DFCache.h)|Asynchronous composite in-memory and on-disk cache. Uses `NSCache` for in-memory caching and `DFDiskCache` for on-disk caching. Extends `DFDiskCache` functionality by providing API for associating custom metadata with cache entries.|
+|[DFCache (DFUIImage)](https://github.com/kean/DFCache/blob/master/DFCache/DFCache%2BDFUIImage.h)|First class UIImage support, including background image decompression.|
+|[DFCache (DFExtensions)](https://github.com/kean/DFCache/blob/master/DFCache/DFCache%2BDFExtensions.h)|Set of methods that extend `DFCache` functionality by providing direct asynchronous access to data and allowing you to retrieve cached objects in batches.|
+|[DFFileStorage](https://github.com/kean/DFCache/blob/master/DFCache/Key-Value%20File%20Storage/DFFileStorage.h)|Key-value file storage.|
+|[DFDiskCache](https://github.com/kean/DFCache/blob/master/DFCache/DFDiskCache.h)|Disk cache extends file storage functionality by providing LRU (least recently used) cleanup.|
+|[NSURL (DFExtendedFileAttributes)](https://github.com/kean/DFCache/blob/master/DFCache/Extended%20File%20Attributes/NSURL%2BDFExtendedFileAttributes.h)|Objective-c wrapper of UNIX extended file attributes. Extended attributes extend the basic attributes associated with files and directories in the file system. They are stored as name:data pairs associated with file system objects (files, directories, symlinks, etc). See setxattr(2).|
 
 # Examples
 
