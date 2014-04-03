@@ -48,7 +48,7 @@ id JSON = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error
 ```objective-c
 DFCache *cache = [[DFCache alloc] initWithName:@"sample_cache"];
 NSDictionary *object = @{ @"key" : @"value" }
-[cache storeObject:object forKey:key cost:0 data:DFCacheEncodeNSCoding];
+[cache storeObject:object forKey:key cost:0 encode:DFCacheEncodeNSCoding];
 [cache setMetadata:@{ @"revalidation_date" : [NSDate date] } forKey:key];
 NSDictionary *metadata = [cache metadataForKey:key];
 ```
