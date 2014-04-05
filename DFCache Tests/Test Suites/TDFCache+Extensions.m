@@ -104,6 +104,8 @@
     NSDictionary *strings;
     [_cache storeStringsWithCount:5 strings:&strings];
     NSArray *keys = [strings allKeys];
+    [_cache.memoryCache removeObjectForKey:keys[3]];
+    [_cache.memoryCache removeObjectForKey:keys[4]];
     
     BOOL __block isWaiting = YES;
     [_cache cachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(NSDictionary *objects) {

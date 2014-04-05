@@ -23,7 +23,7 @@
 #import "DFCache+DFExtensions.h"
 #import "DFCachePrivate.h"
 
-@implementation DFCache (DFExtensions)
+@implementation DFCache (DFCacheExtensions)
 
 #pragma mark - Direct Data Access
 
@@ -72,14 +72,14 @@
         return;
     }
     dispatch_async(self.ioQueue, ^{
-        NSMutableDictionary *objects = [NSMutableDictionary new];
+        NSMutableDictionary *batch = [NSMutableDictionary new];
         for (NSString *key in keys) {
             NSData *data = [self.diskCache dataForKey:key];
             if (data) {
-                objects[key] = data;
+                batch[key] = data;
             }
         }
-        _dwarf_cache_callback(completion, objects);
+        _dwarf_cache_callback(completion, batch);
     });
 }
 
@@ -92,42 +92,39 @@
         return;
     }
     NSMutableArray *remainingKeys = [NSMutableArray arrayWithArray:keys];
-    NSMutableDictionary *foundObjects = [NSMutableDictionary new];
+    NSMutableDictionary *batch = [NSMutableDictionary new];
     
     // Lookup objects into memory cache.
     for (NSString *key in keys) {
         id object = [self.memoryCache objectForKey:key];
         if (object) {
-            foundObjects[key] = object;
+            batch[key] = object;
             [remainingKeys removeObject:key];
         }
     }
     if (!remainingKeys.count) {
-        _dwarf_cache_callback(completion, foundObjects);
+        _dwarf_cache_callback(completion, batch);
         return;
     }
     
-    // Lookup data for remaining keys into disk storage.
-    dispatch_async(self.ioQueue, ^{
-        NSMutableDictionary *foundData = [NSMutableDictionary new];
-        for (NSString *key in remainingKeys) {
-            NSData *data = [self.diskCache dataForKey:key];
-            if (data) {
-                foundData[key] = data;
-            }
-        }
+    // Lookup data for remaining keys into disk cache.
+    [self cachedDataForKeys:remainingKeys completion:^(NSDictionary *foundData) {
+        NSMutableDictionary *dataForKeys = [foundData mutableCopy];
         dispatch_async(self.processingQueue, ^{
             for (NSString *key in foundData) {
-                NSData *data = foundData[key];
-                id object = decode(data);
-                if (object) {
-                    [self storeObject:object forKey:key cost:cost];
-                    foundObjects[key] = object;
+                @autoreleasepool {
+                    NSData *data = foundData[key];
+                    id object = decode(data);
+                    if (object) {
+                        [self storeObject:object forKey:key cost:cost];
+                        batch[key] = object;
+                    }
+                    [dataForKeys removeObjectForKey:key];
                 }
             }
-            _dwarf_cache_callback(completion, foundObjects);
+            _dwarf_cache_callback(completion, batch);
         });
-    });
+    }];
 }
 
 - (void)cachedObjectForAnyKey:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id, NSString *))completion {
@@ -141,30 +138,32 @@
         return;
     }
     dispatch_async(self.ioQueue, ^{
-        id foundObject;
-        NSString *foundKey;
-        for (NSString *key in keys) {
-            id object = [self.memoryCache objectForKey:key];
-            if (object) {
-                foundObject = object;
-                foundKey = key;
-                break;
+        @autoreleasepool {
+            id foundObject;
+            NSString *foundKey;
+            for (NSString *key in keys) {
+                id object = [self.memoryCache objectForKey:key];
+                if (object) {
+                    foundObject = object;
+                    foundKey = key;
+                    break;
+                }
+                NSData *data = [self.diskCache dataForKey:key];
+                if (!data) {
+                    continue;
+                }
+                object = decode(data);
+                if (object) {
+                    foundObject = object;
+                    foundKey = key;
+                    [self storeObject:object forKey:key cost:cost];
+                    break;
+                }
             }
-            NSData *data = [self.diskCache dataForKey:key];
-            if (!data) {
-                continue;
-            }
-            object = decode(data);
-            if (object) {
-                foundObject = object;
-                foundKey = key;
-                [self storeObject:object forKey:key cost:cost];
-                break;
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(foundObject, foundKey);
+            });
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completion(foundObject, foundKey);
-        });
     });
 }
 

@@ -22,9 +22,9 @@
 
 #import "DFCache.h"
 
-/* Set of methods extending DFCache functionality by providing direct asynchronous access to data and allowing you to retrieve cached objects in batches.
+/* Set of methods extending DFCache functionality by providing direct access to data and allowing you to retrieve cached objects in batches.
 */
-@interface DFCache (DFExtensions)
+@interface DFCache (DFCacheExtensions)
 
 #pragma mark - Direct Data Access
 
@@ -42,26 +42,26 @@
  */
 - (void)storeData:(NSData *)data forKey:(NSString *)key;
 
+#pragma mark - Read (Batching)
+
 /*! Reads data for provided keys.
  @param keys Array of unique keys.
  @param decode Decoding block returning object from data.
  @param cost Cost block returning cost for memory cache.
- @param completion Completion block.
+ @param completion Completion block. Batch dictionary contains key : data pairs read from disk cache.
  */
-- (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *data))completion;
-
-#pragma mark - Read (Batching)
+- (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *batch))completion;
 
 /*! Reads objects for provided keys.
  @param keys Array of unique keys.
  @param decode Decoding block returning object from data.
  @param cost Cost block returning cost for memory cache.
- @param completion Completion block.
+ @param completion Completion block. Batch dictionary contains key : object pairs retrieved from receiver.
  */
 - (void)cachedObjectsForKeys:(NSArray *)keys
                       decode:(DFCacheDecodeBlock)decode
                         cost:(DFCacheCostBlock)cost
-                  completion:(void (^)(NSDictionary *objects))completion;
+                  completion:(void (^)(NSDictionary *batch))completion;
 
 /*! Reads first found object for provided keys.
  @param key The unique key.
