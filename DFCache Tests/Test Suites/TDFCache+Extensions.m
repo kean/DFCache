@@ -52,7 +52,7 @@
     NSString *object = @"value";
     NSString *key = @"key";
     
-    [_cache storeObject:object forKey:key cost:0 encode:DFCacheEncodeNSCoding];
+    [_cache storeObject:object encode:DFCacheEncodeNSCoding forKey:key];
     
     BOOL __block isWaiting = YES;
     [_cache cachedDataForKey:key completion:^(NSData *data) {
@@ -67,7 +67,7 @@
     NSString *object = @"value";
     NSString *key = @"key";
     
-    [_cache storeObject:object forKey:key cost:0 encode:DFCacheEncodeNSCoding];
+    [_cache storeObject:object encode:DFCacheEncodeNSCoding forKey:key];
     NSData *data = [_cache cachedDataForKey:key];
     XCTAssertEqualObjects(object, DFCacheDecodeNSCoding(data));
 }

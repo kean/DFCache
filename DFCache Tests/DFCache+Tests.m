@@ -29,7 +29,7 @@
     for (NSUInteger i = 0; i < count; i++) {
         NSString *key = [NSString stringWithFormat:@"key_%lu", (unsigned long)i];
         NSString *string = [self _randomStringWithLength:(arc4random_uniform(30) + 1)];
-        [self storeObject:string forKey:key cost:0 encode:DFCacheEncodeNSCoding];
+        [self storeObject:string encode:DFCacheEncodeNSCoding forKey:key];
         strings[key] = string;
     }
     *s = strings;

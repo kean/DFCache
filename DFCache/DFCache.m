@@ -76,13 +76,14 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
     return [self initWithName:name memoryCache:memoryCache];
 }
 
-#pragma mark - Read
+#pragma mark - Read (Asynchronous)
 
 - (void)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id))completion {
+    NSAssert(decode, @"DFCacheDecodeBlock must not be nil");
     if (!completion) {
         return;
     }
-    if (!key) {
+    if (!key.length) {
         _dwarf_cache_callback(completion, nil);
         return;
     }
@@ -98,15 +99,24 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
             return;
         }
         dispatch_async(_processingQueue, ^{
-            id object = decode(data);
-            [self storeObject:object forKey:key cost:cost];
-            _dwarf_cache_callback(completion, object);
+            @autoreleasepool {
+                id object = decode(data);
+                [self storeObject:object forKey:key cost:cost];
+                _dwarf_cache_callback(completion, object);
+            }
         });
     });
 }
 
+- (void)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode completion:(void (^)(id))completion {
+    [self cachedObjectForKey:key decode:decode cost:nil completion:completion];
+}
+
+#pragma mark - Read (Synchronous)
+
 - (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost {
-    if (!key || !decode) {
+    NSAssert(decode, @"DFCacheDecodeBlock must not be nil");
+    if (!key.length || !decode) {
         return nil;
     }
     id __block object = [_memoryCache objectForKey:key];
@@ -114,50 +124,72 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
         return object;
     }
     dispatch_sync(_ioQueue, ^{
-        NSData *data = [_diskCache dataForKey:key];
-        if (data) {
-            object = decode(data);
-            [self storeObject:object forKey:key cost:cost];
+        @autoreleasepool {
+            NSData *data = [_diskCache dataForKey:key];
+            if (data) {
+                object = decode(data);
+                [self storeObject:object forKey:key cost:cost];
+            }
         }
     });
     return object;
 }
 
+- (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode {
+    return [self cachedObjectForKey:key decode:decode cost:nil];
+}
+
 #pragma mark - Write
 
 - (void)storeObject:(id)object
+               data:(NSData *)data
              forKey:(NSString *)key
-               cost:(NSUInteger)cost
-             encode:(DFCacheEncodeBlock)encode {
-    [self _storeObject:object forKey:key cost:cost data:nil encode:encode];
+               cost:(NSUInteger)cost {
+    [self _storeObject:object data:data encode:nil forKey:key cost:cost ];
 }
 
 - (void)storeObject:(id)object
+               data:(NSData *)data
+             forKey:(NSString *)key {
+    [self storeObject:object data:data forKey:key cost:0];
+}
+
+- (void)storeObject:(id)object
+             encode:(DFCacheEncodeBlock)encode
              forKey:(NSString *)key
-               cost:(NSUInteger)cost
-               data:(NSData *)data {
-    [self _storeObject:object forKey:key cost:cost data:data encode:nil];
+               cost:(NSUInteger)cost {
+    [self _storeObject:object data:nil encode:encode forKey:key cost:cost ];
+}
+
+- (void)storeObject:(id)object
+             encode:(DFCacheEncodeBlock)encode
+             forKey:(NSString *)key {
+    [self storeObject:object encode:encode forKey:key cost:0];
 }
 
 - (void)_storeObject:(id)object
-              forKey:(NSString *)key
-                cost:(NSUInteger)cost
                 data:(NSData *)data
-              encode:(DFCacheEncodeBlock)encode {
-    if (!object || !key.length) {
+              encode:(DFCacheEncodeBlock)encode
+              forKey:(NSString *)key
+                cost:(NSUInteger)cost {
+    if (!key.length) {
         return;
     }
-    [_memoryCache setObject:object forKey:key cost:cost];
+    if (object) {
+        [_memoryCache setObject:object forKey:key cost:cost];
+    }
     if (!data && !encode) {
         return;
     }
     dispatch_async(_ioQueue, ^{
-        [_diskCache setData:(data ? data : encode(object)) forKey:key];
+        @autoreleasepool {
+            [_diskCache setData:(data ? data : encode(object)) forKey:key];
+        }
     });
 }
 
 - (void)storeObject:(id)object forKey:(NSString *)key cost:(DFCacheCostBlock)cost {
-    if (!object || !key) {
+    if (!object || !key.length) {
         return;
     }
     NSUInteger objectCost = cost ? cost(object) : 0;
@@ -196,7 +228,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
 #pragma mark - Metadata
 
 - (NSDictionary *)metadataForKey:(NSString *)key {
-    if (!key) {
+    if (!key.length) {
         return nil;
     }
     NSDictionary *__block metadata;
@@ -208,7 +240,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
 }
 
 - (void)setMetadata:(NSDictionary *)metadata forKey:(NSString *)key {
-    if (!metadata || !key) {
+    if (!metadata || !key.length) {
         return;
     }
     dispatch_async(_ioQueue, ^{
@@ -218,7 +250,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
 }
 
 - (void)setMetadataValues:(NSDictionary *)keyedValues forKey:(NSString *)key {
-    if (!keyedValues.count || !key) {
+    if (!keyedValues.count || !key.length) {
         return;
     }
     dispatch_async(_ioQueue, ^{
@@ -231,7 +263,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
 }
 
 - (void)removeMetadataForKey:(NSString *)key {
-    if (!key) {
+    if (!key.length) {
         return;
     }
     dispatch_async(_ioQueue, ^{
@@ -258,13 +290,12 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
 
 - (void)_scheduleCleanupTimer {
     [_cleanupTimer invalidate];
-    if (!_cleanupTimerEnabled) {
-        return;
+    if (_cleanupTimerEnabled) {
+        DFCache *__weak weakSelf = self;
+        _cleanupTimer = [DFCacheTimer scheduledTimerWithTimeInterval:_cleanupTimeInterval block:^{
+            [weakSelf cleanupDiskCache];
+        } userInfo:nil repeats:YES];
     }
-    DFCache *__weak weakSelf = self;
-    _cleanupTimer = [DFCacheTimer scheduledTimerWithTimeInterval:_cleanupTimeInterval block:^{
-        [weakSelf cleanupDiskCache];
-    } userInfo:nil repeats:YES];
 }
 
 - (void)cleanupDiskCache {
@@ -278,5 +309,15 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
     [_memoryCache removeAllObjects];
 }
 #endif
+
+#pragma mark - Deprecated
+
+- (void)storeObject:(id)object forKey:(NSString *)key cost:(NSUInteger)cost data:(NSData *)data {
+    [self storeObject:object data:data forKey:key cost:cost];
+}
+
+- (void)storeObject:(id)object forKey:(NSString *)key cost:(NSUInteger)cost encode:(DFCacheEncodeBlock)encode {
+    [self storeObject:object encode:encode forKey:key cost:cost];
+}
 
 @end

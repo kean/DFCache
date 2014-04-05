@@ -78,9 +78,9 @@
     NSString *string = @"value1";
     NSString *key = @"key1";
     
-    [_cache storeObject:string forKey:key cost:0.f encode:^NSData *(id object) {
+    [_cache storeObject:string encode:^NSData *(id object) {
         return [((NSString *)object) dataUsingEncoding:NSUTF8StringEncoding];
-    }];
+    } forKey:key];
     
     XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
@@ -96,7 +96,23 @@
     NSString *key = @"key1";
     NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
     
-    [_cache storeObject:string forKey:key cost:0.f data:data];
+    [_cache storeObject:string data:data forKey:key];
+    
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:^id(NSData *data) {
+        return [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+    } cost:nil];
+    XCTAssertEqualObjects(string, cachedString);
+}
+
+- (void)testWriteWithDataDeprecated {
+    NSString *string = @"value1";
+    NSString *key = @"key1";
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [_cache storeObject:string data:data forKey:key];
     
     XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
@@ -111,12 +127,12 @@
     NSString *string = @"test_string";
     NSString *key = @"key3";
     
-    [_cache storeObject:string forKey:key cost:0.f encode:nil];
+    [_cache storeObject:string encode:nil forKey:key];
     
     XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
     
-    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:0];
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:nil];
     XCTAssertNil(cachedString);
 }
 
@@ -126,7 +142,7 @@
     NSDictionary *JSON = @{ @"key" : @"value" };
     NSString *key = @"key3";
     
-    [_cache storeObject:JSON forKey:key cost:0.f encode:DFCacheEncodeJSON];
+    [_cache storeObject:JSON encode:DFCacheEncodeJSON forKey:key];
 
     BOOL __block isWaiting = YES;
     [_cache cachedObjectForKey:key decode:DFCacheDecodeJSON cost:nil completion:^(id object) {
@@ -140,12 +156,39 @@
     NSString *string = @"test_string";
     NSString *key = @"key3";
     
-    [_cache storeObject:string forKey:key cost:0.f encode:DFCacheEncodeNSCoding];
+    [_cache storeObject:string encode:DFCacheEncodeNSCoding forKey:key];
     
     XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
     
-    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:0];
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:nil];
+    XCTAssertEqualObjects(string, cachedString);
+}
+
+#pragma mark - Read (No Cost)
+
+- (void)testReadAsynchronouslyNoCostBlock {
+    NSDictionary *JSON = @{ @"key" : @"value" };
+    NSString *key = @"key3";
+    
+    [_cache storeObject:JSON encode:DFCacheEncodeJSON forKey:key];
+    
+    BOOL __block isWaiting = YES;
+    [_cache cachedObjectForKey:key decode:DFCacheDecodeJSON completion:^(id object) {
+        XCTAssertTrue([JSON[@"key"] isEqualToString:object[@"key"]]);
+        isWaiting = NO;
+    }];
+    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+}
+
+- (void)testReadSynchrousltNoCost {
+    NSString *string = @"test_string";
+    NSString *key = @"key3";
+    [_cache storeObject:string encode:DFCacheEncodeNSCoding forKey:key];
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding];
     XCTAssertEqualObjects(string, cachedString);
 }
 
@@ -201,7 +244,7 @@
     NSString *metaValue = @"meta_value";
     NSString *metaKey = @"meta_key";
     
-    [_cache storeObject:value forKey:key cost:0 encode:DFCacheEncodeNSCoding];
+    [_cache storeObject:value encode:DFCacheEncodeNSCoding forKey:key];
     [_cache setMetadata:@{ metaKey : metaValue } forKey:key];
     
     // 1.1. Read metadata right after storing object.

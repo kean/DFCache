@@ -25,6 +25,8 @@
 
 @implementation DFCache (DFExtensions)
 
+#pragma mark - Direct Data Access
+
 - (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *))completion {
     if (!completion) {
         return;
@@ -58,6 +60,8 @@
         [self.diskCache setData:data forKey:key];
     });
 }
+
+#pragma mark - Read (Batching)
 
 - (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *))completion {
     if (!completion) {

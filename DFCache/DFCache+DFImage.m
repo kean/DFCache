@@ -29,9 +29,9 @@
 - (void)storeImage:(UIImage *)image imageData:(NSData *)data forKey:(NSString *)key {
     NSUInteger cost = DFCacheCostUIImage(image);
     if (data) {
-        [self storeObject:image forKey:key cost:cost data:data];
+        [self storeObject:image data:data forKey:key cost:cost];
     } else {
-        [self storeObject:image forKey:key cost:cost encode:DFCacheEncodeUIImage];
+        [self storeObject:image encode:DFCacheEncodeUIImage forKey:key cost:cost];
     }
 }
 

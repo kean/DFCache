@@ -26,7 +26,7 @@
 */
 @interface DFCache (DFExtensions)
 
-#pragma mark - Direct Data Manipulations
+#pragma mark - Direct Data Access
 
 /*! Reads data from disk.
  @param key The unique key.
@@ -34,11 +34,11 @@
  */
 - (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *data))completion;
 
-/*! Reads data from disk syncronously.
+/*! Reads data from disk synchronously.
  */
 - (NSData *)cachedDataForKey:(NSString *)key;
 
-/*! Stores data into disk cache asyncronously.
+/*! Stores data into disk cache asynchronously.
  */
 - (void)storeData:(NSData *)data forKey:(NSString *)key;
 
@@ -50,7 +50,7 @@
  */
 - (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *data))completion;
 
-#pragma mark - Batch Read
+#pragma mark - Read (Batching)
 
 /*! Reads objects for provided keys.
  @param keys Array of unique keys.

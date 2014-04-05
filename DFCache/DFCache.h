@@ -37,9 +37,9 @@ extern NSString *const DFCacheAttributeMetadataKey;
  */
 
 /*! Asynchronous composite in-memory and on-disk cache with LRU cleanup.
- @discussion Uses NSCache for in-memory caching and DFDiskCache for on-disk caching. Provides API for associating metadata with cache entries.
- @discussion DFCache automatically schedules disk cleanup to be run repeatedly.
- @warning NSCache auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else NSCache won't be able to evict memory properly. DFCache automatically removes all object from memory cache on memory warning.
+ @discussion Uses NSCache for in-memory caching and DFDiskCache for on-disk caching. Provides API for associating metadata with cache entries. Automatically schedules disk cleanup to be run repeatedly.
+ @discussion All disk IO operations (including operations that associate metadata with cache entries) are run on serial dispatch queue. If you store the object using DFCache asynchronous API and then immediately try to retrieve it then you are guaranteed to get the object back.
+ @warning NSCache auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else NSCache won't be able to evict memory properly. Typically, the obvious cost is the size of the object in bytes. Be aware that `DFCache` automatically removes all object from memory cache on memory warning for you.
  */
 @interface DFCache : NSObject
 
@@ -60,28 +60,28 @@ extern NSString *const DFCacheAttributeMetadataKey;
  */
 - (id)initWithName:(NSString *)name;
 
-/*! Returns memory cache or nil if cache was initialized without the memory cache.
- */
-@property (nonatomic, readonly) NSCache *memoryCache;
-
-/*! Returns disk cache used by DFCache instance.
+/*! Returns disk cache used by receiver.
  */
 @property (nonatomic, readonly) DFDiskCache *diskCache;
 
-/*! Internal disk queue used to dispatch blocks operating on disk cache.
+/*! Returns memory cache used by receiver. Memory cache might be nil.
+ */
+@property (nonatomic, readonly) NSCache *memoryCache;
+
+/*! Serial dispatch queue used for all disk IO operations. If you store the object using DFCache asynchronous API and then immediately try to retrieve it then you are guaranteed to get the object back.
  */
 @property (nonatomic) dispatch_queue_t ioQueue;
 
-/*! Internal processing queue used to dispatch decoding blocks. Etc.
+/*! Concurrent dispatch queue used for dispatching blocks that decode cached data.
  */
 @property (nonatomic) dispatch_queue_t processingQueue;
 
-#pragma mark - Read
+#pragma mark - Read (Asynchronous)
 
-/*! Reads object from disk.
+/*! Reads object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Computes the object cost in memory cache using given DFCacheCostBlock.
  @param key The unique key.
- @param decode Decoding block returning object from data.
- @param cost Cost block returning cost for memory cache.
+ @param decode Decoding block that returns object from given data.
+ @param cost Cost block returning cost for memory cache. Might be nil.
  @param completion Completion block.
  */
 - (void)cachedObjectForKey:(NSString *)key
@@ -89,52 +89,95 @@ extern NSString *const DFCacheAttributeMetadataKey;
                       cost:(DFCacheCostBlock)cost
                 completion:(void (^)(id object))completion;
 
-/*! Returns object from disk synchorounsly.
+/*! Reads object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk.
  @param key The unique key.
- @param decode Decoding block returning object from data.
+ @param decode Decoding block that returns object from given data.
+ @param completion Completion block.
+ */
+- (void)cachedObjectForKey:(NSString *)key
+                    decode:(DFCacheDecodeBlock)decode
+                completion:(void (^)(id object))completion;
+
+#pragma mark - Read (Synchronous)
+
+/*! Returns object from either in-memory or on-disk cache synchronously. Refreshes object in memory cache it it was retrieved from disk.
+ @param key The unique key.
+ @param decode Decoding block that returns object from given data. Might be nil.
  @param cost Cost block returning cost for memory cache.
  */
-- (id)cachedObjectForKey:(NSString *)key
-                  decode:(DFCacheDecodeBlock)decode
-                    cost:(DFCacheCostBlock)cost;
+- (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost;
+
+/*! Returns object from either in-memory or on-disk cache synchronously. Refreshes object in memory cache it it was retrieved from disk.
+ @param key The unique key.
+ @param decode Decoding block that returns object from given data.
+ */
+- (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode;
 
 #pragma mark - Write
 
 /*! Stores object into memory cache. Stores data into disk cache.
  @param object The object to store into memory cache.
+ @param data Data to store into disk cache.
  @param key The unique key.
- @param cost The cost with which to associate the object (used by memory cache).
+ @param cost The cost with which to associate the object (used by memory cache). Typically, the obvious cost is the size of the object in bytes.
+ */
+- (void)storeObject:(id)object
+               data:(NSData *)data
+             forKey:(NSString *)key
+               cost:(NSUInteger)cost;
+
+/*! Stores object into memory cache. Stores data into disk cache.
+ @param object The object to store into memory cache.
+ @param key The unique key.
  @param data Data to store into disk cache.
  */
 - (void)storeObject:(id)object
-             forKey:(NSString *)key
-               cost:(NSUInteger)cost
-               data:(NSData *)data;
+               data:(NSData *)data
+             forKey:(NSString *)key;
 
-/*! Stores object into memory cache. Stores data representation provided by the transformation block into disk cache.
+/*! Stores object into memory cache. Stores data representation provided by the DFCacheEncodeBlock into disk cache.
+ @param object The object to store into memory cache.
+ @param encode Block that returns data representation of the object.
+ @param key The unique key.
+ @param cost The cost with which to associate the object (used by memory cache). Typically, the obvious cost is the size of the object in bytes.
+ */
+- (void)storeObject:(id)object
+             encode:(DFCacheEncodeBlock)encode
+             forKey:(NSString *)key
+               cost:(NSUInteger)cost;
+
+/*! Stores object into memory cache. Stores data representation provided by the DFCacheEncodeBlock into disk cache.
+ @param object The object to store into memory cache.
+ @param encode Block that returns data representation of the object.
+ @param key The unique key.
+ */
+- (void)storeObject:(id)object
+             encode:(DFCacheEncodeBlock)encode
+             forKey:(NSString *)key;
+
+/*! Stores object into memory cache. Calculate cost using provided DFCacheCostBlock (if block is not nil).
  @param object The object to store into memory cache.
  @param key The unique key.
  @param cost The cost with which to associate the object (used by memory cache).
- @param encode Encoder block returning object's data representation.
  */
 - (void)storeObject:(id)object
              forKey:(NSString *)key
-               cost:(NSUInteger)cost
-             encode:(DFCacheEncodeBlock)encode;
-
-/*! Stores object into memory cache. Calculate cost using provided block (if block is not nil).
- @param object The object to store into memory cache.
- @param key The unique key.
- @param cost The cost with which to associate the object (used by memory cache).
- */
-- (void)storeObject:(id)object forKey:(NSString *)key cost:(DFCacheCostBlock)cost;
+               cost:(DFCacheCostBlock)cost;
 
 #pragma mark - Remove
 
-/*! Removes object from both disk and memory cache.
+/*! Removes objects from both disk and memory cache.
+ @param keys Array of strings.
  */
 - (void)removeObjectsForKeys:(NSArray *)keys;
+
+/*! Removes object from both disk and memory cache.
+ @param key The unique key.
+ */
 - (void)removeObjectForKey:(NSString *)key;
+
+/*! Removes all objects both disk and memory cache.
+ */
 - (void)removeAllObjects;
 
 #pragma mark - Metadata
@@ -145,13 +188,15 @@ extern NSString *const DFCacheAttributeMetadataKey;
  */
 - (NSDictionary *)metadataForKey:(NSString *)key;
 
-/*! Sets metadata for provided key. Method will have no effect if there is no entry under the given key.
+/*! Sets metadata for provided key. 
+ @warning Method will have no effect if there is no entry under the given key.
  @param metadata Dictionary with metadata.
  @param key The unique key.
  */
 - (void)setMetadata:(NSDictionary *)metadata forKey:(NSString *)key;
 
-/*! Sets metadata values for providerd keys. Method will have no effect if there is no entry under the given key.
+/*! Sets metadata values for provided keys.
+ @warning Method will have no effect if there is no entry under the given key.
  @param keyedValues Dictionary with metadata.
  @param key The unique key.
  */
@@ -164,7 +209,8 @@ extern NSString *const DFCacheAttributeMetadataKey;
 
 #pragma mark - Cleanup
 
-/*! Sets cleanup time interval and schedules cleanup timer with the given timer interal if the cleanup timer is enabled. Default value is 60 seconds.
+/*! Sets cleanup time interval and schedules cleanup timer with the given time interval. 
+ @discussion Cleanup timer is scheduled only if automatic cleanup is enabled. Default value is 60 seconds.
  */
 - (void)setCleanupTimerInterval:(NSTimeInterval)timeInterval;
 
@@ -172,8 +218,18 @@ extern NSString *const DFCacheAttributeMetadataKey;
  */
 - (void)setCleanupTimerEnabled:(BOOL)enabled;
 
-/*! Cleanup disk cache asynchronously.
+/*! Cleanup disk cache asynchronously. For more info see DFDiskCache - (void)cleanup.
  */
 - (void)cleanupDiskCache;
+
+#pragma mark - Deprecated
+
+/*! Deprecated method. Use -(void)storeObject:data:forKey:cost instead;
+ */
+- (void)storeObject:(id)object forKey:(NSString *)key cost:(NSUInteger)cost data:(NSData *)data DEPRECATED_ATTRIBUTE;
+
+/*! Deprecated method. Use -(void)storeObject:encode:forKey:cost instead;
+ */
+- (void)storeObject:(id)object forKey:(NSString *)key cost:(NSUInteger)cost encode:(DFCacheEncodeBlock)encode DEPRECATED_ATTRIBUTE;
 
 @end
