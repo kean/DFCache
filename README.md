@@ -14,7 +14,7 @@ DFCache is an iOS and OS X library that implements composite in-memory and on-di
 - iOS 6.0 or OS X 10.7
 
 ### iOS 7.0
-`NSCache` auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else `NSCache` won't be able to evict memory properly.
+`NSCache` auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else `NSCache` won't be able to evict memory properly. Be aware that `DFCache` automatically removes all object from memory cache on memory warning for you.
 
 # Classes
 |Class|Description|
