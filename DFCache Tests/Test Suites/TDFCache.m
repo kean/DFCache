@@ -61,6 +61,17 @@
     XCTAssertThrows([[DFCache alloc] initWithName:nil]);
 }
 
+- (void)testInitializationWithoutDiskCacheThrowsException {
+    XCTAssertThrowsSpecificNamed([[DFCache alloc] initWithDiskCache:nil memoryCache:nil], NSException, NSInvalidArgumentException);
+}
+
+- (void)testInitializationWithoutNameThrowsException {
+    XCTAssertThrowsSpecificNamed([[DFCache alloc] initWithName:nil memoryCache:nil], NSException, NSInvalidArgumentException);
+    XCTAssertThrowsSpecificNamed([[DFCache alloc] initWithName:@"" memoryCache:nil], NSException, NSInvalidArgumentException);
+    XCTAssertThrowsSpecificNamed([[DFCache alloc] initWithName:nil], NSException, NSInvalidArgumentException);
+    XCTAssertThrowsSpecificNamed([[DFCache alloc] initWithName:@""], NSException, NSInvalidArgumentException);
+}
+
 #pragma mark - Write (custom encoders/decoders)
 
 - (void)testWriteWithTransform {

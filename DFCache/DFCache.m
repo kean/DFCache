@@ -45,13 +45,12 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
         _diskCache = diskCache;
         _memoryCache = memoryCache;
         
-        _ioQueue = dispatch_queue_create("_df_storage_io_queue", DISPATCH_QUEUE_SERIAL);
+        _ioQueue = dispatch_queue_create("DFCache:IOQueue", DISPATCH_QUEUE_SERIAL);
         _processingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         
         _cleanupTimeInterval = 60.f;
         _cleanupTimerEnabled = YES;
-        [self _rescheduleCleanupTimer];
-        [self cleanupDiskCache];
+        [self _scheduleCleanupTimer];
     }
     return self;
 }
@@ -60,11 +59,10 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
     if (!name.length) {
         [NSException raise:NSInvalidArgumentException format:@"Attemting to initialize DFCache without a name"];
     }
-    NSString *storagePath = [[DFDiskCache cachesDirectoryPath] stringByAppendingPathComponent:name];
-    DFDiskCache *storage = [[DFDiskCache alloc] initWithPath:storagePath error:nil];
-    storage.capacity = 1024 * 1024 * 100; // 100 Mb
-    storage.cleanupRate = 0.5f;
-    return [self initWithDiskCache:storage memoryCache:memoryCache];
+    DFDiskCache *diskCache = [[DFDiskCache alloc] initWithName:name];
+    diskCache.capacity = 1024 * 1024 * 100; // 100 Mb
+    diskCache.cleanupRate = 0.5f;
+    return [self initWithDiskCache:diskCache memoryCache:memoryCache];
 }
 
 - (id)initWithName:(NSString *)name {
@@ -243,18 +241,18 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
 - (void)setCleanupTimerInterval:(NSTimeInterval)timeInterval {
     if (_cleanupTimeInterval != timeInterval) {
         _cleanupTimeInterval = timeInterval;
-        [self _rescheduleCleanupTimer];
+        [self _scheduleCleanupTimer];
     }
 }
 
 - (void)setCleanupTimerEnabled:(BOOL)enabled {
     if (_cleanupTimerEnabled != enabled) {
         _cleanupTimerEnabled = enabled;
-        [self _rescheduleCleanupTimer];
+        [self _scheduleCleanupTimer];
     }
 }
 
-- (void)_rescheduleCleanupTimer {
+- (void)_scheduleCleanupTimer {
     [_cleanupTimer invalidate];
     if (!_cleanupTimerEnabled) {
         return;

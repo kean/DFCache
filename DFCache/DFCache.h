@@ -20,8 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DFDiskCache.h"
 #import "DFCacheBlocks.h"
+#import "DFDiskCache.h"
 
 /*! Extended attribute name used to store metadata (see NSURL+DFExtendedFileAttributes).
  */
@@ -36,25 +36,27 @@ extern NSString *const DFCacheAttributeMetadataKey;
  - Concise and extensible API.
  */
 
-/*! Asynchronous composite in-memory and on-disk cache. 
- @discussion Uses NSCache for in-memory caching and DFDiskCache for on-disk caching. Extends DFDiskCache functionality by providing API for associating custom metadata with cache entries.
+/*! Asynchronous composite in-memory and on-disk cache with LRU cleanup.
+ @discussion Uses NSCache for in-memory caching and DFDiskCache for on-disk caching. Provides API for associating metadata with cache entries.
+ @discussion DFCache automatically schedules disk cleanup to be run repeatedly.
+ @warning NSCache auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else NSCache won't be able to evict memory properly.
  */
 @interface DFCache : NSObject
 
-/*! Initializes and returns cache with provided disk and memory cache.
- @param diskCache Disk cache. Must not be nil.
- @param memoryCache Memory cache. Pass nil to disable memory caching.
+/*! Initializes and returns cache with provided disk and memory cache. Designated initializer.
+ @param diskCache Disk cache. Raises NSInvalidArgumentException if disk cache is nil.
+ @param memoryCache Memory cache. Pass nil to disable in-memory cache.
  */
 - (id)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache;
 
-/*! Convenience method. Initializes and returns cache with provided name and memory cache.
- @param name Name is used to initialize disk cache.
- @param memoryCache Memory cache. Pass nil to disable memory caching.
+/*! Initializes cache by creating DFDiskCache instance with a given name and calling designated initializer.
+ @param name Name used to initialize disk cache. Raises NSInvalidArgumentException if name length is 0.
+ @param memoryCache Memory cache. Pass nil to disable in-memory cache.
  */
 - (id)initWithName:(NSString *)name memoryCache:(NSCache *)memoryCache;
 
-/*! Convenience method. Initializes and returns cache with provided name. Creates both disk and memory cache.
- @param name Name is used to initialize disk cache.
+/*! Initializes cache by creating DFDiskCache instance with a given name and NSCache instance and calling designated initializer.
+ @param name Name used to initialize disk cache. Raises NSInvalidArgumentException if name length is 0.
  */
 - (id)initWithName:(NSString *)name;
 

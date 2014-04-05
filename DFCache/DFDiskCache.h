@@ -28,7 +28,9 @@ static const unsigned long long DFDiskCacheCapacityUnlimited = 0;
  */
 @interface DFDiskCache : DFFileStorage
 
-/*! Maximum disk cache capacity. Default value is DFDiskCacheCapacityUnlimited.
+- (id)initWithName:(NSString *)name;
+
+/*! Maximum disk cache capacity. Default value is 100 Mb.
  @discussion Not a strict limit. Disk storage is actually cleaned up only when cleanup method gets called.
  */
 @property (nonatomic) unsigned long long capacity;
