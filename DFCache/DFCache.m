@@ -34,6 +34,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_cleanupTimer invalidate];
 }
 
@@ -51,6 +52,10 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
         _cleanupTimeInterval = 60.f;
         _cleanupTimerEnabled = YES;
         [self _scheduleCleanupTimer];
+        
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didReceiveMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+#endif
     }
     return self;
 }
@@ -67,7 +72,6 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
 
 - (id)initWithName:(NSString *)name {
     NSCache *memoryCache = [NSCache new];
-    memoryCache.totalCostLimit = 1024 * 1024 * 15; // 15 Mb
     memoryCache.name = name;
     return [self initWithName:name memoryCache:memoryCache];
 }
@@ -268,5 +272,11 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
         [_diskCache cleanup];
     });
 }
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+- (void)_didReceiveMemoryWarning:(NSNotification *__unused)notification {
+    [_memoryCache removeAllObjects];
+}
+#endif
 
 @end

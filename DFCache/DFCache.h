@@ -39,7 +39,7 @@ extern NSString *const DFCacheAttributeMetadataKey;
 /*! Asynchronous composite in-memory and on-disk cache with LRU cleanup.
  @discussion Uses NSCache for in-memory caching and DFDiskCache for on-disk caching. Provides API for associating metadata with cache entries.
  @discussion DFCache automatically schedules disk cleanup to be run repeatedly.
- @warning NSCache auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else NSCache won't be able to evict memory properly.
+ @warning NSCache auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else NSCache won't be able to evict memory properly. DFCache automatically removes all object from memory cache on memory warning.
  */
 @interface DFCache : NSObject
 

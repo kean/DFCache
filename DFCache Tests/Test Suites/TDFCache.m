@@ -221,6 +221,17 @@
     XCTAssertTrue([metadata[metaKey] isEqualToString:customValueMod]);
 }
 
+#pragma mark - Memory Pressure
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+- (void)testRespondsToMemoryWarning {
+    [_cache.memoryCache setObject:@"object" forKey:@"key"];
+    XCTAssertNotNil([_cache.memoryCache objectForKey:@"key"]);
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidReceiveMemoryWarningNotification object:nil userInfo:nil];
+    XCTAssertNil([_cache.memoryCache objectForKey:@"key"]);
+}
+#endif
+
 #pragma mark - Helpers
 
 - (NSData *)_testDataWithSize:(unsigned long long)size {
