@@ -46,25 +46,48 @@
     _cache = nil;
 }
 
-#pragma mark - Read (Batching)
+#pragma mark - Read (Batch)
 
-- (void)testCachedDataForMultipleKeys {
+- (void)testBatchCachedDataForKeysAsynchronous {
+    NSDictionary *strings;
+    [_cache storeStringsWithCount:5 strings:&strings];
+    [_cache.memoryCache removeAllObjects];
+    NSArray *keys = [strings allKeys];
+    
+    BOOL __block isWaiting = YES;
+    [_cache batchCachedDataForKeys:keys completion:^(NSDictionary *batch) {
+        for (NSString *key in keys) {
+            XCTAssertNotNil(batch[key]);
+        }
+        isWaiting = NO;
+    }];
+    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+}
+
+- (void)testBatchCachedDataForKeysSynchronous {
+    NSDictionary *strings;
+    [_cache storeStringsWithCount:5 strings:&strings];
+    [_cache.memoryCache removeAllObjects];
+    NSArray *keys = [strings allKeys];
+    
+    NSDictionary *batch = [_cache batchCachedDataForKeys:keys];
+    for (NSString *key in keys) {
+        XCTAssertNotNil(batch[key]);
+    }
+}
+
+- (void)testBatchCachedObjectsForKeysFromMemoryCache {
     NSDictionary *strings;
     [_cache storeStringsWithCount:5 strings:&strings];
     NSArray *keys = [strings allKeys];
     
-    BOOL __block isWaiting = YES;
-    [_cache cachedDataForKeys:keys completion:^(NSDictionary *data) {
-        for (NSString *key in keys) {
-            XCTAssertNotNil(data[key]);
-        }
-        isWaiting = NO;
-    }];
-    
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    NSDictionary *batch = [_cache batchCachedObjectsForKeys:keys];
+    for (NSString *key in keys) {
+        XCTAssertNotNil(batch[key]);
+    }
 }
 
-- (void)testCachedObjectsForKeys {
+- (void)testBatchCachedObjectsForKeysAsynchronous {
     NSDictionary *strings;
     [_cache storeStringsWithCount:5 strings:&strings];
     NSArray *keys = [strings allKeys];
@@ -72,37 +95,57 @@
     [_cache.memoryCache removeObjectForKey:keys[4]];
     
     BOOL __block isWaiting = YES;
-    [_cache cachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(NSDictionary *objects) {
+    [_cache batchCachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(NSDictionary *batch) {
         for (NSString *key in keys) {
-            XCTAssertTrue([objects[key] isEqualToString:strings[key]]);
+            XCTAssertTrue([batch[key] isEqualToString:strings[key]]);
         }
         isWaiting = NO;
     }];
-    
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
 }
 
-- (void)testCachedObjectsForKeysFromDisk {
+- (void)testBatchCachedObjectsForKeysAsynchronousMemoryCacheEmpty {
     NSDictionary *strings;
-    NSArray *keys;
-    
-    _cache = [[DFCache alloc] initWithName:[self _generateCacheName] memoryCache:nil];
-    
     [_cache storeStringsWithCount:5 strings:&strings];
-    keys = [strings allKeys];
+    NSArray *keys = [strings allKeys];
+    [_cache.memoryCache removeAllObjects];
     
     BOOL __block isWaiting = YES;
-    [_cache cachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(NSDictionary *objects) {
+    [_cache batchCachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(NSDictionary *batch) {
         for (NSString *key in keys) {
-            XCTAssertTrue([objects[key] isEqualToString:strings[key]]);
+            XCTAssertTrue([batch[key] isEqualToString:strings[key]]);
         }
         isWaiting = NO;
     }];
-    
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
 }
 
-- (void)testCachedObjectForAnyKey {
+- (void)testBatchCachedObjectsForKeysSynchronous {
+    NSDictionary *strings;
+    [_cache storeStringsWithCount:5 strings:&strings];
+    NSArray *keys = [strings allKeys];
+    [_cache.memoryCache removeObjectForKey:keys[3]];
+    [_cache.memoryCache removeObjectForKey:keys[4]];
+    
+    NSDictionary *batch = [_cache batchCachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil];
+    for (NSString *key in keys) {
+        XCTAssertTrue([batch[key] isEqualToString:strings[key]]);
+    }
+}
+
+- (void)testBatchCachedObjectsForKeysSynchronousMemoryCacheEmpty {
+    NSDictionary *strings;
+    [_cache storeStringsWithCount:5 strings:&strings];
+    NSArray *keys = [strings allKeys];
+    [_cache.memoryCache removeAllObjects];
+    
+    NSDictionary *batch = [_cache batchCachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil];
+    for (NSString *key in keys) {
+        XCTAssertTrue([batch[key] isEqualToString:strings[key]]);
+    }
+}
+
+- (void)testFirstCachedObjectForKeys {
     NSDictionary *strings;
     [_cache storeStringsWithCount:5 strings:&strings];
     NSArray *keys = [strings allKeys];
@@ -110,33 +153,29 @@
     [_cache removeObjectForKey:keys[0]];
     
     BOOL __block isWaiting = YES;
-    [_cache cachedObjectForAnyKey:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(id object, NSString *key) {
+    [_cache firstCachedObjectForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(id object, NSString *key) {
         XCTAssertTrue([key isEqualToString:keys[1]]);
         XCTAssertTrue([object isEqualToString:strings[keys[1]]]);
         isWaiting = NO;
     }];
-    
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
 }
 
-- (void)testCachedObjectForAnyKeyFromDisk {
+- (void)testFirstCachedObjectForKeysFromDisk {
     NSDictionary *strings;
     NSArray *keys;
-    
-    _cache = [[DFCache alloc] initWithName:[self _generateCacheName] memoryCache:nil];
-    
     [_cache storeStringsWithCount:5 strings:&strings];
+    [_cache.memoryCache removeAllObjects];
     keys = [strings allKeys];
 
     [_cache removeObjectForKey:keys[0]];
     
     BOOL __block isWaiting = YES;
-    [_cache cachedObjectForAnyKey:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(id object, NSString *key) {
+    [_cache firstCachedObjectForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(id object, NSString *key) {
         XCTAssertTrue([key isEqualToString:keys[1]]);
         XCTAssertTrue([object isEqualToString:strings[keys[1]]]);
         isWaiting = NO;
     }];
-    
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
 }
 

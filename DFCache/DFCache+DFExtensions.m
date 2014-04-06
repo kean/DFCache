@@ -23,11 +23,11 @@
 #import "DFCache+DFExtensions.h"
 #import "DFCachePrivate.h"
 
-@implementation DFCache (DFCacheExtensions)
+@implementation DFCache (DFCacheExtended)
 
-#pragma mark - Read (Batching)
+#pragma mark - Read (Batch)
 
-- (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *))completion {
+- (void)batchCachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *batch))completion {
     if (!completion) {
         return;
     }
@@ -36,18 +36,50 @@
         return;
     }
     dispatch_async(self.ioQueue, ^{
-        NSMutableDictionary *batch = [NSMutableDictionary new];
-        for (NSString *key in keys) {
-            NSData *data = [self.diskCache dataForKey:key];
-            if (data) {
-                batch[key] = data;
-            }
-        }
+        NSDictionary *batch = [self _batchCachedDataForKeys:keys];
         _dwarf_cache_callback(completion, batch);
     });
 }
 
-- (void)cachedObjectsForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(NSDictionary *))completion {
+- (NSDictionary *)batchCachedDataForKeys:(NSArray *)keys {
+    if (!keys.count) {
+        return nil;
+    }
+    NSDictionary *__block batch;
+    dispatch_sync(self.ioQueue, ^{
+        batch = [self _batchCachedDataForKeys:keys];
+    });
+    return batch;
+}
+
+- (NSDictionary *)_batchCachedDataForKeys:(NSArray *)keys {
+    NSMutableDictionary *batch = [NSMutableDictionary new];
+    for (NSString *key in keys) {
+        NSAssert([key isKindOfClass:[NSString class]], @"Key must be an an instance of NSString or an instance of any class that inherits from NSString.");
+        NSData *data = [self.diskCache dataForKey:key];
+        if (data) {
+            batch[key] = data;
+        }
+    }
+    return [batch copy];
+}
+
+- (NSDictionary *)batchCachedObjectsForKeys:(NSArray *)keys {
+    if (!keys.count) {
+        return nil;
+    }
+    NSMutableDictionary *batch = [NSMutableDictionary new];
+    for (NSString *key in keys) {
+        NSAssert([key isKindOfClass:[NSString class]], @"Key must be an an instance of NSString or an instance of any class that inherits from NSString.");
+        id object = [self.memoryCache objectForKey:key];
+        if (object) {
+            batch[key] = object;
+        }
+    }
+    return [batch copy];
+}
+
+- (void)batchCachedObjectsForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(NSDictionary *))completion {
     if (!completion) {
         return;
     }
@@ -55,43 +87,67 @@
         _dwarf_cache_callback(completion, nil);
         return;
     }
-    NSMutableArray *remainingKeys = [NSMutableArray arrayWithArray:keys];
-    NSMutableDictionary *batch = [NSMutableDictionary new];
     
-    // Lookup objects into memory cache.
-    for (NSString *key in keys) {
-        id object = [self.memoryCache objectForKey:key];
-        if (object) {
-            batch[key] = object;
-            [remainingKeys removeObject:key];
-        }
-    }
+    // Retrieve objects from memory cache.
+    NSArray *remainingKeys;
+    NSMutableDictionary *batch = [self _batchCachedObjectForKeys:keys remainingKeys:&remainingKeys];
     if (!remainingKeys.count) {
         _dwarf_cache_callback(completion, batch);
         return;
     }
     
-    // Lookup data for remaining keys into disk cache.
-    [self cachedDataForKeys:remainingKeys completion:^(NSDictionary *foundData) {
-        NSMutableDictionary *dataForKeys = [foundData mutableCopy];
+    // Retrieve remaining objects from disk cache.
+    [self batchCachedDataForKeys:keys completion:^(NSDictionary *dataBatch) {
         dispatch_async(self.processingQueue, ^{
-            for (NSString *key in foundData) {
-                @autoreleasepool {
-                    NSData *data = foundData[key];
-                    id object = decode(data);
-                    if (object) {
-                        [self storeObject:object forKey:key cost:cost];
-                        batch[key] = object;
-                    }
-                    [dataForKeys removeObjectForKey:key];
-                }
-            }
+            [batch addEntriesFromDictionary:[self _objectsBatchFromDataBatch:dataBatch decode:decode cost:cost]];
             _dwarf_cache_callback(completion, batch);
         });
     }];
 }
 
-- (void)cachedObjectForAnyKey:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id, NSString *))completion {
+- (NSDictionary *)batchCachedObjectsForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost {
+    if (!keys.count) {
+        return nil;
+    }
+    // Retrieve objects from memory cache.
+    NSArray *remainingKeys;
+    NSMutableDictionary *batch = [self _batchCachedObjectForKeys:keys remainingKeys:&remainingKeys];
+    if (!remainingKeys.count) {
+        return [batch copy];
+    }
+    
+    // Retrieve remaining objects from disk cache.
+    NSDictionary *dataBatch = [self batchCachedDataForKeys:remainingKeys];
+    [batch addEntriesFromDictionary:[self _objectsBatchFromDataBatch:dataBatch decode:decode cost:cost]];
+    return [batch copy];
+}
+
+- (NSMutableDictionary *)_batchCachedObjectForKeys:(NSArray *)keys remainingKeys:(NSArray *__autoreleasing *)remainingKeys {
+    NSMutableDictionary *batch = [[NSMutableDictionary alloc] initWithDictionary:[self batchCachedObjectsForKeys:keys]];
+    if (remainingKeys) {
+        *remainingKeys = [keys filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *__unused bindings) {
+            return !batch[evaluatedObject];
+        }]];
+    }
+    return batch;
+}
+
+- (NSDictionary *)_objectsBatchFromDataBatch:(NSDictionary *)dataBatch decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost {
+    NSMutableDictionary *batch = [NSMutableDictionary new];
+    @autoreleasepool {
+        for (NSString *key in dataBatch) {
+            NSData *data = dataBatch[key];
+            id object = decode(data);
+            if (object) {
+                [self storeObject:object forKey:key cost:cost];
+                batch[key] = object;
+            }
+        }
+    }
+    return batch;
+}
+
+- (void)firstCachedObjectForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id, NSString *))completion {
     if (!completion) {
         return;
     }
@@ -101,22 +157,25 @@
         });
         return;
     }
+    for (NSString *key in keys) {
+        id object = [self.memoryCache objectForKey:key];
+        if (object) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(object, key);
+            });
+            return;
+        }
+    }
     dispatch_async(self.ioQueue, ^{
         @autoreleasepool {
             id foundObject;
             NSString *foundKey;
             for (NSString *key in keys) {
-                id object = [self.memoryCache objectForKey:key];
-                if (object) {
-                    foundObject = object;
-                    foundKey = key;
-                    break;
-                }
                 NSData *data = [self.diskCache dataForKey:key];
                 if (!data) {
                     continue;
                 }
-                object = decode(data);
+                id object = decode(data);
                 if (object) {
                     foundObject = object;
                     foundKey = key;
@@ -129,6 +188,20 @@
             });
         }
     });
+}
+
+#pragma mark - Deprecated
+
+- (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *))completion {
+    [self batchCachedDataForKeys:keys completion:completion];
+}
+
+- (void)cachedObjectsForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(NSDictionary *))completion {
+    [self batchCachedObjectsForKeys:keys decode:decode cost:cost completion:completion];
+}
+
+- (void)cachedObjectForAnyKey:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id, NSString *))completion {
+    [self firstCachedObjectForKeys:keys decode:decode cost:cost completion:completion];
 }
 
 @end
