@@ -25,42 +25,6 @@
 
 @implementation DFCache (DFCacheExtensions)
 
-#pragma mark - Direct Data Access
-
-- (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *))completion {
-    if (!completion) {
-        return;
-    }
-    if (!key.length) {
-        _dwarf_cache_callback(completion, nil);
-        return;
-    }
-    dispatch_async(self.ioQueue, ^{
-        NSData *data = [self.diskCache dataForKey:key];
-        _dwarf_cache_callback(completion, data);
-    });
-}
-
-- (NSData *)cachedDataForKey:(NSString *)key {
-    if (!key.length) {
-        return nil;
-    }
-    NSData *__block data;
-    dispatch_sync(self.ioQueue, ^{
-        data = [self.diskCache dataForKey:key];
-    });
-    return data;
-}
-
-- (void)storeData:(NSData *)data forKey:(NSString *)key {
-    if (!data || !key.length) {
-        return;
-    }
-    dispatch_async(self.ioQueue, ^{
-        [self.diskCache setData:data forKey:key];
-    });
-}
-
 #pragma mark - Read (Batching)
 
 - (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *))completion {

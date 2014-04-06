@@ -275,6 +275,42 @@
 }
 #endif
 
+#pragma mark - Direct Data Access
+
+- (void)testCachedDataForKeyAsynchronous {
+    NSString *object = @"value";
+    NSString *key = @"key";
+    
+    [_cache storeObject:object encode:DFCacheEncodeNSCoding forKey:key];
+    
+    BOOL __block isWaiting = YES;
+    [_cache cachedDataForKey:key completion:^(NSData *data) {
+        XCTAssertEqualObjects(object, DFCacheDecodeNSCoding(data));
+        isWaiting = NO;
+    }];
+    
+    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+}
+
+- (void)testCachedDataForKeySynchronous {
+    NSString *object = @"value";
+    NSString *key = @"key";
+    
+    [_cache storeObject:object encode:DFCacheEncodeNSCoding forKey:key];
+    NSData *data = [_cache cachedDataForKey:key];
+    XCTAssertEqualObjects(object, DFCacheDecodeNSCoding(data));
+}
+
+- (void)testStoreDataForKey {
+    size_t dataSize = 10000;
+    int *buffer = malloc(dataSize);
+    NSData *data = [NSData dataWithBytesNoCopy:buffer length:dataSize];
+    
+    [_cache storeData:data forKey:@"key"];
+    NSData *cachedData = [_cache cachedDataForKey:@"key"];
+    XCTAssertTrue([data length] == [cachedData length]);
+}
+
 #pragma mark - Helpers
 
 - (NSData *)_testDataWithSize:(unsigned long long)size {

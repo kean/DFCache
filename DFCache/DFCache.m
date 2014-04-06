@@ -46,7 +46,7 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
         _diskCache = diskCache;
         _memoryCache = memoryCache;
         
-        _ioQueue = dispatch_queue_create("DFCache:IOQueue", DISPATCH_QUEUE_SERIAL);
+        _ioQueue = dispatch_queue_create("DFCache::IOQueue", DISPATCH_QUEUE_SERIAL);
         _processingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         
         _cleanupTimeInterval = 60.f;
@@ -309,6 +309,42 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
     [_memoryCache removeAllObjects];
 }
 #endif
+
+#pragma mark - Data
+
+- (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *))completion {
+    if (!completion) {
+        return;
+    }
+    if (!key.length) {
+        _dwarf_cache_callback(completion, nil);
+        return;
+    }
+    dispatch_async(self.ioQueue, ^{
+        NSData *data = [self.diskCache dataForKey:key];
+        _dwarf_cache_callback(completion, data);
+    });
+}
+
+- (NSData *)cachedDataForKey:(NSString *)key {
+    if (!key.length) {
+        return nil;
+    }
+    NSData *__block data;
+    dispatch_sync(self.ioQueue, ^{
+        data = [self.diskCache dataForKey:key];
+    });
+    return data;
+}
+
+- (void)storeData:(NSData *)data forKey:(NSString *)key {
+    if (!data || !key.length) {
+        return;
+    }
+    dispatch_async(self.ioQueue, ^{
+        [self.diskCache setData:data forKey:key];
+    });
+}
 
 #pragma mark - Deprecated
 

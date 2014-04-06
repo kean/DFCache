@@ -222,6 +222,25 @@ extern NSString *const DFCacheAttributeMetadataKey;
  */
 - (void)cleanupDiskCache;
 
+#pragma mark - Data
+
+/*! Reads data from disk.
+ @param key The unique key.
+ @param completion Completion block.
+ */
+- (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *data))completion;
+
+/*! Reads data from disk synchronously.
+ @param key The unique key.
+ */
+- (NSData *)cachedDataForKey:(NSString *)key;
+
+/*! Stores data into disk cache asynchronously.
+ @param data Data to be stored into disk cache.
+ @param key The unique key.
+ */
+- (void)storeData:(NSData *)data forKey:(NSString *)key;
+
 #pragma mark - Deprecated
 
 /*! Deprecated method. Use -(void)storeObject:data:forKey:cost instead;

@@ -22,25 +22,9 @@
 
 #import "DFCache.h"
 
-/* Set of methods extending DFCache functionality by providing direct access to data and allowing you to retrieve cached objects in batches.
+/* Set of methods extending DFCache functionality. API to retrieve cached objects in batches.
 */
 @interface DFCache (DFCacheExtensions)
-
-#pragma mark - Direct Data Access
-
-/*! Reads data from disk.
- @param key The unique key.
- @param completion Completion block.
- */
-- (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *data))completion;
-
-/*! Reads data from disk synchronously.
- */
-- (NSData *)cachedDataForKey:(NSString *)key;
-
-/*! Stores data into disk cache asynchronously.
- */
-- (void)storeData:(NSData *)data forKey:(NSString *)key;
 
 #pragma mark - Read (Batching)
 
