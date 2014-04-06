@@ -244,10 +244,12 @@ extern NSString *const DFCacheAttributeMetadataKey;
 #pragma mark - Deprecated
 
 /*! Deprecated method. Use -(void)storeObject:data:forKey:cost instead;
+ @warning Deprecated in DFCache 1.3.0.
  */
 - (void)storeObject:(id)object forKey:(NSString *)key cost:(NSUInteger)cost data:(NSData *)data DEPRECATED_ATTRIBUTE;
 
 /*! Deprecated method. Use -(void)storeObject:encode:forKey:cost instead;
+ @warning Deprecated in DFCache 1.3.0.
  */
 - (void)storeObject:(id)object forKey:(NSString *)key cost:(NSUInteger)cost encode:(DFCacheEncodeBlock)encode DEPRECATED_ATTRIBUTE;
 
