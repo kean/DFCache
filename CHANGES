@@ -1,0 +1,23 @@
+DFCache 1.3.0
+-------------
+* DFCache automatically removes all objects from memory cache on UIApplicationDidReceiveMemoryWarningNotification notification.
+* DFCache: cleaner interface for storing and retrieving entries. Deprecate two clumsy methods.
+* DFDiskCache: add initWithName: method.
+* DFDiskCache: default capacity is now 100 Mb instead of DFDiskCacheCapacityUnlimited.
+* Improved documentation.
+
+DFCache 1.2.1
+-------------
+* DFDiskCache now uses built-in NSURLContentAccessDateKey for LRU cleanup
+
+DFCache 1.2.0
+-------------
+* Add first class UIImage support, including background image decompression
+
+DFCache 1.1.0
+-------------
+* Add cleanup scheduling API
+
+DFCache 1.0.0
+-------------
+* Initial public version.
