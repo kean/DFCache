@@ -1,9 +1,9 @@
 # About DFCache
 
-DFCache is an iOS and OS X library that implements composite in-memory and on-disk cache. It is implemented as a set of reusable classes with concise and extensible API.
+DFCache is an iOS and OS X library that provides composite in-memory and on-disk cache with LRU cleanup. It is implemented as a set of reusable classes with concise and extensible API.
 
 ### Key Features
- - Concise, extensible and well-documented API.
+ - Well-documented API.
  - Thoroughly tested. Written for and used heavily in the iOS application with more than half a million active users.
  - LRU cleanup (discards least recently used items first).
  - Metadata implemented on top on UNIX extended file attributes.
