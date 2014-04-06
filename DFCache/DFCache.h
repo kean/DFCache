@@ -28,18 +28,21 @@
 extern NSString *const DFCacheAttributeMetadataKey;
 
 /* DFCache key features:
- - Asynchronous composite in-memory and on-disk cache.
- - Encoding, decoding and cost calculation implemented using blocks. Store any kind of Objective-C objects or manipulate data directly (see DFFileStorage).
- - LRU cleanup (discard least recently used items first).
- - Custom metadata implemented on top on UNIX extended file attributes.
+ 
+ - Concise, extensible and well-documented API.
  - Thoroughly tested. Written for and used heavily in the iOS application with more than half a million active users.
- - Concise and extensible API.
+ - LRU cleanup (discards least recently used items first).
+ - Metadata implemented on top on UNIX extended file attributes.
+ - Encoding and decoding implemented using blocks. Store any kind of Objective-C objects or manipulate data directly.
+ - First class UIImage support including background image decompression.
+ - Batch methods to retrieve cached entries.
  */
 
 /*! Asynchronous composite in-memory and on-disk cache with LRU cleanup.
- @discussion Uses NSCache for in-memory caching and DFDiskCache for on-disk caching. Provides API for associating metadata with cache entries. Automatically schedules disk cleanup to be run repeatedly.
- @discussion All disk IO operations (including operations that associate metadata with cache entries) are run on serial dispatch queue. If you store the object using DFCache asynchronous API and then immediately try to retrieve it then you are guaranteed to get the object back.
- @warning NSCache auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else NSCache won't be able to evict memory properly. Typically, the obvious cost is the size of the object in bytes. Be aware that `DFCache` automatically removes all object from memory cache on memory warning for you.
+ @discussion Uses NSCache for in-memory caching and DFDiskCache for on-disk caching. Provides API for associating metadata with cache entries. Parts of the DFCache API (like first class UIImage support and batch read methods) are available through the categories. For more info see DFCacheExtended and DFImage categories.
+ @note All disk IO operations (including operations that associate metadata with cache entries) are run on a serial dispatch queue. If you store the object using DFCache asynchronous API and then immediately try to retrieve it then you are guaranteed to get the object back.
+ @note Default disk capacity is 100 Mb. Disk cleanup is implemented using LRU algorithm, the least recently used items are discarded first. Disk cleanup is automatically scheduled to run repeatedly.
+ @note NSCache auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else NSCache won't be able to evict memory properly. Typically, the obvious cost is the size of the object in bytes. Keep in mind that DFCache automatically removes all object from memory cache on memory warning for you.
  */
 @interface DFCache : NSObject
 
@@ -166,17 +169,17 @@ extern NSString *const DFCacheAttributeMetadataKey;
 
 #pragma mark - Remove
 
-/*! Removes objects from both disk and memory cache.
+/*! Removes objects from both disk and memory cache. Metadata is also removed.
  @param keys Array of strings.
  */
 - (void)removeObjectsForKeys:(NSArray *)keys;
 
-/*! Removes object from both disk and memory cache.
+/*! Removes object from both disk and memory cache. Metadata is also removed.
  @param key The unique key.
  */
 - (void)removeObjectForKey:(NSString *)key;
 
-/*! Removes all objects both disk and memory cache.
+/*! Removes all objects both disk and memory cache. Metadata is also removed.
  */
 - (void)removeAllObjects;
 
@@ -224,13 +227,13 @@ extern NSString *const DFCacheAttributeMetadataKey;
 
 #pragma mark - Data
 
-/*! Reads data from disk.
+/*! Retrieves data from disk cache.
  @param key The unique key.
  @param completion Completion block.
  */
 - (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *data))completion;
 
-/*! Reads data from disk synchronously.
+/*! Reads data from disk cache synchronously.
  @param key The unique key.
  */
 - (NSData *)cachedDataForKey:(NSString *)key;

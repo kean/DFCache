@@ -3,25 +3,25 @@
 DFCache is an iOS and OS X library that implements composite in-memory and on-disk cache. It is implemented as a set of reusable classes with concise and extensible API.
 
 ### Key Features
- - Encoding and decoding implemented using blocks. Store any kind of Objective-C objects or manipulate data directly (see `DFFileStorage`).
+ - Concise, extensible and well-documented API.
+ - Thoroughly tested. Written for and used heavily in the iOS application with more than half a million active users.
  - LRU cleanup (discards least recently used items first).
  - Metadata implemented on top on UNIX extended file attributes.
- - First class UIImage support including background image decompression.
+ - Encoding and decoding implemented using blocks. Store any kind of Objective-C objects or manipulate data directly.
+ - First class `UIImage` support including background image decompression.
  - Batch methods to retrieve cached entries.
- - Thoroughly tested. Written for and used heavily in the iOS application with more than half a million active users.
- - Concise and extensible API.
 
 ### Requirements
 - iOS 6.0 or OS X 10.7
 
 ### NSCache on iOS 7.0
-`NSCache` auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else `NSCache` won't be able to evict memory properly. Typically, the obvious cost is the size of the object in bytes. Be aware that `DFCache` automatically removes all object from memory cache on memory warning for you.
+`NSCache` auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else `NSCache` won't be able to evict memory properly. Typically, the obvious cost is the size of the object in bytes. Keep in mind that `DFCache` automatically removes all object from memory cache on memory warning for you.
 
 # Classes
 |Class|Description|
 |---------|---------|
-|[DFCache](https://github.com/kean/DFCache/blob/master/DFCache/DFCache.h)|Asynchronous composite in-memory and on-disk cache. Uses `NSCache` for in-memory caching and `DFDiskCache` for on-disk caching. Extends `DFDiskCache` functionality by providing API for associating custom metadata with cache entries.|
-|[DFCache (DFImage)](https://github.com/kean/DFCache/blob/master/DFCache/DFCache%2BDFImage.h)|First class UIImage support, including background image decompression.|
+|[DFCache](https://github.com/kean/DFCache/blob/master/DFCache/DFCache.h)|Asynchronous composite in-memory and on-disk cache with LRU cleanup. Uses `NSCache` for in-memory caching and `DFDiskCache` for on-disk caching. Provides API for associating metadata with cache entries.|
+|[DFCache (DFImage)](https://github.com/kean/DFCache/blob/master/DFCache/DFCache%2BDFImage.h)|First class UIImage support including background image decompression.|
 |[DFCache (DFCacheExtended)](https://github.com/kean/DFCache/blob/master/DFCache/DFCache%2BDFExtensions.h)|Set of methods that extend `DFCache` functionality by allowing you to retrieve cached entries in batches.|
 |[DFFileStorage](https://github.com/kean/DFCache/blob/master/DFCache/Key-Value%20File%20Storage/DFFileStorage.h)|Key-value file storage.|
 |[DFDiskCache](https://github.com/kean/DFCache/blob/master/DFCache/DFDiskCache.h)|Disk cache extends file storage functionality by providing LRU (least recently used) cleanup.|

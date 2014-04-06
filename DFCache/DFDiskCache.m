@@ -73,7 +73,7 @@
 }
 
 + (NSString *)cachesDirectoryPath {
-    return NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    return [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
 }
 
 @end
