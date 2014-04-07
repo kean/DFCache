@@ -78,12 +78,8 @@
 
 #pragma mark - Miscellaneous
 
-- (NSString *)_stringFromBytes:(unsigned long long)bytes {
-    return [NSByteCountFormatter stringFromByteCount:bytes countStyle:NSByteCountFormatterCountStyleBinary];
-}
-
 - (NSString *)debugDescription {
-    return [NSString stringWithFormat:@"<%@ %p> { capacity: %@; usage: %@; files: %lu }", [self class], self, [self _stringFromBytes:self.capacity], [self _stringFromBytes:self.contentsSize], (unsigned long)[self contentsWithResourceKeys:nil].count];
+    return [NSString stringWithFormat:@"<%@ %p> { capacity: %@; usage: %@; files: %lu }", [self class], self, _dwarf_bytes_to_str(self.capacity), _dwarf_bytes_to_str(self.contentsSize), (unsigned long)[self contentsWithResourceKeys:nil].count];
 }
 
 @end

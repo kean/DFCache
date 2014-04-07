@@ -95,4 +95,8 @@
     return [_fileManager contentsOfDirectoryAtURL:rootURL includingPropertiesForKeys:keys options:NSDirectoryEnumerationSkipsHiddenFiles error:nil];
 }
 
+- (NSString *)debugDescription {
+    return [NSString stringWithFormat:@"<%@ %p> { usage: %@; files: %lu }", [self class], self, _dwarf_bytes_to_str(self.contentsSize), (unsigned long)[self contentsWithResourceKeys:nil].count];
+}
+
 @end

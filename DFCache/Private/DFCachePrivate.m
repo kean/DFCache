@@ -40,3 +40,8 @@ _dwarf_cache_sha1(const char *data, uint32_t length) {
     CC_SHA1(data, (CC_LONG)length, hash);
     return _dwarf_cache_to_string(hash, CC_SHA1_DIGEST_LENGTH);
 }
+
+NSString *
+_dwarf_bytes_to_str(unsigned long long bytes) {
+    return [NSByteCountFormatter stringFromByteCount:bytes countStyle:NSByteCountFormatterCountStyleBinary];
+}

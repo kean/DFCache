@@ -35,6 +35,11 @@ _dwarf_cache_callback(void (^block)(id), id object) {
 extern NSString *
 _dwarf_cache_sha1(const char *data, uint32_t length);
 
+/*! Returns user-friendly string with bytes.
+ */
+extern NSString *
+_dwarf_bytes_to_str(unsigned long long bytes);
+
 #pragma mark - Types -
 
 typedef unsigned long long _dwarf_cache_bytes;
