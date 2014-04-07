@@ -72,9 +72,9 @@
     XCTAssertThrowsSpecificNamed([[DFCache alloc] initWithName:@""], NSException, NSInvalidArgumentException);
 }
 
-#pragma mark - Write (custom encoders/decoders)
+#pragma mark - Write
 
-- (void)testWriteWithTransform {
+- (void)testWriteWithCustomEncodingAndDecodingBlock {
     NSString *string = @"value1";
     NSString *key = @"key1";
     
@@ -87,7 +87,7 @@
     
     NSString *cachedString = [_cache cachedObjectForKey:key decode:^id(NSData *data) {
         return [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-    } cost:nil];
+    }];
     XCTAssertEqualObjects(string, cachedString);
 }
 
@@ -103,23 +103,7 @@
     
     NSString *cachedString = [_cache cachedObjectForKey:key decode:^id(NSData *data) {
         return [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-    } cost:nil];
-    XCTAssertEqualObjects(string, cachedString);
-}
-
-- (void)testWriteWithDataDeprecated {
-    NSString *string = @"value1";
-    NSString *key = @"key1";
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    
-    [_cache storeObject:string data:data forKey:key];
-    
-    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
-    [_cache.memoryCache removeObjectForKey:key];
-    
-    NSString *cachedString = [_cache cachedObjectForKey:key decode:^id(NSData *data) {
-        return [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-    } cost:nil];
+    }];
     XCTAssertEqualObjects(string, cachedString);
 }
 
@@ -132,20 +116,23 @@
     XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
     
-    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:nil];
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding];
     XCTAssertNil(cachedString);
 }
 
-#pragma mark - Write (predifined encoders/decoders)
+#pragma mark - Write (DFCacheEncode(Decode)JSON, DFCacheEncode(Decode)NSCoding)
  
 - (void)testWriteJSON {
     NSDictionary *JSON = @{ @"key" : @"value" };
     NSString *key = @"key3";
     
     [_cache storeObject:JSON encode:DFCacheEncodeJSON forKey:key];
-
+    
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
+    [_cache.memoryCache removeObjectForKey:key];
+    
     BOOL __block isWaiting = YES;
-    [_cache cachedObjectForKey:key decode:DFCacheDecodeJSON cost:nil completion:^(id object) {
+    [_cache cachedObjectForKey:key decode:DFCacheDecodeJSON completion:^(id object) {
         XCTAssertTrue([JSON[@"key"] isEqualToString:object[@"key"]]);
         isWaiting = NO;
     }];
@@ -161,13 +148,13 @@
     XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
     
-    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:nil];
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding];
     XCTAssertEqualObjects(string, cachedString);
 }
 
-#pragma mark - Read (No Cost)
+#pragma mark - Read
 
-- (void)testReadAsynchronouslyNoCostBlock {
+- (void)testReadAsynchronouslyWithoutCostBlock {
     NSDictionary *JSON = @{ @"key" : @"value" };
     NSString *key = @"key3";
     
@@ -181,7 +168,7 @@
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
 }
 
-- (void)testReadSynchrousltNoCost {
+- (void)testReadSynchrouslyWithoutCostBlock {
     NSString *string = @"test_string";
     NSString *key = @"key3";
     [_cache storeObject:string encode:DFCacheEncodeNSCoding forKey:key];
@@ -192,7 +179,43 @@
     XCTAssertEqualObjects(string, cachedString);
 }
 
-#pragma mark - Removal
+- (void)testReadAsynchronouslyWithCostBlock {
+    NSDictionary *JSON = @{ @"key" : @"value" };
+    NSString *key = @"key3";
+    
+    [_cache storeObject:JSON encode:DFCacheEncodeJSON forKey:key];
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    BOOL __block isWaiting = YES;
+    BOOL __block isCostBlockCalled = NO;
+    [_cache cachedObjectForKey:key decode:DFCacheDecodeJSON cost:^NSUInteger(id __unused object) {
+        isCostBlockCalled = YES;
+        return 10.f;
+    } completion:^(id object) {
+        XCTAssertTrue([JSON[@"key"] isEqualToString:object[@"key"]]);
+        isWaiting = NO;
+    }];
+    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    XCTAssertTrue(isCostBlockCalled);
+}
+
+- (void)testReadSynchrouslyWithCostBlock {
+    NSString *string = @"test_string";
+    NSString *key = @"key3";
+    [_cache storeObject:string encode:DFCacheEncodeNSCoding forKey:key];
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    BOOL __block isCostBlockCalled = NO;
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:^NSUInteger(id __unused object) {
+        isCostBlockCalled = YES;
+        return 10.f;
+    }];
+    XCTAssertTrue(isCostBlockCalled);
+    XCTAssertEqualObjects(string, cachedString);
+}
+
+#pragma mark - Remove
 
 - (void)testRemovalForSingleKey {
     NSDictionary *objects;
@@ -206,8 +229,17 @@
     
     [_cache removeObjectForKey:removeKey];
     
-    [self _assertDoesntContainObjectsForKeys:@[removeKey]];
-    [self _assertContainsObjectsForKeys:remainingKeys objects:objects];
+    for (NSString *key in @[removeKey]) {
+        NSString *object = [_cache.memoryCache objectForKey:key];
+        XCTAssertNil(object, @"Memory cache: contains object for key %@", key);
+        XCTAssertNil([_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding], @"Disk cache: contains object for key %@", key);
+    }
+    
+    for (NSString *key in remainingKeys) {
+        id object = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding];
+        XCTAssertNotNil(object, @"Disk cache: no object for key %@", key);
+        XCTAssertEqualObjects(objects[key], object);
+    }
 }
 
 - (void)testRemovalForMultipleKeys {
@@ -219,9 +251,18 @@
     NSArray *remainingKeys = @[ keys[1], keys[4] ];
     
     [_cache removeObjectsForKeys:removeKeys];
+
+    for (NSString *key in remainingKeys) {
+        id object = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding];
+        XCTAssertNotNil(object, @"Disk cache: no object for key %@", key);
+        XCTAssertEqualObjects(objects[key], object);
+    }
     
-    [self _assertContainsObjectsForKeys:remainingKeys objects:objects];
-    [self _assertDoesntContainObjectsForKeys:removeKeys];
+    for (NSString *key in removeKeys) {
+        NSString *object = [_cache.memoryCache objectForKey:key];
+        XCTAssertNil(object, @"Memory cache: contains object for key %@", key);
+        XCTAssertNil([_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding], @"Disk cache: contains object for key %@", key);
+    }
 }
 
 - (void)testRemoveAllObjects {
@@ -230,7 +271,11 @@
     
     [_cache removeAllObjects];
     
-    [self _assertDoesntContainObjectsForKeys:[objects allKeys]];
+    for (NSString *key in [objects allKeys]) {
+        NSString *object = [_cache.memoryCache objectForKey:key];
+        XCTAssertNil(object, @"Memory cache: contains object for key %@", key);
+        XCTAssertNil([_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding], @"Disk cache: contains object for key %@", key);
+    }
 }
 
 #pragma mark - Metadata Tests
@@ -275,7 +320,7 @@
 }
 #endif
 
-#pragma mark - Direct Data Access
+#pragma mark - Data
 
 - (void)testCachedDataForKeyAsynchronous {
     NSString *object = @"value";
@@ -311,35 +356,49 @@
     XCTAssertTrue([data length] == [cachedData length]);
 }
 
-#pragma mark - Helpers
+#pragma mark - Deprecated
 
-- (NSData *)_testDataWithSize:(unsigned long long)size {
-    int *buffer = malloc(size);
-    return [NSData dataWithBytesNoCopy:buffer length:size];
+/*! @warning Deprecated in DFCache 1.3.0.
+ */
+- (void)testWriteWithCustomEncodingBlockDeprecated {
+    NSString *string = @"value1";
+    NSString *key = @"key1";
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    [_cache storeObject:string forKey:key cost:0 encode:^NSData *(id object) {
+        return [((NSString *)object) dataUsingEncoding:NSUTF8StringEncoding];
+    }];
+#pragma clang diagnostic pop
+    
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:^id(NSData *data) {
+        return [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+    }];
+    XCTAssertEqualObjects(string, cachedString);
 }
 
-- (void)_assertContainsObjectsForKeys:(NSArray *)keys objects:(NSDictionary *)objects {
-    for (NSString *key in keys) {
-        {
-            id object = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:nil];
-            XCTAssertNotNil(object, @"Disk cache: no object for key %@", key);
-            XCTAssertEqualObjects(objects[key], object);
-        }
-    }
-}
-
-- (void)_assertDoesntContainObjectsForKeys:(NSArray *)keys {
-    for (NSString *key in keys) {
-        {
-            NSString *object = [_cache.memoryCache objectForKey:key];
-            XCTAssertNil(object, @"Memory cache: contains object for key %@", key);
-        }
-        
-        {
-            id object = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:nil];
-            XCTAssertNil(object, @"Disk cache: contains object for key %@", key);
-        }
-    }
+/*! @warning Deprecated in DFCache 1.3.0.
+ */
+- (void)testWriteWithDataDeprecated {
+    NSString *string = @"value1";
+    NSString *key = @"key1";
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    [_cache storeObject:string forKey:key cost:10 data:data];
+#pragma clang diagnostic pop
+    
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    NSString *cachedString = [_cache cachedObjectForKey:key decode:^id(NSData *data) {
+        return [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+    }];
+    XCTAssertEqualObjects(string, cachedString);
 }
 
 @end
