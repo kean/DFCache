@@ -346,6 +346,12 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
     });
 }
 
+#pragma mark - Miscellaneous
+
+- (NSString *)debugDescription {
+    return [NSString stringWithFormat:@"<%@ %p> { disk_cache = %@ }", [self class], self, [self.diskCache debugDescription]];
+}
+
 #pragma mark - Deprecated
 
 - (void)storeObject:(id)object forKey:(NSString *)key cost:(NSUInteger)cost data:(NSData *)data {

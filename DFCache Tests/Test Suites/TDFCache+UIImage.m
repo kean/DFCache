@@ -46,10 +46,12 @@
     NSString *key = @"key";
     
     [_cache storeImage:image imageData:nil forKey:key];
+    [_cache.memoryCache removeAllObjects];
     
-    __block BOOL isWaiting = NO;
+    __block BOOL isWaiting = YES;
     [_cache cachedImageForKey:key completion:^(UIImage *cachedImage) {
         [self _assertImage:image isEqualImage:cachedImage];
+        isWaiting = NO;
     }];
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
 }
@@ -60,10 +62,12 @@
     NSString *key = @"key";
     
     [_cache storeImage:image imageData:data forKey:key];
+    [_cache.memoryCache removeAllObjects];
     
-    __block BOOL isWaiting = NO;
+    __block BOOL isWaiting = YES;
     [_cache cachedImageForKey:key completion:^(UIImage *cachedImage) {
         [self _assertImage:image isEqualImage:cachedImage];
+        isWaiting = NO;
     }];
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
 }
@@ -72,7 +76,7 @@
 
 - (UIImage *)_testImage {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString *path = [bundle pathForResource:@"image" ofType:@"jpeg"];
+    NSString *path = [bundle pathForResource:@"zebrainpastelfield" ofType:@"png"];
     return [UIImage imageWithContentsOfFile:path];
 }
 

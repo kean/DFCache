@@ -25,6 +25,9 @@
 		0C94792318CCE4D4008E8938 /* DFCacheTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94792018CCE4D4008E8938 /* DFCacheTimer.m */; };
 		0C94792418CCE4D4008E8938 /* DFCacheTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94792018CCE4D4008E8938 /* DFCacheTimer.m */; };
 		0C94792518CCE4D4008E8938 /* DFCacheTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94792018CCE4D4008E8938 /* DFCacheTimer.m */; };
+		0CADA4EA18F2BF5400F5248D /* zebrainpastelfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */; };
+		0CADA4EB18F2BF5400F5248D /* zebrainpastelfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */; };
+		0CADA4EC18F2BF5400F5248D /* zebrainpastelfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */; };
 		0CB95DFA18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95DFB18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95DFC18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */; };
@@ -144,6 +147,7 @@
 		0C8C15E217D40DFC004B7DAA /* DFCache Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DFCache Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C94791F18CCE4D4008E8938 /* DFCacheTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCacheTimer.h; sourceTree = "<group>"; };
 		0C94792018CCE4D4008E8938 /* DFCacheTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCacheTimer.m; sourceTree = "<group>"; };
+		0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zebrainpastelfield.png; sourceTree = "<group>"; };
 		0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+DFExtendedFileAttributes.h"; sourceTree = "<group>"; };
 		0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DFExtendedFileAttributes.m"; sourceTree = "<group>"; };
 		0CB95E0418CB181000169472 /* DFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCache.h; sourceTree = "<group>"; };
@@ -332,6 +336,7 @@
 				0CDB852718CB44B6005DAA43 /* DFCache+Tests.m */,
 				0C7D47B218CB20470078C765 /* DFTesting.h */,
 				0CDB852518CB4485005DAA43 /* Test Suites */,
+				0CADA4E818F2BF5400F5248D /* Resources */,
 				0CB95E1C18CB186D00169472 /* DFCache Tests iOS */,
 				0CFAA7ED18CC7006004C56CC /* DFCache Tests OS X Static */,
 				0CFAA80318CC704E004C56CC /* DFCache Tests OS X Dynamic */,
@@ -346,6 +351,14 @@
 				0C85802D18CF125800D71F3E /* DFCacheImageDecoder.m */,
 			);
 			path = "Image Decoder";
+			sourceTree = "<group>";
+		};
+		0CADA4E818F2BF5400F5248D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		0CB95DF418CB17AD00169472 /* Extended File Attributes */ = {
@@ -647,6 +660,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CB95E2F18CB186D00169472 /* InfoPlist.strings in Resources */,
+				0CADA4EA18F2BF5400F5248D /* zebrainpastelfield.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +669,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CFAA7F218CC7007004C56CC /* InfoPlist.strings in Resources */,
+				0CADA4EB18F2BF5400F5248D /* zebrainpastelfield.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,6 +678,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CFAA80818CC704E004C56CC /* InfoPlist.strings in Resources */,
+				0CADA4EC18F2BF5400F5248D /* zebrainpastelfield.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
