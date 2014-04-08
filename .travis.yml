@@ -1,7 +1,5 @@
 language: objective-c
-before_install:
-    - brew update
-    - brew install xctool
+
 script: xctool -project DFCache.xcodeproj -scheme 'DFCache iOS' test
 script: xctool -project DFCache.xcodeproj -scheme 'DFCache OS X Static' test
 script: xctool -project DFCache.xcodeproj -scheme 'DFCache OS X Dynamic' test
