@@ -6,8 +6,7 @@ DFCache is an iOS and OS X library that provides composite in-memory and on-disk
 
 
 ### Key Features
- - Well-documented API.
- - Thoroughly tested. Written for and used heavily in the iOS application with more than half a million active users.
+ - Thoroughly tested and well-documented.
  - LRU cleanup (discards least recently used items first).
  - Metadata implemented on top on UNIX extended file attributes.
  - Encoding and decoding implemented using blocks. Store any kind of Objective-C objects or manipulate data directly.
@@ -30,7 +29,7 @@ DFCache is an iOS and OS X library that provides composite in-memory and on-disk
 |[DFDiskCache](https://github.com/kean/DFCache/blob/master/DFCache/DFDiskCache.h)|Disk cache extends file storage functionality by providing LRU (least recently used) cleanup.|
 |[NSURL (DFExtendedFileAttributes)](https://github.com/kean/DFCache/blob/master/DFCache/Extended%20File%20Attributes/NSURL%2BDFExtendedFileAttributes.h)|Objective-c wrapper of UNIX extended file attributes. Extended attributes extend the basic attributes associated with files and directories in the file system. They are stored as name:data pairs associated with file system objects (files, directories, symlinks, etc). See setxattr(2).|
 
-# Examples
+# Usage
 
 ### DFCache
 
@@ -111,7 +110,7 @@ The recommended way to install `DFCache` is via [Cocoapods](http://cocoapods.org
 ```ruby
 # Podfile example
 platform :ios, '6.0'
-# platform :osx, '10.7'
+# platform :osx, '10.8'
 pod 'DFCache', '~> 1.0'
 ```
 
