@@ -1,6 +1,9 @@
 language: objective-c
 
 script: 
-- xctool -project DFCache.xcodeproj -scheme 'DFCache iOS' test
-- xctool -project DFCache.xcodeproj -scheme 'DFCache OS X Static' test
-- xctool -project DFCache.xcodeproj -scheme 'DFCache OS X Dynamic' test
+- xctool -project DFCache.xcodeproj -scheme 'DFCache iOS' test -test-sdk iphonesimulator6.0
+- xctool -project DFCache.xcodeproj -scheme 'DFCache iOS' test -test-sdk iphonesimulator6.1
+- xctool -project DFCache.xcodeproj -scheme 'DFCache iOS' test -test-sdk iphonesimulator7.0
+- xctool -project DFCache.xcodeproj -scheme 'DFCache OS X Static' test -test-sdk macosx10.7
+- xctool -project DFCache.xcodeproj -scheme 'DFCache OS X Static' test -test-sdk macosx10.8
+- xctool -project DFCache.xcodeproj -scheme 'DFCache OS X Static' test -test-sdk macosx10.9
