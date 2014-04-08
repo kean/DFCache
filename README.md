@@ -15,7 +15,7 @@ DFCache is an iOS and OS X library that provides composite in-memory and on-disk
  - Batch methods to retrieve cached entries.
 
 ### Requirements
-- iOS 6.0 or OS X 10.7
+- iOS 6.0 or OS X 10.8
 
 ### NSCache on iOS 7.0
 `NSCache` auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else `NSCache` won't be able to evict memory properly. Typically, the obvious cost is the size of the object in bytes. Keep in mind that `DFCache` automatically removes all object from memory cache on memory warning for you.
