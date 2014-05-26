@@ -2,6 +2,10 @@ language: objective-c
 
 xcode_project: DFCache.xcodeproj
 
+before_script:
+    - brew update
+    - brew upgrade xctool
+
 matrix:
   include:
     - xcode_scheme: 'DFCache iOS'
