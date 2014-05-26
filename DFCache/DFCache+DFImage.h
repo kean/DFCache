@@ -31,8 +31,7 @@ static const DFCacheEncodeBlock DFCacheEncodeUIImage = ^NSData *(UIImage *image)
 };
 
 static const DFCacheDecodeBlock DFCacheDecodeUIImage = ^UIImage *(NSData *data) {
-    UIImage *image = [[UIImage alloc] initWithData:data scale:[UIScreen mainScreen].scale];
-    return [DFCacheImageDecoder decodedImage:image];
+    return [DFCacheImageDecoder decompressedImageWithData:data];
 };
 
 static const DFCacheCostBlock DFCacheCostUIImage = ^NSUInteger(id object){

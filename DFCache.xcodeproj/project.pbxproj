@@ -28,6 +28,8 @@
 		0CADA4EA18F2BF5400F5248D /* zebrainpastelfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */; };
 		0CADA4EB18F2BF5400F5248D /* zebrainpastelfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */; };
 		0CADA4EC18F2BF5400F5248D /* zebrainpastelfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */; };
+		0CB1C77F1933783700F11441 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB1C77E1933783700F11441 /* ImageIO.framework */; };
+		0CB1C7801933784F00F11441 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB1C77E1933783700F11441 /* ImageIO.framework */; };
 		0CB95DFA18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95DFB18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95DFC18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */; };
@@ -149,6 +151,7 @@
 		0C94791F18CCE4D4008E8938 /* DFCacheTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCacheTimer.h; sourceTree = "<group>"; };
 		0C94792018CCE4D4008E8938 /* DFCacheTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCacheTimer.m; sourceTree = "<group>"; };
 		0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zebrainpastelfield.png; sourceTree = "<group>"; };
+		0CB1C77E1933783700F11441 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+DFExtendedFileAttributes.h"; sourceTree = "<group>"; };
 		0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DFExtendedFileAttributes.m"; sourceTree = "<group>"; };
 		0CB95E0418CB181000169472 /* DFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCache.h; sourceTree = "<group>"; };
@@ -191,6 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CB1C77F1933783700F11441 /* ImageIO.framework in Frameworks */,
 				0CBC53A118CB4D70002A8993 /* UIKit.framework in Frameworks */,
 				0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */,
 			);
@@ -218,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CB1C7801933784F00F11441 /* ImageIO.framework in Frameworks */,
 				0CFC5CBC17D42367001C2951 /* libDFCache.a in Frameworks */,
 				0CBC53A218CB4D7D002A8993 /* UIKit.framework in Frameworks */,
 				0C8C15E517D40DFC004B7DAA /* Foundation.framework in Frameworks */,
@@ -309,6 +314,7 @@
 		0C3712F617D3F93F00766FD9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0CB1C77E1933783700F11441 /* ImageIO.framework */,
 				0C85803C18CF17F900D71F3E /* CoreGraphics.framework */,
 				0C85803A18CF17DF00D71F3E /* QuartzCore.framework */,
 				0CBC53A718CB4DCF002A8993 /* AppKit.framework */,
