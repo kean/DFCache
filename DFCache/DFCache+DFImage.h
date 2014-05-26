@@ -38,8 +38,9 @@ static const DFCacheCostBlock DFCacheCostUIImage = ^NSUInteger(id object){
     if (![object isKindOfClass:[UIImage class]]) {
         return 0;
     }
-    UIImage *image = (UIImage *)object;
-    return CGImageGetWidth(image.CGImage) * CGImageGetHeight(image.CGImage) * 4;
+    CGImageRef image = ((UIImage *)object).CGImage;
+    NSUInteger bytesPerPixel = CGImageGetBitsPerPixel(image) / 8;
+    return CGImageGetWidth(image) * CGImageGetHeight(image) * bytesPerPixel;
 };
 
 #endif
