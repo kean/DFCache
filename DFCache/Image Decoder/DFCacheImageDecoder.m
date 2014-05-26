@@ -32,16 +32,17 @@
  (c) Olivier Poitrey <rs@dailymotion.com>
  */
 + (UIImage *)decompressedImageWithData:(NSData *)data {
-    if (&kCGImageSourceShouldCacheImmediately != NULL) {
-        return [self _decompressedImageWithData:data];
-    } else {
+    // Not yet sure about kCGImageSourceShouldCacheImmediately, might be enabled in future releases.
+    //if (&kCGImageSourceShouldCacheImmediately != NULL) {
+    //    return [self _decompressedImageWithData:data];
+    //} else {
         return [self _preIOS7DecompressedImageWithData:data];
-    }
+    //}
 }
 
 + (UIImage *)_decompressedImageWithData:(NSData *)data {
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
-    CGImageRef cgImage = CGImageSourceCreateImageAtIndex(source, 0, (__bridge CFDictionaryRef)@{(id)kCGImageSourceShouldCacheImmediately: @YES});
+    CGImageRef cgImage = CGImageSourceCreateImageAtIndex(source, 0, (__bridge CFDictionaryRef) @{(id)kCGImageSourceShouldCacheImmediately: @YES, (id)kCGImageSourceShouldCache: @YES});
     
     UIImage *image = [UIImage imageWithCGImage:cgImage];
     CGImageRelease(cgImage);
