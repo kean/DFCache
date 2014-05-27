@@ -39,8 +39,8 @@ static const DFCacheCostBlock DFCacheCostUIImage = ^NSUInteger(id object){
         return 0;
     }
     CGImageRef image = ((UIImage *)object).CGImage;
-    NSUInteger bytesPerPixel = CGImageGetBitsPerPixel(image) / 8;
-    return CGImageGetWidth(image) * CGImageGetHeight(image) * bytesPerPixel;
+    NSUInteger bitsPerPixel = CGImageGetBitsPerPixel(image);
+    return (CGImageGetWidth(image) * CGImageGetHeight(image) * bitsPerPixel) / 8; // Return number of bytes in image bitmap.
 };
 
 #endif
