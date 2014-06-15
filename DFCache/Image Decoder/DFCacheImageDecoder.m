@@ -22,6 +22,7 @@
 
 #import "DFCacheImageDecoder.h"
 #import <CoreGraphics/CoreGraphics.h>
+#import <ImageIO/ImageIO.h>
 
 @implementation DFCacheImageDecoder
 
@@ -30,7 +31,30 @@
 /*! Implementation from SDWebImage package.
  (c) Olivier Poitrey <rs@dailymotion.com>
  */
-+ (UIImage *)decodedImage:(UIImage *)image {
++ (UIImage *)decompressedImageWithData:(NSData *)data {
+    // Not yet sure about kCGImageSourceShouldCacheImmediately, might be enabled in future releases.
+    //if (&kCGImageSourceShouldCacheImmediately != NULL) {
+    //    return [self _decompressedImageWithData:data];
+    //} else {
+        return [self _preIOS7DecompressedImageWithData:data];
+    //}
+}
+
++ (UIImage *)_decompressedImageWithData:(NSData *)data {
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
+    CGImageRef cgImage = CGImageSourceCreateImageAtIndex(source, 0, (__bridge CFDictionaryRef) @{(id)kCGImageSourceShouldCacheImmediately: @YES, (id)kCGImageSourceShouldCache: @YES});
+    
+    UIImage *image = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    CFRelease(source);
+    return image;
+}
+
++ (UIImage *)_preIOS7DecompressedImageWithData:(NSData *)data {
+    if (!data) {
+        return nil;
+    }
+    UIImage *image = [[UIImage alloc] initWithData:data scale:[UIScreen mainScreen].scale];
     if (!image) {
         return nil;
     }
@@ -77,7 +101,7 @@
     
     // If failed, return original image
     if (!context) {
-       return image;
+        return image;
     }
     
     CGContextDrawImage(context, imageRect, imageRef);

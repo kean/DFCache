@@ -31,16 +31,16 @@ static const DFCacheEncodeBlock DFCacheEncodeUIImage = ^NSData *(UIImage *image)
 };
 
 static const DFCacheDecodeBlock DFCacheDecodeUIImage = ^UIImage *(NSData *data) {
-    UIImage *image = [[UIImage alloc] initWithData:data scale:[UIScreen mainScreen].scale];
-    return [DFCacheImageDecoder decodedImage:image];
+    return [DFCacheImageDecoder decompressedImageWithData:data];
 };
 
 static const DFCacheCostBlock DFCacheCostUIImage = ^NSUInteger(id object){
     if (![object isKindOfClass:[UIImage class]]) {
         return 0;
     }
-    UIImage *image = (UIImage *)object;
-    return CGImageGetWidth(image.CGImage) * CGImageGetHeight(image.CGImage) * 4;
+    CGImageRef image = ((UIImage *)object).CGImage;
+    NSUInteger bitsPerPixel = CGImageGetBitsPerPixel(image);
+    return (CGImageGetWidth(image) * CGImageGetHeight(image) * bitsPerPixel) / 8; // Return number of bytes in image bitmap.
 };
 
 #endif
