@@ -76,17 +76,6 @@
     }
 }
 
-- (void)testBatchCachedObjectsForKeysFromMemoryCache {
-    NSDictionary *strings;
-    [_cache storeStringsWithCount:5 strings:&strings];
-    NSArray *keys = [strings allKeys];
-    
-    NSDictionary *batch = [_cache batchCachedObjectsForKeys:keys];
-    for (NSString *key in keys) {
-        XCTAssertNotNil(batch[key]);
-    }
-}
-
 - (void)testBatchCachedObjectsForKeysAsynchronous {
     NSDictionary *strings;
     [_cache storeStringsWithCount:5 strings:&strings];
