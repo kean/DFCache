@@ -183,7 +183,18 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
     }
     dispatch_async(self.ioQueue, ^{
         @autoreleasepool {
-            [self.diskCache setData:(data ? data : encode(object)) forKey:key];
+            NSData *__block encodedData = data;
+            if (!encodedData) {
+                @try {
+                    encodedData = encode(object);
+                }
+                @catch (NSException *exception) {
+                    // Do nothing
+                }
+            }
+            if (encodedData) {
+                [self.diskCache setData:encodedData forKey:key];
+            }
         }
     });
 }

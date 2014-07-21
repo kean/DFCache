@@ -27,19 +27,31 @@ typedef NSUInteger (^DFCacheCostBlock)(id object);
 #pragma mark - <NSCoding>
 
 static const DFCacheEncodeBlock DFCacheEncodeNSCoding = ^NSData *(id<NSCoding> object){
+    if (!object) {
+        return nil;
+    }
     return [NSKeyedArchiver archivedDataWithRootObject:object];
 };
 
 static const DFCacheDecodeBlock DFCacheDecodeNSCoding = ^id<NSCoding>(NSData *data){
+    if (!data) {
+        return nil;
+    }
     return [NSKeyedUnarchiver unarchiveObjectWithData:data];
 };
 
 #pragma mark - JSON
 
 static const DFCacheEncodeBlock DFCacheEncodeJSON = ^NSData *(id JSON){
+    if (!JSON) {
+        return nil;
+    }
     return [NSJSONSerialization dataWithJSONObject:JSON options:kNilOptions error:nil];
 };
 
 static const DFCacheDecodeBlock DFCacheDecodeJSON = ^id(NSData *data){
+    if (!data) {
+        return nil;
+    }
     return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
 };

@@ -152,6 +152,31 @@
     XCTAssertEqualObjects(string, cachedString);
 }
 
+#pragma mark - Write (Exceptions)
+
+- (void)testWriteDataNilObjectNilWithValidENcode {
+    // test that it doesn't crash
+    [_cache storeObject:nil encode:DFCacheEncodeJSON forKey:@"key"];
+    BOOL __block isWaiting = YES;
+    [_cache cachedObjectForKey:@"key" decode:DFCacheDecodeJSON completion:^(id object) {
+        XCTAssertNil(object);
+        isWaiting = NO;
+    }];
+    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+}
+
+- (void)testWriteInvalidInputForEncodeBlock {
+    // test that is doesn't crash
+    NSCache *object = [NSCache new];
+    [_cache storeObject:object encode:DFCacheEncodeNSCoding forKey:@"key"];
+    BOOL __block isWaiting = YES;
+    [_cache cachedObjectForKey:@"key" decode:DFCacheDecodeNSCoding completion:^(id retrievedObject) {
+        XCTAssertNil(retrievedObject);
+        isWaiting = NO;
+    }];
+    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+}
+
 #pragma mark - Read
 
 - (void)testReadAsynchronouslyWithoutCostBlock {
