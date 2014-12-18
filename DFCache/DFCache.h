@@ -94,7 +94,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
 - (void)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer completion:(void (^)(id object))completion;
 
 
-#pragma mark - Read (Asynchronous) _LEGACY_
+#pragma mark - Read (Asynchronous) _DEPRECATED_
 
 /*! Reads object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Computes the object cost in memory cache using given DFCacheCostBlock.
  @param key The unique key.
@@ -105,7 +105,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
 - (void)cachedObjectForKey:(NSString *)key
                     decode:(DFCacheDecodeBlock)decode
                       cost:(DFCacheCostBlock)cost
-                completion:(void (^)(id object))completion;
+                completion:(void (^)(id object))completion DEPRECATED_ATTRIBUTE;
 
 /*! Reads object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk.
  @param key The unique key.
@@ -114,33 +114,33 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
  */
 - (void)cachedObjectForKey:(NSString *)key
                     decode:(DFCacheDecodeBlock)decode
-                completion:(void (^)(id object))completion;
+                completion:(void (^)(id object))completion DEPRECATED_ATTRIBUTE;
 
 #pragma mark - Read (Synchronous) _EXPERIMENTAL_
 
 - (id)cachedObjectForKey:(NSString *)key;
 - (id)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer;
 
-#pragma mark - Read (Synchronous) _LEGACY_
+#pragma mark - Read (Synchronous) _DEPRECATED_
 
 /*! Returns object from either in-memory or on-disk cache synchronously. Refreshes object in memory cache it it was retrieved from disk.
  @param key The unique key.
  @param decode Decoding block that returns object from given data. Might be nil.
  @param cost Cost block returning cost for memory cache.
  */
-- (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost;
+- (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost DEPRECATED_ATTRIBUTE;
 
 /*! Returns object from either in-memory or on-disk cache synchronously. Refreshes object in memory cache it it was retrieved from disk.
  @param key The unique key.
  @param decode Decoding block that returns object from given data.
  */
-- (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode;
+- (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode DEPRECATED_ATTRIBUTE;
 
 #pragma mark - Write _EXPERIMENTAL_
 
 - (void)storeObject:(id)object forKey:(NSString *)key;
 
-- (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key;
+// - (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key;
 
 /*! Stores object into memory cache. Stores data into disk cache. Adds value transformer to the file's metadata.
  @param object The object to store into memory cache.
@@ -150,7 +150,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
  */
 - (void)storeObject:(id)object data:(NSData *)data valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key;
 
-#pragma mark - Write _LEGACY_
+#pragma mark - Write _DEPRECATED_
 
 /*! Stores object into memory cache. Stores data into disk cache.
  @param object The object to store into memory cache.
@@ -161,7 +161,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
 - (void)storeObject:(id)object
                data:(NSData *)data
              forKey:(NSString *)key
-               cost:(NSUInteger)cost;
+               cost:(NSUInteger)cost DEPRECATED_ATTRIBUTE;
 
 /*! Stores object into memory cache. Stores data into disk cache.
  @param object The object to store into memory cache.
@@ -170,7 +170,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
  */
 - (void)storeObject:(id)object
                data:(NSData *)data
-             forKey:(NSString *)key;
+             forKey:(NSString *)key DEPRECATED_ATTRIBUTE;
 
 /*! Stores object into memory cache. Stores data representation provided by the DFCacheEncodeBlock into disk cache.
  @param object The object to store into memory cache.
@@ -181,7 +181,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
 - (void)storeObject:(id)object
              encode:(DFCacheEncodeBlock)encode
              forKey:(NSString *)key
-               cost:(NSUInteger)cost;
+               cost:(NSUInteger)cost DEPRECATED_ATTRIBUTE;
 
 /*! Stores object into memory cache. Stores data representation provided by the DFCacheEncodeBlock into disk cache.
  @param object The object to store into memory cache.
@@ -190,7 +190,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
  */
 - (void)storeObject:(id)object
              encode:(DFCacheEncodeBlock)encode
-             forKey:(NSString *)key;
+             forKey:(NSString *)key DEPRECATED_ATTRIBUTE;
 
 /*! Stores object into memory cache. Calculate cost using provided DFCacheCostBlock (if block is not nil).
  @param object The object to store into memory cache.
@@ -199,7 +199,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
  */
 - (void)storeObject:(id)object
              forKey:(NSString *)key
-               cost:(DFCacheCostBlock)cost;
+               cost:(DFCacheCostBlock)cost DEPRECATED_ATTRIBUTE;
 
 #pragma mark - Remove
 

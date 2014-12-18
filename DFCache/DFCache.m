@@ -125,7 +125,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     });
 }
 
-#pragma mark - Read (Asynchronous) _LEGACY_
+#pragma mark - Read (Asynchronous) _DEPRECATED_
 
 - (void)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id))completion {
     NSAssert(decode, @"DFCacheDecodeBlock must not be nil");
@@ -195,7 +195,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     return object;
 }
 
-#pragma mark - Read (Synchronous) _LEGACY_
+#pragma mark - Read (Synchronous) _DEPRECATED_
 
 - (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost {
     NSAssert(decode, @"DFCacheDecodeBlock must not be nil");
