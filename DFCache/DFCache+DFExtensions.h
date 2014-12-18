@@ -55,7 +55,7 @@
 - (void)batchCachedObjectsForKeys:(NSArray *)keys
                            decode:(DFCacheDecodeBlock)decode
                              cost:(DFCacheCostBlock)cost
-                       completion:(void (^)(NSDictionary *batch))completion;
+                       completion:(void (^)(NSDictionary *batch))completion DEPRECATED_ATTRIBUTE;
 
 /*! Returns batch of objects that correspond to the given keys.
  @param keys Array of the unique keys.
@@ -63,7 +63,7 @@
  @param cost Cost block returning cost for memory cache. Might be nil.
  @return NSDictionary instance with key:data pairs.
  */
-- (NSDictionary *)batchCachedObjectsForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost;
+- (NSDictionary *)batchCachedObjectsForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost DEPRECATED_ATTRIBUTE;
 
 /*! Retrieves first found object for the given keys.
  @param key The unique key.
@@ -74,6 +74,6 @@
 - (void)firstCachedObjectForKeys:(NSArray *)keys
                           decode:(DFCacheDecodeBlock)decode
                             cost:(DFCacheCostBlock)cost
-                      completion:(void (^)(id object, NSString *key))completion;
+                      completion:(void (^)(id object, NSString *key))completion DEPRECATED_ATTRIBUTE;
 
 @end
