@@ -29,6 +29,7 @@
 
 
 NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
+static NSString *const DFCacheValueTransformerMetadataKey = @"_df_cache_value_transformer_key";
 
 
 @implementation DFCache {
@@ -117,6 +118,51 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
 - (void)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode completion:(void (^)(id))completion {
     [self cachedObjectForKey:key decode:decode cost:nil completion:completion];
 }
+
+- (void)cachedObjectForKey:(NSString *)key completion:(void (^)(id))completion {
+    [self cachedObjectForKey:key valueTransformer:nil completion:nil];
+}
+
+#pragma mark - >>>> EXPERIMENTAL
+
+- (void)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer completion:(void (^)(id))completion {
+    if (!key.length) {
+        _dwarf_cache_callback(completion, nil);
+        return;
+    }
+    id object = [self.memoryCache objectForKey:key];
+    if (object) {
+        _dwarf_cache_callback(completion, object);
+        return;
+    }
+    dispatch_async(self.ioQueue, ^{
+        NSData *data = [self.diskCache dataForKey:key];
+        if (!data) {
+            _dwarf_cache_callback(completion, nil);
+            return;
+        }
+        id<DFValueTransforming> valueTransformer = inputValueTransformer;
+        if (!inputValueTransformer) {
+            NSURL *fileURL = [self.diskCache URLForKey:key];
+            valueTransformer = [fileURL extendedAttributeValueForKey:DFCacheValueTransformerMetadataKey error:nil];
+        }
+        NSParameterAssert(valueTransformer);
+        dispatch_async(self.processingQueue, ^{
+            @autoreleasepool {
+                id object = [valueTransformer reverseTransfomedValue:data];
+                // TODO Move cost calculation outside?
+                NSUInteger cost = 0;
+                if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
+                    cost = [valueTransformer costForValue:object];
+                }
+                [self.memoryCache setObject:object forKey:key cost:cost];
+                _dwarf_cache_callback(completion, object);
+            }
+        });
+    });
+}
+
+#pragma mark - <<<< EXPERIMENTAL
 
 #pragma mark - Read (Synchronous)
 
