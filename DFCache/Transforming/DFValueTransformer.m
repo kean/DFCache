@@ -11,15 +11,25 @@
 
 @implementation DFValueTransformer
 
-- (id)initWithCoder:(NSCoder *)decoder {
+- (id)initWithCoder:(NSCoder *__unused)decoder {
     if (self = [super init]) {
         // do nothing
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder {
+- (void)encodeWithCoder:(NSCoder *__unused)coder {
     // do nothing
+}
+
+- (NSData *)transformedValue:(id __unused)value {
+    [NSException raise:NSInternalInconsistencyException format:@"Abstract method called %@", NSStringFromSelector(_cmd)];
+    return nil;
+}
+
+- (id)reverseTransfomedValue:(NSData *__unused)data {
+    [NSException raise:NSInternalInconsistencyException format:@"Abstract method called %@", NSStringFromSelector(_cmd)];
+    return nil;
 }
 
 @end

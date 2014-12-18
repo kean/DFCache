@@ -83,7 +83,6 @@
     [_cache.memoryCache removeObjectForKey:key];
     
     NSString *cachedString = [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerNSCoding new]];
-    NSLog(@"cachedString = %@", cachedString);
     XCTAssertEqualObjects(string, cachedString);
 }
 
@@ -96,7 +95,6 @@
     [_cache.memoryCache removeObjectForKey:key];
     
     NSString *cachedString = [_cache cachedObjectForKey:key];
-    NSLog(@"cachedString = %@", cachedString);
     XCTAssertEqualObjects(string, cachedString);
 }
 
