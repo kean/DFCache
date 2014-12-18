@@ -76,18 +76,4 @@
                             cost:(DFCacheCostBlock)cost
                       completion:(void (^)(id object, NSString *key))completion;
 
-#pragma mark - Deprecated
-
-/*! Deprecated method. Use - (void)batchCachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *batch))completion instead.
- */
-- (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *batch))completion DEPRECATED_ATTRIBUTE;
-
-/*! Deprecated method. Use - (void)batchCachedObjectsForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(NSDictionary *batch))completion instead.
- */
-- (void)cachedObjectsForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(NSDictionary *batch))completion DEPRECATED_ATTRIBUTE;
-
-/* Deprecated method. Use - (void)firstCachedObjectForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id object, NSString *key))completion instead.
- */
-- (void)cachedObjectForAnyKey:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id object, NSString *key))completion DEPRECATED_ATTRIBUTE;
-
 @end
