@@ -36,3 +36,8 @@
 - (instancetype)initWithData:(NSData *)data;
 
 @end
+
+
+@interface TDFValueTransformerCacheUnsupportedDummy : DFValueTransformer
+
+@end

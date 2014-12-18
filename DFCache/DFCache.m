@@ -86,10 +86,10 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
 #pragma mark - Read (Asynchronous) _EXPERIMENTAL_
 
 - (void)cachedObjectForKey:(NSString *)key completion:(void (^)(id))completion {
-    [self cachedObjectForKey:key valueTransformer:nil completion:nil];
+    [self cachedObjectForKey:key valueTransformer:nil completion:completion];
 }
 
-- (void)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer completion:(void (^)(id))completion {
+- (void)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer completion:(void (^)(id))completion {
     if (!key.length) {
         _dwarf_cache_callback(completion, nil);
         return;
@@ -99,6 +99,10 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
         _dwarf_cache_callback(completion, object);
         return;
     }
+    [self _cachedObjectForKey:key valueTransformer:valueTransformer completion:completion];
+}
+
+- (void)_cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer completion:(void (^)(id))completion {
     dispatch_async(self.ioQueue, ^{
         NSData *data = [self.diskCache dataForKey:key];
         if (!data) {
@@ -121,7 +125,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     });
 }
 
-#pragma mark - Read (Asynchronous)
+#pragma mark - Read (Asynchronous) _LEGACY_
 
 - (void)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id))completion {
     NSAssert(decode, @"DFCacheDecodeBlock must not be nil");
@@ -163,7 +167,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     return [self cachedObjectForKey:key valueTransformer:nil];
 }
 
-- (id)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer {
+- (id)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer {
     if (!key.length) {
         return nil;
     }
@@ -171,23 +175,27 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     if (object) {
         return object;
     }
+    @autoreleasepool {
+        return [self _cachedObjectForKey:key valueTransformer:valueTransformer];
+    }
+}
+
+- (id)_cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer {
     NSData *__block data;
     id<DFValueTransforming> __block valueTransformer = inputValueTransformer;
     dispatch_sync(self.ioQueue, ^{
-        @autoreleasepool {
-            data = [self.diskCache dataForKey:key];
+        data = [self.diskCache dataForKey:key];
+        if (!valueTransformer) {
             NSURL *fileURL = [self.diskCache URLForKey:key];
-            if (!valueTransformer) {
-                valueTransformer = [fileURL extendedAttributeValueForKey:DFCacheAttributeValueTransformerKey error:nil];
-            }
+            valueTransformer = [fileURL extendedAttributeValueForKey:DFCacheAttributeValueTransformerKey error:nil];
         }
     });
-    object = [valueTransformer reverseTransfomedValue:data];
+    id object = [valueTransformer reverseTransfomedValue:data];
     [self _setObject:object forKey:key valueTransformer:valueTransformer];
     return object;
 }
 
-#pragma mark - Read (Synchronous)
+#pragma mark - Read (Synchronous) _LEGACY_
 
 - (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost {
     NSAssert(decode, @"DFCacheDecodeBlock must not be nil");
@@ -221,9 +229,9 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
 }
 
 /*
-- (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key {
-    [self storeObject:object data:data valueTransformer:nil forKey:key];
-}
+ - (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key {
+ [self storeObject:object data:data valueTransformer:nil forKey:key];
+ }
  */
 
 - (void)storeObject:(id)object data:(NSData *)data valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key {

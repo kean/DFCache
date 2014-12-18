@@ -83,3 +83,16 @@
 }
 
 @end
+
+
+@implementation TDFValueTransformerCacheUnsupportedDummy
+
+- (NSData *)transformedValue:(id)value {
+    return value ? [((TDFCacheUnsupportedDummy *)value) dataRepresentation] : nil;
+}
+
+- (id)reverseTransfomedValue:(NSData *)data {
+    return data ? [[TDFCacheUnsupportedDummy alloc] initWithData:data] : nil;
+}
+
+@end

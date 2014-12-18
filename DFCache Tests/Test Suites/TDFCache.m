@@ -98,9 +98,34 @@
     XCTAssertEqualObjects(string, cachedString);
 }
 
+#pragma mark - Dummy
+
+- (void)testDummy {
+    TDFCacheUnsupportedDummy *dummy1 = [TDFCacheUnsupportedDummy new];
+    TDFCacheUnsupportedDummy *dummy2 = [TDFCacheUnsupportedDummy new];
+    XCTAssertNotEqualObjects(dummy1, dummy2);
+    XCTAssertEqualObjects(dummy1, dummy1);
+    NSData *data = [dummy1 dataRepresentation];
+    TDFCacheUnsupportedDummy *dummy3 = [[TDFCacheUnsupportedDummy alloc] initWithData:data];
+    XCTAssertEqualObjects(dummy1, dummy3);
+}
+
 #pragma mark - Write
 
-- (void)testWriteWithData {
+- (void)testWriteUnsupportedObject {
+    TDFCacheUnsupportedDummy *dummy = [TDFCacheUnsupportedDummy new];
+    NSString *key = @"key3";
+    
+    [_cache storeObject:dummy forKey:key];
+    
+    XCTAssertEqualObjects([_cache.memoryCache objectForKey:key], dummy);
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    TDFCacheUnsupportedDummy *cachedObject = [_cache cachedObjectForKey:key];
+    XCTAssertNil(cachedObject);
+}
+
+- (void)testWriteUnsupportedObjectWithData {
     TDFCacheUnsupportedDummy *dummy = [TDFCacheUnsupportedDummy new];
     NSString *key = @"key1";
     NSData *data = [dummy dataRepresentation];
@@ -110,23 +135,8 @@
     XCTAssert([_cache.memoryCache objectForKey:key] == dummy);
     [_cache.memoryCache removeObjectForKey:key];
     
-    TDFCacheUnsupportedDummy *cacheDummy = [_cache cachedObjectForKey:key decode:^id(NSData *data) {
-        return [[TDFCacheUnsupportedDummy alloc] initWithData:data];
-    }];
+    TDFCacheUnsupportedDummy *cacheDummy = [_cache cachedObjectForKey:key valueTransformer:[TDFValueTransformerCacheUnsupportedDummy new]];
     XCTAssertEqualObjects(cacheDummy, dummy);
-}
-
-- (void)testWriteNotSupportedObject {
-    NSStream *object = [NSStream new];
-    NSString *key = @"key3";
-    
-    [_cache storeObject:object forKey:key];
-    
-    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
-    [_cache.memoryCache removeObjectForKey:key];
-    
-    NSStream *cachedObject = [_cache cachedObjectForKey:key];
-    XCTAssertNil(cachedObject);
 }
 
 #pragma mark - Write (DFCacheEncode(Decode)JSON, DFCacheEncode(Decode)NSCoding)

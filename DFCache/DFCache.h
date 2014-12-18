@@ -94,7 +94,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
 - (void)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer completion:(void (^)(id object))completion;
 
 
-#pragma mark - Read (Asynchronous)
+#pragma mark - Read (Asynchronous) _LEGACY_
 
 /*! Reads object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Computes the object cost in memory cache using given DFCacheCostBlock.
  @param key The unique key.
@@ -121,7 +121,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
 - (id)cachedObjectForKey:(NSString *)key;
 - (id)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer;
 
-#pragma mark - Read (Synchronous)
+#pragma mark - Read (Synchronous) _LEGACY_
 
 /*! Returns object from either in-memory or on-disk cache synchronously. Refreshes object in memory cache it it was retrieved from disk.
  @param key The unique key.
