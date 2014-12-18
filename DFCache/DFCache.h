@@ -139,10 +139,18 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
 #pragma mark - Write _EXPERIMENTAL_
 
 - (void)storeObject:(id)object forKey:(NSString *)key;
-//- (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key;
+
+- (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key;
+
+/*! Stores object into memory cache. Stores data into disk cache. Adds value transformer to the file's metadata.
+ @param object The object to store into memory cache.
+ @param data Data to store into disk cache. Might be nil. If data is nil value transformer is used.
+ @param valueTransformer Value transformer used to encode and decode data.
+ @param key The unique key.
+ */
 - (void)storeObject:(id)object data:(NSData *)data valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key;
 
-#pragma mark - Write
+#pragma mark - Write _LEGACY_
 
 /*! Stores object into memory cache. Stores data into disk cache.
  @param object The object to store into memory cache.

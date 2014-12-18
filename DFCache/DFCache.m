@@ -219,11 +219,13 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
 - (void)storeObject:(id)object forKey:(NSString *)key {
     [self storeObject:object data:nil valueTransformer:nil forKey:key];
 }
+
 /*
 - (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key {
     [self storeObject:object data:data valueTransformer:nil forKey:key];
 }
-*/
+ */
+
 - (void)storeObject:(id)object data:(NSData *)data valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key {
     if (!key.length) {
         return;
@@ -231,8 +233,9 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     if (!valueTransformer) {
         valueTransformer = [self.valueTransfomerFactory valueTransformerForValue:object];
     }
-    if (object) {
-        [self _setObject:object forKey:key valueTransformer:valueTransformer];
+    [self _setObject:object forKey:key valueTransformer:valueTransformer];
+    if (!data && !valueTransformer) {
+        return;
     }
     dispatch_async(self.ioQueue, ^{
         @autoreleasepool {
@@ -247,13 +250,35 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
             }
             if (encodedData) {
                 [self.diskCache setData:encodedData forKey:key];
-                NSURL *fileURL = [self.diskCache URLForKey:key];
-                [fileURL setExtendedAttributeValue:valueTransformer forKey:DFCacheAttributeValueTransformerKey];
+                if (valueTransformer) {
+                    NSURL *fileURL = [self.diskCache URLForKey:key];
+                    [fileURL setExtendedAttributeValue:valueTransformer forKey:DFCacheAttributeValueTransformerKey];
+                }
             }
         }
-    });}
+    });
+}
 
-#pragma mark - Write
+- (void)_setObject:(id)object forKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer {
+    if (!object || !key.length) {
+        return;
+    }
+    NSUInteger cost = 0;
+    if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
+        cost = [valueTransformer costForValue:object];
+    }
+    [self.memoryCache setObject:object forKey:key cost:cost];
+}
+
+- (void)storeObject:(id)object forKey:(NSString *)key cost:(DFCacheCostBlock)cost {
+    if (!object || !key.length) {
+        return;
+    }
+    NSUInteger objectCost = cost ? cost(object) : 0;
+    [self.memoryCache setObject:object forKey:key cost:objectCost];
+}
+
+#pragma mark - Write (LEGACY)
 
 - (void)storeObject:(id)object
                data:(NSData *)data
@@ -311,25 +336,6 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
             }
         }
     });
-}
-
-- (void)_setObject:(id)object forKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer {
-    if (!object || !key.length) {
-        return;
-    }
-    NSUInteger cost = 0;
-    if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
-        cost = [valueTransformer costForValue:object];
-    }
-    [self.memoryCache setObject:object forKey:key cost:cost];
-}
-
-- (void)storeObject:(id)object forKey:(NSString *)key cost:(DFCacheCostBlock)cost {
-    if (!object || !key.length) {
-        return;
-    }
-    NSUInteger objectCost = cost ? cost(object) : 0;
-    [self.memoryCache setObject:object forKey:key cost:objectCost];
 }
 
 #pragma mark - Remove

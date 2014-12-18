@@ -15,7 +15,7 @@
 - (id)reverseTransfomedValue:(NSData *)data;
 
 @optional
-/*! The cost that is associated with the value in the memory cache.
+/*! The cost that is associated with the value in the memory cache. Typically, the obvious cost is the size of the object in bytes.
  */
 - (NSUInteger)costForValue:(id)value;
 
@@ -28,5 +28,10 @@
 
 
 @interface DFValueTransformerNSCoding : DFValueTransformer
+
+@end
+
+
+@interface DFValueTransformerJSON : DFValueTransformer
 
 @end

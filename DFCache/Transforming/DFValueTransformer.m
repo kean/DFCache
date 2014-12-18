@@ -46,3 +46,16 @@
 }
 
 @end
+
+
+@implementation DFValueTransformerJSON
+
+- (NSData *)transformedValue:(id)value {
+    return value ? [NSJSONSerialization dataWithJSONObject:value options:kNilOptions error:nil] : nil;
+}
+
+- (id)reverseTransfomedValue:(NSData *)data {
+    return data ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil] : nil;
+}
+
+@end

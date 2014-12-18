@@ -19,7 +19,11 @@ static id<DFValueTransformerFactory> _sharedFactory;
 #pragma mark - <DFValueTransformerFactory>
 
 - (id<DFValueTransforming>)valueTransformerForValue:(id)value {
-    return [DFValueTransformerNSCoding new];
+    if ([value conformsToProtocol:@protocol(NSCoding)]) {
+        return [DFValueTransformerNSCoding new];
+    } else {
+        return nil;
+    }
 }
 
 #pragma mark - Dependency Injectors

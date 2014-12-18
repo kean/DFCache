@@ -29,7 +29,7 @@
     for (NSUInteger i = 0; i < count; i++) {
         NSString *key = [NSString stringWithFormat:@"key_%lu", (unsigned long)i];
         NSString *string = [self _randomStringWithLength:(arc4random_uniform(30) + 1)];
-        [self storeObject:string encode:DFCacheEncodeNSCoding forKey:key];
+        [self storeObject:string forKey:key];
         strings[key] = string;
     }
     *s = strings;
@@ -41,6 +41,45 @@
         data[x] = (char)('A' + arc4random_uniform(26));
     };
     return [[NSString alloc] initWithBytes:data length:length encoding:NSUTF8StringEncoding];
+}
+
+@end
+
+
+@implementation TDFCacheUnsupportedDummy {
+    NSUUID *_UUID;
+    
+}
+
+- (instancetype)initWithUUID:(NSUUID *)UUID {
+    if (self = [super init]) {
+        _UUID = UUID;
+    }
+    return self;
+}
+
+- (instancetype)init {
+    return [self initWithUUID:[NSUUID UUID]];
+}
+
+- (instancetype)initWithData:(NSData *)data {
+    NSString *UUID = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+    return [self initWithUUID:[[NSUUID alloc] initWithUUIDString:UUID]];
+}
+
+- (BOOL)isEqual:(id)object {
+    if (!object) {
+        return NO;
+    }
+    if ([object class] != [self class]) {
+        return NO;
+    }
+    TDFCacheUnsupportedDummy *other = object;
+    return [other->_UUID isEqual:_UUID];
+}
+
+- (NSData *)dataRepresentation {
+    return [[_UUID UUIDString] dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 @end
