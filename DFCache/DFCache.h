@@ -22,6 +22,8 @@
 
 #import "DFCacheBlocks.h"
 #import "DFDiskCache.h"
+#import "DFValueTransformer.h"
+#import "DFValueTransformerFactory.h"
 
 /*! Extended attribute name used to store metadata (see NSURL+DFExtendedFileAttributes).
  */
@@ -62,6 +64,10 @@ extern NSString *const DFCacheAttributeMetadataKey;
  @param name Name used to initialize disk cache. Raises NSInvalidArgumentException if name length is 0.
  */
 - (id)initWithName:(NSString *)name;
+
+/*! The transformer factory used by the cache. Cache is initialized with a default value transformer factory. For more info see DFValueTransformerFactory declaration.
+ */
+@property (nonatomic) id<DFValueTransformerFactory> valueTransfomerFactory;
 
 /*! Returns disk cache used by receiver.
  */

@@ -23,9 +23,13 @@
 #import "DFCache.h"
 #import "DFCachePrivate.h"
 #import "DFCacheTimer.h"
+#import "DFValueTransformer.h"
+#import "DFValueTransformerFactory.h"
 #import "NSURL+DFExtendedFileAttributes.h"
 
+
 NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
+
 
 @implementation DFCache {
     BOOL _cleanupTimerEnabled;
@@ -45,6 +49,8 @@ NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
         }
         _diskCache = diskCache;
         _memoryCache = memoryCache;
+        
+        _valueTransfomerFactory = [DFValueTransformerFactory defaultFactory];
         
         _ioQueue = dispatch_queue_create("DFCache::IOQueue", DISPATCH_QUEUE_SERIAL);
         _processingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);

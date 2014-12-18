@@ -169,6 +169,7 @@
     // test that is doesn't crash
     NSCache *object = [NSCache new];
     [_cache storeObject:object encode:DFCacheEncodeNSCoding forKey:@"key"];
+    [_cache.memoryCache removeAllObjects];
     BOOL __block isWaiting = YES;
     [_cache cachedObjectForKey:@"key" decode:DFCacheDecodeNSCoding completion:^(id retrievedObject) {
         XCTAssertNil(retrievedObject);
