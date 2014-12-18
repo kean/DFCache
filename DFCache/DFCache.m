@@ -114,12 +114,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
         dispatch_async(self.processingQueue, ^{
             @autoreleasepool {
                 id object = [valueTransformer reverseTransfomedValue:data];
-                // TODO Move cost calculation outside?
-                NSUInteger cost = 0;
-                if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
-                    cost = [valueTransformer costForValue:object];
-                }
-                [self.memoryCache setObject:object forKey:key cost:cost];
+                [self _setObject:object forKey:key valueTransformer:valueTransformer];
                 _dwarf_cache_callback(completion, object);
             }
         });
@@ -188,12 +183,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
         }
     });
     object = [valueTransformer reverseTransfomedValue:data];
-    // TODO Move cost calculation outside?
-    NSUInteger cost = 0;
-    if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
-        cost = [valueTransformer costForValue:object];
-    }
-    [self.memoryCache setObject:object forKey:key cost:cost];
+    [self _setObject:object forKey:key valueTransformer:valueTransformer];
     return object;
 }
 
@@ -242,12 +232,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
         valueTransformer = [self.valueTransfomerFactory valueTransformerForValue:object];
     }
     if (object) {
-        // TODO Move cost calculation outside?
-        NSUInteger cost = 0;
-        if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
-            cost = [valueTransformer costForValue:object];
-        }
-        [self.memoryCache setObject:object forKey:key cost:cost];
+        [self _setObject:object forKey:key valueTransformer:valueTransformer];
     }
     dispatch_async(self.ioQueue, ^{
         @autoreleasepool {
@@ -326,6 +311,17 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
             }
         }
     });
+}
+
+- (void)_setObject:(id)object forKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer {
+    if (!object || !key.length) {
+        return;
+    }
+    NSUInteger cost = 0;
+    if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
+        cost = [valueTransformer costForValue:object];
+    }
+    [self.memoryCache setObject:object forKey:key cost:cost];
 }
 
 - (void)storeObject:(id)object forKey:(NSString *)key cost:(DFCacheCostBlock)cost {
