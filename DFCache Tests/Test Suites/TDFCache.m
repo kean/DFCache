@@ -382,49 +382,4 @@
     XCTAssertTrue([data length] == [cachedData length]);
 }
 
-#pragma mark - Deprecated
-
-/*! @warning Deprecated in DFCache 1.3.0.
- */
-- (void)testWriteWithCustomEncodingBlockDeprecated {
-    NSString *string = @"value1";
-    NSString *key = @"key1";
-    
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    [_cache storeObject:string forKey:key cost:0 encode:^NSData *(id object) {
-        return [((NSString *)object) dataUsingEncoding:NSUTF8StringEncoding];
-    }];
-#pragma clang diagnostic pop
-    
-    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
-    [_cache.memoryCache removeObjectForKey:key];
-    
-    NSString *cachedString = [_cache cachedObjectForKey:key decode:^id(NSData *data) {
-        return [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-    }];
-    XCTAssertEqualObjects(string, cachedString);
-}
-
-/*! @warning Deprecated in DFCache 1.3.0.
- */
-- (void)testWriteWithDataDeprecated {
-    NSString *string = @"value1";
-    NSString *key = @"key1";
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    [_cache storeObject:string forKey:key cost:10 data:data];
-#pragma clang diagnostic pop
-    
-    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
-    [_cache.memoryCache removeObjectForKey:key];
-    
-    NSString *cachedString = [_cache cachedObjectForKey:key decode:^id(NSData *data) {
-        return [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-    }];
-    XCTAssertEqualObjects(string, cachedString);
-}
-
 @end

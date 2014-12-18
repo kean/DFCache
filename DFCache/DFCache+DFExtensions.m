@@ -190,18 +190,4 @@
     });
 }
 
-#pragma mark - Deprecated
-
-- (void)cachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *))completion {
-    [self batchCachedDataForKeys:keys completion:completion];
-}
-
-- (void)cachedObjectsForKeys:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(NSDictionary *))completion {
-    [self batchCachedObjectsForKeys:keys decode:decode cost:cost completion:completion];
-}
-
-- (void)cachedObjectForAnyKey:(NSArray *)keys decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id, NSString *))completion {
-    [self firstCachedObjectForKeys:keys decode:decode cost:cost completion:completion];
-}
-
 @end

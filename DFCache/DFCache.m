@@ -415,14 +415,4 @@ static NSString *const DFCacheValueTransformerMetadataKey = @"_df_cache_value_tr
     return [NSString stringWithFormat:@"<%@ %p> { disk_cache = %@ }", [self class], self, [self.diskCache debugDescription]];
 }
 
-#pragma mark - Deprecated
-
-- (void)storeObject:(id)object forKey:(NSString *)key cost:(NSUInteger)cost data:(NSData *)data {
-    [self storeObject:object data:data forKey:key cost:cost];
-}
-
-- (void)storeObject:(id)object forKey:(NSString *)key cost:(NSUInteger)cost encode:(DFCacheEncodeBlock)encode {
-    [self storeObject:object encode:encode forKey:key cost:cost];
-}
-
 @end
