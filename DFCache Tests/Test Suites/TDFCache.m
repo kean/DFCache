@@ -99,7 +99,7 @@
     
     NSString *string = @"value1";
     NSString *key = @"key1";
-
+    
     XCTAssertTrue([[_cache.valueTransfomerFactory valueTransformerForValue:string] class] == [DFValueTransformerNSCoding class]);
     
     [_cache storeObject:string valueTransformer:nil forKey:key];
@@ -165,7 +165,7 @@
 }
 
 #pragma mark - DFValueTransformerJSON
- 
+
 - (void)testWriteAndReadJSONByProvidingValueProvidersBothTimes {
     NSDictionary *JSON = @{ @"key" : @"value" };
     NSString *key = @"key3";
@@ -271,13 +271,54 @@
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
 }
 
-#pragma mark - _LEGACY_
+#pragma mark - Memory Cache
+
+- (void)testMemoryCache {
+    DFCache *cache = [self _createCacheForMemoryCacheTesting];
+    
+    NSString *string = @"value1";
+    NSString *key = @"key1";
+    [cache storeObject:string valueTransformer:nil forKey:key];
+    
+    XCTAssertEqualObjects(string, [cache.memoryCache objectForKey:key]);
+}
+
+- (void)testThatReadMethodsUseMemoryCache {
+    DFCache *cache = [self _createCacheForMemoryCacheTesting];
+    
+    TDFCacheUnsupportedDummy *dummy = [TDFCacheUnsupportedDummy new];
+    NSString *key = @"key1";
+    [cache storeObject:dummy valueTransformer:nil forKey:key];
+    
+    XCTAssertEqualObjects(dummy, [cache.memoryCache objectForKey:key]);
+
+    TDFCacheUnsupportedDummy *cacheDummy = [cache cachedObjectForKey:key valueTransformer:nil];
+    XCTAssertEqualObjects(cacheDummy, dummy);
+}
+
+- (DFCache *)_createCacheForMemoryCacheTesting {
+    NSString *name = [[NSUUID UUID] UUIDString];
+    DFDiskCache *diskCache = [[DFDiskCache alloc] initWithName:name];
+    return [[DFCache alloc] initWithDiskCache:diskCache memoryCache:[NSCache new]];
+}
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+- (void)testRespondsToMemoryWarning {
+    DFCache *cache = [self _createCacheForMemoryCacheTesting];
+    [cache.memoryCache setObject:@"object" forKey:@"key"];
+    XCTAssertNotNil([cache.memoryCache objectForKey:@"key"]);
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidReceiveMemoryWarningNotification object:nil userInfo:nil];
+    XCTAssertNil([cache.memoryCache objectForKey:@"key"]);
+}
+#endif
 
 #pragma mark - Remove
 
 - (void)testRemovalForSingleKey {
+    DFCache *cache = [self _createCacheForMemoryCacheTesting];
+    
     NSDictionary *objects;
-    [_cache storeStringsWithCount:5 strings:&objects];
+    [cache storeStringsWithCount:5 strings:&objects];
     NSArray *keys = [objects allKeys];
     
     NSString *removeKey = keys[2];
@@ -285,54 +326,58 @@
     NSMutableArray *remainingKeys = [NSMutableArray arrayWithArray:keys];
     [remainingKeys removeObject:removeKey];
     
-    [_cache removeObjectForKey:removeKey];
+    [cache removeObjectForKey:removeKey];
     
     for (NSString *key in @[removeKey]) {
-        NSString *object = [_cache.memoryCache objectForKey:key];
+        NSString *object = [cache.memoryCache objectForKey:key];
         XCTAssertNil(object, @"Memory cache: contains object for key %@", key);
-        XCTAssertNil([_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding], @"Disk cache: contains object for key %@", key);
+        XCTAssertNil([cache cachedObjectForKey:key], @"Disk cache: contains object for key %@", key);
     }
     
     for (NSString *key in remainingKeys) {
-        id object = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding];
+        id object = [cache cachedObjectForKey:key];
         XCTAssertNotNil(object, @"Disk cache: no object for key %@", key);
         XCTAssertEqualObjects(objects[key], object);
     }
 }
 
 - (void)testRemovalForMultipleKeys {
+    DFCache *cache = [self _createCacheForMemoryCacheTesting];
+    
     NSDictionary *objects;
-    [_cache storeStringsWithCount:5 strings:&objects];
+    [cache storeStringsWithCount:5 strings:&objects];
     NSArray *keys = [objects allKeys];
     
     NSArray *removeKeys = @[ keys[0], keys[2], keys[3] ];
     NSArray *remainingKeys = @[ keys[1], keys[4] ];
     
-    [_cache removeObjectsForKeys:removeKeys];
-
+    [cache removeObjectsForKeys:removeKeys];
+    
     for (NSString *key in remainingKeys) {
-        id object = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding];
+        id object = [cache cachedObjectForKey:key];
         XCTAssertNotNil(object, @"Disk cache: no object for key %@", key);
         XCTAssertEqualObjects(objects[key], object);
     }
     
     for (NSString *key in removeKeys) {
-        NSString *object = [_cache.memoryCache objectForKey:key];
+        NSString *object = [cache.memoryCache objectForKey:key];
         XCTAssertNil(object, @"Memory cache: contains object for key %@", key);
-        XCTAssertNil([_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding], @"Disk cache: contains object for key %@", key);
+        XCTAssertNil([cache cachedObjectForKey:key], @"Disk cache: contains object for key %@", key);
     }
 }
 
 - (void)testRemoveAllObjects {
-    NSDictionary *objects;
-    [_cache storeStringsWithCount:5 strings:&objects];
+    DFCache *cache = [self _createCacheForMemoryCacheTesting];
     
-    [_cache removeAllObjects];
+    NSDictionary *objects;
+    [cache storeStringsWithCount:5 strings:&objects];
+    
+    [cache removeAllObjects];
     
     for (NSString *key in [objects allKeys]) {
-        NSString *object = [_cache.memoryCache objectForKey:key];
+        NSString *object = [cache.memoryCache objectForKey:key];
         XCTAssertNil(object, @"Memory cache: contains object for key %@", key);
-        XCTAssertNil([_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding], @"Disk cache: contains object for key %@", key);
+        XCTAssertNil([cache cachedObjectForKey:key], @"Disk cache: contains object for key %@", key);
     }
 }
 
@@ -347,7 +392,7 @@
     NSString *metaValue = @"meta_value";
     NSString *metaKey = @"meta_key";
     
-    [_cache storeObject:value encode:DFCacheEncodeNSCoding forKey:key];
+    [_cache storeObject:value  forKey:key];
     [_cache setMetadata:@{ metaKey : metaValue } forKey:key];
     
     // 1.1. Read metadata right after storing object.
@@ -355,29 +400,17 @@
     NSDictionary *metadata = [_cache metadataForKey:key];
     XCTAssertNotNil(metadata);
     XCTAssertTrue([metadata[metaKey] isEqualToString:metaValue]);
-
+    
     // 1.2. Update metadata.
     // =====================
     NSString *customValueMod = @"custom_value_mod";
     
     [_cache setMetadataValues:@{ metaKey : customValueMod } forKey:key];
-
+    
     metadata = [_cache metadataForKey:key];
     XCTAssertNotNil(metadata);
     XCTAssertTrue([metadata[metaKey] isEqualToString:customValueMod]);
 }
-
-#pragma mark - Memory Pressure
-/*
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
-- (void)testRespondsToMemoryWarning {
-    [_cache.memoryCache setObject:@"object" forKey:@"key"];
-    XCTAssertNotNil([_cache.memoryCache objectForKey:@"key"]);
-    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidReceiveMemoryWarningNotification object:nil userInfo:nil];
-    XCTAssertNil([_cache.memoryCache objectForKey:@"key"]);
-}
-#endif
-*/
 
 #pragma mark - Data
 
@@ -385,11 +418,12 @@
     NSString *object = @"value";
     NSString *key = @"key";
     
-    [_cache storeObject:object encode:DFCacheEncodeNSCoding forKey:key];
+    [_cache storeObject:object forKey:key];
     
     BOOL __block isWaiting = YES;
     [_cache cachedDataForKey:key completion:^(NSData *data) {
-        XCTAssertEqualObjects(object, DFCacheDecodeNSCoding(data));
+        DFValueTransformerNSCoding *transformer = [DFValueTransformerNSCoding new];
+        XCTAssertEqualObjects(object, [transformer reverseTransfomedValue:data]);
         isWaiting = NO;
     }];
     
@@ -400,9 +434,10 @@
     NSString *object = @"value";
     NSString *key = @"key";
     
-    [_cache storeObject:object encode:DFCacheEncodeNSCoding forKey:key];
+    [_cache storeObject:object forKey:key];
     NSData *data = [_cache cachedDataForKey:key];
-    XCTAssertEqualObjects(object, DFCacheDecodeNSCoding(data));
+    DFValueTransformerNSCoding *transformer = [DFValueTransformerNSCoding new];
+    XCTAssertEqualObjects(object,[transformer reverseTransfomedValue:data]);
 }
 
 - (void)testStoreDataForKey {
