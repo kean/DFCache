@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@protocol DFValueTransforming <NSObject>
+@protocol DFValueTransforming <NSObject, NSCoding>
 
 - (NSData *)transformedValue:(id)value;
 - (id)reverseTransfomedValue:(NSData *)data;
@@ -24,6 +24,9 @@
 
 @interface DFValueTransformer : NSObject <DFValueTransforming>
 
+@end
 
+
+@interface DFValueTransformerNSCoding : DFValueTransformer
 
 @end

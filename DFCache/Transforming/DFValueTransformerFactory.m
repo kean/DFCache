@@ -13,8 +13,16 @@
 static id<DFValueTransformerFactory> _sharedFactory;
 
 + (void)initialize {
-    // TODO: Set default value transformer factory.
+    [self setDefaultFactory:[DFValueTransformerFactory new]];
 }
+
+#pragma mark - <DFValueTransformerFactory>
+
+- (id<DFValueTransforming>)valueTransformerForValue:(id)value {
+    return [DFValueTransformerNSCoding new];
+}
+
+#pragma mark - Dependency Injectors
 
 + (id<DFValueTransformerFactory>)defaultFactory {
     return _sharedFactory;

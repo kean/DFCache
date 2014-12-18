@@ -29,7 +29,7 @@
 
 
 NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
-static NSString *const DFCacheValueTransformerMetadataKey = @"_df_cache_value_transformer_key";
+NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transformer_key";
 
 
 @implementation DFCache {
@@ -83,6 +83,49 @@ static NSString *const DFCacheValueTransformerMetadataKey = @"_df_cache_value_tr
     return [self initWithName:name memoryCache:memoryCache];
 }
 
+#pragma mark - Read (Asynchronous) _EXPERIMENTAL_
+
+- (void)cachedObjectForKey:(NSString *)key completion:(void (^)(id))completion {
+    [self cachedObjectForKey:key valueTransformer:nil completion:nil];
+}
+
+- (void)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer completion:(void (^)(id))completion {
+    if (!key.length) {
+        _dwarf_cache_callback(completion, nil);
+        return;
+    }
+    id object = [self.memoryCache objectForKey:key];
+    if (object) {
+        _dwarf_cache_callback(completion, object);
+        return;
+    }
+    dispatch_async(self.ioQueue, ^{
+        NSData *data = [self.diskCache dataForKey:key];
+        if (!data) {
+            _dwarf_cache_callback(completion, nil);
+            return;
+        }
+        id<DFValueTransforming> valueTransformer = inputValueTransformer;
+        if (!inputValueTransformer) {
+            NSURL *fileURL = [self.diskCache URLForKey:key];
+            valueTransformer = [fileURL extendedAttributeValueForKey:DFCacheAttributeValueTransformerKey error:nil];
+        }
+        NSParameterAssert(valueTransformer);
+        dispatch_async(self.processingQueue, ^{
+            @autoreleasepool {
+                id object = [valueTransformer reverseTransfomedValue:data];
+                // TODO Move cost calculation outside?
+                NSUInteger cost = 0;
+                if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
+                    cost = [valueTransformer costForValue:object];
+                }
+                [self.memoryCache setObject:object forKey:key cost:cost];
+                _dwarf_cache_callback(completion, object);
+            }
+        });
+    });
+}
+
 #pragma mark - Read (Asynchronous)
 
 - (void)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode cost:(DFCacheCostBlock)cost completion:(void (^)(id))completion {
@@ -119,50 +162,40 @@ static NSString *const DFCacheValueTransformerMetadataKey = @"_df_cache_value_tr
     [self cachedObjectForKey:key decode:decode cost:nil completion:completion];
 }
 
-- (void)cachedObjectForKey:(NSString *)key completion:(void (^)(id))completion {
-    [self cachedObjectForKey:key valueTransformer:nil completion:nil];
+#pragma mark - Read (Synchronous) _EXPERIMENTAL_
+
+- (id)cachedObjectForKey:(NSString *)key {
+    return [self cachedObjectForKey:key valueTransformer:nil];
 }
 
-#pragma mark - >>>> EXPERIMENTAL
-
-- (void)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer completion:(void (^)(id))completion {
+- (id)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer {
     if (!key.length) {
-        _dwarf_cache_callback(completion, nil);
-        return;
+        return nil;
     }
     id object = [self.memoryCache objectForKey:key];
     if (object) {
-        _dwarf_cache_callback(completion, object);
-        return;
+        return object;
     }
-    dispatch_async(self.ioQueue, ^{
-        NSData *data = [self.diskCache dataForKey:key];
-        if (!data) {
-            _dwarf_cache_callback(completion, nil);
-            return;
-        }
-        id<DFValueTransforming> valueTransformer = inputValueTransformer;
-        if (!inputValueTransformer) {
+    NSData *__block data;
+    id<DFValueTransforming> __block valueTransformer = inputValueTransformer;
+    dispatch_sync(self.ioQueue, ^{
+        @autoreleasepool {
+            data = [self.diskCache dataForKey:key];
             NSURL *fileURL = [self.diskCache URLForKey:key];
-            valueTransformer = [fileURL extendedAttributeValueForKey:DFCacheValueTransformerMetadataKey error:nil];
-        }
-        NSParameterAssert(valueTransformer);
-        dispatch_async(self.processingQueue, ^{
-            @autoreleasepool {
-                id object = [valueTransformer reverseTransfomedValue:data];
-                // TODO Move cost calculation outside?
-                NSUInteger cost = 0;
-                if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
-                    cost = [valueTransformer costForValue:object];
-                }
-                [self.memoryCache setObject:object forKey:key cost:cost];
-                _dwarf_cache_callback(completion, object);
+            if (!valueTransformer) {
+                valueTransformer = [fileURL extendedAttributeValueForKey:DFCacheAttributeValueTransformerKey error:nil];
             }
-        });
+        }
     });
+    object = [valueTransformer reverseTransfomedValue:data];
+    // TODO Move cost calculation outside?
+    NSUInteger cost = 0;
+    if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
+        cost = [valueTransformer costForValue:object];
+    }
+    [self.memoryCache setObject:object forKey:key cost:cost];
+    return object;
 }
-
-#pragma mark - <<<< EXPERIMENTAL
 
 #pragma mark - Read (Synchronous)
 
@@ -190,6 +223,50 @@ static NSString *const DFCacheValueTransformerMetadataKey = @"_df_cache_value_tr
 - (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode {
     return [self cachedObjectForKey:key decode:decode cost:nil];
 }
+
+#pragma mark - Write _EXPERIMENTAL_
+
+- (void)storeObject:(id)object forKey:(NSString *)key {
+    [self storeObject:object data:nil valueTransformer:nil forKey:key];
+}
+/*
+- (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key {
+    [self storeObject:object data:data valueTransformer:nil forKey:key];
+}
+*/
+- (void)storeObject:(id)object data:(NSData *)data valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key {
+    if (!key.length) {
+        return;
+    }
+    if (!valueTransformer) {
+        valueTransformer = [self.valueTransfomerFactory valueTransformerForValue:object];
+    }
+    if (object) {
+        // TODO Move cost calculation outside?
+        NSUInteger cost = 0;
+        if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
+            cost = [valueTransformer costForValue:object];
+        }
+        [self.memoryCache setObject:object forKey:key cost:cost];
+    }
+    dispatch_async(self.ioQueue, ^{
+        @autoreleasepool {
+            NSData *__block encodedData = data;
+            if (!encodedData) {
+                @try {
+                    encodedData = [valueTransformer transformedValue:object];
+                }
+                @catch (NSException *exception) {
+                    // Do nothing
+                }
+            }
+            if (encodedData) {
+                [self.diskCache setData:encodedData forKey:key];
+                NSURL *fileURL = [self.diskCache URLForKey:key];
+                [fileURL setExtendedAttributeValue:valueTransformer forKey:DFCacheAttributeValueTransformerKey];
+            }
+        }
+    });}
 
 #pragma mark - Write
 

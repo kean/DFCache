@@ -29,6 +29,8 @@
  */
 extern NSString *const DFCacheAttributeMetadataKey;
 
+extern NSString *const DFCacheAttributeValueTransformerKey;
+
 /* DFCache key features:
  
  - Concise, extensible and well-documented API.
@@ -85,6 +87,13 @@ extern NSString *const DFCacheAttributeMetadataKey;
  */
 @property (nonatomic) dispatch_queue_t processingQueue;
 
+#pragma mark - Read (Asynchronous) _EXPERIMENTAL_
+
+- (void)cachedObjectForKey:(NSString *)key completion:(void (^)(id object))completion;
+
+- (void)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer completion:(void (^)(id object))completion;
+
+
 #pragma mark - Read (Asynchronous)
 
 /*! Reads object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Computes the object cost in memory cache using given DFCacheCostBlock.
@@ -107,6 +116,11 @@ extern NSString *const DFCacheAttributeMetadataKey;
                     decode:(DFCacheDecodeBlock)decode
                 completion:(void (^)(id object))completion;
 
+#pragma mark - Read (Synchronous) _EXPERIMENTAL_
+
+- (id)cachedObjectForKey:(NSString *)key;
+- (id)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer;
+
 #pragma mark - Read (Synchronous)
 
 /*! Returns object from either in-memory or on-disk cache synchronously. Refreshes object in memory cache it it was retrieved from disk.
@@ -121,6 +135,12 @@ extern NSString *const DFCacheAttributeMetadataKey;
  @param decode Decoding block that returns object from given data.
  */
 - (id)cachedObjectForKey:(NSString *)key decode:(DFCacheDecodeBlock)decode;
+
+#pragma mark - Write _EXPERIMENTAL_
+
+- (void)storeObject:(id)object forKey:(NSString *)key;
+//- (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key;
+- (void)storeObject:(id)object data:(NSData *)data valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key;
 
 #pragma mark - Write
 

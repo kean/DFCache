@@ -74,6 +74,34 @@
 
 #pragma mark - Write
 
+- (void)testWriteProvidingValueTransformer {
+    NSString *string = @"value1";
+    NSString *key = @"key1";
+    
+    [_cache storeObject:string data:nil valueTransformer:[DFValueTransformerNSCoding new] forKey:key];
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    NSString *cachedString = [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerNSCoding new]];
+    NSLog(@"cachedString = %@", cachedString);
+    XCTAssertEqualObjects(string, cachedString);
+}
+
+- (void)testWriteWithoutProvidingValueTransformer {
+    NSString *string = @"value1";
+    NSString *key = @"key1";
+    
+    [_cache storeObject:string forKey:key];
+    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    NSString *cachedString = [_cache cachedObjectForKey:key];
+    NSLog(@"cachedString = %@", cachedString);
+    XCTAssertEqualObjects(string, cachedString);
+}
+
+#pragma mark - Write
+
 - (void)testWriteWithCustomEncodingAndDecodingBlock {
     NSString *string = @"value1";
     NSString *key = @"key1";
