@@ -51,7 +51,7 @@
 }
 
 - (void)testInitialization {
-    NSString *name = @"test_name";
+    NSString *name = @"test_init_01";
     DFCache *cache = [[DFCache alloc] initWithName:name];
     XCTAssertNotNil(cache.memoryCache);
     XCTAssertNotNil(cache.diskCache);
@@ -59,6 +59,14 @@
     
     XCTAssertThrows([[DFCache alloc] initWithName:@""]);
     XCTAssertThrows([[DFCache alloc] initWithName:nil]);
+}
+
+- (void)testInitializationValueTransformerFactoryDependencyInjectors {
+    DFCache *cache1 = [[DFCache alloc] initWithName: @"test_init_02"];
+    XCTAssertEqualObjects(cache1.valueTransfomerFactory, [DFValueTransformerFactory defaultFactory]);
+    
+    DFCache *cache2 = [[DFCache alloc] initWithDiskCache:[[DFDiskCache alloc] initWithName:@"test_init_02"] memoryCache:nil];
+    XCTAssertEqualObjects(cache2.valueTransfomerFactory, [DFValueTransformerFactory defaultFactory]);
 }
 
 - (void)testInitializationWithoutDiskCacheThrowsException {
@@ -74,11 +82,13 @@
 
 #pragma mark - Write
 
-- (void)testWriteProvidingValueTransformer {
+- (void)testThatNSStringIsWrittenProvidingValueTransformer {
+    /* Test that storeObject:valueTransformer:forKey: works if we provide a valid value transformer.
+     */
     NSString *string = @"value1";
     NSString *key = @"key1";
     
-    [_cache storeObject:string data:nil valueTransformer:[DFValueTransformerNSCoding new] forKey:key];
+    [_cache storeObject:string valueTransformer:[DFValueTransformerNSCoding new] forKey:key];
     XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
     [_cache.memoryCache removeObjectForKey:key];
     
@@ -98,7 +108,41 @@
     XCTAssertEqualObjects(string, cachedString);
 }
 
-#pragma mark - Dummy
+#pragma mark - Value Transformers
+ 
+- (void)testWriteAndReadJSONByProvidingValueProvidersBothTimes {
+    NSDictionary *JSON = @{ @"key" : @"value" };
+    NSString *key = @"key3";
+    
+    [_cache storeObject:JSON valueTransformer:[DFValueTransformerJSON new] forKey:key];
+    XCTAssertEqualObjects([_cache.memoryCache objectForKey:key], JSON);
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    BOOL __block isWaiting = YES;
+    [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerJSON new] completion:^(id object) {
+        XCTAssertTrue([JSON[@"key"] isEqualToString:object[@"key"]]);
+        isWaiting = NO;
+    }];
+    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+}
+
+- (void)testWriteAndReadJSONByProvidingValueProviderOnlyForWrite {
+    NSDictionary *JSON = @{ @"key" : @"value" };
+    NSString *key = @"key3";
+    
+    [_cache storeObject:JSON valueTransformer:[DFValueTransformerJSON new] forKey:key];
+    XCTAssertEqualObjects([_cache.memoryCache objectForKey:key], JSON);
+    [_cache.memoryCache removeObjectForKey:key];
+    
+    BOOL __block isWaiting = YES;
+    [_cache cachedObjectForKey:key completion:^(id object) {
+        XCTAssertTrue([JSON[@"key"] isEqualToString:object[@"key"]]);
+        isWaiting = NO;
+    }];
+    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+}
+
+#pragma mark - Write (Unsupported Objects)
 
 - (void)testDummy {
     TDFCacheUnsupportedDummy *dummy1 = [TDFCacheUnsupportedDummy new];
@@ -109,8 +153,6 @@
     TDFCacheUnsupportedDummy *dummy3 = [[TDFCacheUnsupportedDummy alloc] initWithData:data];
     XCTAssertEqualObjects(dummy1, dummy3);
 }
-
-#pragma mark - Write
 
 - (void)testWriteUnsupportedObject {
     TDFCacheUnsupportedDummy *dummy = [TDFCacheUnsupportedDummy new];
@@ -130,7 +172,7 @@
     NSString *key = @"key1";
     NSData *data = [dummy dataRepresentation];
     
-    [_cache storeObject:dummy data:data valueTransformer:nil forKey:key];
+    [_cache storeObject:dummy valueTransformer:nil data:data forKey:key];
     
     XCTAssert([_cache.memoryCache objectForKey:key] == dummy);
     [_cache.memoryCache removeObjectForKey:key];
@@ -139,37 +181,7 @@
     XCTAssertEqualObjects(cacheDummy, dummy);
 }
 
-#pragma mark - Write (DFCacheEncode(Decode)JSON, DFCacheEncode(Decode)NSCoding)
- 
-- (void)testWriteJSON {
-    NSDictionary *JSON = @{ @"key" : @"value" };
-    NSString *key = @"key3";
-    
-    [_cache storeObject:JSON encode:DFCacheEncodeJSON forKey:key];
-    
-    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
-    [_cache.memoryCache removeObjectForKey:key];
-    
-    BOOL __block isWaiting = YES;
-    [_cache cachedObjectForKey:key decode:DFCacheDecodeJSON completion:^(id object) {
-        XCTAssertTrue([JSON[@"key"] isEqualToString:object[@"key"]]);
-        isWaiting = NO;
-    }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
-}
-
-- (void)testWriteNSCoding {
-    NSString *string = @"test_string";
-    NSString *key = @"key3";
-    
-    [_cache storeObject:string encode:DFCacheEncodeNSCoding forKey:key];
-    
-    XCTAssertNotNil([_cache.memoryCache objectForKey:key]);
-    [_cache.memoryCache removeObjectForKey:key];
-    
-    NSString *cachedString = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding];
-    XCTAssertEqualObjects(string, cachedString);
-}
+#pragma mark - _LEGACY_
 
 #pragma mark - Write (Exceptions)
 

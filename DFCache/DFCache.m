@@ -225,7 +225,11 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
 #pragma mark - Write _EXPERIMENTAL_
 
 - (void)storeObject:(id)object forKey:(NSString *)key {
-    [self storeObject:object data:nil valueTransformer:nil forKey:key];
+    [self storeObject:object valueTransformer:nil data:nil forKey:key];
+}
+
+- (void)storeObject:(id)object valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key {
+    [self storeObject:object valueTransformer:valueTransformer data:nil forKey:key];
 }
 
 /*
@@ -234,7 +238,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
  }
  */
 
-- (void)storeObject:(id)object data:(NSData *)data valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key {
+- (void)storeObject:(id)object valueTransformer:(id<DFValueTransforming>)valueTransformer data:(NSData *)data forKey:(NSString *)key {
     if (!key.length) {
         return;
     }
