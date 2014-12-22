@@ -76,7 +76,6 @@
     return [UIImage imageWithContentsOfFile:path];
 }
 
-
 - (void)_assertImage:(UIImage *)img1 isEqualImage:(UIImage *)img2 {
     XCTAssertNotNil(img1);
     XCTAssertNotNil(img2);

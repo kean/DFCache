@@ -78,7 +78,7 @@ extern NSString *const DFCacheAttributeMetadataKey;
  */
 @property (nonatomic, readonly) NSCache *memoryCache;
 
-#pragma mark - Read (Asynchronous)
+#pragma mark - Read
 
 /*! Reads object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Uses value transformer provided by value transformer factory.
  @param key The unique key.
@@ -86,20 +86,18 @@ extern NSString *const DFCacheAttributeMetadataKey;
  */
 - (void)cachedObjectForKey:(NSString *)key completion:(void (^)(id object))completion;
 
+/*! Returns object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Uses value transformer provided by value transformer factory.
+ @param key The unique key.
+ @param completion Completion block.
+ */
+- (id)cachedObjectForKey:(NSString *)key;
+
 /*! Reads object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Uses value transformer provided by value transformer factory.
  @param key The unique key.
  @param valueTransformer Value transformer used to encode and decode data.
  @param completion Completion block.
  */
 - (void)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer completion:(void (^)(id object))completion;
-
-#pragma mark - Read (Synchronous)
-
-/*! Returns object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Uses value transformer provided by value transformer factory.
- @param key The unique key.
- @param completion Completion block.
- */
-- (id)cachedObjectForKey:(NSString *)key;
 
 /*! Returns object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Uses value transformer provided by value transformer factory.
  @param key The unique key.
@@ -137,6 +135,11 @@ extern NSString *const DFCacheAttributeMetadataKey;
  @param key The unique key.
  */
 - (void)storeObject:(id)object valueTransformer:(id<DFValueTransforming>)valueTransformer data:(NSData *)data forKey:(NSString *)key;
+
+/*! Stores object into memory cache. Retrieves value transformer from factory and uses it to calculate object cost.
+ @param object The object to store into memory cache.
+ */
+- (void)setObject:(id)object forKey:(NSString *)key;
 
 #pragma mark - Remove
 

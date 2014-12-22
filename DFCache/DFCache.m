@@ -91,7 +91,7 @@ static NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_t
     return [self initWithName:name memoryCache:memoryCache];
 }
 
-#pragma mark - Read (Asynchronous)
+#pragma mark - Read
 
 - (void)cachedObjectForKey:(NSString *)key completion:(void (^)(id))completion {
     [self cachedObjectForKey:key valueTransformer:nil completion:completion];
@@ -132,8 +132,6 @@ static NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_t
         });
     });
 }
-
-#pragma mark - Read (Synchronous)
 
 - (id)cachedObjectForKey:(NSString *)key {
     return [self cachedObjectForKey:key valueTransformer:nil];
@@ -214,9 +212,16 @@ static NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_t
     });
 }
 
+- (void)setObject:(id)object forKey:(NSString *)key {
+    [self _setObject:object forKey:key valueTransformer:nil];
+}
+
 - (void)_setObject:(id)object forKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer {
     if (!object || !key.length) {
         return;
+    }
+    if (!valueTransformer) {
+        valueTransformer = [self.valueTransfomerFactory valueTransformerForValue:object];
     }
     NSUInteger cost = 0;
     if ([valueTransformer respondsToSelector:@selector(costForValue:)]) {
