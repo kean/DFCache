@@ -92,7 +92,8 @@
     NSString *string = @"value1";
     NSString *key = @"key1";
     
-    [_cache storeObject:string valueTransformer:[DFValueTransformerNSCoding new] forKey:key];
+    [_cache storeObject:string forKey:key valueTransformer:[DFValueTransformerNSCoding new]];
+    
     NSString *cachedString = [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerNSCoding new]];
     XCTAssertEqualObjects(string, cachedString);
 }
@@ -106,7 +107,7 @@
     
     XCTAssertTrue([[_cache.valueTransfomerFactory valueTransformerForValue:string] class] == [DFValueTransformerNSCoding class]);
     
-    [_cache storeObject:string valueTransformer:nil forKey:key];
+    [_cache storeObject:string forKey:key valueTransformer:nil];
     
     NSString *cachedString = [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerNSCoding new]];
     XCTAssertEqualObjects(string, cachedString);
@@ -139,7 +140,7 @@
     NSString *key = @"key1";
     NSData *data = [dummy dataRepresentation];
     
-    [_cache storeObject:dummy valueTransformer:nil data:data forKey:key];
+    [_cache storeObject:dummy forKey:key valueTransformer:nil data:data];
     
     TDFCacheUnsupportedDummy *cacheDummy = [_cache cachedObjectForKey:key valueTransformer:[TDFValueTransformerCacheUnsupportedDummy new]];
     XCTAssertEqualObjects(cacheDummy, dummy);
@@ -149,21 +150,21 @@
 
 - (void)testWriteWithoutKeyDoesntRaiseAnException {
     NSString *string = @"value1";
-    [_cache storeObject:string valueTransformer:[DFValueTransformerNSCoding new] forKey:nil];
+    [_cache storeObject:string forKey:nil valueTransformer:[DFValueTransformerNSCoding new]];
     NSString *cachedString = [_cache cachedObjectForKey:nil valueTransformer:[DFValueTransformerNSCoding new]];
     XCTAssertNil(cachedString);
 }
 
 - (void)testWriteWithoutObjectDoesntRaiseAnException {
     NSString *key = @"key1";
-    [_cache storeObject:nil valueTransformer:[DFValueTransformerNSCoding new] forKey:key];
+    [_cache storeObject:nil forKey:key valueTransformer:[DFValueTransformerNSCoding new]];
     NSString *cachedString = [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerNSCoding new]];
     XCTAssertNil(cachedString);
 }
 
 - (void)testWriteWithInvalidValueTransformerDoesntRaiseAnException {
     TDFCacheUnsupportedDummy *object = [TDFCacheUnsupportedDummy new];
-    [_cache storeObject:object valueTransformer:[DFValueTransformerNSCoding new] forKey:@"key"];
+    [_cache storeObject:object forKey:@"key" valueTransformer:[DFValueTransformerNSCoding new]];
     id cachedObject = [_cache cachedObjectForKey:@"key" valueTransformer:[DFValueTransformerNSCoding new]];
     XCTAssertNil(cachedObject);
 }
@@ -174,7 +175,7 @@
     NSDictionary *JSON = @{ @"key" : @"value" };
     NSString *key = @"key3";
     
-    [_cache storeObject:JSON valueTransformer:[DFValueTransformerJSON new] forKey:key];
+    [_cache storeObject:JSON forKey:key valueTransformer:[DFValueTransformerJSON new]];
     
     BOOL __block isWaiting = YES;
     [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerJSON new] completion:^(id object) {
@@ -188,7 +189,7 @@
     NSDictionary *JSON = @{ @"key" : @"value" };
     NSString *key = @"key3";
     
-    [_cache storeObject:JSON valueTransformer:[DFValueTransformerJSON new] forKey:key];
+    [_cache storeObject:JSON forKey:key valueTransformer:[DFValueTransformerJSON new]];
     
     BOOL __block isWaiting = YES;
     [_cache cachedObjectForKey:key completion:^(id object) {
@@ -203,7 +204,7 @@
 - (void)testReadWithValueTransformer {
     NSString *string = @"value1";
     NSString *key = @"key1";
-    [_cache storeObject:string valueTransformer:nil forKey:key];
+    [_cache storeObject:string forKey:key valueTransformer:nil];
     NSString *cachedString = [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerNSCoding new]];
     XCTAssertEqualObjects(string, cachedString);
 }
@@ -211,7 +212,7 @@
 - (void)testReadWithoutValueTransformer {
     NSString *string = @"value1";
     NSString *key = @"key1";
-    [_cache storeObject:string valueTransformer:nil forKey:key];
+    [_cache storeObject:string forKey:key valueTransformer:nil];
     NSString *cachedString = [_cache cachedObjectForKey:key valueTransformer:nil];
     XCTAssertEqualObjects(string, cachedString);
     
@@ -222,7 +223,7 @@
 - (void)testReadWithInvalidValueTransformerDoesntRaiseException {
     NSString *string = @"value1";
     NSString *key = @"key1";
-    [_cache storeObject:string valueTransformer:nil forKey:key];
+    [_cache storeObject:string forKey:key valueTransformer:nil];
     id cachedObject = [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerJSON new]];
     XCTAssertNil(cachedObject);
 }
@@ -245,7 +246,7 @@
 - (void)testAsyncReadWithoutValueTransformer {
     NSString *string = @"value1";
     NSString *key = @"key1";
-    [_cache storeObject:string valueTransformer:nil forKey:key];
+    [_cache storeObject:string forKey:key valueTransformer:nil];
     
     BOOL __block isWaiting = YES;
     [_cache cachedObjectForKey:key valueTransformer:nil completion:^(id object) {
@@ -265,7 +266,7 @@
 - (void)testReadAsyncWithInvalidValueTransformerDoesntRaiseException {
     NSString *string = @"value1";
     NSString *key = @"key1";
-    [_cache storeObject:string valueTransformer:nil forKey:key];
+    [_cache storeObject:string forKey:key valueTransformer:nil];
     
     BOOL __block isWaiting = YES;
     [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerJSON new] completion:^(id object) {
@@ -282,7 +283,7 @@
     
     NSString *string = @"value1";
     NSString *key = @"key1";
-    [cache storeObject:string valueTransformer:nil forKey:key];
+    [cache storeObject:string forKey:key valueTransformer:nil];
     
     XCTAssertEqualObjects(string, [cache.memoryCache objectForKey:key]);
 }
@@ -292,8 +293,8 @@
     
     TDFCacheUnsupportedDummy *dummy = [TDFCacheUnsupportedDummy new];
     NSString *key = @"key1";
-    [cache storeObject:dummy valueTransformer:nil forKey:key];
-    
+    [cache storeObject:dummy forKey:key valueTransformer:nil];
+
     XCTAssertEqualObjects(dummy, [cache.memoryCache objectForKey:key]);
 
     TDFCacheUnsupportedDummy *cacheDummy = [cache cachedObjectForKey:key valueTransformer:nil];

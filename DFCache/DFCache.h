@@ -117,24 +117,24 @@ extern NSString *const DFCacheAttributeMetadataKey;
 /*! Stores object into memory cache. Stores data into disk cache. Retrieves value transformer from factory and  associates it with data.
  @param object The object to store into memory cache.
  @param key The unique key.
+ @param data Data to store into disk cache.
  */
-- (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key;
+- (void)storeObject:(id)object forKey:(NSString *)key data:(NSData *)data;
 
 /*! Stores object into memory cache. Uses a given value transformer (or value transformer from factory in case given transformer is nil) to encode object and stores data into disk cache. Value transformer gets associated with data.
  @param object The object to store into memory cache.
- @param valueTransformer Value transformer used to encode and decode data.
- @param data Data to store into disk cache.
  @param key The unique key.
+ @param valueTransformer Value transformer used to encode and decode data.
  */
-- (void)storeObject:(id)object valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key;
+- (void)storeObject:(id)object forKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer;
 
 /*! Stores object into memory cache. If data is not nil than stores data into disk cache and retrieves value transformer from factory and associates it with data. If data is nil uses a given value transformer (or value transformer from factory in case given transformer is nil) to encode object and stores data into disk cache. Value transformer gets associated with data.
  @param object The object to store into memory cache.
+ @param key The unique key.
  @param valueTransformer Value transformer used to encode and decode data.
  @param data Data to store into disk cache.
- @param key The unique key.
  */
-- (void)storeObject:(id)object valueTransformer:(id<DFValueTransforming>)valueTransformer data:(NSData *)data forKey:(NSString *)key;
+- (void)storeObject:(id)object forKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer data:(NSData *)data;
 
 /*! Stores object into memory cache. Retrieves value transformer from factory and uses it to calculate object cost.
  @param object The object to store into memory cache.

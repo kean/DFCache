@@ -167,18 +167,18 @@ static NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_t
 #pragma mark - Write
 
 - (void)storeObject:(id)object forKey:(NSString *)key {
-    [self storeObject:object valueTransformer:nil data:nil forKey:key];
+    [self storeObject:object forKey:key valueTransformer:nil data:nil];
 }
 
-- (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key {
-    [self storeObject:object valueTransformer:nil data:data forKey:key];
+- (void)storeObject:(id)object forKey:(NSString *)key data:(NSData *)data {
+    [self storeObject:object forKey:key valueTransformer:nil data:data];
 }
 
-- (void)storeObject:(id)object valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key {
-    [self storeObject:object valueTransformer:valueTransformer data:nil forKey:key];
+- (void)storeObject:(id)object forKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer {
+    [self storeObject:object forKey:key valueTransformer:valueTransformer data:nil];
 }
 
-- (void)storeObject:(id)object valueTransformer:(id<DFValueTransforming>)valueTransformer data:(NSData *)data forKey:(NSString *)key {
+- (void)storeObject:(id)object forKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer data:(NSData *)data {
     if (!key.length) {
         return;
     }

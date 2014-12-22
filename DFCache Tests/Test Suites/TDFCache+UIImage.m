@@ -61,7 +61,7 @@
     NSData *data = UIImagePNGRepresentation(image);
     NSString *key = @"key";
     
-    [_cache storeObject:image data:data forKey:key];
+    [_cache storeObject:image forKey:key data:data];
     [_cache.memoryCache removeAllObjects];
     
     UIImage *cachedImage = [_cache cachedObjectForKey:key];
