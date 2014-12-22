@@ -35,7 +35,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
 @implementation DFCache {
     BOOL _cleanupTimerEnabled;
     NSTimeInterval _cleanupTimeInterval;
-    DFCacheTimer *__weak _cleanupTimer;
+    NSTimer *__weak _cleanupTimer;
 }
 
 - (void)dealloc {
