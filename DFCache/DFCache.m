@@ -36,6 +36,14 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     BOOL _cleanupTimerEnabled;
     NSTimeInterval _cleanupTimeInterval;
     NSTimer *__weak _cleanupTimer;
+    
+    /*! Serial dispatch queue used for all disk IO operations. If you store the object using DFCache asynchronous API and then immediately try to retrieve it then you are guaranteed to get the object back.
+     */
+    dispatch_queue_t _ioQueue;
+    
+    /*! Concurrent dispatch queue used for dispatching blocks that decode cached data.
+     */
+    dispatch_queue_t _processingQueue;
 }
 
 - (void)dealloc {
@@ -103,7 +111,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
 }
 
 - (void)_cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer completion:(void (^)(id))completion {
-    dispatch_async(self.ioQueue, ^{
+    dispatch_async(_ioQueue, ^{
         NSData *data = [self.diskCache dataForKey:key];
         if (!data) {
             _dwarf_cache_callback(completion, nil);
@@ -115,7 +123,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
             valueTransformer = [fileURL df_extendedAttributeValueForKey:DFCacheAttributeValueTransformerKey error:nil];
         }
         NSParameterAssert(valueTransformer);
-        dispatch_async(self.processingQueue, ^{
+        dispatch_async(_processingQueue, ^{
             @autoreleasepool {
                 id object = [valueTransformer reverseTransfomedValue:data];
                 [self _setObject:object forKey:key valueTransformer:valueTransformer];
@@ -147,7 +155,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
 - (id)_cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)inputValueTransformer {
     NSData *__block data;
     id<DFValueTransforming> __block valueTransformer = inputValueTransformer;
-    dispatch_sync(self.ioQueue, ^{
+    dispatch_sync(_ioQueue, ^{
         data = [self.diskCache dataForKey:key];
         if (!valueTransformer) {
             NSURL *fileURL = [self.diskCache URLForKey:key];
@@ -184,7 +192,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     if (!data && !valueTransformer) {
         return;
     }
-    dispatch_async(self.ioQueue, ^{
+    dispatch_async(_ioQueue, ^{
         @autoreleasepool {
             NSData *__block encodedData = data;
             if (!encodedData) {
@@ -226,7 +234,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     for (NSString *key in keys) {
         [self.memoryCache removeObjectForKey:key];
     }
-    dispatch_async(self.ioQueue, ^{
+    dispatch_async(_ioQueue, ^{
         for (NSString *key in keys) {
             [self.diskCache removeDataForKey:key];
         }
@@ -241,7 +249,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
 
 - (void)removeAllObjects {
     [self.memoryCache removeAllObjects];
-    dispatch_async(self.ioQueue, ^{
+    dispatch_async(_ioQueue, ^{
         [self.diskCache removeAllData];
     });
 }
@@ -253,7 +261,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
         return nil;
     }
     NSDictionary *__block metadata;
-    dispatch_sync(self.ioQueue, ^{
+    dispatch_sync(_ioQueue, ^{
         NSURL *fileURL = [self.diskCache URLForKey:key];
         metadata = [fileURL df_extendedAttributeValueForKey:DFCacheAttributeMetadataKey error:nil];
     });
@@ -264,7 +272,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     if (!metadata || !key.length) {
         return;
     }
-    dispatch_async(self.ioQueue, ^{
+    dispatch_async(_ioQueue, ^{
         NSURL *fileURL = [self.diskCache URLForKey:key];
         [fileURL df_setExtendedAttributeValue:metadata forKey:DFCacheAttributeMetadataKey];
     });
@@ -274,7 +282,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     if (!keyedValues.count || !key.length) {
         return;
     }
-    dispatch_async(self.ioQueue, ^{
+    dispatch_async(_ioQueue, ^{
         NSURL *fileURL = [self.diskCache URLForKey:key];
         NSDictionary *metadata = [fileURL df_extendedAttributeValueForKey:DFCacheAttributeMetadataKey error:nil];
         NSMutableDictionary *mutableMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
@@ -287,7 +295,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     if (!key.length) {
         return;
     }
-    dispatch_async(self.ioQueue, ^{
+    dispatch_async(_ioQueue, ^{
         NSURL *fileURL = [self.diskCache URLForKey:key];
         [fileURL df_removeExtendedAttributeForKey:DFCacheAttributeMetadataKey];
     });
@@ -320,7 +328,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
 }
 
 - (void)cleanupDiskCache {
-    dispatch_async(self.ioQueue, ^{
+    dispatch_async(_ioQueue, ^{
         [self.diskCache cleanup];
     });
 }
@@ -341,7 +349,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
         _dwarf_cache_callback(completion, nil);
         return;
     }
-    dispatch_async(self.ioQueue, ^{
+    dispatch_async(_ioQueue, ^{
         NSData *data = [self.diskCache dataForKey:key];
         _dwarf_cache_callback(completion, data);
     });
@@ -352,7 +360,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
         return nil;
     }
     NSData *__block data;
-    dispatch_sync(self.ioQueue, ^{
+    dispatch_sync(_ioQueue, ^{
         data = [self.diskCache dataForKey:key];
     });
     return data;
@@ -362,7 +370,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     if (!data || !key.length) {
         return;
     }
-    dispatch_async(self.ioQueue, ^{
+    dispatch_async(_ioQueue, ^{
         [self.diskCache setData:data forKey:key];
     });
 }

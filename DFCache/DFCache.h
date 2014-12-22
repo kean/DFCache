@@ -78,14 +78,6 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
  */
 @property (nonatomic, readonly) NSCache *memoryCache;
 
-/*! Serial dispatch queue used for all disk IO operations. If you store the object using DFCache asynchronous API and then immediately try to retrieve it then you are guaranteed to get the object back.
- */
-@property (nonatomic) dispatch_queue_t ioQueue;
-
-/*! Concurrent dispatch queue used for dispatching blocks that decode cached data.
- */
-@property (nonatomic) dispatch_queue_t processingQueue;
-
 #pragma mark - Read (Asynchronous)
 
 /*! Reads object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Uses value transformer provided by value transformer factory.
