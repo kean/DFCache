@@ -28,18 +28,6 @@
 		0CADA4EC18F2BF5400F5248D /* zebrainpastelfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */; };
 		0CB1C77F1933783700F11441 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB1C77E1933783700F11441 /* ImageIO.framework */; };
 		0CB1C7801933784F00F11441 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB1C77E1933783700F11441 /* ImageIO.framework */; };
-		0CB83F4B1A427AD800FEFC86 /* DFValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB83F491A427AD800FEFC86 /* DFValueTransformer.h */; };
-		0CB83F4C1A427AD800FEFC86 /* DFValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB83F491A427AD800FEFC86 /* DFValueTransformer.h */; };
-		0CB83F4D1A427AD800FEFC86 /* DFValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB83F491A427AD800FEFC86 /* DFValueTransformer.h */; };
-		0CB83F4E1A427AD800FEFC86 /* DFValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB83F4A1A427AD800FEFC86 /* DFValueTransformer.m */; };
-		0CB83F4F1A427AD800FEFC86 /* DFValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB83F4A1A427AD800FEFC86 /* DFValueTransformer.m */; };
-		0CB83F501A427AD800FEFC86 /* DFValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB83F4A1A427AD800FEFC86 /* DFValueTransformer.m */; };
-		0CB83F531A427BEE00FEFC86 /* DFValueTransformerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB83F511A427BEE00FEFC86 /* DFValueTransformerFactory.h */; };
-		0CB83F541A427BEE00FEFC86 /* DFValueTransformerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB83F511A427BEE00FEFC86 /* DFValueTransformerFactory.h */; };
-		0CB83F551A427BEE00FEFC86 /* DFValueTransformerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB83F511A427BEE00FEFC86 /* DFValueTransformerFactory.h */; };
-		0CB83F561A427BEE00FEFC86 /* DFValueTransformerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB83F521A427BEE00FEFC86 /* DFValueTransformerFactory.m */; };
-		0CB83F571A427BEE00FEFC86 /* DFValueTransformerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB83F521A427BEE00FEFC86 /* DFValueTransformerFactory.m */; };
-		0CB83F581A427BEE00FEFC86 /* DFValueTransformerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB83F521A427BEE00FEFC86 /* DFValueTransformerFactory.m */; };
 		0CB95DFA18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95DFB18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95DFC18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */; };
@@ -80,6 +68,18 @@
 		0CCF5E3218CD0F9300823676 /* DFCachePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37064F18CA408F003E20C4 /* DFCachePrivate.h */; };
 		0CCF5E3318CD0F9300823676 /* DFCacheTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C94791F18CCE4D4008E8938 /* DFCacheTimer.h */; };
 		0CCF5E3418CD0F9300823676 /* DFCache iOS-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CFA33EF17D4734900AE6EEF /* DFCache iOS-Prefix.pch */; };
+		0CCFDBE61A482BF300DBBF8E /* DFValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE21A482BF300DBBF8E /* DFValueTransformer.h */; };
+		0CCFDBE71A482BF300DBBF8E /* DFValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE21A482BF300DBBF8E /* DFValueTransformer.h */; };
+		0CCFDBE81A482BF300DBBF8E /* DFValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE21A482BF300DBBF8E /* DFValueTransformer.h */; };
+		0CCFDBE91A482BF300DBBF8E /* DFValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE31A482BF300DBBF8E /* DFValueTransformer.m */; };
+		0CCFDBEA1A482BF300DBBF8E /* DFValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE31A482BF300DBBF8E /* DFValueTransformer.m */; };
+		0CCFDBEB1A482BF300DBBF8E /* DFValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE31A482BF300DBBF8E /* DFValueTransformer.m */; };
+		0CCFDBEC1A482BF300DBBF8E /* DFValueTransformerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE41A482BF300DBBF8E /* DFValueTransformerFactory.h */; };
+		0CCFDBED1A482BF300DBBF8E /* DFValueTransformerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE41A482BF300DBBF8E /* DFValueTransformerFactory.h */; };
+		0CCFDBEE1A482BF300DBBF8E /* DFValueTransformerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE41A482BF300DBBF8E /* DFValueTransformerFactory.h */; };
+		0CCFDBEF1A482BF300DBBF8E /* DFValueTransformerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE51A482BF300DBBF8E /* DFValueTransformerFactory.m */; };
+		0CCFDBF01A482BF300DBBF8E /* DFValueTransformerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE51A482BF300DBBF8E /* DFValueTransformerFactory.m */; };
+		0CCFDBF11A482BF300DBBF8E /* DFValueTransformerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE51A482BF300DBBF8E /* DFValueTransformerFactory.m */; };
 		0CDB852818CB44B6005DAA43 /* DFCache+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852718CB44B6005DAA43 /* DFCache+Tests.m */; };
 		0CDB852C18CB44D9005DAA43 /* TDFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852A18CB44D9005DAA43 /* TDFCache.m */; };
 		0CDB852E18CB44D9005DAA43 /* TDFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852B18CB44D9005DAA43 /* TDFCache+Extensions.m */; };
@@ -157,10 +157,6 @@
 		0C94792018CCE4D4008E8938 /* DFCacheTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCacheTimer.m; sourceTree = "<group>"; };
 		0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zebrainpastelfield.png; sourceTree = "<group>"; };
 		0CB1C77E1933783700F11441 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		0CB83F491A427AD800FEFC86 /* DFValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFValueTransformer.h; sourceTree = "<group>"; };
-		0CB83F4A1A427AD800FEFC86 /* DFValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFValueTransformer.m; sourceTree = "<group>"; };
-		0CB83F511A427BEE00FEFC86 /* DFValueTransformerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFValueTransformerFactory.h; sourceTree = "<group>"; };
-		0CB83F521A427BEE00FEFC86 /* DFValueTransformerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFValueTransformerFactory.m; sourceTree = "<group>"; };
 		0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+DFExtendedFileAttributes.h"; sourceTree = "<group>"; };
 		0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DFExtendedFileAttributes.m"; sourceTree = "<group>"; };
 		0CB95E0418CB181000169472 /* DFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCache.h; sourceTree = "<group>"; };
@@ -176,6 +172,10 @@
 		0CBC53A718CB4DCF002A8993 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		0CCCFED018CB2D4B009AE6DB /* DFFileStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFFileStorage.h; sourceTree = "<group>"; };
 		0CCCFED118CB2D4B009AE6DB /* DFFileStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFFileStorage.m; sourceTree = "<group>"; };
+		0CCFDBE21A482BF300DBBF8E /* DFValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFValueTransformer.h; sourceTree = "<group>"; };
+		0CCFDBE31A482BF300DBBF8E /* DFValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFValueTransformer.m; sourceTree = "<group>"; };
+		0CCFDBE41A482BF300DBBF8E /* DFValueTransformerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFValueTransformerFactory.h; sourceTree = "<group>"; };
+		0CCFDBE51A482BF300DBBF8E /* DFValueTransformerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFValueTransformerFactory.m; sourceTree = "<group>"; };
 		0CDB852618CB44B6005DAA43 /* DFCache+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache+Tests.h"; sourceTree = "<group>"; };
 		0CDB852718CB44B6005DAA43 /* DFCache+Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DFCache+Tests.m"; sourceTree = "<group>"; };
 		0CDB852A18CB44D9005DAA43 /* TDFCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFCache.m; sourceTree = "<group>"; };
@@ -274,7 +274,7 @@
 				0CCCFECF18CB2D4B009AE6DB /* Key-Value File Storage */,
 				0CB95DF418CB17AD00169472 /* Extended File Attributes */,
 				0C85802B18CF124D00D71F3E /* Image Decoder */,
-				0CB83F481A427AD800FEFC86 /* Transforming */,
+				0CCFDBE11A482BF300DBBF8E /* Value Transforming */,
 				0C37064E18CA408F003E20C4 /* Private */,
 			);
 			path = DFCache;
@@ -375,17 +375,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		0CB83F481A427AD800FEFC86 /* Transforming */ = {
-			isa = PBXGroup;
-			children = (
-				0CB83F491A427AD800FEFC86 /* DFValueTransformer.h */,
-				0CB83F4A1A427AD800FEFC86 /* DFValueTransformer.m */,
-				0CB83F511A427BEE00FEFC86 /* DFValueTransformerFactory.h */,
-				0CB83F521A427BEE00FEFC86 /* DFValueTransformerFactory.m */,
-			);
-			path = Transforming;
-			sourceTree = "<group>";
-		};
 		0CB95DF418CB17AD00169472 /* Extended File Attributes */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +402,17 @@
 				0CCCFED118CB2D4B009AE6DB /* DFFileStorage.m */,
 			);
 			path = "Key-Value File Storage";
+			sourceTree = "<group>";
+		};
+		0CCFDBE11A482BF300DBBF8E /* Value Transforming */ = {
+			isa = PBXGroup;
+			children = (
+				0CCFDBE21A482BF300DBBF8E /* DFValueTransformer.h */,
+				0CCFDBE31A482BF300DBBF8E /* DFValueTransformer.m */,
+				0CCFDBE41A482BF300DBBF8E /* DFValueTransformerFactory.h */,
+				0CCFDBE51A482BF300DBBF8E /* DFValueTransformerFactory.m */,
+			);
+			path = "Value Transforming";
 			sourceTree = "<group>";
 		};
 		0CDB852518CB4485005DAA43 /* Test Suites */ = {
@@ -483,15 +483,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CB95E0C18CB181000169472 /* DFCache.h in Headers */,
-				0CB83F4C1A427AD800FEFC86 /* DFValueTransformer.h in Headers */,
 				0CB95E1118CB181000169472 /* DFCache+DFExtensions.h in Headers */,
 				0CB95E1818CB181000169472 /* DFDiskCache.h in Headers */,
 				0CCCFED318CB2D4B009AE6DB /* DFFileStorage.h in Headers */,
 				0CB95DFB18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */,
+				0CCFDBED1A482BF300DBBF8E /* DFValueTransformerFactory.h in Headers */,
 				0C94792118CCE4D4008E8938 /* DFCacheTimer.h in Headers */,
 				0C3706C418CA408F003E20C4 /* DFCachePrivate.h in Headers */,
+				0CCFDBE71A482BF300DBBF8E /* DFValueTransformer.h in Headers */,
 				0CFA33F417D4734900AE6EEF /* DFCache OS X-Prefix.pch in Headers */,
-				0CB83F541A427BEE00FEFC86 /* DFValueTransformerFactory.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,15 +500,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CB95E0B18CB181000169472 /* DFCache.h in Headers */,
-				0CB83F4D1A427AD800FEFC86 /* DFValueTransformer.h in Headers */,
 				0CB95E1018CB181000169472 /* DFCache+DFExtensions.h in Headers */,
 				0CB95E1718CB181000169472 /* DFDiskCache.h in Headers */,
 				0CCCFED218CB2D4B009AE6DB /* DFFileStorage.h in Headers */,
 				0CB95DFA18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */,
+				0CCFDBEE1A482BF300DBBF8E /* DFValueTransformerFactory.h in Headers */,
 				0C94792218CCE4D4008E8938 /* DFCacheTimer.h in Headers */,
 				0C3706C318CA408F003E20C4 /* DFCachePrivate.h in Headers */,
+				0CCFDBE81A482BF300DBBF8E /* DFValueTransformer.h in Headers */,
 				0CFA33F317D4734900AE6EEF /* DFCache OS X-Prefix.pch in Headers */,
-				0CB83F551A427BEE00FEFC86 /* DFValueTransformerFactory.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,15 +518,15 @@
 			files = (
 				0CCF5DCC18CD0CC700823676 /* DFCache.h in Headers */,
 				0CCF5DCE18CD0CC700823676 /* DFCache+DFExtensions.h in Headers */,
-				0CB83F4B1A427AD800FEFC86 /* DFValueTransformer.h in Headers */,
+				0CCFDBE61A482BF300DBBF8E /* DFValueTransformer.h in Headers */,
 				0CCF5DCF18CD0CC700823676 /* DFDiskCache.h in Headers */,
 				0CCF5DD018CD0CC700823676 /* DFFileStorage.h in Headers */,
 				0CCF5DD118CD0CC700823676 /* NSURL+DFExtendedFileAttributes.h in Headers */,
 				0CCF5E3218CD0F9300823676 /* DFCachePrivate.h in Headers */,
 				0C85802E18CF125800D71F3E /* DFCacheImageDecoder.h in Headers */,
-				0CB83F531A427BEE00FEFC86 /* DFValueTransformerFactory.h in Headers */,
 				0CCF5E3318CD0F9300823676 /* DFCacheTimer.h in Headers */,
 				0CCF5E3418CD0F9300823676 /* DFCache iOS-Prefix.pch in Headers */,
+				0CCFDBEC1A482BF300DBBF8E /* DFValueTransformerFactory.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,14 +732,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CCFDBEF1A482BF300DBBF8E /* DFValueTransformerFactory.m in Sources */,
 				0CB95E1218CB181000169472 /* DFCache+DFExtensions.m in Sources */,
 				0CCCFED418CB2D4B009AE6DB /* DFFileStorage.m in Sources */,
 				0CB95E0D18CB181000169472 /* DFCache.m in Sources */,
 				0CB95DFC18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */,
 				0C94792318CCE4D4008E8938 /* DFCacheTimer.m in Sources */,
-				0CB83F561A427BEE00FEFC86 /* DFValueTransformerFactory.m in Sources */,
+				0CCFDBE91A482BF300DBBF8E /* DFValueTransformer.m in Sources */,
 				0C7D47AE18CB1FA50078C765 /* DFCachePrivate.m in Sources */,
-				0CB83F4E1A427AD800FEFC86 /* DFValueTransformer.m in Sources */,
 				0CB95E1918CB181000169472 /* DFDiskCache.m in Sources */,
 				0C85803118CF125800D71F3E /* DFCacheImageDecoder.m in Sources */,
 			);
@@ -750,11 +750,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CB95E0F18CB181000169472 /* DFCache.m in Sources */,
-				0CB83F4F1A427AD800FEFC86 /* DFValueTransformer.m in Sources */,
+				0CCFDBEA1A482BF300DBBF8E /* DFValueTransformer.m in Sources */,
 				0CB95E1418CB181000169472 /* DFCache+DFExtensions.m in Sources */,
 				0CCCFED618CB2D4B009AE6DB /* DFFileStorage.m in Sources */,
 				0CB95DFE18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */,
-				0CB83F571A427BEE00FEFC86 /* DFValueTransformerFactory.m in Sources */,
+				0CCFDBF01A482BF300DBBF8E /* DFValueTransformerFactory.m in Sources */,
 				0C94792418CCE4D4008E8938 /* DFCacheTimer.m in Sources */,
 				0C7D47B018CB1FA50078C765 /* DFCachePrivate.m in Sources */,
 				0CB95E1B18CB181000169472 /* DFDiskCache.m in Sources */,
@@ -766,11 +766,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CB95E1318CB181000169472 /* DFCache+DFExtensions.m in Sources */,
-				0CB83F501A427AD800FEFC86 /* DFValueTransformer.m in Sources */,
+				0CCFDBEB1A482BF300DBBF8E /* DFValueTransformer.m in Sources */,
 				0CCCFED518CB2D4B009AE6DB /* DFFileStorage.m in Sources */,
 				0CB95E0E18CB181000169472 /* DFCache.m in Sources */,
 				0CB95DFD18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */,
-				0CB83F581A427BEE00FEFC86 /* DFValueTransformerFactory.m in Sources */,
+				0CCFDBF11A482BF300DBBF8E /* DFValueTransformerFactory.m in Sources */,
 				0C94792518CCE4D4008E8938 /* DFCacheTimer.m in Sources */,
 				0C7D47AF18CB1FA50078C765 /* DFCachePrivate.m in Sources */,
 				0CB95E1A18CB181000169472 /* DFDiskCache.m in Sources */,
