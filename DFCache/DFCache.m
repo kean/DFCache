@@ -29,7 +29,10 @@
 
 
 NSString *const DFCacheAttributeMetadataKey = @"_df_cache_metadata_key";
-NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transformer_key";
+
+/*! Extended attribute name used to store value transformer associated with data.
+ */
+static NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transformer_key";
 
 
 @implementation DFCache {

@@ -28,7 +28,6 @@
  */
 extern NSString *const DFCacheAttributeMetadataKey;
 
-extern NSString *const DFCacheAttributeValueTransformerKey;
 
 /* DFCache key features:
  
@@ -36,20 +35,21 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
  - Thoroughly tested. Written for and used heavily in the iOS application with more than half a million active users.
  - LRU cleanup (discards least recently used items first).
  - Metadata implemented on top on UNIX extended file attributes.
- - Encoding and decoding implemented using blocks. Store any kind of Objective-C objects or manipulate data directly.
  - First class UIImage support including background image decompression.
+ - Builtin support for objects conforming to <NSCoding> protocol. Can be extended to support more protocols and classes.
  - Batch methods to retrieve cached entries.
  */
 
 /*! Asynchronous composite in-memory and on-disk cache with LRU cleanup.
- @discussion Uses NSCache for in-memory caching and DFDiskCache for on-disk caching. Provides API for associating metadata with cache entries. Parts of the DFCache API (like first class UIImage support and batch read methods) are available through the categories. For more info see DFCacheExtended and DFImage categories.
- @note All disk IO operations (including operations that associate metadata with cache entries) are run on a serial dispatch queue. If you store the object using DFCache asynchronous API and then immediately try to retrieve it then you are guaranteed to get the object back.
+ @discussion Uses NSCache for in-memory caching and DFDiskCache for on-disk caching. Provides API for associating metadata with cache entries.
+ @note Encoding and decoding is implemented using id<DFValueTransforming> protocol. DFCache has several builtin value transformers that support object conforming to <NSCoding> protocol and images (UIImage). Use value transformer factory (id<DFValueTransformerFactory>) to extend cache functionality.
+ @note All disk IO operations (including operations that associate metadata with cache entries) are run on a serial dispatch queue. If you store the object using DFCache asynchronous API and then immediately retrieve it you are guaranteed to get the object back.
  @note Default disk capacity is 100 Mb. Disk cleanup is implemented using LRU algorithm, the least recently used items are discarded first. Disk cleanup is automatically scheduled to run repeatedly.
  @note NSCache auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else NSCache won't be able to evict memory properly. Typically, the obvious cost is the size of the object in bytes. Keep in mind that DFCache automatically removes all object from memory cache on memory warning for you.
  */
 @interface DFCache : NSObject
 
-/*! Initializes and returns cache with provided disk and memory cache. Designated initializer.
+/*! Initializes and returns cache with provided disk and memory cache.
  @param diskCache Disk cache. Raises NSInvalidArgumentException if disk cache is nil.
  @param memoryCache Memory cache. Pass nil to disable in-memory cache.
  */
@@ -66,7 +66,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
  */
 - (instancetype)initWithName:(NSString *)name;
 
-/*! The transformer factory used by the cache. Cache is initialized with a default value transformer factory. For more info see DFValueTransformerFactory declaration.
+/*! The transformer factory used by cache. Cache is initialized with a default value transformer factory. For more info see DFValueTransformerFactory declaration.
  */
 @property (nonatomic) id<DFValueTransformerFactory> valueTransfomerFactory;
 
@@ -116,7 +116,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
  */
 - (void)storeObject:(id)object forKey:(NSString *)key;
 
-/*! Stores object into memory cache. Stores data into disk cache. Retrieves value transformer from factory and  associats it with data.
+/*! Stores object into memory cache. Stores data into disk cache. Retrieves value transformer from factory and  associates it with data.
  @param object The object to store into memory cache.
  @param key The unique key.
  */
@@ -130,7 +130,7 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
  */
 - (void)storeObject:(id)object valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key;
 
-/*! Stores object into memory cache. If data is not nil than stores data into disk cache and retrieves value transformer from factory and associats it with data. If data is nil uses a given value transformer (or value transformer from factory in case given transformer is nil) to encode object and stores data into disk cache. Value transformer gets associated with data.
+/*! Stores object into memory cache. If data is not nil than stores data into disk cache and retrieves value transformer from factory and associates it with data. If data is nil uses a given value transformer (or value transformer from factory in case given transformer is nil) to encode object and stores data into disk cache. Value transformer gets associated with data.
  @param object The object to store into memory cache.
  @param valueTransformer Value transformer used to encode and decode data.
  @param data Data to store into disk cache.
