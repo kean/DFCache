@@ -122,7 +122,6 @@ static NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_t
             NSURL *fileURL = [self.diskCache URLForKey:key];
             valueTransformer = [fileURL df_extendedAttributeValueForKey:DFCacheAttributeValueTransformerKey error:nil];
         }
-        NSParameterAssert(valueTransformer);
         dispatch_async(_processingQueue, ^{
             @autoreleasepool {
                 id object = [valueTransformer reverseTransfomedValue:data];
