@@ -50,8 +50,8 @@ extern NSString *const DFCacheAttributeMetadataKey;
 @interface DFCache : NSObject
 
 /*! Initializes and returns cache with provided disk and memory cache.
- @param diskCache Disk cache. Raises NSInvalidArgumentException if disk cache is nil.
- @param memoryCache Memory cache. Pass nil to disable in-memory cache.
+ @param diskCache Disk cache. Pass nil to disable on-disk caching.
+ @param memoryCache Memory cache. Pass nil to disable in-memory caching.
  */
 - (instancetype)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache NS_DESIGNATED_INITIALIZER;
 

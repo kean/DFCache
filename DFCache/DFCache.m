@@ -56,9 +56,6 @@ static NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_t
 
 - (instancetype)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache {
     if (self = [super init]) {
-        if (!diskCache) {
-            [NSException raise:NSInvalidArgumentException format:@"Attempting to initialize DFCache without disk cache"];
-        }
         _diskCache = diskCache;
         _memoryCache = memoryCache;
         

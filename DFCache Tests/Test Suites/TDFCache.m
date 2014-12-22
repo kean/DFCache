@@ -69,8 +69,12 @@
     XCTAssertEqualObjects(cache2.valueTransfomerFactory, [DFValueTransformerFactory defaultFactory]);
 }
 
-- (void)testInitializationWithoutDiskCacheThrowsException {
-    XCTAssertThrowsSpecificNamed([[DFCache alloc] initWithDiskCache:nil memoryCache:nil], NSException, NSInvalidArgumentException);
+- (void)testInitializationWithoutDiskCache {
+    DFCache *cache = [[DFCache alloc] initWithDiskCache:nil memoryCache:nil];
+    [cache cleanupDiskCache];
+    [cache removeAllObjects];
+    [cache storeObject:@"object" forKey:@"key"];
+    XCTAssertNil([cache cachedObjectForKey:@"key"]);
 }
 
 - (void)testInitializationWithoutNameThrowsException {
