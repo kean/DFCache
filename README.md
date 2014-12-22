@@ -29,7 +29,7 @@ UIImage *image = ...; // Instead of UIImage you can use the same API for objects
 
 // Store image
 [cache storeObject:image forKey:key];
-// [cache storeObject:image data:data forKey:key]; - you can store original image data
+// [cache storeObject:image forKey:key data:data]; - you can store original image data
 
 // Retrieve decompressed image
 [cache cachedObjectForKey:key completion:^(id object) {
@@ -45,7 +45,7 @@ UIImage *image = ...; // Instead of UIImage you can use the same API for objects
 ```objective-c
 DFCache *cache = [[DFCache alloc] initWithName:@"sample_cache"];
 NSDictionary *object = @{ @"key" : @"value" };
-[cache storeObject:object encode:DFCacheDecodeNSCoding forKey:@"key"];
+[cache storeObject:object forKey:@"key"];
 [cache setMetadata:@{ @"revalidation_date" : [NSDate date] } forKey:@"key"];
 NSDictionary *metadata = [cache metadataForKey:@"key"];
 ```
@@ -55,7 +55,7 @@ NSDictionary *metadata = [cache metadataForKey:@"key"];
 ```objective-c
 // Store JSON using builtin JSON serializer
 id JSON = ...; // Any JSON object
-[cache storeObject:JSON valueTransformer:[DFValueTransformerJSON new] forKey:@"key"];
+[cache storeObject:JSON forKey:@"key" valueTransformer:[DFValueTransformerJSON new]];
 
 // Value transformer is automatically associated with data into disk cache so there is no need to specify it when retrieving objects
 id cachedJSON = [cache cachedObjectForKey:@"key"];
