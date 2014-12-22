@@ -84,7 +84,7 @@
     [_cache.memoryCache removeObjectForKey:keys[4]];
     
     BOOL __block isWaiting = YES;
-    [_cache batchCachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(NSDictionary *batch) {
+    [_cache batchCachedObjectsForKeys:keys completion:^(NSDictionary *batch) {
         for (NSString *key in keys) {
             XCTAssertTrue([batch[key] isEqualToString:strings[key]]);
         }
@@ -100,7 +100,7 @@
     [_cache.memoryCache removeAllObjects];
     
     BOOL __block isWaiting = YES;
-    [_cache batchCachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(NSDictionary *batch) {
+    [_cache batchCachedObjectsForKeys:keys completion:^(NSDictionary *batch) {
         for (NSString *key in keys) {
             XCTAssertTrue([batch[key] isEqualToString:strings[key]]);
         }
@@ -116,7 +116,7 @@
     [_cache.memoryCache removeObjectForKey:keys[3]];
     [_cache.memoryCache removeObjectForKey:keys[4]];
     
-    NSDictionary *batch = [_cache batchCachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil];
+    NSDictionary *batch = [_cache batchCachedObjectsForKeys:keys];
     for (NSString *key in keys) {
         XCTAssertTrue([batch[key] isEqualToString:strings[key]]);
     }
@@ -128,7 +128,7 @@
     NSArray *keys = [strings allKeys];
     [_cache.memoryCache removeAllObjects];
     
-    NSDictionary *batch = [_cache batchCachedObjectsForKeys:keys decode:DFCacheDecodeNSCoding cost:nil];
+    NSDictionary *batch = [_cache batchCachedObjectsForKeys:keys];
     for (NSString *key in keys) {
         XCTAssertTrue([batch[key] isEqualToString:strings[key]]);
     }
@@ -142,7 +142,7 @@
     [_cache removeObjectForKey:keys[0]];
     
     BOOL __block isWaiting = YES;
-    [_cache firstCachedObjectForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(id object, NSString *key) {
+    [_cache firstCachedObjectForKeys:keys completion:^(id object, NSString *key) {
         XCTAssertTrue([key isEqualToString:keys[1]]);
         XCTAssertTrue([object isEqualToString:strings[keys[1]]]);
         isWaiting = NO;
@@ -160,7 +160,7 @@
     [_cache removeObjectForKey:keys[0]];
     
     BOOL __block isWaiting = YES;
-    [_cache firstCachedObjectForKeys:keys decode:DFCacheDecodeNSCoding cost:nil completion:^(id object, NSString *key) {
+    [_cache firstCachedObjectForKeys:keys completion:^(id object, NSString *key) {
         XCTAssertTrue([key isEqualToString:keys[1]]);
         XCTAssertTrue([object isEqualToString:strings[keys[1]]]);
         isWaiting = NO;
@@ -185,7 +185,7 @@
         }
         
         {
-            id object = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:nil];
+            id object = [_cache cachedObjectForKey:key];
             XCTAssertNotNil(object, @"Disk cache: no object for key %@", key);
             XCTAssertEqualObjects(objects[key], object);
         }
@@ -200,7 +200,7 @@
         }
         
         {
-            id object = [_cache cachedObjectForKey:key decode:DFCacheDecodeNSCoding cost:nil];
+            id object = [_cache cachedObjectForKey:key];
             XCTAssertNil(object, @"Disk cache: contains object for key %@", key);
         }
     }
