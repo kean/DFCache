@@ -228,15 +228,13 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     [self storeObject:object valueTransformer:nil data:nil forKey:key];
 }
 
+- (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key {
+    [self storeObject:object valueTransformer:nil data:data forKey:key];
+}
+
 - (void)storeObject:(id)object valueTransformer:(id<DFValueTransforming>)valueTransformer forKey:(NSString *)key {
     [self storeObject:object valueTransformer:valueTransformer data:nil forKey:key];
 }
-
-/*
- - (void)storeObject:(id)object data:(NSData *)data forKey:(NSString *)key {
- [self storeObject:object data:data valueTransformer:nil forKey:key];
- }
- */
 
 - (void)storeObject:(id)object valueTransformer:(id<DFValueTransforming>)valueTransformer data:(NSData *)data forKey:(NSString *)key {
     if (!key.length) {
@@ -297,12 +295,6 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
              forKey:(NSString *)key
                cost:(NSUInteger)cost {
     [self _storeObject:object data:data encode:nil forKey:key cost:cost ];
-}
-
-- (void)storeObject:(id)object
-               data:(NSData *)data
-             forKey:(NSString *)key {
-    [self storeObject:object data:data forKey:key cost:0];
 }
 
 - (void)storeObject:(id)object

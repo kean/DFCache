@@ -19,11 +19,17 @@ static id<DFValueTransformerFactory> _sharedFactory;
 #pragma mark - <DFValueTransformerFactory>
 
 - (id<DFValueTransforming>)valueTransformerForValue:(id)value {
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+    if ([value isKindOfClass:[UIImage class]]) {
+        return [DFValueTransformerUIImage new];
+    }
+#endif
+    
     if ([value conformsToProtocol:@protocol(NSCoding)]) {
         return [DFValueTransformerNSCoding new];
-    } else {
-        return nil;
     }
+    
+    return nil;
 }
 
 #pragma mark - Dependency Injectors

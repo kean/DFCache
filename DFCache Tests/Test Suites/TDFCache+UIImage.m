@@ -10,7 +10,7 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "DFCache+DFImage.h"
+#import "DFCache.h"
 #import "DFTesting.h"
 #import <XCTest/XCTest.h>
 
@@ -45,12 +45,12 @@
     UIImage *image = [self _testImage];
     NSString *key = @"key";
     
-    [_cache storeImage:image imageData:nil forKey:key];
+    [_cache storeObject:image forKey:key];
     [_cache.memoryCache removeAllObjects];
     
     __block BOOL isWaiting = YES;
-    [_cache cachedImageForKey:key completion:^(UIImage *cachedImage) {
-        [self _assertImage:image isEqualImage:cachedImage];
+    [_cache cachedObjectForKey:key completion:^(id object) {
+        [self _assertImage:image isEqualImage:object];
         isWaiting = NO;
     }];
     DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
@@ -61,15 +61,11 @@
     NSData *data = UIImagePNGRepresentation(image);
     NSString *key = @"key";
     
-    [_cache storeImage:image imageData:data forKey:key];
+    [_cache storeObject:image data:data forKey:key];
     [_cache.memoryCache removeAllObjects];
     
-    __block BOOL isWaiting = YES;
-    [_cache cachedImageForKey:key completion:^(UIImage *cachedImage) {
-        [self _assertImage:image isEqualImage:cachedImage];
-        isWaiting = NO;
-    }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    UIImage *cachedImage = [_cache cachedObjectForKey:key];
+    [self _assertImage:image isEqualImage:cachedImage];
 }
 
 #pragma mark - Helpers

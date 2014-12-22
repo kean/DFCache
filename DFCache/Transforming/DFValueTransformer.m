@@ -7,6 +7,7 @@
 //
 
 #import "DFValueTransformer.h"
+#import "DFCacheImageDecoder.h"
 
 
 @implementation DFValueTransformer
@@ -59,3 +60,42 @@
 }
 
 @end
+
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+
+@implementation DFValueTransformerUIImage
+
+- (instancetype)init {
+    if (self = [super init]) {
+        _compressionQuality = 0.75f;
+    }
+    return self;
+}
+
+- (NSData *)transformedValue:(id)value {
+    BOOL isOpaque = [self _isImageOpaque:value];
+    return isOpaque ? UIImageJPEGRepresentation(value, self.compressionQuality) : UIImagePNGRepresentation(value);
+}
+
+- (BOOL)_isImageOpaque:(UIImage *)image {
+    CGImageAlphaInfo info = CGImageGetAlphaInfo(image.CGImage);
+    return !(info == kCGImageAlphaFirst ||
+             info == kCGImageAlphaLast ||
+             info == kCGImageAlphaPremultipliedFirst ||
+             info == kCGImageAlphaPremultipliedLast);
+}
+
+- (id)reverseTransfomedValue:(NSData *)data {
+    return [DFCacheImageDecoder decompressedImageWithData:data];
+}
+
+- (NSUInteger)costForValue:(id)value {
+    CGImageRef image = ((UIImage *)value).CGImage;
+    NSUInteger bitsPerPixel = CGImageGetBitsPerPixel(image);
+    return (CGImageGetWidth(image) * CGImageGetHeight(image) * bitsPerPixel) / 8; // Return number of bytes in image bitmap.
+}
+
+@end
+
+#endif
