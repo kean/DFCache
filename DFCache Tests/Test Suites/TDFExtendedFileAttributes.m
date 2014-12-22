@@ -51,9 +51,9 @@
     
     NSURL *fileURL = [NSURL fileURLWithPath:filepath];
 
-    int error = [fileURL setExtendedAttributeValue:value forKey:key];
+    int error = [fileURL df_setExtendedAttributeValue:value forKey:key];
     XCTAssertTrue(!error);
-    NSString *valueOut = [fileURL extendedAttributeValueForKey:key error:NULL];
+    NSString *valueOut = [fileURL df_extendedAttributeValueForKey:key error:NULL];
     XCTAssertTrue([valueOut isEqualToString:value]);
 }
 
@@ -66,15 +66,15 @@
     
     NSURL *fileURL = [NSURL fileURLWithPath:filepath];
     
-    int error = [fileURL setExtendedAttributeValue:value forKey:key];
+    int error = [fileURL df_setExtendedAttributeValue:value forKey:key];
     XCTAssertTrue(!error);
-    error = [fileURL removeExtendedAttributeForKey:key];
+    error = [fileURL df_removeExtendedAttributeForKey:key];
     XCTAssertTrue(!error);
-    NSString *valueOut = [fileURL extendedAttributeValueForKey:key error:NULL];
+    NSString *valueOut = [fileURL df_extendedAttributeValueForKey:key error:NULL];
     XCTAssertTrue(!valueOut);
 }
 
-- (void)testExtendedAttributesList {
+- (void)testdf_extendedAttributesList {
     NSString *value = @"_attr_value";
     NSString *key = @"_attr_key";
     NSString *value2 = @"_attr_value_2";
@@ -85,10 +85,10 @@
     
     NSURL *fileURL = [NSURL fileURLWithPath:filepath];
     
-    [fileURL setExtendedAttributeValue:value forKey:key];
-    [fileURL setExtendedAttributeValue:value2 forKey:key2];
+    [fileURL df_setExtendedAttributeValue:value forKey:key];
+    [fileURL df_setExtendedAttributeValue:value2 forKey:key2];
     
-    NSArray *keys = [fileURL extendedAttributesList:NULL];
+    NSArray *keys = [fileURL df_extendedAttributesList:NULL];
     XCTAssertTrue([keys containsObject:key]);
     XCTAssertTrue([keys containsObject:key2]);
 }
@@ -100,8 +100,8 @@
     NSURL *fileURL = [NSURL fileURLWithPath:filepath];
     
     NSString *key = @"_attr_key";
-    [fileURL setExtendedAttributeData:[self _tempData] forKey:key options:0];
-    XCTAssertThrowsSpecificNamed([fileURL extendedAttributeValueForKey:key error:nil], NSException, NSInvalidArgumentException);
+    [fileURL df_setExtendedAttributeData:[self _tempData] forKey:key options:0];
+    XCTAssertThrowsSpecificNamed([fileURL df_extendedAttributeValueForKey:key error:nil], NSException, NSInvalidArgumentException);
 }
 
 #pragma mark - Helpers

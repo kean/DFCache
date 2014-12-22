@@ -112,7 +112,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
         id<DFValueTransforming> valueTransformer = inputValueTransformer;
         if (!inputValueTransformer) {
             NSURL *fileURL = [self.diskCache URLForKey:key];
-            valueTransformer = [fileURL extendedAttributeValueForKey:DFCacheAttributeValueTransformerKey error:nil];
+            valueTransformer = [fileURL df_extendedAttributeValueForKey:DFCacheAttributeValueTransformerKey error:nil];
         }
         NSParameterAssert(valueTransformer);
         dispatch_async(self.processingQueue, ^{
@@ -151,7 +151,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
         data = [self.diskCache dataForKey:key];
         if (!valueTransformer) {
             NSURL *fileURL = [self.diskCache URLForKey:key];
-            valueTransformer = [fileURL extendedAttributeValueForKey:DFCacheAttributeValueTransformerKey error:nil];
+            valueTransformer = [fileURL df_extendedAttributeValueForKey:DFCacheAttributeValueTransformerKey error:nil];
         }
     });
     id object = [valueTransformer reverseTransfomedValue:data];
@@ -199,7 +199,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
                 [self.diskCache setData:encodedData forKey:key];
                 if (valueTransformer) {
                     NSURL *fileURL = [self.diskCache URLForKey:key];
-                    [fileURL setExtendedAttributeValue:valueTransformer forKey:DFCacheAttributeValueTransformerKey];
+                    [fileURL df_setExtendedAttributeValue:valueTransformer forKey:DFCacheAttributeValueTransformerKey];
                 }
             }
         }
@@ -255,7 +255,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     NSDictionary *__block metadata;
     dispatch_sync(self.ioQueue, ^{
         NSURL *fileURL = [self.diskCache URLForKey:key];
-        metadata = [fileURL extendedAttributeValueForKey:DFCacheAttributeMetadataKey error:nil];
+        metadata = [fileURL df_extendedAttributeValueForKey:DFCacheAttributeMetadataKey error:nil];
     });
     return metadata;
 }
@@ -266,7 +266,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     }
     dispatch_async(self.ioQueue, ^{
         NSURL *fileURL = [self.diskCache URLForKey:key];
-        [fileURL setExtendedAttributeValue:metadata forKey:DFCacheAttributeMetadataKey];
+        [fileURL df_setExtendedAttributeValue:metadata forKey:DFCacheAttributeMetadataKey];
     });
 }
 
@@ -276,10 +276,10 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     }
     dispatch_async(self.ioQueue, ^{
         NSURL *fileURL = [self.diskCache URLForKey:key];
-        NSDictionary *metadata = [fileURL extendedAttributeValueForKey:DFCacheAttributeMetadataKey error:nil];
+        NSDictionary *metadata = [fileURL df_extendedAttributeValueForKey:DFCacheAttributeMetadataKey error:nil];
         NSMutableDictionary *mutableMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
         [mutableMetadata addEntriesFromDictionary:keyedValues];
-        [fileURL setExtendedAttributeValue:mutableMetadata forKey:DFCacheAttributeMetadataKey];
+        [fileURL df_setExtendedAttributeValue:mutableMetadata forKey:DFCacheAttributeMetadataKey];
     });
 }
 
@@ -289,7 +289,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     }
     dispatch_async(self.ioQueue, ^{
         NSURL *fileURL = [self.diskCache URLForKey:key];
-        [fileURL removeExtendedAttributeForKey:DFCacheAttributeMetadataKey];
+        [fileURL df_removeExtendedAttributeForKey:DFCacheAttributeMetadataKey];
     });
 }
 
