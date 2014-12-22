@@ -48,14 +48,4 @@
 
 @end
 
-
-@interface DFValueTransformerUIImageJPEG : DFValueTransformerUIImage
-
-@end
-
-
-@interface DFValueTransformerUIImagePNG : DFValueTransformerUIImage
-
-@end
-
 #endif
