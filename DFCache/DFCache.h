@@ -53,18 +53,18 @@ extern NSString *const DFCacheAttributeValueTransformerKey;
  @param diskCache Disk cache. Raises NSInvalidArgumentException if disk cache is nil.
  @param memoryCache Memory cache. Pass nil to disable in-memory cache.
  */
-- (id)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache;
+- (instancetype)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache NS_DESIGNATED_INITIALIZER;
 
 /*! Initializes cache by creating DFDiskCache instance with a given name and calling designated initializer.
  @param name Name used to initialize disk cache. Raises NSInvalidArgumentException if name length is 0.
  @param memoryCache Memory cache. Pass nil to disable in-memory cache.
  */
-- (id)initWithName:(NSString *)name memoryCache:(NSCache *)memoryCache;
+- (instancetype)initWithName:(NSString *)name memoryCache:(NSCache *)memoryCache;
 
 /*! Initializes cache by creating DFDiskCache instance with a given name and NSCache instance and calling designated initializer.
  @param name Name used to initialize disk cache. Raises NSInvalidArgumentException if name length is 0.
  */
-- (id)initWithName:(NSString *)name;
+- (instancetype)initWithName:(NSString *)name;
 
 /*! The transformer factory used by the cache. Cache is initialized with a default value transformer factory. For more info see DFValueTransformerFactory declaration.
  */

@@ -43,7 +43,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     [_cleanupTimer invalidate];
 }
 
-- (id)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache {
+- (instancetype)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache {
     if (self = [super init]) {
         if (!diskCache) {
             [NSException raise:NSInvalidArgumentException format:@"Attempting to initialize DFCache without disk cache"];
@@ -67,7 +67,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     return self;
 }
 
-- (id)initWithName:(NSString *)name memoryCache:(NSCache *)memoryCache {
+- (instancetype)initWithName:(NSString *)name memoryCache:(NSCache *)memoryCache {
     if (!name.length) {
         [NSException raise:NSInvalidArgumentException format:@"Attemting to initialize DFCache without a name"];
     }
@@ -77,7 +77,7 @@ NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_transfor
     return [self initWithDiskCache:diskCache memoryCache:memoryCache];
 }
 
-- (id)initWithName:(NSString *)name {
+- (instancetype)initWithName:(NSString *)name {
     NSCache *memoryCache = [NSCache new];
     memoryCache.name = name;
     return [self initWithName:name memoryCache:memoryCache];
