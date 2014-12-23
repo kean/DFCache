@@ -162,13 +162,6 @@
     XCTAssertNil(cachedString);
 }
 
-- (void)testWriteWithInvalidValueTransformerDoesntRaiseAnException {
-    TDFCacheUnsupportedDummy *object = [TDFCacheUnsupportedDummy new];
-    [_cache storeObject:object forKey:@"key" valueTransformer:[DFValueTransformerNSCoding new]];
-    id cachedObject = [_cache cachedObjectForKey:@"key" valueTransformer:[DFValueTransformerNSCoding new]];
-    XCTAssertNil(cachedObject);
-}
-
 #pragma mark - DFValueTransformerJSON
 
 - (void)testWriteAndReadJSONByProvidingValueProvidersBothTimes {
@@ -268,6 +261,21 @@
     NSString *key = @"key1";
     [_cache storeObject:string forKey:key valueTransformer:nil];
     
+    BOOL __block isWaiting = YES;
+    [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerJSON new] completion:^(id object) {
+        XCTAssertNil(object);
+        isWaiting = NO;
+    }];
+    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+}
+
+- (void)testReadAsyncDoesntCrashWhenCalledWithoutCompletionBlock {
+    NSString *string = @"value1";
+    NSString *key = @"key1";
+    [_cache storeObject:string forKey:key valueTransformer:nil];
+    [_cache cachedObjectForKey:key completion:nil];
+    
+    // Make sure that previous cash lookup finished executing
     BOOL __block isWaiting = YES;
     [_cache cachedObjectForKey:key valueTransformer:[DFValueTransformerJSON new] completion:^(id object) {
         XCTAssertNil(object);
