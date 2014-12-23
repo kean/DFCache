@@ -224,7 +224,7 @@ static NSString *const DFCacheAttributeValueTransformerKey = @"_df_cache_value_t
 }
 
 - (void)removeObjectForKey:(NSString *)key {
-    if (key) {
+    if (key != nil) {
         [self removeObjectsForKeys:@[key]];
     }
 }
