@@ -125,7 +125,7 @@ platform :ios, '6.0'
 pod 'DFCache', '~> 2.0'
 ```
 
-# Migration from DFCache 1.0
+# Migration from DFCache 1.0 to DFCache 2.0
 
 `DFCache 2.0` interface is incompatible with previous versions. The main difference is a new family of protocols (`<DFValueTransforming>`, `<DFValueTransformerFactory>`) that is used instead of the encoding, decoding and cost calculating blocks from the previous versions. 
 
