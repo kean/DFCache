@@ -146,7 +146,6 @@
 		0C37136617D3FC3300766FD9 /* libDFCache-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libDFCache-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37137517D3FC3C00766FD9 /* DFCache.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = DFCache.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCachePrivate.m; sourceTree = "<group>"; };
-		0C7D47B218CB20470078C765 /* DFTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFTesting.h; sourceTree = "<group>"; };
 		0C85802C18CF125800D71F3E /* DFCacheImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCacheImageDecoder.h; sourceTree = "<group>"; };
 		0C85802D18CF125800D71F3E /* DFCacheImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCacheImageDecoder.m; sourceTree = "<group>"; };
 		0C85803818CF172D00D71F3E /* TDFCache+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TDFCache+UIImage.m"; sourceTree = "<group>"; };
@@ -348,7 +347,6 @@
 			children = (
 				0CDB852618CB44B6005DAA43 /* DFCache+Tests.h */,
 				0CDB852718CB44B6005DAA43 /* DFCache+Tests.m */,
-				0C7D47B218CB20470078C765 /* DFTesting.h */,
 				0CDB852518CB4485005DAA43 /* Test Suites */,
 				0CADA4E818F2BF5400F5248D /* Resources */,
 				0CB95E1C18CB186D00169472 /* DFCache Tests iOS */,

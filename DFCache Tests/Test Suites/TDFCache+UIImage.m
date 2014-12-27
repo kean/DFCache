@@ -11,7 +11,6 @@
  */
 
 #import "DFCache.h"
-#import "DFTesting.h"
 #import <XCTest/XCTest.h>
 
 @interface TDFCache_UIImage : XCTestCase
@@ -48,12 +47,12 @@
     [_cache storeObject:image forKey:key];
     [_cache.memoryCache removeAllObjects];
     
-    __block BOOL isWaiting = YES;
+    XCTestExpectation *expectation = [self expectationWithDescription:@"read"];
     [_cache cachedObjectForKey:key completion:^(id object) {
         [self _assertImage:image isEqualImage:object];
-        isWaiting = NO;
+        [expectation fulfill];
     }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    [self waitForExpectationsWithTimeout:3.0 handler:nil];
 }
 
 - (void)testWriteWithDataAndReadSync {

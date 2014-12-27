@@ -21,7 +21,6 @@
 // THE SOFTWARE.
 
 #import "DFDiskCache.h"
-#import "DFTesting.h"
 #import <XCTest/XCTest.h>
 
 @interface TDFDiskCache : XCTestCase
