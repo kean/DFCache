@@ -31,7 +31,7 @@ extern NSString *const DFValueTransformerUIImageName;
 #endif
 
 
-@protocol DFValueTransforming <NSObject, NSCoding>
+@protocol DFValueTransforming <NSObject>
 
 - (NSData *)transformedValue:(id)value;
 - (id)reverseTransfomedValue:(NSData *)data;

@@ -34,17 +34,6 @@ NSString *const DFValueTransformerUIImageName = @"DFValueTransformerUIImageName"
 
 @implementation DFValueTransformer
 
-- (id)initWithCoder:(NSCoder *__unused)decoder {
-    if (self = [super init]) {
-        // do nothing
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *__unused)coder {
-    // do nothing
-}
-
 - (NSData *)transformedValue:(id __unused)value {
     [NSException raise:NSInternalInconsistencyException format:@"Abstract method called %@", NSStringFromSelector(_cmd)];
     return nil;
