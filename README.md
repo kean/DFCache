@@ -50,17 +50,6 @@ NSDictionary *object = @{ @"key" : @"value" };
 NSDictionary *metadata = [cache metadataForKey:@"key"];
 ```
 
-#### Value transformer and JSON
-
-```objective-c
-// Store JSON using builtin JSON serializer
-id JSON = ...; // Any JSON object
-[cache storeObject:JSON forKey:@"key" valueTransformer:[DFValueTransformerJSON new]];
-
-// Value transformer is automatically associated with data into disk cache so there is no need to specify it when retrieving objects
-id cachedJSON = [cache cachedObjectForKey:@"key"];
-```
-
 ### DFCache (DFCacheExtended)
 
 #### Retrieve batch of objects
@@ -125,7 +114,7 @@ platform :ios, '6.0'
 pod 'DFCache', '~> 2.0'
 ```
 
-# Migration from DFCache 1.0
+# Migration to DFCache 2.0 from DFCache 1.0
 
 `DFCache 2.0` interface is incompatible with previous versions. The main difference is a new family of protocols (`<DFValueTransforming>`, `<DFValueTransformerFactory>`) that is used instead of the encoding, decoding and cost calculating blocks from the previous versions. 
 
