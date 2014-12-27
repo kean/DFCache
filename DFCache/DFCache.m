@@ -128,9 +128,9 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
     NSData *__block data;
     NSString *__block valueTransformerName;
     dispatch_sync(_ioQueue, ^{
-        data = [self.diskCache dataForKey:key];
+        NSURL *fileURL = [self.diskCache URLForKey:key];
+        data = [NSData dataWithContentsOfURL:fileURL];
         if (data != nil) {
-            NSURL *fileURL = [self.diskCache URLForKey:key];
             valueTransformerName = [fileURL df_extendedAttributeValueForKey:DFCacheAttributeValueTransformerNameKey error:nil];
         }
     });
@@ -165,9 +165,9 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
                 encodedData = [valueTransformer transformedValue:object];
             }
             if (encodedData != nil) {
-                [self.diskCache setData:encodedData forKey:key];
+                NSURL *fileURL = [self.diskCache URLForKey:key];
+                [encodedData writeToURL:fileURL atomically:YES];
                 if (valueTransformerName != nil) {
-                    NSURL *fileURL = [self.diskCache URLForKey:key];
                     [fileURL df_setExtendedAttributeValue:valueTransformerName forKey:DFCacheAttributeValueTransformerNameKey];
                 }
             }
