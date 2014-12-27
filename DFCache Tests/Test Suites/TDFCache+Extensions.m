@@ -22,7 +22,6 @@
 
 #import "DFCache+DFExtensions.h"
 #import "DFCache+Tests.h"
-#import "DFTesting.h"
 #import <XCTest/XCTest.h>
 
 @interface TDFCache_Extensions : XCTestCase
@@ -54,14 +53,14 @@
     [_cache.memoryCache removeAllObjects];
     NSArray *keys = [strings allKeys];
     
-    BOOL __block isWaiting = YES;
+    XCTestExpectation *expectation = [self expectationWithDescription:@"read"];
     [_cache batchCachedDataForKeys:keys completion:^(NSDictionary *batch) {
         for (NSString *key in keys) {
             XCTAssertNotNil(batch[key]);
         }
-        isWaiting = NO;
+        [expectation fulfill];
     }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    [self waitForExpectationsWithTimeout:3.0 handler:nil];
 }
 
 - (void)testBatchCachedDataForKeysSynchronous {
@@ -83,14 +82,14 @@
     [_cache.memoryCache removeObjectForKey:keys[3]];
     [_cache.memoryCache removeObjectForKey:keys[4]];
     
-    BOOL __block isWaiting = YES;
+    XCTestExpectation *expectation = [self expectationWithDescription:@"read"];
     [_cache batchCachedObjectsForKeys:keys completion:^(NSDictionary *batch) {
         for (NSString *key in keys) {
             XCTAssertTrue([batch[key] isEqualToString:strings[key]]);
         }
-        isWaiting = NO;
+        [expectation fulfill];
     }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    [self waitForExpectationsWithTimeout:3.0 handler:nil];
 }
 
 - (void)testBatchCachedObjectsForKeysAsynchronousMemoryCacheEmpty {
@@ -99,14 +98,14 @@
     NSArray *keys = [strings allKeys];
     [_cache.memoryCache removeAllObjects];
     
-    BOOL __block isWaiting = YES;
+    XCTestExpectation *expectation = [self expectationWithDescription:@"read"];
     [_cache batchCachedObjectsForKeys:keys completion:^(NSDictionary *batch) {
         for (NSString *key in keys) {
             XCTAssertTrue([batch[key] isEqualToString:strings[key]]);
         }
-        isWaiting = NO;
+        [expectation fulfill];
     }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    [self waitForExpectationsWithTimeout:3.0 handler:nil];
 }
 
 - (void)testBatchCachedObjectsForKeysSynchronous {
@@ -141,13 +140,13 @@
     
     [_cache removeObjectForKey:keys[0]];
     
-    BOOL __block isWaiting = YES;
+    XCTestExpectation *expectation = [self expectationWithDescription:@"read"];
     [_cache firstCachedObjectForKeys:keys completion:^(id object, NSString *key) {
         XCTAssertTrue([key isEqualToString:keys[1]]);
         XCTAssertTrue([object isEqualToString:strings[keys[1]]]);
-        isWaiting = NO;
+        [expectation fulfill];
     }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    [self waitForExpectationsWithTimeout:3.0 handler:nil];
 }
 
 - (void)testFirstCachedObjectForKeysFromDisk {
@@ -159,13 +158,13 @@
 
     [_cache removeObjectForKey:keys[0]];
     
-    BOOL __block isWaiting = YES;
+    XCTestExpectation *expectation = [self expectationWithDescription:@"read"];
     [_cache firstCachedObjectForKeys:keys completion:^(id object, NSString *key) {
         XCTAssertTrue([key isEqualToString:keys[1]]);
         XCTAssertTrue([object isEqualToString:strings[keys[1]]]);
-        isWaiting = NO;
+        [expectation fulfill];
     }];
-    DWARF_TEST_WAIT_WHILE(isWaiting, 10.f);
+    [self waitForExpectationsWithTimeout:3.0 handler:nil];
 }
 
 #pragma mark - Helpers
