@@ -351,3 +351,19 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
 }
 
 @end
+
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+@implementation DFCache (UIImage)
+
+- (void)setAllowsImageDecompression:(BOOL)allowsImageDecompression {
+    DFValueTransformerUIImage *transformer = [self.valueTransfomerFactory valueTransformerForName:DFValueTransformerUIImageName];
+    if ([transformer isKindOfClass:[DFValueTransformerUIImage class]]) {
+        transformer.allowsImageDecompression = allowsImageDecompression;
+    } else {
+        NSLog(@"Failed to set allowsImageDecompression. %@", self);
+    }
+}
+
+@end
+#endif

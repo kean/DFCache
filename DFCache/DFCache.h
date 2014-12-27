@@ -190,3 +190,12 @@ extern NSString *const DFCacheAttributeMetadataKey;
 - (void)storeData:(NSData *)data forKey:(NSString *)key;
 
 @end
+
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+@interface DFCache (UIImage)
+
+- (void)setAllowsImageDecompression:(BOOL)allowsImageDecompression;
+
+@end
+#endif

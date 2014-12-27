@@ -122,7 +122,7 @@
     TDFCacheUnsupportedDummy *dummy = [TDFCacheUnsupportedDummy new];
     NSString *key = @"key1";
     NSData *data = [dummy dataRepresentation];
-    
+    [_cache setAllowsImageDecompression:NO];
     [_cache storeObject:dummy forKey:key data:data];
     
     XCTAssertNil([_cache cachedObjectForKey:key]);
