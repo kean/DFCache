@@ -11,13 +11,10 @@ DFCache is an iOS and OS X library that provides composite in-memory and on-disk
  - First class `UIImage` support including background image decompression.
  - Batch methods to retrieve cached entries.
 
+# Installation
+
 ### Requirements
 - iOS 6.0 or OS X 10.8
-
-### NSCache on iOS 7.0
-`NSCache` auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else `NSCache` won't be able to evict memory properly. Typically, the obvious cost is the size of the object in bytes. Keep in mind that `DFCache` automatically removes all object from memory cache on memory warning for you.
-
-# Installation
 
 ### Cocoapods
 The recommended way to install `DFCache` is via [Cocoapods](http://cocoapods.org) package manager.
@@ -113,6 +110,9 @@ NSString *value = [fileURL df_extendedAttributeValueForKey:@"attr_key" error:NUL
 |[DFDiskCache](https://github.com/kean/DFCache/blob/master/DFCache/DFDiskCache.h)|Disk cache extends file storage functionality by providing LRU (least recently used) cleanup.|
 |[NSURL (DFExtendedFileAttributes)](https://github.com/kean/DFCache/blob/master/DFCache/Extended%20File%20Attributes/NSURL%2BDFExtendedFileAttributes.h)|Objective-c wrapper of UNIX extended file attributes. Extended attributes extend the basic attributes associated with files and directories in the file system. They are stored as name:data pairs associated with file system objects (files, directories, symlinks, etc). See setxattr(2).|
 |[DFCache (DFCacheExtended)](https://github.com/kean/DFCache/blob/master/DFCache/DFCache%2BDFExtensions.h)|Set of methods that extend `DFCache` functionality by allowing you to retrieve cached entries in batches.|
+
+### NSCache on iOS 7.0
+`NSCache` auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else `NSCache` won't be able to evict memory properly. Typically, the obvious cost is the size of the object in bytes. Keep in mind that `DFCache` automatically removes all object from memory cache on memory warning for you.
 
 # Migration to DFCache 2.0 from DFCache 1.0
 
