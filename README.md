@@ -11,10 +11,10 @@ DFCache is an iOS and OS X library that provides composite in-memory and on-disk
  - First class `UIImage` support including background image decompression.
  - Batch methods to retrieve cached entries.
 
-# Installation
-
 ### Requirements
 - iOS 6.0 or OS X 10.8
+
+# Installation
 
 ### Cocoapods
 The recommended way to install `DFCache` is via [Cocoapods](http://cocoapods.org) package manager.
