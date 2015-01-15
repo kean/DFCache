@@ -1,7 +1,9 @@
 # About DFCache 
 [![Build Status](https://travis-ci.org/kean/DFCache.svg?branch=master)](https://travis-ci.org/kean/DFCache)
 
-DFCache is an iOS and OS X library that provides composite in-memory and on-disk cache with LRU cleanup. It is implemented as a set of reusable classes and protocols with concise and extensible API.
+`DFCache` is an iOS and OS X library that provides composite in-memory and on-disk cache with LRU cleanup. It is implemented as a set of reusable classes and protocols with concise and extensible API. 
+
+`DFCache` is not intended to be used as a `NSURLCache` alternative. If you use `Foundation` URL loading system you should use `NSURLCache` that supports well-defined caching specifications like [HTTP Caching](https://tools.ietf.org/html/rfc7234).
 
 ### Key Features
  - Thoroughly tested and well-documented.
