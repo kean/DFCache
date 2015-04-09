@@ -66,7 +66,7 @@ extern NSString *const DFValueTransformerUIImageName;
 /*! The quality of the resulting JPEG image, expressed as a value from 0.0 to 1.0. The value 0.0 represents the maximum compression (or lowest quality) while the value 1.0 represents the least compression (or best quality).
  @discussion Applies only or images that don't have an alpha channel and cab be encoded in JPEG format.
  */
-@property (nonatomic) CGFloat compressionQuality;
+@property (nonatomic) float compressionQuality;
 
 @property (nonatomic) BOOL allowsImageDecompression;
 

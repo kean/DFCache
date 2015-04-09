@@ -37,7 +37,7 @@ static const unsigned long long DFDiskCacheCapacityUnlimited = 0;
 
 /*! Remaining disk usage after cleanup. The rate must be in the range of 0.0 to 1.0 where 1.0 represents full disk capacity. Default and recommended value is 0.5.
  */
-@property (nonatomic) CGFloat cleanupRate;
+@property (nonatomic) float cleanupRate;
 
 /*! Cleans up disk cache by discarding the least recently used items.
  @discussion Cleanup algorithm runs only if max disk cache capacity is set to non-zero value. Target size is calculated by multiplying disk capacity and cleanup rate.
