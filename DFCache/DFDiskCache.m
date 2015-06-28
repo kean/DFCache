@@ -25,7 +25,7 @@
 
 @implementation DFDiskCache
 
-- (instancetype)initWithPath:(NSString *)path error:(NSError *__autoreleasing *)error {
+- (instancetype)initWithPath:(NSString *)path error:(NSError **)error {
     if (self = [super initWithPath:path error:error]) {
         _capacity = 1024 * 1024 * 100; // 100 Mb
         _cleanupRate = 0.5f;

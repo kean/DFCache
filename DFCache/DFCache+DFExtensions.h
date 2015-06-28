@@ -22,6 +22,8 @@
 
 #import "DFCache.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /* Set of methods extending DFCache functionality. API to retrieve cached data or objects in batches.
 */
 @interface DFCache (DFCacheExtended)
@@ -32,30 +34,32 @@
  @param keys Array of the unique keys.
  @param completion Completion block. Batch dictionary contains key:data pairs.
  */
-- (void)batchCachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *batch))completion;
+- (void)batchCachedDataForKeys:(NSArray *)keys completion:(void (^__nullable)(NSDictionary *__nullable batch))completion;
 
 /*! Returns dictionary with NSData instances that correspond to the given keys.
  @param keys Array of the unique keys.
  @return NSDictionary instance with key:data pairs.
  */
-- (NSDictionary *)batchCachedDataForKeys:(NSArray *)keys;
+- (nullable NSDictionary *)batchCachedDataForKeys:(NSArray *)keys;
 
 /*! Retrieves batch of objects that correspond to the given keys.
  @param keys Array of the unique keys.
  @param completion Completion block. Batch dictionary contains key : object pairs retrieved from receiver.
  */
-- (void)batchCachedObjectsForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *batch))completion;
+- (void)batchCachedObjectsForKeys:(NSArray *)keys completion:(void (^__nullable)(NSDictionary *__nullable batch))completion;
 
 /*! Returns batch of objects that correspond to the given keys.
  @param keys Array of the unique keys.
  @return NSDictionary instance with key:data pairs.
  */
-- (NSDictionary *)batchCachedObjectsForKeys:(NSArray *)keys;
+- (nullable NSDictionary *)batchCachedObjectsForKeys:(NSArray *)keys;
 
 /*! Retrieves first found object for the given keys.
  @param key The unique key.
  @param completion Completion block.
  */
-- (void)firstCachedObjectForKeys:(NSArray *)keys completion:(void (^)(id object, NSString *key))completion;
+- (void)firstCachedObjectForKeys:(NSArray *)keys completion:(void (^__nullable)(id __nullable object, NSString *__nullable key))completion;
 
 @end
+
+NS_ASSUME_NONNULL_END

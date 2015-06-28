@@ -99,7 +99,7 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
         return;
     }
     id object = [self.memoryCache objectForKey:key];
-    if (object != nil) {
+    if (object) {
         _dwarf_cache_callback(completion, object);
         return;
     }
@@ -116,7 +116,7 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
         return nil;
     }
     id object = [self.memoryCache objectForKey:key];
-    if (object != nil) {
+    if (object) {
         return object;
     }
     @autoreleasepool {
@@ -130,7 +130,7 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
     dispatch_sync(_ioQueue, ^{
         NSURL *fileURL = [self.diskCache URLForKey:key];
         data = [NSData dataWithContentsOfURL:fileURL];
-        if (data != nil) {
+        if (data) {
             valueTransformerName = [fileURL df_extendedAttributeValueForKey:DFCacheAttributeValueTransformerNameKey error:nil];
         }
     });
@@ -164,10 +164,10 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
             if (!encodedData) {
                 encodedData = [valueTransformer transformedValue:object];
             }
-            if (encodedData != nil) {
+            if (encodedData) {
                 NSURL *fileURL = [self.diskCache URLForKey:key];
                 [encodedData writeToURL:fileURL atomically:YES];
-                if (valueTransformerName != nil) {
+                if (valueTransformerName) {
                     [fileURL df_setExtendedAttributeValue:valueTransformerName forKey:DFCacheAttributeValueTransformerNameKey];
                 }
             }
@@ -211,7 +211,7 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
 }
 
 - (void)removeObjectForKey:(NSString *)key {
-    if (key != nil) {
+    if (key) {
         [self removeObjectsForKeys:@[key]];
     }
 }

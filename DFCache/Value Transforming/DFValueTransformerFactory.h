@@ -23,14 +23,15 @@
 #import <Foundation/Foundation.h>
 #import "DFValueTransformer.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol DFValueTransformerFactory <NSObject>
 
-- (NSString *)valueTransformerNameForValue:(id)value;
+- (nullable NSString *)valueTransformerNameForValue:(id)value;
 
 /*! Returns value transformer registered for a given name.
  */
-- (id<DFValueTransforming>)valueTransformerForName:(NSString *)name;
+- (nullable id<DFValueTransforming>)valueTransformerForName:(NSString *)name;
 
 @end
 
@@ -50,3 +51,5 @@
 - (void)registerValueTransformer:(id<DFValueTransforming>)valueTransformer forName:(NSString *)name;
 
 @end
+
+NS_ASSUME_NONNULL_END

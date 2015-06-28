@@ -57,7 +57,6 @@
     XCTAssertTrue([cache.memoryCache.name isEqualToString:name]);
     
     XCTAssertThrows([[DFCache alloc] initWithName:@""]);
-    XCTAssertThrows([[DFCache alloc] initWithName:nil]);
 }
 
 - (void)testInitializationValueTransformerFactoryDependencyInjectors {
@@ -77,9 +76,7 @@
 }
 
 - (void)testInitializationWithoutNameThrowsException {
-    XCTAssertThrowsSpecificNamed([[DFCache alloc] initWithName:nil memoryCache:nil], NSException, NSInvalidArgumentException);
     XCTAssertThrowsSpecificNamed([[DFCache alloc] initWithName:@"" memoryCache:nil], NSException, NSInvalidArgumentException);
-    XCTAssertThrowsSpecificNamed([[DFCache alloc] initWithName:nil], NSException, NSInvalidArgumentException);
     XCTAssertThrowsSpecificNamed([[DFCache alloc] initWithName:@""], NSException, NSInvalidArgumentException);
 }
 
@@ -126,20 +123,6 @@
     
     XCTAssertNil([_cache cachedObjectForKey:key]);
     XCTAssertNotNil([_cache cachedDataForKey:key]);
-}
-
-#pragma mark - Write (Exceptions)
-
-- (void)testWriteWithoutKeyDoesntRaiseAnException {
-    NSString *string = @"value1";
-    [_cache storeObject:string forKey:nil];
-    XCTAssertNil([_cache cachedObjectForKey:nil]);
-}
-
-- (void)testWriteWithoutObjectDoesntRaiseAnException {
-    NSString *key = @"key1";
-    [_cache storeObject:nil forKey:key];
-    XCTAssertNil([_cache cachedObjectForKey:key]);
 }
 
 #pragma mark - DFValueTransformerJSON

@@ -22,6 +22,8 @@
 
 #import "DFFileStorage.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 static const unsigned long long DFDiskCacheCapacityUnlimited = 0;
 
 /*! Disk cache extends file storage functionality by providing LRU (least recently used) cleanup. Cleanup doesn't get called automatically.
@@ -49,3 +51,5 @@ static const unsigned long long DFDiskCacheCapacityUnlimited = 0;
 + (NSString *)cachesDirectoryPath;
 
 @end
+
+NS_ASSUME_NONNULL_END

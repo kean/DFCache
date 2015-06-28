@@ -20,6 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*! Key-value file storage.
  @discussion File storage doesn't limit your access to the underlying storage directory.
  */
@@ -29,7 +31,7 @@
  @param path Storage directory path.
  @param error A pointer to an error object. If an error occurs while creating storage directory, the pointer is set to the file system error (see NSFileManager). You may specify nil for this parameter if you do not want the error information.
  */
-- (instancetype)initWithPath:(NSString *)path error:(NSError *__autoreleasing *)error NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithPath:(NSString *)path error:(NSError **)error NS_DESIGNATED_INITIALIZER;
 
 /*! Returns storage directory path.
  */
@@ -37,7 +39,7 @@
 
 /*! Returns the contents of the file for the given key.
  */
-- (NSData *)dataForKey:(NSString *)key;
+- (nullable NSData *)dataForKey:(NSString *)key;
 
 /*! Creates a file with the specified content for the given key.
  */
@@ -74,6 +76,8 @@
 /*! Returns URLs of items contained into storage.
  @param keys An array of keys that identify the file properties that you want pre-fetched for each item in the storage. For each returned URL, the specified properties are fetched and cached in the NSURL object. For a list of keys you can specify, see Common File System Resource Keys.
  */
-- (NSArray *)contentsWithResourceKeys:(NSArray *)keys;
+- (nullable NSArray *)contentsWithResourceKeys:(nullable NSArray *)keys;
 
 @end
+
+NS_ASSUME_NONNULL_END

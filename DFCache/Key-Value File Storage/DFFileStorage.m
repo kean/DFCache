@@ -42,17 +42,17 @@
 }
 
 - (NSData *)dataForKey:(NSString *)key {
-    return key != nil ? [_fileManager contentsAtPath:[self pathForKey:key]] : nil;
+    return key ? [_fileManager contentsAtPath:[self pathForKey:key]] : nil;
 }
 
 - (void)setData:(NSData *)data forKey:(NSString *)key {
-    if (data != nil && key != nil) {
+    if (data && key) {
         [_fileManager createFileAtPath:[self pathForKey:key] contents:data attributes:nil];
     }
 }
 
 - (void)removeDataForKey:(NSString *)key {
-    if (key != nil) {
+    if (key) {
         [_fileManager removeItemAtPath:[self pathForKey:key] error:nil];
     }
 }
@@ -68,15 +68,15 @@
 }
 
 - (NSString *)pathForKey:(NSString *)key {
-    return key != nil ? [_path stringByAppendingPathComponent:[self filenameForKey:key]] : nil;
+    return key ? [_path stringByAppendingPathComponent:[self filenameForKey:key]] : nil;
 }
 
 - (NSURL *)URLForKey:(NSString *)key {
-    return key != nil ? [NSURL fileURLWithPath:[self pathForKey:key]] : nil;
+    return key ? [NSURL fileURLWithPath:[self pathForKey:key]] : nil;
 }
 
 - (BOOL)containsDataForKey:(NSString *)key {
-    return key != nil ? [_fileManager fileExistsAtPath:[self pathForKey:key]] : NO;
+    return key ? [_fileManager fileExistsAtPath:[self pathForKey:key]] : NO;
 }
 
 - (_dwarf_cache_bytes)contentsSize {

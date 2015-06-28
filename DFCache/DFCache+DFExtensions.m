@@ -45,7 +45,7 @@
     NSMutableDictionary *batch = [NSMutableDictionary new];
     for (NSString *key in keys) {
         NSData *data = [self cachedDataForKey:key];
-        if (data != nil) {
+        if (data) {
             batch[key] = data;
         }
     }
@@ -70,7 +70,7 @@
     NSMutableDictionary *batch = [NSMutableDictionary new];
     for (NSString *key in keys) {
         id object = [self cachedObjectForKey:key];
-        if (object != nil) {
+        if (object) {
             batch[key] = object;
         }
     }
@@ -83,7 +83,7 @@
 
 - (void)_firstCachedObjectForKeys:(NSMutableArray *)keys completion:(void (^)(id, NSString *))completion {
     if (!keys.count) {
-        if (completion != nil) {
+        if (completion) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(nil, nil);
             });
@@ -94,8 +94,8 @@
     [keys removeObjectAtIndex:0];
     DFCache *__weak weakSelf = self;
     [self cachedObjectForKey:key completion:^(id object) {
-        if (object != nil) {
-            if (completion != nil) {
+        if (object) {
+            if (completion) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion(object, key);
                 });

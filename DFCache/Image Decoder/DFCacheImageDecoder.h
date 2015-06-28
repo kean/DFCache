@@ -23,7 +23,7 @@
 @interface DFCacheImageDecoder : NSObject
 
 #if (__IPHONE_OS_VERSION_MIN_REQUIRED)
-+ (UIImage *)decompressedImageWithData:(NSData *)data;
++ (nullable UIImage *)decompressedImageWithData:(nonnull NSData *)data;
 #endif
 
 @end

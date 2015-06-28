@@ -22,6 +22,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *const DFValueTransformerNSCodingName;
 extern NSString *const DFValueTransformerJSONName;
@@ -33,8 +34,8 @@ extern NSString *const DFValueTransformerUIImageName;
 
 @protocol DFValueTransforming <NSObject>
 
-- (NSData *)transformedValue:(id)value;
-- (id)reverseTransfomedValue:(NSData *)data;
+- (nullable NSData *)transformedValue:(id)value;
+- (nullable id)reverseTransfomedValue:(NSData *)data;
 
 @optional
 /*! The cost that is associated with the value in the memory cache. Typically, the obvious cost is the size of the object in bytes.
@@ -73,3 +74,5 @@ extern NSString *const DFValueTransformerUIImageName;
 @end
 
 #endif
+
+NS_ASSUME_NONNULL_END

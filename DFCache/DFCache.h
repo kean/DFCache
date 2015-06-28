@@ -24,6 +24,8 @@
 #import "DFValueTransformer.h"
 #import "DFValueTransformerFactory.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*! Extended attribute name used to store metadata (see NSURL+DFExtendedFileAttributes).
  */
 extern NSString *const DFCacheAttributeMetadataKey;
@@ -53,13 +55,13 @@ extern NSString *const DFCacheAttributeMetadataKey;
  @param diskCache Disk cache. Pass nil to disable on-disk caching.
  @param memoryCache Memory cache. Pass nil to disable in-memory caching.
  */
-- (instancetype)initWithDiskCache:(DFDiskCache *)diskCache memoryCache:(NSCache *)memoryCache NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDiskCache:(nullable DFDiskCache *)diskCache memoryCache:(nullable NSCache *)memoryCache NS_DESIGNATED_INITIALIZER;
 
 /*! Initializes cache by creating DFDiskCache instance with a given name and calling designated initializer.
  @param name Name used to initialize disk cache. Raises NSInvalidArgumentException if name length is 0.
  @param memoryCache Memory cache. Pass nil to disable in-memory cache.
  */
-- (instancetype)initWithName:(NSString *)name memoryCache:(NSCache *)memoryCache;
+- (instancetype)initWithName:(NSString *)name memoryCache:(nullable NSCache *)memoryCache;
 
 /*! Initializes cache by creating DFDiskCache instance with a given name and NSCache instance and calling designated initializer.
  @param name Name used to initialize disk cache. Raises NSInvalidArgumentException if name length is 0.
@@ -72,11 +74,11 @@ extern NSString *const DFCacheAttributeMetadataKey;
 
 /*! Returns disk cache used by receiver.
  */
-@property (nonatomic, readonly) DFDiskCache *diskCache;
+@property (nullable, nonatomic, readonly) DFDiskCache *diskCache;
 
 /*! Returns memory cache used by receiver. Memory cache might be nil.
  */
-@property (nonatomic, readonly) NSCache *memoryCache;
+@property (nullable, nonatomic, readonly) NSCache *memoryCache;
 
 #pragma mark - Read
 
@@ -84,13 +86,13 @@ extern NSString *const DFCacheAttributeMetadataKey;
  @param key The unique key.
  @param completion Completion block.
  */
-- (void)cachedObjectForKey:(NSString *)key completion:(void (^)(id object))completion;
+- (void)cachedObjectForKey:(NSString *)key completion:(void (^__nullable)(id __nullable object))completion;
 
 /*! Returns object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Uses value transformer provided by value transformer factory.
  @param key The unique key.
  @param completion Completion block.
  */
-- (id)cachedObjectForKey:(NSString *)key;
+- (nullable id)cachedObjectForKey:(NSString *)key;
 
 #pragma mark - Write
 
@@ -105,7 +107,7 @@ extern NSString *const DFCacheAttributeMetadataKey;
  @param key The unique key.
  @param data Data to store into disk cache.
  */
-- (void)storeObject:(id)object forKey:(NSString *)key data:(NSData *)data;
+- (void)storeObject:(id)object forKey:(NSString *)key data:(nullable NSData *)data;
 
 /*! Stores object into memory cache. Retrieves value transformer from factory and uses it to calculate object cost.
  @param object The object to store into memory cache.
@@ -134,7 +136,7 @@ extern NSString *const DFCacheAttributeMetadataKey;
  @param key The unique key.
  @return Copy of metadata for key.
  */
-- (NSDictionary *)metadataForKey:(NSString *)key;
+- (nullable NSDictionary *)metadataForKey:(NSString *)key;
 
 /*! Sets metadata for provided key. 
  @warning Method will have no effect if there is no entry under the given key.
@@ -176,12 +178,12 @@ extern NSString *const DFCacheAttributeMetadataKey;
  @param key The unique key.
  @param completion Completion block.
  */
-- (void)cachedDataForKey:(NSString *)key completion:(void (^)(NSData *data))completion;
+- (void)cachedDataForKey:(NSString *)key completion:(void (^__nullable)(NSData *__nullable data))completion;
 
 /*! Reads data from disk cache synchronously.
  @param key The unique key.
  */
-- (NSData *)cachedDataForKey:(NSString *)key;
+- (nullable NSData *)cachedDataForKey:(NSString *)key;
 
 /*! Stores data into disk cache asynchronously.
  @param data Data to be stored into disk cache.
@@ -199,3 +201,5 @@ extern NSString *const DFCacheAttributeMetadataKey;
 
 @end
 #endif
+
+NS_ASSUME_NONNULL_END
