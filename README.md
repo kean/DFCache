@@ -1,5 +1,4 @@
 # About DFCache 
-[![Build Status](https://travis-ci.org/kean/DFCache.svg?branch=master)](https://travis-ci.org/kean/DFCache)
 
 `DFCache` is an iOS and OS X library that provides composite in-memory and on-disk cache with LRU cleanup. It is implemented as a set of reusable classes and protocols with concise and extensible API. 
 
