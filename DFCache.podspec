@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name = 'DFCache'
-    s.version = '3.0.1'
+    s.version = '3.1.0'
     s.license = 'MIT'
     s.homepage = 'https://github.com/kean/DFCache'
     s.authors = 'Alexander Grebenyuk'
