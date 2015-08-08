@@ -125,7 +125,6 @@
 		EE8C44441B757B2800CD9472 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB855618CB48F6005DAA43 /* XCTest.framework */; };
 		EE8C44471B757B2800CD9472 /* zebrainpastelfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */; };
 		EE8C44541B757B6F00CD9472 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE8C44511B757B6F00CD9472 /* InfoPlist.strings */; };
-		EE8C44581B757C2700CD9472 /* DFCache iOS Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = EE8C44561B757BF300CD9472 /* DFCache iOS Framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE8C44591B757C4200CD9472 /* DFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0418CB181000169472 /* DFCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE8C445A1B757C4200CD9472 /* DFCache+DFExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0618CB181000169472 /* DFCache+DFExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE8C445B1B757C4200CD9472 /* DFDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0918CB181000169472 /* DFDiskCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -247,7 +246,6 @@
 		EE8C444E1B757B6F00CD9472 /* DFCache Tests iOS Framework-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DFCache Tests iOS Framework-Info.plist"; path = "DFCache Tests/DFCache Tests iOS Framework/DFCache Tests iOS Framework-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EE8C444F1B757B6F00CD9472 /* DFCache Tests iOS Framework-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DFCache Tests iOS Framework-Prefix.pch"; path = "DFCache Tests/DFCache Tests iOS Framework/DFCache Tests iOS Framework-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		EE8C44521B757B6F00CD9472 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
-		EE8C44561B757BF300CD9472 /* DFCache iOS Framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DFCache iOS Framework.h"; sourceTree = "<group>"; };
 		EE8C44571B757BF300CD9472 /* DFCache iOS Framework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DFCache iOS Framework-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -511,7 +509,6 @@
 			children = (
 				0CFA33EF17D4734900AE6EEF /* DFCache iOS-Prefix.pch */,
 				0CFA33F017D4734900AE6EEF /* DFCache OS X-Prefix.pch */,
-				EE8C44561B757BF300CD9472 /* DFCache iOS Framework.h */,
 				EE8C44571B757BF300CD9472 /* DFCache iOS Framework-Info.plist */,
 			);
 			path = "Supporting Files";
@@ -659,7 +656,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE8C44581B757C2700CD9472 /* DFCache iOS Framework.h in Headers */,
 				EE8C44591B757C4200CD9472 /* DFCache.h in Headers */,
 				EE8C445A1B757C4200CD9472 /* DFCache+DFExtensions.h in Headers */,
 				EE8C445B1B757C4200CD9472 /* DFDiskCache.h in Headers */,
