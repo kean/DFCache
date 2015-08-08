@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EE8C44141B757A1F00CD9472"
-               BuildableName = "DFCache iOS Framework.framework"
+               BuildableName = "DFCache.framework"
                BlueprintName = "DFCache iOS Framework"
                ReferencedContainer = "container:DFCache.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EE8C44141B757A1F00CD9472"
-            BuildableName = "DFCache iOS Framework.framework"
+            BuildableName = "DFCache.framework"
             BlueprintName = "DFCache iOS Framework"
             ReferencedContainer = "container:DFCache.xcodeproj">
          </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EE8C44141B757A1F00CD9472"
-            BuildableName = "DFCache iOS Framework.framework"
+            BuildableName = "DFCache.framework"
             BlueprintName = "DFCache iOS Framework"
             ReferencedContainer = "container:DFCache.xcodeproj">
          </BuildableReference>
