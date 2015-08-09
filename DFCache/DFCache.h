@@ -20,9 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <Foundation/Foundation.h>
 #import "DFDiskCache.h"
 #import "DFValueTransformer.h"
 #import "DFValueTransformerFactory.h"
+#import "DFCacheImageDecoder.h"
+#import "NSURL+DFExtendedFileAttributes.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -190,6 +193,38 @@ extern NSString *const DFCacheAttributeMetadataKey;
  @param key The unique key.
  */
 - (void)storeData:(NSData *)data forKey:(NSString *)key;
+
+#pragma mark - Read (Batch)
+
+/*! Retrieves batch of NSData instances for the given keys.
+ @param keys Array of the unique keys.
+ @param completion Completion block. Batch dictionary contains key:data pairs.
+ */
+- (void)batchCachedDataForKeys:(NSArray *)keys completion:(void (^__nullable)(NSDictionary *__nullable batch))completion;
+
+/*! Returns dictionary with NSData instances that correspond to the given keys.
+ @param keys Array of the unique keys.
+ @return NSDictionary instance with key:data pairs.
+ */
+- (nullable NSDictionary *)batchCachedDataForKeys:(NSArray *)keys;
+
+/*! Retrieves batch of objects that correspond to the given keys.
+ @param keys Array of the unique keys.
+ @param completion Completion block. Batch dictionary contains key : object pairs retrieved from receiver.
+ */
+- (void)batchCachedObjectsForKeys:(NSArray *)keys completion:(void (^__nullable)(NSDictionary *__nullable batch))completion;
+
+/*! Returns batch of objects that correspond to the given keys.
+ @param keys Array of the unique keys.
+ @return NSDictionary instance with key:data pairs.
+ */
+- (nullable NSDictionary *)batchCachedObjectsForKeys:(NSArray *)keys;
+
+/*! Retrieves first found object for the given keys.
+ @param key The unique key.
+ @param completion Completion block.
+ */
+- (void)firstCachedObjectForKeys:(NSArray *)keys completion:(void (^__nullable)(id __nullable object, NSString *__nullable key))completion;
 
 @end
 

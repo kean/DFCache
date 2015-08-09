@@ -20,7 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "DFCache+DFExtensions.h"
 #import "DFCache+Tests.h"
 #import <XCTest/XCTest.h>
 
