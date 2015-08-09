@@ -344,8 +344,32 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
     });
 }
 
+#pragma mark - Miscellaneous
 
-#pragma mark - Read (Batch)
+- (NSString *)debugDescription {
+    return [NSString stringWithFormat:@"<%@ %p> { disk_cache = %@ }", [self class], self, [self.diskCache debugDescription]];
+}
+
+@end
+
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+@implementation DFCache (UIImage)
+
+- (void)setAllowsImageDecompression:(BOOL)allowsImageDecompression {
+    DFValueTransformerUIImage *transformer = [self.valueTransfomerFactory valueTransformerForName:DFValueTransformerUIImageName];
+    if ([transformer isKindOfClass:[DFValueTransformerUIImage class]]) {
+        transformer.allowsImageDecompression = allowsImageDecompression;
+    } else {
+        NSLog(@"Failed to set allowsImageDecompression. %@", self);
+    }
+}
+
+@end
+#endif
+
+
+@implementation DFCache (DFCacheExtended)
 
 - (void)batchCachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *batch))completion {
     if (!keys.count) {
@@ -426,26 +450,4 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
     }];
 }
 
-#pragma mark - Miscellaneous
-
-- (NSString *)debugDescription {
-    return [NSString stringWithFormat:@"<%@ %p> { disk_cache = %@ }", [self class], self, [self.diskCache debugDescription]];
-}
-
 @end
-
-
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
-@implementation DFCache (UIImage)
-
-- (void)setAllowsImageDecompression:(BOOL)allowsImageDecompression {
-    DFValueTransformerUIImage *transformer = [self.valueTransfomerFactory valueTransformerForName:DFValueTransformerUIImageName];
-    if ([transformer isKindOfClass:[DFValueTransformerUIImage class]]) {
-        transformer.allowsImageDecompression = allowsImageDecompression;
-    } else {
-        NSLog(@"Failed to set allowsImageDecompression. %@", self);
-    }
-}
-
-@end
-#endif

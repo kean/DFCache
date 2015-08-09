@@ -194,7 +194,19 @@ extern NSString *const DFCacheAttributeMetadataKey;
  */
 - (void)storeData:(NSData *)data forKey:(NSString *)key;
 
-#pragma mark - Read (Batch)
+@end
+
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+@interface DFCache (UIImage)
+
+- (void)setAllowsImageDecompression:(BOOL)allowsImageDecompression;
+
+@end
+#endif
+
+
+@interface DFCache (DFCacheExtended)
 
 /*! Retrieves batch of NSData instances for the given keys.
  @param keys Array of the unique keys.
@@ -227,14 +239,5 @@ extern NSString *const DFCacheAttributeMetadataKey;
 - (void)firstCachedObjectForKeys:(NSArray *)keys completion:(void (^__nullable)(id __nullable object, NSString *__nullable key))completion;
 
 @end
-
-
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
-@interface DFCache (UIImage)
-
-- (void)setAllowsImageDecompression:(BOOL)allowsImageDecompression;
-
-@end
-#endif
 
 NS_ASSUME_NONNULL_END
