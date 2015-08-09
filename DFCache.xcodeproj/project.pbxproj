@@ -238,10 +238,6 @@
 		0CFAA80718CC704E004C56CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0CFAA80B18CC704E004C56CC /* DFCache Tests OS X Dynamic-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DFCache Tests OS X Dynamic-Prefix.pch"; sourceTree = "<group>"; };
 		EE8C44151B757A1F00CD9472 /* DFCache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DFCache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE8C44181B757A1F00CD9472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EE8C44191B757A1F00CD9472 /* DFCache iOS Framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DFCache iOS Framework.h"; sourceTree = "<group>"; };
-		EE8C44251B757A1F00CD9472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EE8C44261B757A1F00CD9472 /* DFCache_iOS_FrameworkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DFCache_iOS_FrameworkTests.m; sourceTree = "<group>"; };
 		EE8C444C1B757B2800CD9472 /* DFCache Tests iOS copy.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DFCache Tests iOS copy.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE8C444E1B757B6F00CD9472 /* DFCache Tests iOS Framework-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DFCache Tests iOS Framework-Info.plist"; path = "DFCache Tests/DFCache Tests iOS Framework/DFCache Tests iOS Framework-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EE8C444F1B757B6F00CD9472 /* DFCache Tests iOS Framework-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DFCache Tests iOS Framework-Prefix.pch"; path = "DFCache Tests/DFCache Tests iOS Framework/DFCache Tests iOS Framework-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -368,8 +364,6 @@
 			children = (
 				0C37061D18CA408F003E20C4 /* DFCache */,
 				0C7D47B118CB20470078C765 /* DFCache Tests */,
-				EE8C44161B757A1F00CD9472 /* DFCache iOS Framework */,
-				EE8C44231B757A1F00CD9472 /* DFCache iOS FrameworkTests */,
 				0C3712F617D3F93F00766FD9 /* Frameworks */,
 				0CFA33EE17D4734900AE6EEF /* Supporting Files */,
 				0C3712F517D3F93F00766FD9 /* Products */,
@@ -548,40 +542,6 @@
 				0CFAA80518CC704E004C56CC /* DFCache Tests OS X Dynamic-Info.plist */,
 				0CFAA80618CC704E004C56CC /* InfoPlist.strings */,
 				0CFAA80B18CC704E004C56CC /* DFCache Tests OS X Dynamic-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		EE8C44161B757A1F00CD9472 /* DFCache iOS Framework */ = {
-			isa = PBXGroup;
-			children = (
-				EE8C44191B757A1F00CD9472 /* DFCache iOS Framework.h */,
-				EE8C44171B757A1F00CD9472 /* Supporting Files */,
-			);
-			path = "DFCache iOS Framework";
-			sourceTree = "<group>";
-		};
-		EE8C44171B757A1F00CD9472 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				EE8C44181B757A1F00CD9472 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		EE8C44231B757A1F00CD9472 /* DFCache iOS FrameworkTests */ = {
-			isa = PBXGroup;
-			children = (
-				EE8C44261B757A1F00CD9472 /* DFCache_iOS_FrameworkTests.m */,
-				EE8C44241B757A1F00CD9472 /* Supporting Files */,
-			);
-			path = "DFCache iOS FrameworkTests";
-			sourceTree = "<group>";
-		};
-		EE8C44241B757A1F00CD9472 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				EE8C44251B757A1F00CD9472 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
