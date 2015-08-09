@@ -28,7 +28,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EE8C44331B757B2800CD9472"
+               BuildableName = "DFCache Tests iOS copy.xctest"
+               BlueprintName = "DFCache Tests iOS Framework"
+               ReferencedContainer = "container:DFCache.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EE8C44141B757A1F00CD9472"
+            BuildableName = "DFCache.framework"
+            BlueprintName = "DFCache iOS Framework"
+            ReferencedContainer = "container:DFCache.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
