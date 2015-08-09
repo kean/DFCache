@@ -344,6 +344,88 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
     });
 }
 
+
+#pragma mark - Read (Batch)
+
+- (void)batchCachedDataForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *batch))completion {
+    if (!keys.count) {
+        _dwarf_cache_callback(completion, nil);
+        return;
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSDictionary *batch = [self batchCachedDataForKeys:keys];
+        _dwarf_cache_callback(completion, batch);
+    });
+}
+
+- (NSDictionary *)batchCachedDataForKeys:(NSArray *)keys {
+    if (!keys.count) {
+        return nil;
+    }
+    NSMutableDictionary *batch = [NSMutableDictionary new];
+    for (NSString *key in keys) {
+        NSData *data = [self cachedDataForKey:key];
+        if (data) {
+            batch[key] = data;
+        }
+    }
+    return [batch copy];
+}
+
+- (void)batchCachedObjectsForKeys:(NSArray *)keys completion:(void (^)(NSDictionary *))completion {
+    if (!keys.count) {
+        _dwarf_cache_callback(completion, nil);
+        return;
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSDictionary *batch = [self batchCachedObjectsForKeys:keys];
+        _dwarf_cache_callback(completion, batch);
+    });
+}
+
+- (NSDictionary *)batchCachedObjectsForKeys:(NSArray *)keys {
+    if (!keys.count) {
+        return nil;
+    }
+    NSMutableDictionary *batch = [NSMutableDictionary new];
+    for (NSString *key in keys) {
+        id object = [self cachedObjectForKey:key];
+        if (object) {
+            batch[key] = object;
+        }
+    }
+    return batch;
+}
+
+- (void)firstCachedObjectForKeys:(NSArray *)keys completion:(void (^)(id, NSString *))completion {
+    [self _firstCachedObjectForKeys:[keys mutableCopy] completion:completion];
+}
+
+- (void)_firstCachedObjectForKeys:(NSMutableArray *)keys completion:(void (^)(id, NSString *))completion {
+    if (!keys.count) {
+        if (completion) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(nil, nil);
+            });
+        }
+        return;
+    }
+    NSString *key = keys[0];
+    [keys removeObjectAtIndex:0];
+    DFCache *__weak weakSelf = self;
+    [self cachedObjectForKey:key completion:^(id object) {
+        if (object) {
+            if (completion) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(object, key);
+                });
+            }
+        } else {
+            [weakSelf _firstCachedObjectForKeys:keys completion:completion];
+        }
+    }];
+}
+
 #pragma mark - Miscellaneous
 
 - (NSString *)debugDescription {
