@@ -28,7 +28,7 @@ The recommended way to install `DFCache` is via [Cocoapods](http://cocoapods.org
 # Podfile example
 platform :ios, '6.0'
 # platform :osx, '10.8'
-pod 'DFCache', '~> 2.0'
+pod 'DFCache'
 ```
 
 # Usage
