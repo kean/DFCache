@@ -1,9 +1,4 @@
-<h1 align="center">DFCache</h1> 
-
-<p align="center">
-<a href="https://cocoapods.org/pods/DFCache"><img src="http://img.shields.io/cocoapods/v/DFCache.svg?style=flat"></a>
-<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
-</p>
+<p align="center"><img src="https://cloud.githubusercontent.com/assets/1567433/9701460/c779930e-5432-11e5-9c49-e4f00fef9770.png" height="100"/></p>
 
 `DFCache` is an iOS and OS X library that provides composite in-memory and on-disk cache with LRU cleanup. It is implemented as a set of reusable classes and protocols with concise and extensible API. 
 
