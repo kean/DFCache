@@ -35,6 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithPath:(NSString *)path error:(NSError **)error NS_DESIGNATED_INITIALIZER;
 
+/*! Unavailable initializer, please use designated initializer.
+ */
+- (nullable instancetype)init NS_UNAVAILABLE;
+
 /*! Returns storage directory path.
  */
 @property (nonatomic, readonly) NSString *path;

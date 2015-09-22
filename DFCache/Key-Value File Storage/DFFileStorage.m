@@ -41,6 +41,11 @@
     return self;
 }
 
+- (nullable instancetype)init { \
+    [NSException raise:NSInternalInconsistencyException format:@"Please use designated initialzier"];
+    return nil;
+}
+
 - (NSData *)dataForKey:(NSString *)key {
     return key ? [_fileManager contentsAtPath:[self pathForKey:key]] : nil;
 }
