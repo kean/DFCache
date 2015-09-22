@@ -93,17 +93,6 @@
     XCTAssertTrue([keys containsObject:key2]);
 }
 
-- (void)testExtendedAttributeReadDataNotSupporingNSCodying {
-    NSString *filepath = [_tempDirectoryPath stringByAppendingPathComponent:@"_test_04"];
-    [[self _tempData] writeToFile:filepath atomically:YES];
-    
-    NSURL *fileURL = [NSURL fileURLWithPath:filepath];
-    
-    NSString *key = @"_attr_key";
-    [fileURL df_setExtendedAttributeData:[self _tempData] forKey:key options:0];
-    XCTAssertThrowsSpecificNamed([fileURL df_extendedAttributeValueForKey:key error:nil], NSException, NSInvalidArgumentException);
-}
-
 #pragma mark - Helpers
 
 - (NSData *)_tempData {
