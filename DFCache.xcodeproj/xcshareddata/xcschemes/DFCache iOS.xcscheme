@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0C37135517D3FC2500766FD9"
-               BuildableName = "libDFCache.a"
+               BlueprintIdentifier = "EE8C44141B757A1F00CD9472"
+               BuildableName = "DFCache.framework"
                BlueprintName = "DFCache iOS"
                ReferencedContainer = "container:DFCache.xcodeproj">
             </BuildableReference>
@@ -32,13 +32,22 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0C8C15E117D40DFC004B7DAA"
-               BuildableName = "DFCache Tests iOS.xctest"
-               BlueprintName = "DFCache Tests iOS"
+               BlueprintIdentifier = "EE8C44331B757B2800CD9472"
+               BuildableName = "DFCache iOS Tests.xctest"
+               BlueprintName = "DFCache iOS Tests"
                ReferencedContainer = "container:DFCache.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EE8C44141B757A1F00CD9472"
+            BuildableName = "DFCache.framework"
+            BlueprintName = "DFCache iOS"
+            ReferencedContainer = "container:DFCache.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -55,8 +64,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0C37135517D3FC2500766FD9"
-            BuildableName = "libDFCache.a"
+            BlueprintIdentifier = "EE8C44141B757A1F00CD9472"
+            BuildableName = "DFCache.framework"
             BlueprintName = "DFCache iOS"
             ReferencedContainer = "container:DFCache.xcodeproj">
          </BuildableReference>
@@ -70,6 +79,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EE8C44141B757A1F00CD9472"
+            BuildableName = "DFCache.framework"
+            BlueprintName = "DFCache iOS"
+            ReferencedContainer = "container:DFCache.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

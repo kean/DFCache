@@ -5,7 +5,7 @@
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
 </p>
 
-`DFCache` is an iOS and OS X library that provides composite in-memory and on-disk cache with LRU cleanup. It is implemented as a set of reusable classes and protocols with concise and extensible API. 
+`DFCache` provides composite in-memory and on-disk cache with LRU cleanup. It is implemented as a set of reusable classes and protocols with concise and extensible API. 
 
 `DFCache` is not intended to be used as a `NSURLCache` alternative. If you use `Foundation` URL loading system you should use `NSURLCache` that supports well-defined caching specifications like [HTTP Caching](https://tools.ietf.org/html/rfc7234).
 
@@ -92,7 +92,7 @@ DFFileStorage *storage = [[DFFileStorage alloc] initWithPath:path error:nil];
 NSArray *resourceKeys = @[ NSURLContentModificationDateKey, NSURLFileAllocatedSizeKey ];
 NSArray *contents = [storage contentsWithResourceKeys:resourceKeys];
 for (NSURL *fileURL in contents) {
-    // Use file URL and pre-fetched file attributes. 
+    // Use file URL and pre-fetched file attributes.
 }
 ```
 
@@ -122,7 +122,7 @@ NSString *value = [fileURL df_extendedAttributeValueForKey:@"attr_key" error:NUL
 
 # Migration to DFCache 2.0 from DFCache 1.0
 
-`DFCache 2.0` interface is incompatible with previous versions. The main difference is a new family of protocols (`<DFValueTransforming>`, `<DFValueTransformerFactory>`) that is used instead of the encoding, decoding and cost calculating blocks from the previous versions. 
+`DFCache 2.0` interface is incompatible with previous versions. The main difference is a new family of protocols (`<DFValueTransforming>`, `<DFValueTransformerFactory>`) that is used instead of the encoding, decoding and cost calculating blocks from the previous versions.
 
 Persistence implementation is largely the same except for a new extended file attribute that is used to associate value transformers with data. Objects encoded by the previous versions of `DFCache` do not have this attribute, which means that you won't be able to retrieve them using new  `-(id)cachedObjectForKey:(NSString *)key;` API. You should provide a value transformer instead `-(id)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer;`.
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,16 +14,16 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0C37136517D3FC3300766FD9"
-               BuildableName = "libDFCache-OSX.a"
-               BlueprintName = "DFCache OS X Static"
+               BlueprintIdentifier = "0C3030331C4BBA4400E2ED22"
+               BuildableName = "DFCache.framework"
+               BlueprintName = "DFCache OSX"
                ReferencedContainer = "container:DFCache.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
@@ -32,13 +32,22 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0CFAA7EA18CC7006004C56CC"
-               BuildableName = "DFCache Tests OS X Static.xctest"
-               BlueprintName = "DFCache Tests OS X Static"
+               BlueprintIdentifier = "0C30303C1C4BBA4400E2ED22"
+               BuildableName = "DFCache OSX Tests.xctest"
+               BlueprintName = "DFCache OSX Tests"
                ReferencedContainer = "container:DFCache.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0C3030331C4BBA4400E2ED22"
+            BuildableName = "DFCache.framework"
+            BlueprintName = "DFCache OSX"
+            ReferencedContainer = "container:DFCache.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -55,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0C37136517D3FC3300766FD9"
-            BuildableName = "libDFCache-OSX.a"
-            BlueprintName = "DFCache OS X Static"
+            BlueprintIdentifier = "0C3030331C4BBA4400E2ED22"
+            BuildableName = "DFCache.framework"
+            BlueprintName = "DFCache OSX"
             ReferencedContainer = "container:DFCache.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -70,6 +79,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0C3030331C4BBA4400E2ED22"
+            BuildableName = "DFCache.framework"
+            BlueprintName = "DFCache OSX"
+            ReferencedContainer = "container:DFCache.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

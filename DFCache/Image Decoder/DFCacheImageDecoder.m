@@ -23,9 +23,8 @@
 #import "DFCacheImageDecoder.h"
 #import <CoreGraphics/CoreGraphics.h>
 
-@implementation DFCacheImageDecoder
-
 #if TARGET_OS_IOS
+@implementation DFCacheImageDecoder
 
 + (UIImage *)decompressedImageWithData:(NSData *)data {
     return [self _decompressedImage:(data ? [UIImage imageWithData:data scale:[UIScreen mainScreen].scale] : nil)];
@@ -58,6 +57,5 @@
     return decompressedImage;
 }
 
-#endif
-
 @end
+#endif

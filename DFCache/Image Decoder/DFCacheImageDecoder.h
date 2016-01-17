@@ -25,10 +25,10 @@
 #import <UIKit/UIKit.h>
 #endif
 
+#if TARGET_OS_IOS
 @interface DFCacheImageDecoder : NSObject
 
-#if TARGET_OS_IOS
 + (nullable UIImage *)decompressedImageWithData:(nonnull NSData *)data;
-#endif
 
 @end
+#endif

@@ -12,6 +12,7 @@
 
 #import "DFCache.h"
 #import <XCTest/XCTest.h>
+#import <UIKit/UIKit.h>
 
 @interface TDFCache_UIImage : XCTestCase
 
