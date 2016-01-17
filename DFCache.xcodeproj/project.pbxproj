@@ -3,15 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C3706C318CA408F003E20C4 /* DFCachePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37064F18CA408F003E20C4 /* DFCachePrivate.h */; };
 		0C3706C418CA408F003E20C4 /* DFCachePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37064F18CA408F003E20C4 /* DFCachePrivate.h */; };
 		0C37135717D3FC2500766FD9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
 		0C7D47AE18CB1FA50078C765 /* DFCachePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */; };
-		0C7D47AF18CB1FA50078C765 /* DFCachePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */; };
 		0C7D47B018CB1FA50078C765 /* DFCachePrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */; };
 		0C85802E18CF125800D71F3E /* DFCacheImageDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C85802C18CF125800D71F3E /* DFCacheImageDecoder.h */; };
 		0C85803118CF125800D71F3E /* DFCacheImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C85802D18CF125800D71F3E /* DFCacheImageDecoder.m */; };
@@ -19,41 +17,28 @@
 		0C85803D18CF17F900D71F3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C85803C18CF17F900D71F3E /* CoreGraphics.framework */; };
 		0C8C15E517D40DFC004B7DAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3712F717D3F93F00766FD9 /* Foundation.framework */; };
 		0C94792118CCE4D4008E8938 /* DFCacheTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C94791F18CCE4D4008E8938 /* DFCacheTimer.h */; };
-		0C94792218CCE4D4008E8938 /* DFCacheTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C94791F18CCE4D4008E8938 /* DFCacheTimer.h */; };
 		0C94792318CCE4D4008E8938 /* DFCacheTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94792018CCE4D4008E8938 /* DFCacheTimer.m */; };
 		0C94792418CCE4D4008E8938 /* DFCacheTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94792018CCE4D4008E8938 /* DFCacheTimer.m */; };
-		0C94792518CCE4D4008E8938 /* DFCacheTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C94792018CCE4D4008E8938 /* DFCacheTimer.m */; };
 		0CADA4EA18F2BF5400F5248D /* zebrainpastelfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */; };
 		0CADA4EB18F2BF5400F5248D /* zebrainpastelfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */; };
-		0CADA4EC18F2BF5400F5248D /* zebrainpastelfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CADA4E918F2BF5400F5248D /* zebrainpastelfield.png */; };
 		0CB1C77F1933783700F11441 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB1C77E1933783700F11441 /* ImageIO.framework */; };
 		0CB1C7801933784F00F11441 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB1C77E1933783700F11441 /* ImageIO.framework */; };
-		0CB95DFA18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95DFB18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95DFC18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */; };
-		0CB95DFD18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */; };
 		0CB95DFE18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95DF618CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m */; };
-		0CB95E0B18CB181000169472 /* DFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0418CB181000169472 /* DFCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95E0C18CB181000169472 /* DFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0418CB181000169472 /* DFCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95E0D18CB181000169472 /* DFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0518CB181000169472 /* DFCache.m */; };
-		0CB95E0E18CB181000169472 /* DFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0518CB181000169472 /* DFCache.m */; };
 		0CB95E0F18CB181000169472 /* DFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0518CB181000169472 /* DFCache.m */; };
-		0CB95E1718CB181000169472 /* DFDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0918CB181000169472 /* DFDiskCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95E1818CB181000169472 /* DFDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0918CB181000169472 /* DFDiskCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CB95E1918CB181000169472 /* DFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0A18CB181000169472 /* DFDiskCache.m */; };
-		0CB95E1A18CB181000169472 /* DFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0A18CB181000169472 /* DFDiskCache.m */; };
 		0CB95E1B18CB181000169472 /* DFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0A18CB181000169472 /* DFDiskCache.m */; };
 		0CB95E2F18CB186D00169472 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CB95E1F18CB186D00169472 /* InfoPlist.strings */; };
 		0CBC53A118CB4D70002A8993 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBC53A018CB4D70002A8993 /* UIKit.framework */; };
 		0CBC53A218CB4D7D002A8993 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBC53A018CB4D70002A8993 /* UIKit.framework */; };
 		0CBC53A318CB4DA2002A8993 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB855A18CB4A8F005DAA43 /* Cocoa.framework */; };
-		0CBC53A618CB4DAF002A8993 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB855A18CB4A8F005DAA43 /* Cocoa.framework */; };
 		0CBC53A818CB4DCF002A8993 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBC53A718CB4DCF002A8993 /* AppKit.framework */; };
-		0CBC53A918CB4DD4002A8993 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBC53A718CB4DCF002A8993 /* AppKit.framework */; };
-		0CCCFED218CB2D4B009AE6DB /* DFFileStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCCFED018CB2D4B009AE6DB /* DFFileStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CCCFED318CB2D4B009AE6DB /* DFFileStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCCFED018CB2D4B009AE6DB /* DFFileStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CCCFED418CB2D4B009AE6DB /* DFFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCCFED118CB2D4B009AE6DB /* DFFileStorage.m */; };
-		0CCCFED518CB2D4B009AE6DB /* DFFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCCFED118CB2D4B009AE6DB /* DFFileStorage.m */; };
 		0CCCFED618CB2D4B009AE6DB /* DFFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCCFED118CB2D4B009AE6DB /* DFFileStorage.m */; };
 		0CCF5DCC18CD0CC700823676 /* DFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0418CB181000169472 /* DFCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CCF5DCF18CD0CC700823676 /* DFDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95E0918CB181000169472 /* DFDiskCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -64,16 +49,12 @@
 		0CCF5E3418CD0F9300823676 /* DFCache iOS-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CFA33EF17D4734900AE6EEF /* DFCache iOS-Prefix.pch */; };
 		0CCFDBE61A482BF300DBBF8E /* DFValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE21A482BF300DBBF8E /* DFValueTransformer.h */; };
 		0CCFDBE71A482BF300DBBF8E /* DFValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE21A482BF300DBBF8E /* DFValueTransformer.h */; };
-		0CCFDBE81A482BF300DBBF8E /* DFValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE21A482BF300DBBF8E /* DFValueTransformer.h */; };
 		0CCFDBE91A482BF300DBBF8E /* DFValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE31A482BF300DBBF8E /* DFValueTransformer.m */; };
 		0CCFDBEA1A482BF300DBBF8E /* DFValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE31A482BF300DBBF8E /* DFValueTransformer.m */; };
-		0CCFDBEB1A482BF300DBBF8E /* DFValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE31A482BF300DBBF8E /* DFValueTransformer.m */; };
 		0CCFDBEC1A482BF300DBBF8E /* DFValueTransformerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE41A482BF300DBBF8E /* DFValueTransformerFactory.h */; };
 		0CCFDBED1A482BF300DBBF8E /* DFValueTransformerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE41A482BF300DBBF8E /* DFValueTransformerFactory.h */; };
-		0CCFDBEE1A482BF300DBBF8E /* DFValueTransformerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE41A482BF300DBBF8E /* DFValueTransformerFactory.h */; };
 		0CCFDBEF1A482BF300DBBF8E /* DFValueTransformerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE51A482BF300DBBF8E /* DFValueTransformerFactory.m */; };
 		0CCFDBF01A482BF300DBBF8E /* DFValueTransformerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE51A482BF300DBBF8E /* DFValueTransformerFactory.m */; };
-		0CCFDBF11A482BF300DBBF8E /* DFValueTransformerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE51A482BF300DBBF8E /* DFValueTransformerFactory.m */; };
 		0CDB852818CB44B6005DAA43 /* DFCache+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852718CB44B6005DAA43 /* DFCache+Tests.m */; };
 		0CDB852C18CB44D9005DAA43 /* TDFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852A18CB44D9005DAA43 /* TDFCache.m */; };
 		0CDB852E18CB44D9005DAA43 /* TDFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852B18CB44D9005DAA43 /* TDFCache+Extensions.m */; };
@@ -81,27 +62,16 @@
 		0CDB853518CB451D005DAA43 /* TDFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB853118CB451D005DAA43 /* TDFExtendedFileAttributes.m */; };
 		0CDB853718CB451D005DAA43 /* TDFFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB853218CB451D005DAA43 /* TDFFileStorage.m */; };
 		0CF0F8DB18F454C200C0995E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB855618CB48F6005DAA43 /* XCTest.framework */; };
-		0CFA33F317D4734900AE6EEF /* DFCache OS X-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CFA33F017D4734900AE6EEF /* DFCache OS X-Prefix.pch */; };
 		0CFA33F417D4734900AE6EEF /* DFCache OS X-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CFA33F017D4734900AE6EEF /* DFCache OS X-Prefix.pch */; };
 		0CFAA7EC18CC7006004C56CC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB855618CB48F6005DAA43 /* XCTest.framework */; };
 		0CFAA7F218CC7007004C56CC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CFAA7F018CC7007004C56CC /* InfoPlist.strings */; };
 		0CFAA7FB18CC702E004C56CC /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBC53A718CB4DCF002A8993 /* AppKit.framework */; };
 		0CFAA7FC18CC7031004C56CC /* libDFCache-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37136617D3FC3300766FD9 /* libDFCache-OSX.a */; };
-		0CFAA80218CC704E004C56CC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB855618CB48F6005DAA43 /* XCTest.framework */; };
-		0CFAA80818CC704E004C56CC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CFAA80618CC704E004C56CC /* InfoPlist.strings */; };
-		0CFAA81118CC7054004C56CC /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBC53A718CB4DCF002A8993 /* AppKit.framework */; };
-		0CFAA81218CC7057004C56CC /* DFCache.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37137517D3FC3C00766FD9 /* DFCache.dylib */; };
 		0CFAA81318CC7088004C56CC /* TDFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852A18CB44D9005DAA43 /* TDFCache.m */; };
 		0CFAA81418CC7088004C56CC /* TDFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852B18CB44D9005DAA43 /* TDFCache+Extensions.m */; };
 		0CFAA81518CC7088004C56CC /* TDFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB853018CB451D005DAA43 /* TDFDiskCache.m */; };
 		0CFAA81618CC7088004C56CC /* TDFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB853118CB451D005DAA43 /* TDFExtendedFileAttributes.m */; };
 		0CFAA81718CC7088004C56CC /* TDFFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB853218CB451D005DAA43 /* TDFFileStorage.m */; };
-		0CFAA81818CC7088004C56CC /* TDFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852A18CB44D9005DAA43 /* TDFCache.m */; };
-		0CFAA81918CC7088004C56CC /* TDFCache+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852B18CB44D9005DAA43 /* TDFCache+Extensions.m */; };
-		0CFAA81A18CC7088004C56CC /* TDFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB853018CB451D005DAA43 /* TDFDiskCache.m */; };
-		0CFAA81B18CC7088004C56CC /* TDFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB853118CB451D005DAA43 /* TDFExtendedFileAttributes.m */; };
-		0CFAA81C18CC7088004C56CC /* TDFFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB853218CB451D005DAA43 /* TDFFileStorage.m */; };
-		0CFAA81D18CC708B004C56CC /* DFCache+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852718CB44B6005DAA43 /* DFCache+Tests.m */; };
 		0CFAA81E18CC708C004C56CC /* DFCache+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852718CB44B6005DAA43 /* DFCache+Tests.m */; };
 		0CFC5CBC17D42367001C2951 /* libDFCache.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C37135617D3FC2500766FD9 /* libDFCache.a */; };
 		EE8C44371B757B2800CD9472 /* TDFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB852A18CB44D9005DAA43 /* TDFCache.m */; };
@@ -148,13 +118,6 @@
 			remoteGlobalIDString = 0C37136517D3FC3300766FD9;
 			remoteInfo = "DFCache OS X Static";
 		};
-		0CFAA80C18CC704E004C56CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0C3712EC17D3F93F00766FD9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0C37137417D3FC3C00766FD9;
-			remoteInfo = "DFCache OS X Dynamic";
-		};
 		0CFC5CB617D42118001C2951 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0C3712EC17D3F93F00766FD9 /* Project object */;
@@ -179,7 +142,6 @@
 		0C37132917D3F9C700766FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0C37135617D3FC2500766FD9 /* libDFCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDFCache.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C37136617D3FC3300766FD9 /* libDFCache-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libDFCache-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C37137517D3FC3C00766FD9 /* DFCache.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = DFCache.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C7D47AD18CB1FA50078C765 /* DFCachePrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCachePrivate.m; sourceTree = "<group>"; };
 		0C85802C18CF125800D71F3E /* DFCacheImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCacheImageDecoder.h; sourceTree = "<group>"; };
 		0C85802D18CF125800D71F3E /* DFCacheImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCacheImageDecoder.m; sourceTree = "<group>"; };
@@ -223,10 +185,6 @@
 		0CFAA7EF18CC7006004C56CC /* DFCache Tests OS X Static-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DFCache Tests OS X Static-Info.plist"; sourceTree = "<group>"; };
 		0CFAA7F118CC7007004C56CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0CFAA7F518CC7007004C56CC /* DFCache Tests OS X Static-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DFCache Tests OS X Static-Prefix.pch"; sourceTree = "<group>"; };
-		0CFAA80118CC704E004C56CC /* DFCache Tests OS X Dynamic.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DFCache Tests OS X Dynamic.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0CFAA80518CC704E004C56CC /* DFCache Tests OS X Dynamic-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DFCache Tests OS X Dynamic-Info.plist"; sourceTree = "<group>"; };
-		0CFAA80718CC704E004C56CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0CFAA80B18CC704E004C56CC /* DFCache Tests OS X Dynamic-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DFCache Tests OS X Dynamic-Prefix.pch"; sourceTree = "<group>"; };
 		EE8C44151B757A1F00CD9472 /* DFCache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DFCache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE8C444C1B757B2800CD9472 /* DFCache Tests iOS copy.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DFCache Tests iOS copy.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE8C444E1B757B6F00CD9472 /* DFCache Tests iOS Framework-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DFCache Tests iOS Framework-Info.plist"; path = "DFCache Tests/DFCache Tests iOS Framework/DFCache Tests iOS Framework-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -255,15 +213,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0C37137217D3FC3C00766FD9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CBC53A918CB4DD4002A8993 /* AppKit.framework in Frameworks */,
-				0CBC53A618CB4DAF002A8993 /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0C8C15DE17D40DFC004B7DAA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -284,16 +233,6 @@
 				0CFAA7FC18CC7031004C56CC /* libDFCache-OSX.a in Frameworks */,
 				0CFAA7FB18CC702E004C56CC /* AppKit.framework in Frameworks */,
 				0CFAA7EC18CC7006004C56CC /* XCTest.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CFAA7FE18CC704E004C56CC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CFAA81218CC7057004C56CC /* DFCache.dylib in Frameworks */,
-				0CFAA81118CC7054004C56CC /* AppKit.framework in Frameworks */,
-				0CFAA80218CC704E004C56CC /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,10 +304,8 @@
 			children = (
 				0C37135617D3FC2500766FD9 /* libDFCache.a */,
 				0C37136617D3FC3300766FD9 /* libDFCache-OSX.a */,
-				0C37137517D3FC3C00766FD9 /* DFCache.dylib */,
 				0C8C15E217D40DFC004B7DAA /* DFCache Tests iOS.xctest */,
 				0CFAA7EB18CC7006004C56CC /* DFCache Tests OS X Static.xctest */,
-				0CFAA80118CC704E004C56CC /* DFCache Tests OS X Dynamic.xctest */,
 				EE8C44151B757A1F00CD9472 /* DFCache.framework */,
 				EE8C444C1B757B2800CD9472 /* DFCache Tests iOS copy.xctest */,
 			);
@@ -411,7 +348,6 @@
 				0CB95E1C18CB186D00169472 /* DFCache Tests iOS */,
 				EE8C44551B757B7C00CD9472 /* DFCache Tests iOS Framework */,
 				0CFAA7ED18CC7006004C56CC /* DFCache Tests OS X Static */,
-				0CFAA80318CC704E004C56CC /* DFCache Tests OS X Dynamic */,
 			);
 			path = "DFCache Tests";
 			sourceTree = "<group>";
@@ -515,25 +451,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0CFAA80318CC704E004C56CC /* DFCache Tests OS X Dynamic */ = {
-			isa = PBXGroup;
-			children = (
-				0CFAA80418CC704E004C56CC /* Supporting Files */,
-			);
-			name = "DFCache Tests OS X Dynamic";
-			path = "DFCache Tests/DFCache Tests OS X Dynamic";
-			sourceTree = SOURCE_ROOT;
-		};
-		0CFAA80418CC704E004C56CC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				0CFAA80518CC704E004C56CC /* DFCache Tests OS X Dynamic-Info.plist */,
-				0CFAA80618CC704E004C56CC /* InfoPlist.strings */,
-				0CFAA80B18CC704E004C56CC /* DFCache Tests OS X Dynamic-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		EE8C44551B757B7C00CD9472 /* DFCache Tests iOS Framework */ = {
 			isa = PBXGroup;
 			children = (
@@ -561,22 +478,6 @@
 				0C3706C418CA408F003E20C4 /* DFCachePrivate.h in Headers */,
 				0CCFDBE71A482BF300DBBF8E /* DFValueTransformer.h in Headers */,
 				0CFA33F417D4734900AE6EEF /* DFCache OS X-Prefix.pch in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0C37137317D3FC3C00766FD9 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CB95E0B18CB181000169472 /* DFCache.h in Headers */,
-				0CB95E1718CB181000169472 /* DFDiskCache.h in Headers */,
-				0CCCFED218CB2D4B009AE6DB /* DFFileStorage.h in Headers */,
-				0CB95DFA18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h in Headers */,
-				0CCFDBEE1A482BF300DBBF8E /* DFValueTransformerFactory.h in Headers */,
-				0C94792218CCE4D4008E8938 /* DFCacheTimer.h in Headers */,
-				0C3706C318CA408F003E20C4 /* DFCachePrivate.h in Headers */,
-				0CCFDBE81A482BF300DBBF8E /* DFValueTransformer.h in Headers */,
-				0CFA33F317D4734900AE6EEF /* DFCache OS X-Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,23 +552,6 @@
 			productReference = 0C37136617D3FC3300766FD9 /* libDFCache-OSX.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		0C37137417D3FC3C00766FD9 /* DFCache OS X Dynamic */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0C37137D17D3FC3D00766FD9 /* Build configuration list for PBXNativeTarget "DFCache OS X Dynamic" */;
-			buildPhases = (
-				0C37137117D3FC3C00766FD9 /* Sources */,
-				0C37137217D3FC3C00766FD9 /* Frameworks */,
-				0C37137317D3FC3C00766FD9 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "DFCache OS X Dynamic";
-			productName = "DwarfKit Mac Dynamic";
-			productReference = 0C37137517D3FC3C00766FD9 /* DFCache.dylib */;
-			productType = "com.apple.product-type.library.dynamic";
-		};
 		0C8C15E117D40DFC004B7DAA /* DFCache Tests iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0C8C15F017D40DFC004B7DAA /* Build configuration list for PBXNativeTarget "DFCache Tests iOS" */;
@@ -703,24 +587,6 @@
 			name = "DFCache Tests OS X Static";
 			productName = "DFCache Tests OS X Static";
 			productReference = 0CFAA7EB18CC7006004C56CC /* DFCache Tests OS X Static.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		0CFAA80018CC704E004C56CC /* DFCache Tests OS X Dynamic */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0CFAA80E18CC704E004C56CC /* Build configuration list for PBXNativeTarget "DFCache Tests OS X Dynamic" */;
-			buildPhases = (
-				0CFAA7FD18CC704E004C56CC /* Sources */,
-				0CFAA7FE18CC704E004C56CC /* Frameworks */,
-				0CFAA7FF18CC704E004C56CC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0CFAA80D18CC704E004C56CC /* PBXTargetDependency */,
-			);
-			name = "DFCache Tests OS X Dynamic";
-			productName = "DFCache Tests OS X Dynamic";
-			productReference = 0CFAA80118CC704E004C56CC /* DFCache Tests OS X Dynamic.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		EE8C44141B757A1F00CD9472 /* DFCache iOS Framework */ = {
@@ -775,16 +641,13 @@
 					0CFAA7EA18CC7006004C56CC = {
 						TestTargetID = 0C37136517D3FC3300766FD9;
 					};
-					0CFAA80018CC704E004C56CC = {
-						TestTargetID = 0C37137417D3FC3C00766FD9;
-					};
 					EE8C44141B757A1F00CD9472 = {
 						CreatedOnToolsVersion = 6.4;
 					};
 				};
 			};
 			buildConfigurationList = 0C3712EF17D3F93F00766FD9 /* Build configuration list for PBXProject "DFCache" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -798,11 +661,9 @@
 				0C37135517D3FC2500766FD9 /* DFCache iOS */,
 				EE8C44141B757A1F00CD9472 /* DFCache iOS Framework */,
 				0C37136517D3FC3300766FD9 /* DFCache OS X Static */,
-				0C37137417D3FC3C00766FD9 /* DFCache OS X Dynamic */,
 				0C8C15E117D40DFC004B7DAA /* DFCache Tests iOS */,
 				EE8C44331B757B2800CD9472 /* DFCache Tests iOS Framework */,
 				0CFAA7EA18CC7006004C56CC /* DFCache Tests OS X Static */,
-				0CFAA80018CC704E004C56CC /* DFCache Tests OS X Dynamic */,
 			);
 		};
 /* End PBXProject section */
@@ -823,15 +684,6 @@
 			files = (
 				0CFAA7F218CC7007004C56CC /* InfoPlist.strings in Resources */,
 				0CADA4EB18F2BF5400F5248D /* zebrainpastelfield.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CFAA7FF18CC704E004C56CC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CFAA80818CC704E004C56CC /* InfoPlist.strings in Resources */,
-				0CADA4EC18F2BF5400F5248D /* zebrainpastelfield.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -914,21 +766,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0C37137117D3FC3C00766FD9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CCFDBEB1A482BF300DBBF8E /* DFValueTransformer.m in Sources */,
-				0CCCFED518CB2D4B009AE6DB /* DFFileStorage.m in Sources */,
-				0CB95E0E18CB181000169472 /* DFCache.m in Sources */,
-				0CB95DFD18CB17AD00169472 /* NSURL+DFExtendedFileAttributes.m in Sources */,
-				0CCFDBF11A482BF300DBBF8E /* DFValueTransformerFactory.m in Sources */,
-				0C94792518CCE4D4008E8938 /* DFCacheTimer.m in Sources */,
-				0C7D47AF18CB1FA50078C765 /* DFCachePrivate.m in Sources */,
-				0CB95E1A18CB181000169472 /* DFDiskCache.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0C8C15DD17D40DFC004B7DAA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -953,19 +790,6 @@
 				0CFAA81318CC7088004C56CC /* TDFCache.m in Sources */,
 				0CFAA81E18CC708C004C56CC /* DFCache+Tests.m in Sources */,
 				0CFAA81418CC7088004C56CC /* TDFCache+Extensions.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CFAA7FD18CC704E004C56CC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CFAA81B18CC7088004C56CC /* TDFExtendedFileAttributes.m in Sources */,
-				0CFAA81A18CC7088004C56CC /* TDFDiskCache.m in Sources */,
-				0CFAA81C18CC7088004C56CC /* TDFFileStorage.m in Sources */,
-				0CFAA81818CC7088004C56CC /* TDFCache.m in Sources */,
-				0CFAA81D18CC708B004C56CC /* DFCache+Tests.m in Sources */,
-				0CFAA81918CC7088004C56CC /* TDFCache+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1007,11 +831,6 @@
 			target = 0C37136517D3FC3300766FD9 /* DFCache OS X Static */;
 			targetProxy = 0CFAA7F618CC7007004C56CC /* PBXContainerItemProxy */;
 		};
-		0CFAA80D18CC704E004C56CC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0C37137417D3FC3C00766FD9 /* DFCache OS X Dynamic */;
-			targetProxy = 0CFAA80C18CC704E004C56CC /* PBXContainerItemProxy */;
-		};
 		0CFC5CB717D42118001C2951 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0C37135517D3FC2500766FD9 /* DFCache iOS */;
@@ -1037,14 +856,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				0CFAA7F118CC7007004C56CC /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		0CFAA80618CC704E004C56CC /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0CFAA80718CC704E004C56CC /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1204,49 +1015,6 @@
 			};
 			name = Release;
 		};
-		0C37137E17D3FC3D00766FD9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
-				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/DFCache OS X-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = DFCache;
-				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
-			};
-			name = Debug;
-		};
-		0C37137F17D3FC3D00766FD9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
-				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/DFCache OS X-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = DFCache;
-				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
-			};
-			name = Release;
-		};
 		0C8C15F117D40DFC004B7DAA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1349,76 +1117,6 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "DFCache Tests/DFCache Tests OS X Static/DFCache Tests OS X Static-Info.plist";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-ObjC",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.github.kean.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-		0CFAA80F18CC704E004C56CC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DFCache Tests/DFCache Tests OS X Dynamic/DFCache Tests OS X Dynamic-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "DFCache Tests/DFCache Tests OS X Dynamic/DFCache Tests OS X Dynamic-Info.plist";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-ObjC",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.github.kean.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		0CFAA81018CC704E004C56CC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DFCache Tests/DFCache Tests OS X Dynamic/DFCache Tests OS X Dynamic-Prefix.pch";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "DFCache Tests/DFCache Tests OS X Dynamic/DFCache Tests OS X Dynamic-Info.plist";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1587,15 +1285,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0C37137D17D3FC3D00766FD9 /* Build configuration list for PBXNativeTarget "DFCache OS X Dynamic" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0C37137E17D3FC3D00766FD9 /* Debug */,
-				0C37137F17D3FC3D00766FD9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		0C8C15F017D40DFC004B7DAA /* Build configuration list for PBXNativeTarget "DFCache Tests iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1610,15 +1299,6 @@
 			buildConfigurations = (
 				0CFAA7F918CC7007004C56CC /* Debug */,
 				0CFAA7FA18CC7007004C56CC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0CFAA80E18CC704E004C56CC /* Build configuration list for PBXNativeTarget "DFCache Tests OS X Dynamic" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0CFAA80F18CC704E004C56CC /* Debug */,
-				0CFAA81018CC704E004C56CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
