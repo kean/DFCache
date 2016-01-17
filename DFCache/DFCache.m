@@ -73,7 +73,7 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
     return [self initWithName:name memoryCache:memoryCache];
 }
 
-- (nullable instancetype)init { \
+- (nullable instancetype)init {
     [NSException raise:NSInternalInconsistencyException format:@"Please use designated initialzier"];
     return nil;
 }
