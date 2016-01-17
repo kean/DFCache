@@ -5,31 +5,20 @@
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
 </p>
 
-`DFCache` provides composite in-memory and on-disk cache with LRU cleanup. It is implemented as a set of reusable classes and protocols with concise and extensible API. 
+`DFCache` provides composite in-memory and on-disk cache with LRU cleanup. It is implemented as a set of reusable classes and protocols with concise and extensible API.
 
-`DFCache` is not intended to be used as a `NSURLCache` alternative. If you use `Foundation` URL loading system you should use `NSURLCache` that supports well-defined caching specifications like [HTTP Caching](https://tools.ietf.org/html/rfc7234).
+> `DFCache` is not intended to be used as a `NSURLCache` alternative. If you use `Foundation` URL loading system you should use `NSURLCache` that supports [HTTP Caching](https://tools.ietf.org/html/rfc7234).
 
-### Key Features
- - Thoroughly tested and well-documented.
- - LRU cleanup (discards least recently used items first).
- - Metadata implemented on top on UNIX extended file attributes.
- - Builtin support for objects conforming to `<NSCoding>` protocol. Can be easily extended to support more protocols and classes.
- - First class `UIImage` support including background image decompression.
- - Batch methods to retrieve cached entries.
+## Features
+- LRU cleanup (discards least recently used items first)
+- Metadata implemented on top on UNIX extended file attributes
+- Builtin support for objects conforming to `<NSCoding>` protocol. Can be easily extended to support more protocols and classes
+- First class `UIImage` support including background image decompression
+- Batch methods to retrieve cached entries
+- Thoroughly tested and well-documented
 
-### Requirements
-- iOS 6.0 or OS X 10.8
-
-# Installation
-
-### Cocoapods
-The recommended way to install `DFCache` is via [Cocoapods](http://cocoapods.org) package manager.
-```ruby
-# Podfile example
-platform :ios, '6.0'
-# platform :osx, '10.8'
-pod 'DFCache'
-```
+## Requirements
+iOS 6.0+ / watchOS 2.0+ / OS X 10.8+ / tvOS 9.0+
 
 # Usage
 
@@ -106,7 +95,7 @@ NSString *value = [fileURL df_extendedAttributeValueForKey:@"attr_key" error:NUL
 [fileURL df_removeExtendedAttributeForKey];
 ```
 
-# Classes
+## Design
 |Class|Description|
 |---------|---------|
 |[DFCache](https://github.com/kean/DFCache/blob/master/DFCache/DFCache.h)|Asynchronous composite in-memory and on-disk cache with LRU cleanup. Uses `NSCache` for in-memory caching and `DFDiskCache` for on-disk caching. Provides API for associating metadata with cache entries.|
@@ -120,13 +109,25 @@ NSString *value = [fileURL df_extendedAttributeValueForKey:@"attr_key" error:NUL
 ### NSCache on iOS 7.0
 `NSCache` auto-removal policies have change with the release of iOS 7.0. Make sure that you use reasonable total cost limit or count limit. Or else `NSCache` won't be able to evict memory properly. Typically, the obvious cost is the size of the object in bytes. Keep in mind that `DFCache` automatically removes all object from memory cache on memory warning for you.
 
-# Migration to DFCache 2.0 from DFCache 1.0
+## Installation
 
-`DFCache 2.0` interface is incompatible with previous versions. The main difference is a new family of protocols (`<DFValueTransforming>`, `<DFValueTransformerFactory>`) that is used instead of the encoding, decoding and cost calculating blocks from the previous versions.
+### [CocoaPods](http://cocoapods.org)
 
-Persistence implementation is largely the same except for a new extended file attribute that is used to associate value transformers with data. Objects encoded by the previous versions of `DFCache` do not have this attribute, which means that you won't be able to retrieve them using new  `-(id)cachedObjectForKey:(NSString *)key;` API. You should provide a value transformer instead `-(id)cachedObjectForKey:(NSString *)key valueTransformer:(id<DFValueTransforming>)valueTransformer;`.
+To install DFCache add a dependency to your Podfile:
+```ruby
+# source 'https://github.com/CocoaPods/Specs.git'
+# use_frameworks!
+# platform :ios, "6.0" / :watchos, "2.0" / :osx, "10.8" / :tvos, "9.0"
 
-As an alternative you can start using new API and simply ignore old files. They will be ignored and deleted automatically by builtin LRU cleanup.
+pod "DFCache"
+```
+
+### [Carthage](https://github.com/Carthage/Carthage)
+
+To install DFCache add a dependency to your Cartfile:
+```
+github "kean/DFCache"
+```
 
 ## Contacts
 
