@@ -46,7 +46,6 @@
 		0CCF5DD118CD0CC700823676 /* NSURL+DFExtendedFileAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB95DF518CB17AD00169472 /* NSURL+DFExtendedFileAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CCF5E3218CD0F9300823676 /* DFCachePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37064F18CA408F003E20C4 /* DFCachePrivate.h */; };
 		0CCF5E3318CD0F9300823676 /* DFCacheTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C94791F18CCE4D4008E8938 /* DFCacheTimer.h */; };
-		0CCF5E3418CD0F9300823676 /* DFCache iOS-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CFA33EF17D4734900AE6EEF /* DFCache iOS-Prefix.pch */; };
 		0CCFDBE61A482BF300DBBF8E /* DFValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE21A482BF300DBBF8E /* DFValueTransformer.h */; };
 		0CCFDBE71A482BF300DBBF8E /* DFValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE21A482BF300DBBF8E /* DFValueTransformer.h */; };
 		0CCFDBE91A482BF300DBBF8E /* DFValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCFDBE31A482BF300DBBF8E /* DFValueTransformer.m */; };
@@ -62,7 +61,6 @@
 		0CDB853518CB451D005DAA43 /* TDFExtendedFileAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB853118CB451D005DAA43 /* TDFExtendedFileAttributes.m */; };
 		0CDB853718CB451D005DAA43 /* TDFFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB853218CB451D005DAA43 /* TDFFileStorage.m */; };
 		0CF0F8DB18F454C200C0995E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB855618CB48F6005DAA43 /* XCTest.framework */; };
-		0CFA33F417D4734900AE6EEF /* DFCache OS X-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CFA33F017D4734900AE6EEF /* DFCache OS X-Prefix.pch */; };
 		0CFAA7EC18CC7006004C56CC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB855618CB48F6005DAA43 /* XCTest.framework */; };
 		0CFAA7F218CC7007004C56CC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CFAA7F018CC7007004C56CC /* InfoPlist.strings */; };
 		0CFAA7FB18CC702E004C56CC /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBC53A718CB4DCF002A8993 /* AppKit.framework */; };
@@ -98,7 +96,6 @@
 		EE8C44601B757C6A00CD9472 /* DFValueTransformerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCFDBE41A482BF300DBBF8E /* DFValueTransformerFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE8C44611B757C6A00CD9472 /* DFCachePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C37064F18CA408F003E20C4 /* DFCachePrivate.h */; };
 		EE8C44621B757C6A00CD9472 /* DFCacheTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C94791F18CCE4D4008E8938 /* DFCacheTimer.h */; };
-		EE8C44631B757C7400CD9472 /* DFCache iOS-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 0CFA33EF17D4734900AE6EEF /* DFCache iOS-Prefix.pch */; };
 		EE8C44641B757CC600CD9472 /* DFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0518CB181000169472 /* DFCache.m */; };
 		EE8C44661B757CC600CD9472 /* DFDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB95E0A18CB181000169472 /* DFDiskCache.m */; };
 		EE8C44671B757CC600CD9472 /* DFFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCCFED118CB2D4B009AE6DB /* DFFileStorage.m */; };
@@ -179,8 +176,6 @@
 		0CDB853218CB451D005DAA43 /* TDFFileStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFFileStorage.m; sourceTree = "<group>"; };
 		0CDB855618CB48F6005DAA43 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0CDB855A18CB4A8F005DAA43 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		0CFA33EF17D4734900AE6EEF /* DFCache iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache iOS-Prefix.pch"; sourceTree = "<group>"; };
-		0CFA33F017D4734900AE6EEF /* DFCache OS X-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DFCache OS X-Prefix.pch"; sourceTree = "<group>"; };
 		0CFAA7EB18CC7006004C56CC /* DFCache Tests OS X Static.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DFCache Tests OS X Static.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CFAA7EF18CC7006004C56CC /* DFCache Tests OS X Static-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DFCache Tests OS X Static-Info.plist"; sourceTree = "<group>"; };
 		0CFAA7F118CC7007004C56CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -425,8 +420,6 @@
 		0CFA33EE17D4734900AE6EEF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0CFA33EF17D4734900AE6EEF /* DFCache iOS-Prefix.pch */,
-				0CFA33F017D4734900AE6EEF /* DFCache OS X-Prefix.pch */,
 				EE8C44571B757BF300CD9472 /* DFCache iOS Framework-Info.plist */,
 			);
 			path = "Supporting Files";
@@ -477,7 +470,6 @@
 				0C94792118CCE4D4008E8938 /* DFCacheTimer.h in Headers */,
 				0C3706C418CA408F003E20C4 /* DFCachePrivate.h in Headers */,
 				0CCFDBE71A482BF300DBBF8E /* DFValueTransformer.h in Headers */,
-				0CFA33F417D4734900AE6EEF /* DFCache OS X-Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,7 +485,6 @@
 				0CCF5E3218CD0F9300823676 /* DFCachePrivate.h in Headers */,
 				0C85802E18CF125800D71F3E /* DFCacheImageDecoder.h in Headers */,
 				0CCF5E3318CD0F9300823676 /* DFCacheTimer.h in Headers */,
-				0CCF5E3418CD0F9300823676 /* DFCache iOS-Prefix.pch in Headers */,
 				0CCFDBEC1A482BF300DBBF8E /* DFValueTransformerFactory.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,7 +502,6 @@
 				EE8C445E1B757C6A00CD9472 /* DFCacheImageDecoder.h in Headers */,
 				EE8C44611B757C6A00CD9472 /* DFCachePrivate.h in Headers */,
 				EE8C44621B757C6A00CD9472 /* DFCacheTimer.h in Headers */,
-				EE8C44631B757C7400CD9472 /* DFCache iOS-Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -931,7 +921,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/DFCache iOS-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = DFCache;
 			};
@@ -941,7 +930,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/DFCache iOS-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = DFCache;
 			};
@@ -957,7 +945,6 @@
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/DFCache OS X-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				PRODUCT_NAME = "DFCache-OSX";
 				SDKROOT = macosx;
@@ -976,7 +963,6 @@
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/DFCache OS X-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				PRODUCT_NAME = "DFCache-OSX";
 				SDKROOT = macosx;
@@ -1117,7 +1103,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/DFCache iOS-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1159,7 +1144,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/DFCache iOS-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

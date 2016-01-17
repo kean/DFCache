@@ -198,7 +198,7 @@
     return [[DFCache alloc] initWithDiskCache:diskCache memoryCache:[NSCache new]];
 }
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
 - (void)testRespondsToMemoryWarning {
     DFCache *cache = [self _createCacheForMemoryCacheTesting];
     [cache.memoryCache setObject:@"object" forKey:@"key"];

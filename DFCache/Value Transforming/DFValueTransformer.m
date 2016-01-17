@@ -27,7 +27,7 @@
 NSString *const DFValueTransformerNSCodingName = @"DFValueTransformerNSCodingName";
 NSString *const DFValueTransformerJSONName = @"DFValueTransformerJSONName";
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
 NSString *const DFValueTransformerUIImageName = @"DFValueTransformerUIImageName";
 #endif
 
@@ -73,7 +73,7 @@ NSString *const DFValueTransformerUIImageName = @"DFValueTransformerUIImageName"
 @end
 
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
 
 @implementation DFValueTransformerUIImage
 

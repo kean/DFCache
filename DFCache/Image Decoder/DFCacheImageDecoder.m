@@ -25,7 +25,7 @@
 
 @implementation DFCacheImageDecoder
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
 
 + (UIImage *)decompressedImageWithData:(NSData *)data {
     return [self _decompressedImage:(data ? [UIImage imageWithData:data scale:[UIScreen mainScreen].scale] : nil)];

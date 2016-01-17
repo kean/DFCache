@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString *const DFValueTransformerNSCodingName;
 extern NSString *const DFValueTransformerJSONName;
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
 extern NSString *const DFValueTransformerUIImageName;
 #endif
 
@@ -60,7 +60,7 @@ extern NSString *const DFValueTransformerUIImageName;
 @end
 
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
 
 @interface DFValueTransformerUIImage : DFValueTransformer
 

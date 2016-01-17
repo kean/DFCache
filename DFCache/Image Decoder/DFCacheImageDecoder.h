@@ -21,13 +21,13 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
 #import <UIKit/UIKit.h>
 #endif
 
 @interface DFCacheImageDecoder : NSObject
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
 + (nullable UIImage *)decompressedImageWithData:(nonnull NSData *)data;
 #endif
 

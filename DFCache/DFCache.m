@@ -68,7 +68,7 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
         _cleanupTimerEnabled = YES;
         [self _scheduleCleanupTimer];
         
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didReceiveMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 #endif
     }
@@ -307,7 +307,7 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
     });
 }
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
 - (void)_didReceiveMemoryWarning:(NSNotification *__unused)notification {
     [self.memoryCache removeAllObjects];
 }
@@ -358,7 +358,7 @@ static NSString *const DFCacheAttributeValueTransformerNameKey = @"_df_cache_val
 @end
 
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
 @implementation DFCache (UIImage)
 
 - (void)setAllowsImageDecompression:(BOOL)allowsImageDecompression {

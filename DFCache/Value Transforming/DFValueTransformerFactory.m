@@ -22,6 +22,9 @@
 
 #import "DFValueTransformerFactory.h"
 
+#if TARGET_OS_IOS
+#import <UIKit/UIKit.h>
+#endif
 
 @implementation DFValueTransformerFactory {
     NSMutableDictionary *_transformers;
@@ -40,7 +43,7 @@ static id<DFValueTransformerFactory> _sharedFactory;
         [self registerValueTransformer:[DFValueTransformerNSCoding new] forName:DFValueTransformerNSCodingName];
         [self registerValueTransformer:[DFValueTransformerJSON new] forName:DFValueTransformerJSONName];
         
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
         DFValueTransformerUIImage *transformerUIImage = [DFValueTransformerUIImage new];
         transformerUIImage.compressionQuality = 0.75f;
         transformerUIImage.allowsImageDecompression = YES;
@@ -61,7 +64,7 @@ static id<DFValueTransformerFactory> _sharedFactory;
 #pragma mark - <DFValueTransformerFactory>
 
 - (NSString *)valueTransformerNameForValue:(id)value {
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED)
+#if TARGET_OS_IOS
     if ([value isKindOfClass:[UIImage class]]) {
         return DFValueTransformerUIImageName;
     }
