@@ -277,7 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				0C37061D18CA408F003E20C4 /* DFCache */,
-				0C7D47B118CB20470078C765 /* DFCache Tests */,
+				0C7D47B118CB20470078C765 /* Tests */,
 				0C3712F617D3F93F00766FD9 /* Frameworks */,
 				0CFA33EE17D4734900AE6EEF /* Supporting Files */,
 				0C3712F517D3F93F00766FD9 /* Products */,
@@ -326,7 +326,7 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		0C7D47B118CB20470078C765 /* DFCache Tests */ = {
+		0C7D47B118CB20470078C765 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				0CDB852618CB44B6005DAA43 /* DFCache+Tests.h */,
@@ -335,7 +335,7 @@
 				0CDB852518CB4485005DAA43 /* Test Suites */,
 				0CADA4E818F2BF5400F5248D /* Resources */,
 			);
-			path = "DFCache Tests";
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		0C85802B18CF124D00D71F3E /* Image Decoder */ = {
@@ -927,7 +927,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "DFCache Tests/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -956,7 +956,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "DFCache Tests/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1127,7 +1127,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "DFCache Tests/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.kean.DFCache-tvOSTests";
@@ -1154,7 +1154,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "DFCache Tests/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.kean.DFCache-tvOSTests";
@@ -1336,7 +1336,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				INFOPLIST_FILE = "DFCache Tests/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1358,7 +1358,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				INFOPLIST_FILE = "DFCache Tests/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1398,6 +1398,7 @@
 				0C30306F1C4BBE1500E2ED22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C3030991C4BBEDE00E2ED22 /* Build configuration list for PBXNativeTarget "DFCache tvOS" */ = {
 			isa = XCConfigurationList;
@@ -1406,6 +1407,7 @@
 				0C30309B1C4BBEDE00E2ED22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C30309C1C4BBEDE00E2ED22 /* Build configuration list for PBXNativeTarget "DFCache tvOS Tests" */ = {
 			isa = XCConfigurationList;
@@ -1414,6 +1416,7 @@
 				0C30309E1C4BBEDE00E2ED22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C3712EF17D3F93F00766FD9 /* Build configuration list for PBXProject "DFCache" */ = {
 			isa = XCConfigurationList;
