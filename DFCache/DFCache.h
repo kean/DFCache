@@ -201,7 +201,7 @@ extern NSString *const DFCacheAttributeMetadataKey;
 @end
 
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_TV
 @interface DFCache (UIImage)
 
 - (void)setAllowsImageDecompression:(BOOL)allowsImageDecompression;

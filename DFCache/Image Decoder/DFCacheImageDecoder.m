@@ -23,7 +23,7 @@
 #import "DFCacheImageDecoder.h"
 #import <CoreGraphics/CoreGraphics.h>
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_TV
 @implementation DFCacheImageDecoder
 
 + (UIImage *)decompressedImageWithData:(NSData *)data {

@@ -198,7 +198,7 @@
     return [[DFCache alloc] initWithDiskCache:diskCache memoryCache:[NSCache new]];
 }
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_TV
 - (void)testRespondsToMemoryWarning {
     DFCache *cache = [self _createCacheForMemoryCacheTesting];
     [cache.memoryCache setObject:@"object" forKey:@"key"];

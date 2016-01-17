@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0C3030681C4BBE1500E2ED22"
+               BlueprintIdentifier = "0C3030871C4BBEDE00E2ED22"
                BuildableName = "DFCache.framework"
-               BlueprintName = "DFCache watchOS"
+               BlueprintName = "DFCache tvOS"
                ReferencedContainer = "container:DFCache.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0C3030901C4BBEDE00E2ED22"
+               BuildableName = "DFCache tvOS Tests.xctest"
+               BlueprintName = "DFCache tvOS Tests"
+               ReferencedContainer = "container:DFCache.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0C3030871C4BBEDE00E2ED22"
+            BuildableName = "DFCache.framework"
+            BlueprintName = "DFCache tvOS"
+            ReferencedContainer = "container:DFCache.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0C3030681C4BBE1500E2ED22"
+            BlueprintIdentifier = "0C3030871C4BBEDE00E2ED22"
             BuildableName = "DFCache.framework"
-            BlueprintName = "DFCache watchOS"
+            BlueprintName = "DFCache tvOS"
             ReferencedContainer = "container:DFCache.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0C3030681C4BBE1500E2ED22"
+            BlueprintIdentifier = "0C3030871C4BBEDE00E2ED22"
             BuildableName = "DFCache.framework"
-            BlueprintName = "DFCache watchOS"
+            BlueprintName = "DFCache tvOS"
             ReferencedContainer = "container:DFCache.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
