@@ -23,7 +23,7 @@
     return self;
 }
 
-- (nullable instancetype)init { \
+- (instancetype)init {
     [NSException raise:NSInternalInconsistencyException format:@"Please use designated initialzier"];
     return nil;
 }

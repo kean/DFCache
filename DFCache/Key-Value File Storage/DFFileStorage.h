@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*! Unavailable initializer, please use designated initializer.
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /*! Returns storage directory path.
  */

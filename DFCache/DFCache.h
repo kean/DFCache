@@ -55,7 +55,7 @@ extern NSString *const DFCacheAttributeMetadataKey;
 
 /*! Unavailable initializer, please use designated initializer.
  */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /*! The transformer factory used by cache. Cache is initialized with a default value transformer factory. For more info see DFValueTransformerFactory declaration.
  */
