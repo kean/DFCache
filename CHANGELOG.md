@@ -1,6 +1,13 @@
 [All releases](https://github.com/kean/DFCache/releases)
 
-## DFCache 4.0.0
+## DFCache 4.0.1
+
+- Update for Xcode 8
+- Fix `-init()` annotations for `DFDiskCache` and `DFCache`
+- `-[DFValueTransformerFactory valueTransformerForName:]` argument `name` is now `nullable`
+
+
+## DFCache 4.0
  
 - Add CocoaPods support for tvOS, watchOS
 - Add Carthage support for OSX, tvOS, watchOS
