@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*! Returns value transformer registered for a given name.
  */
-- (nullable id<DFValueTransforming>)valueTransformerForName:(NSString *)name;
+- (nullable id<DFValueTransforming>)valueTransformerForName:(nullable NSString *)name;
 
 @end
 
