@@ -1,5 +1,12 @@
 [All releases](https://github.com/kean/DFCache/releases)
 
+
+## DFCache 4.0.2
+
+- Fix `DFCacheTimer` warnings
+- Fix documentation issues warnings
+
+
 ## DFCache 4.0.1
 
 - Update for Xcode 8
