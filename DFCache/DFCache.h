@@ -79,7 +79,6 @@ extern NSString *const DFCacheAttributeMetadataKey;
 
 /*! Returns object from either in-memory or on-disk cache. Refreshes object in memory cache it it was retrieved from disk. Uses value transformer provided by value transformer factory.
  @param key The unique key.
- @param completion Completion block.
  */
 - (nullable id)cachedObjectForKey:(NSString *)key;
 
@@ -219,7 +218,7 @@ extern NSString *const DFCacheAttributeMetadataKey;
 - (nullable NSDictionary *)batchCachedObjectsForKeys:(NSArray *)keys;
 
 /*! Retrieves first found object for the given keys.
- @param key The unique key.
+ @param keys An array of unique keys.
  @param completion Completion block.
  */
 - (void)firstCachedObjectForKeys:(NSArray *)keys completion:(void (^__nullable)(id __nullable object, NSString *__nullable key))completion;
