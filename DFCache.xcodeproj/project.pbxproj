@@ -607,7 +607,7 @@
 		0C3712EC17D3F93F00766FD9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = com.github.kean;
 				TargetAttributes = {
 					0C3030331C4BBA4400E2ED22 = {
@@ -635,6 +635,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 0C3712EB17D3F93F00766FD9;
