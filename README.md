@@ -9,8 +9,6 @@
 
 > `DFCache` is not intended to be used as a `NSURLCache` alternative. If you use `Foundation` URL loading system you should use `NSURLCache` that supports [HTTP Caching](https://tools.ietf.org/html/rfc7234).
 
-> **Deprecated**. DFCache is no longer maintained.
-
 ## Features
 - LRU cleanup (discards least recently used items first)
 - Metadata implemented on top on UNIX extended file attributes
